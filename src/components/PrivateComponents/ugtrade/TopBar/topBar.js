@@ -35,7 +35,7 @@ function StickyAppBar() {
               flexGrow: 1,
               color: "#830076", // Your desired color for the text
               fontFamily: "Poppins", // Your desired font family
-              fontSize: 24, // Your desired font size
+              fontSize: 18, // Your desired font size
               fontWeight: "bold", // Your desired font weight
               mt: 1, // Move the text downwards by adding margin top
             }}

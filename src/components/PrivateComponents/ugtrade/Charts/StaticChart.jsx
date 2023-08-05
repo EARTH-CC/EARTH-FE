@@ -8,43 +8,39 @@ function MyChart() {
     options: {
       xaxis: {
         categories: [
-          "Jan",
-          "Feb",
-          "Mar",
-          "Apr",
-          "May",
-          "Jun",
-          "Jul",
-          "Aug",
-          "Sep",
-          "Oct",
-          "Nov",
-          "Dec",
+          "Barge 1",
+          "Barge 2",
+          "Barge 3",
+          "Barge 4",
+          "Barge 5",
+          "Barge 6",
+          "Barge 7",
+          "Barge 8",
+          "Barge 9",
+          "Barge 10",
+          "Barge 11",
+          "Barge 12",
         ],
       },
     },
     series: [
       {
-        name: "Sales",
+        name: "Period 1",
         data: [30, 40, 25, 50, 49, 60, 70, 91, 125, 100, 90, 80],
       },
       {
-        name: "Expenses",
-        data: [60, 60, 45, 70, 69, 80, 90, 111, 145, 120, 110, 100],
-      },
-      {
-        name: "Damages",
+        name: "Period 2",
         data: [60, 60, 45, 70, 69, 80, 90, 111, 145, 120, 110, 100],
       },
     ],
   };
 
   return (
-    <div style={{ width: "45%", marginTop: "10px", marginLeft: "160px" }}>
+    <div style={{ width: "45%", marginTop: "30px", marginLeft: "160px" }}>
       <Typography
         sx={{
           color: "Black",
-          fontSize: 28,
+          fontSize: 24,
           fontWeight: "Bold",
           fontStyle: "Poppins",
           marginBottom: "20px",
