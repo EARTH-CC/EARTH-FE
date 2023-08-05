@@ -9,7 +9,7 @@ function Bonatrade() {
   return (
     <Box>
       <TopBar />
-      <Grid container spacing={0} my={2}>
+      <Grid container spacing={0} my={4}>
         <Grid
           item
           xs={6}

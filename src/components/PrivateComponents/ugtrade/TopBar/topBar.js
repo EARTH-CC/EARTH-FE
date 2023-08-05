@@ -24,7 +24,7 @@ function StickyAppBar() {
             edge="start"
             color="inherit"
             aria-label="menu"
-            sx={{ mr: 2, ml: 11 }}
+            sx={{ mr: 2, ml: 5 }}
           >
             <img src={Logo} alt="Logo" style={{ height: "50px" }} />
           </IconButton>
