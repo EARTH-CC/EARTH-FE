@@ -31,7 +31,25 @@ function App() {
             <Route path="/sign-in" element={<Login />} />
 
             <Route element={<PersistLogin />}>
-              <Route element={<RequireAuth allowedRoles="admin" />}>
+              <Route element={<RequireAuth allowedRoles="eglogistics" />}>
+                <Route path="/" element={<Layout />}>
+                  <Route path="/dashboard" element={<Dashboard />} />
+                </Route>
+              </Route>
+
+              <Route element={<RequireAuth allowedRoles="bonatrade" />}>
+                <Route path="/" element={<Layout />}>
+                  <Route path="/dashboard" element={<Dashboard />} />
+                </Route>
+              </Route>
+
+              <Route element={<RequireAuth allowedRoles="erotas" />}>
+                <Route path="/" element={<Layout />}>
+                  <Route path="/dashboard" element={<Dashboard />} />
+                </Route>
+              </Route>
+
+              <Route element={<RequireAuth allowedRoles="ugtrade" />}>
                 <Route path="/" element={<Layout />}>
                   <Route path="/dashboard" element={<Dashboard />} />
                 </Route>
