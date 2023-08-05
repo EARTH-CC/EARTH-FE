@@ -5,7 +5,14 @@ import "./App.css";
 import RequireAuth from "contexts/RequireAuth";
 import PersistLogin from "contexts/PersistLogin";
 import Layout from "contexts/Layouts/Layout";
-import { Unauthorized, Missing, Dashboard, Login, UGTrade } from "pages";
+import {
+  Unauthorized,
+  Missing,
+  Dashboard,
+  Login,
+  Bonatrade,
+  UGTrade,
+} from "pages";
 import themes from "./themes/theme";
 import LandingPage from "./pages/landing";
 
@@ -29,6 +36,7 @@ function App() {
           <Routes>
             <Route path="/" element={<LandingPage />} />
             <Route path="/sign-in" element={<Login />} />
+            <Route path="/bonatrade" element={<Bonatrade />} />
             <Route path="/ugtrade" element={<UGTrade />} />
 
             <Route element={<PersistLogin />}>
@@ -38,11 +46,11 @@ function App() {
                 </Route>
               </Route>
 
-              <Route element={<RequireAuth allowedRoles="bonatrade" />}>
+              {/* <Route element={<RequireAuth allowedRoles="bonatrade" />}>
                 <Route path="/" element={<Layout />}>
-                  <Route path="/dashboard" element={<Dashboard />} />
+                  
                 </Route>
-              </Route>
+              </Route> */}
 
               <Route element={<RequireAuth allowedRoles="erotas" />}>
                 <Route path="/" element={<Layout />}>
