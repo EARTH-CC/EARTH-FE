@@ -1,8 +1,8 @@
 import { useTheme } from "@mui/material";
 import { ResponsiveBar } from "@nivo/bar";
 import PropTypes from "prop-types";
-import themes from "../../themes/co-theme";
-import mockData from "../../data/mockData";
+import themes from "../../../themes/theme";
+import mockData from "../../../data/mockData";
 
 const { tokens } = themes;
 const { mockBarData } = mockData;

@@ -11,3 +11,6 @@ export { default as Bonatrade } from "./private/bonatrade";
 
 // Erotas
 export { default as Erotas } from "./private/erotas";
+
+// UGTrade
+export { default as UGTrade } from "./private/ugtrade";
