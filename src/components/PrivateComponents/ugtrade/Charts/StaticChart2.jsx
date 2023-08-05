@@ -76,7 +76,7 @@ function MyChart() {
           fontWeight: "Bold",
           fontStyle: "Poppins",
           marginBottom: "20px",
-          marginTop: "30px",
+          marginTop: "10px",
         }}
       >
         Monthly Data
