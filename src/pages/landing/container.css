@@ -1,22 +1,146 @@
-.landing-page-container {
+/*BODY*/
+body {
+  font-family: "Roboto", sans-serif;
+}
+body,
+.button:after {
+  background: #ffffff;
+}
+.ctn {
+  display: block;
+  margin: auto;
+  text-align: center;
+}
+footer {
+  position: fixed;
+  bottom: 5px;
+  right: 5px;
+  color: #fff;
+}
+footer a,
+footer a:after {
+  font-size: 1em !important;
+}
+/*END BODY*/
+
+/*LOG IN*/
+.blurred-box {
+  position: relative;
+  width: 650px;
+  height: 780px;
+  background: inherit;
+  border-radius: 2px;
+  overflow: hidden;
+  box-shadow:  5px 8px 15px .5px #3c3c3c;
+}
+
+.login-form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  content: "";
+  width: 700px;
+  height: 830px;
+  background: inherit;
+  position: absolute;
+  left: -25px;
+  right: 0;
+  top: -65px;
+  box-shadow: inset 0 0 0 500px rgba(127, 139, 199, 0.312);
+}
+
+
+
+.app {
   position: relative;
   width: 100%;
   height: 100vh;
   overflow: hidden;
 }
 
-.landing-page-container::before {
-  content: "";
-  position: fixed;
+.bg-animation {
+  position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
   z-index: -1;
-  background-image: linear-gradient(rgba(0, 0, 0, 0.7),
-      rgba(0, 0, 0, 0.7) 90%),
-    url(../../assets/leaves.jpg);
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
+}
+
+.content {
+  position: relative;
+  z-index: 1;
+}
+
+
+@keyframes move_wave {
+  0% {
+    transform: translateX(0) translateZ(0) scaleY(1);
+  }
+  50% {
+    transform: translateX(-25%) translateZ(0) scaleY(0.55);
+  }
+  100% {
+    transform: translateX(-50%) translateZ(0) scaleY(1);
+  }
+}
+.waveWrapper {
+  overflow: hidden;
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  top: 0;
+  margin: auto;
+}
+.waveWrapperInner {
+  position: absolute;
+  width: 100%;
+  overflow: hidden;
+  height: 100%;
+  bottom: -1px;
+  background-image: linear-gradient(to top, #ffffff 10%, #f3f3f3 100%);
+}
+.bgTop {
+  z-index: 15;
+  opacity: 0.5;
+}
+.bgMiddle {
+  z-index: 10;
+  opacity: 0.75;
+}
+.bgBottom {
+  z-index: 5;
+}
+.wave {
+  position: absolute;
+  left: 0;
+  width: 200%;
+  height: 100%;
+  background-repeat: repeat no-repeat;
+  background-position: 0 bottom;
+  transform-origin: center bottom;
+}
+.waveTop {
+  background-size: 50% 100px;
+}
+.waveAnimation .waveTop {
+  animation: move-wave 3s;
+  -webkit-animation: move-wave 3s;
+  -webkit-animation-delay: 1s;
+  animation-delay: 1s;
+}
+.waveMiddle {
+  background-size: 50% 120px;
+}
+.waveAnimation .waveMiddle {
+  animation: move_wave 10s linear infinite;
+}
+.waveBottom {
+  background-size: 50% 100px;
+}
+.waveAnimation .waveBottom {
+  animation: move_wave 15s linear infinite;
 }
