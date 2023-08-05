@@ -15,11 +15,10 @@ import {
 } from "@mui/material";
 import { useFormik } from "formik";
 import { Link, useNavigate } from "react-router-dom";
-import Logo from "../../../assets/philfida.png";
 import { useStateContext } from "../../../contexts/ContextProvider";
 import accountService from "../../../services/account-service";
 import loginValidation, { initialLog } from "../../../validation/login";
-import themes from "../../../themes/co-theme";
+import themes from "../../../themes/theme";
 
 const { ColorModeContext } = themes;
 
@@ -148,14 +147,14 @@ function Login() {
               borderRadius: "50%",
             }}
           >
-            <Box
+            {/* <Box
               className="logo"
               component="img"
               src={Logo}
               alt="Logo"
               height="150px"
               width="150px"
-            />
+            /> */}
           </Box>
           <Box
             sx={{
