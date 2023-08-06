@@ -1,6 +1,6 @@
 import React from "react";
 import { Box, Grid } from "@mui/material";
-import Video from "assets/364226012_6499941906785691_8824985252877859572_n.mp4";
+import Video from "assets/";
 import TopBar from "../../../components/PrivateComponents/erotas/TopBar/topBar";
 import MyChart from "../../../components/PrivateComponents/ugtrade/Charts/StaticChart";
 import MyChart2 from "../../../components/PrivateComponents/ugtrade/Charts/StaticChart2";
