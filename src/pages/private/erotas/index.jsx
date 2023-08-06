@@ -1,5 +1,6 @@
 import React from "react";
 import { Box, Grid } from "@mui/material";
+import Video from "assets/";
 import TopBar from "../../../components/PrivateComponents/erotas/TopBar/topBar";
 import MyChart from "../../../components/PrivateComponents/ugtrade/Charts/StaticChart";
 import MyChart2 from "../../../components/PrivateComponents/ugtrade/Charts/StaticChart2";
@@ -22,6 +23,7 @@ function Erotas() {
         >
           <MyChart />
           <MyChart2 />
+          <Video />
         </Grid>
         <Grid item xs={6}>
           <BillingStatement />
