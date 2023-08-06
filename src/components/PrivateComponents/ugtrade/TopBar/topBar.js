@@ -7,7 +7,7 @@ import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 // import Button from "@mui/material/Button";
 import IconButton from "@mui/material/IconButton";
-import Logo from "assets/images/UGlogo1.png";
+import Logo from "assets/uglogoedited.png";
 
 function StickyAppBar() {
   const navigate = useNavigate();

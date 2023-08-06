@@ -11,8 +11,8 @@ import {
   Typography,
 } from "@mui/material";
 // import logo from "../../../../assets/images/EARTH-Logo.png";
-import uglogo from "../../../../assets/ugtrade.png";
-import bonalogo from "../../../../assets/bontrade.png";
+import uglogo from "../../../../assets/uglogoedited.png";
+import bonalogo from "../../../../assets/bontradelogoedited.png";
 import eglogo from "../../../../assets/eglogistics.png";
 import erologo from "../../../../assets/erotas.png";
 
@@ -42,15 +42,15 @@ function BillingStatement() {
       <Box sx={{ display: "flex", justifyContent: "space-between" }}>
         <Box
           component="img"
-          alt="erologo"
-          src={erologo}
+          alt="bonalogo"
+          src={bonalogo}
           height="80px"
-          width="80px"
+          width="100px"
         />
         <Box
           component="img"
-          alt="eglogo"
-          src={eglogo}
+          alt="uglogo"
+          src={uglogo}
           height="80px"
           width="80px"
         />
@@ -87,15 +87,15 @@ function BillingStatement() {
         </Box>
         <Box
           component="img"
-          alt="uglogo"
-          src={uglogo}
+          alt="eglogo"
+          src={eglogo}
           height="80px"
           width="80px"
         />
         <Box
           component="img"
-          alt="bonalogo"
-          src={bonalogo}
+          alt="erologo"
+          src={erologo}
           height="80px"
           width="80px"
         />
