@@ -1,6 +1,6 @@
 /* eslint-disable react/no-array-index-key */
 /* eslint-disable react/jsx-boolean-value */
-import { Box, Button, Typography, useTheme } from "@mui/material";
+import { Box, Button, Grid, Typography, useTheme } from "@mui/material";
 import DownloadOutlinedIcon from "@mui/icons-material/DownloadOutlined";
 import AttachMoneyIcon from "@mui/icons-material/AttachMoney";
 import ShoppingBasketIcon from "@mui/icons-material/ShoppingBasket";
@@ -178,7 +178,7 @@ export default function Dashboard() {
             p="15px"
           >
             <Typography color={colors.grey[100]} variant="h5" fontWeight="600">
-              Recent Applications
+              Recent Purchase History
             </Typography>
           </Box>
           <Box
@@ -195,26 +195,46 @@ export default function Dashboard() {
                 borderBottom={`4px solid ${colors.primary[500]}`}
                 p="15px"
               >
-                <Box>
-                  <Typography
-                    color={colors.greenAccent[300]}
-                    variant="h5"
-                    fontWeight="600"
+                <Grid container spacing={0}>
+                  <Grid
+                    item
+                    xs={5}
+                    sx={{
+                      display: "flex",
+                      flexDirection: "column",
+                      justifyContent: "center",
+                    }}
                   >
-                    {transaction.txId}
-                  </Typography>
-                  <Typography color={colors.grey[100]}>
-                    {transaction.user}
-                  </Typography>
-                </Box>
-                <Box color={colors.grey[100]}>{transaction.date}</Box>
-                <Box
-                  backgroundColor={colors.theme[100]}
-                  p="5px 10px"
-                  borderRadius="4px"
-                >
-                  {transaction.cost}
-                </Box>
+                    <Typography
+                      color={colors.greenAccent[300]}
+                      variant="h5"
+                      fontWeight="600"
+                    >
+                      {transaction.txId}
+                    </Typography>
+                    <Typography color={colors.grey[100]}>
+                      {transaction.user}
+                    </Typography>
+                  </Grid>
+                  <Grid item xs={5}>
+                    <Typography color={colors.grey[100]}>
+                      {transaction.date}
+                    </Typography>
+                  </Grid>
+                  <Grid
+                    item
+                    xs={2}
+                    sx={{
+                      display: "flex",
+                      justifyContent: "center",
+                      alignItems: "center",
+                      fontSize: "15px",
+                      fontWeight: "bold",
+                    }}
+                  >
+                    {transaction.cost}
+                  </Grid>
+                </Grid>
               </Box>
             ))}
           </Box>
