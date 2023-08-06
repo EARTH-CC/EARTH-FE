@@ -81,7 +81,7 @@ export default function UGTradeLogin({ open, handleClose }) {
               src={Logo}
               alt="Logo"
               sx={{
-                my: "20px",
+                mt: "35px",
                 width: "700px",
                 height: "700px",
                 position: "absolute",

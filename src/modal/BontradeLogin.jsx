@@ -86,7 +86,7 @@ export default function BontradeLogin({ open, handleClose }) {
               src={Logo}
               alt="Logo"
               sx={{
-                my: "20px",
+                mt: "35px",
                 width: "700px",
                 height: "700px",
                 position: "absolute",

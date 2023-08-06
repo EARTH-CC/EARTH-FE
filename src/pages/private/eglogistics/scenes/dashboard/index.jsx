@@ -25,10 +25,7 @@ export default function Dashboard() {
     <Box m="20px">
       {/* HEADER */}
       <Box display="flex" justifyContent="space-between" alignItems="center">
-        <Header
-          title="DASHBOARD"
-          subtitle="Welcome to job application dashboard"
-        />
+        <Header title="DASHBOARD" subtitle="Welcome E&G Logistics dashboard" />
 
         <Box>
           <Button

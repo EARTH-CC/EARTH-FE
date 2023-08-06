@@ -8,7 +8,7 @@ body,
   height: 100vh;
   width: 100vw;
   font-family: "Source Sans 3", sans-serif;
-  background: white;
+  background: "linear-gradient(160deg, #bce1ff, #f3cdc6)";
 }
 
 .app {

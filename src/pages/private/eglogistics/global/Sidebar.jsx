@@ -7,7 +7,7 @@ import PropTypes from "prop-types";
 import MenuOutlinedIcon from "@mui/icons-material/MenuOutlined";
 import { ProSidebar, MenuItem, Menu } from "react-pro-sidebar";
 import { useStateContext } from "contexts/ContextProvider";
-import userImg from "../../../../assets/eglogistics.png";
+import userImg from "../../../../assets/images/eglogistics.png";
 import themes from "../../../../themes/theme";
 import links from "./sidebarlinks";
 import "react-pro-sidebar/dist/css/styles.css";
@@ -21,7 +21,7 @@ function Item({ title, to, icon, selected, setSelected }) {
     <MenuItem
       active={selected === title}
       style={{
-        color: "#fff",
+        color: "black",
       }}
       onClick={() => setSelected(title)}
       icon={icon}
@@ -43,7 +43,7 @@ function Sidebar() {
     <Box
       sx={{
         "& .pro-sidebar-inner": {
-          background: `linear-gradient(100deg, ${colors.theme[100]}, ${colors.theme[200]})`,
+          background: `linear-gradient(100deg, #c0d3e1, #c0d3e1)`,
         },
         "& .pro-icon-wrapper": {
           backgroundColor: "transparent !important",
@@ -55,8 +55,8 @@ function Sidebar() {
           color: "#00FFF7 !important",
         },
         "& .pro-menu-item.active": {
-          color: "#fff !important",
-          backgroundColor: colors.theme[300],
+          color: "black !important",
+          backgroundColor: "#d2bfcd",
           marginRight: isCollapsed ? "0.5px" : "29px",
           borderRadius: "10px",
         },
@@ -67,11 +67,11 @@ function Sidebar() {
           {/* LOGO AND MENU ICON */}
           <MenuItem
             onClick={() => setIsCollapsed(!isCollapsed)}
-            icon={isCollapsed ? <MenuOutlinedIcon /> : undefined}
-            style={{
-              margin: "auto",
-              color: "#fff",
-            }}
+            icon={
+              isCollapsed ? (
+                <MenuOutlinedIcon sx={{ color: "black" }} />
+              ) : undefined
+            }
           >
             {!isCollapsed && (
               <Box
@@ -80,13 +80,8 @@ function Sidebar() {
                 alignItems="center"
                 ml="15px"
               >
-                <Typography variant="h3" color={colors.grey[100]} />
                 <IconButton onClick={() => setIsCollapsed(!isCollapsed)}>
-                  <MenuOutlinedIcon
-                    style={{
-                      color: "#fff",
-                    }}
-                  />
+                  <MenuOutlinedIcon sx={{ color: "black" }} />
                 </IconButton>
               </Box>
             )}
@@ -103,21 +98,18 @@ function Sidebar() {
                   style={{ cursor: "pointer", borderRadius: "50%" }}
                 />
               </Box>
-              <Box textAlign="center">
+              <Box
+                textAlign="center"
+                sx={{ display: "flex", mt: "-30px", justifyContent: "center" }}
+              >
                 <Typography
-                  variant="h2"
+                  variant="h4"
                   color="#fff"
                   fontWeight="bold"
-                  sx={{ mt: "10px", textTransform: "capitalize" }}
+                  sx={{ m: "10px 0 0 0" }}
                 >
-                  {auth?.firstname}
-                </Typography>
-                <Typography
-                  variant="h5"
-                  color="#00FFF7"
-                  textTransform="capitalize"
-                >
-                  {auth?.role}
+                  <span style={{ color: "red" }}>E&G</span>
+                  <span style={{ color: "blue" }}> LOGISTICS</span>
                 </Typography>
               </Box>
             </Box>
@@ -128,7 +120,7 @@ function Sidebar() {
               <Box key={item.title} sx={{ width: "100%" }}>
                 <Typography
                   sx={{
-                    color: "#fff",
+                    color: "black",
                     m: 2,
                     mt: 4,
                     textTransform: "uppercase",

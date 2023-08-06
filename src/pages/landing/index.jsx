@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Box, Button, Grid, Typography } from "@mui/material";
 import Logo from "../../assets/images/logo.png";
 import Bontrade from "../../assets/bontrade.png";
@@ -13,6 +13,50 @@ import EGLogisticsLogin from "../../modal/EGLogisticsLogin";
 import BontradeLogin from "../../modal/BontradeLogin";
 import UGTradeLogin from "../../modal/UGTradeLogin";
 import ErotasLogin from "../../modal/ErotasLogin";
+
+function Cursor() {
+  const [cursorPosition, setCursorPosition] = useState({
+    left: 0,
+    top: 0,
+    opacity: 0,
+  });
+
+  useEffect(() => {
+    const handleMouseMove = (e) => {
+      const x = e.pageX;
+      const y = e.pageY;
+      setCursorPosition({ left: x - 175, top: y - 175, opacity: 1 });
+    };
+
+    document.addEventListener("mousemove", handleMouseMove);
+
+    return () => {
+      document.removeEventListener("mousemove", handleMouseMove);
+    };
+  }, []);
+
+  return (
+    <div
+      className="cursor"
+      style={{
+        width: "350px",
+        height: "350px",
+        borderRadius: "100%",
+        position: "absolute",
+        boxShadow: "2px -3px 41px -1px rgba(241, 196, 15, 0.64)",
+        zIndex: 0,
+        opacity: cursorPosition.opacity,
+        background:
+          "linear-gradient(45deg, #009aff, #a200ff, #1500ce, #00bace, #8f00e2, #ffa112, #ce00c0, #ce006e, #ce0022)",
+        backgroundSize: "400%",
+        animation: "glower 20s linear infinite",
+        filter: "blur(40px)",
+        left: `${cursorPosition.left}px`,
+        top: `${cursorPosition.top}px`,
+      }}
+    />
+  );
+}
 
 function ContentItem() {
   const [openEG, setOpenEG] = useState(false);
@@ -349,6 +393,266 @@ function ContentItem() {
   );
 }
 
+function Honeycomb() {
+  return (
+    <>
+      <div className="cursor" />
+      <div className="row">
+        <div className="hexagon" />
+        <div className="hexagon" />
+        <div className="hexagon" />
+        <div className="hexagon" />
+        <div className="hexagon" />
+        <div className="hexagon" />
+        <div className="hexagon" />
+        <div className="hexagon" />
+        <div className="hexagon" />
+        <div className="hexagon" />
+        <div className="hexagon" />
+        <div className="hexagon" />
+        <div className="hexagon" />
+        <div className="hexagon" />
+        <div className="hexagon" />
+        <div className="hexagon" />
+        <div className="hexagon" />
+        <div className="hexagon" />
+        <div className="hexagon" />
+      </div>
+      <div className="row row-moved">
+        <div className="hexagon" />
+        <div className="hexagon" />
+        <div className="hexagon" />
+        <div className="hexagon" />
+        <div className="hexagon" />
+        <div className="hexagon" />
+        <div className="hexagon" />
+        <div className="hexagon" />
+        <div className="hexagon" />
+        <div className="hexagon" />
+        <div className="hexagon" />
+        <div className="hexagon" />
+        <div className="hexagon" />
+        <div className="hexagon" />
+        <div className="hexagon" />
+        <div className="hexagon" />
+        <div className="hexagon" />
+        <div className="hexagon" />
+        <div className="hexagon" />
+      </div>
+      <div className="row">
+        <div className="hexagon" />
+        <div className="hexagon" />
+        <div className="hexagon" />
+        <div className="hexagon" />
+        <div className="hexagon" />
+        <div className="hexagon" />
+        <div className="hexagon" />
+        <div className="hexagon" />
+        <div className="hexagon" />
+        <div className="hexagon" />
+        <div className="hexagon" />
+        <div className="hexagon" />
+        <div className="hexagon" />
+        <div className="hexagon" />
+        <div className="hexagon" />
+        <div className="hexagon" />
+        <div className="hexagon" />
+        <div className="hexagon" />
+        <div className="hexagon" />
+      </div>
+      <div className="row row-moved">
+        <div className="hexagon" />
+        <div className="hexagon" />
+        <div className="hexagon" />
+        <div className="hexagon" />
+        <div className="hexagon" />
+        <div className="hexagon" />
+        <div className="hexagon" />
+        <div className="hexagon" />
+        <div className="hexagon" />
+        <div className="hexagon" />
+        <div className="hexagon" />
+        <div className="hexagon" />
+        <div className="hexagon" />
+        <div className="hexagon" />
+        <div className="hexagon" />
+        <div className="hexagon" />
+        <div className="hexagon" />
+        <div className="hexagon" />
+        <div className="hexagon" />
+      </div>
+      <div className="row">
+        <div className="hexagon" />
+        <div className="hexagon" />
+        <div className="hexagon" />
+        <div className="hexagon" />
+        <div className="hexagon" />
+        <div className="hexagon" />
+        <div className="hexagon" />
+        <div className="hexagon" />
+        <div className="hexagon" />
+        <div className="hexagon" />
+        <div className="hexagon" />
+        <div className="hexagon" />
+        <div className="hexagon" />
+        <div className="hexagon" />
+        <div className="hexagon" />
+        <div className="hexagon" />
+        <div className="hexagon" />
+        <div className="hexagon" />
+        <div className="hexagon" />
+      </div>
+      <div className="row row-moved">
+        <div className="hexagon" />
+        <div className="hexagon" />
+        <div className="hexagon" />
+        <div className="hexagon" />
+        <div className="hexagon" />
+        <div className="hexagon" />
+        <div className="hexagon" />
+        <div className="hexagon" />
+        <div className="hexagon" />
+        <div className="hexagon" />
+        <div className="hexagon" />
+        <div className="hexagon" />
+        <div className="hexagon" />
+        <div className="hexagon" />
+        <div className="hexagon" />
+        <div className="hexagon" />
+        <div className="hexagon" />
+        <div className="hexagon" />
+        <div className="hexagon" />
+      </div>
+      <div className="row">
+        <div className="hexagon" />
+        <div className="hexagon" />
+        <div className="hexagon" />
+        <div className="hexagon" />
+        <div className="hexagon" />
+        <div className="hexagon" />
+        <div className="hexagon" />
+        <div className="hexagon" />
+        <div className="hexagon" />
+        <div className="hexagon" />
+        <div className="hexagon" />
+        <div className="hexagon" />
+        <div className="hexagon" />
+        <div className="hexagon" />
+        <div className="hexagon" />
+        <div className="hexagon" />
+        <div className="hexagon" />
+        <div className="hexagon" />
+        <div className="hexagon" />
+      </div>
+      <div className="row row-moved">
+        <div className="hexagon" />
+        <div className="hexagon" />
+        <div className="hexagon" />
+        <div className="hexagon" />
+        <div className="hexagon" />
+        <div className="hexagon" />
+        <div className="hexagon" />
+        <div className="hexagon" />
+        <div className="hexagon" />
+        <div className="hexagon" />
+        <div className="hexagon" />
+        <div className="hexagon" />
+        <div className="hexagon" />
+        <div className="hexagon" />
+        <div className="hexagon" />
+        <div className="hexagon" />
+        <div className="hexagon" />
+        <div className="hexagon" />
+        <div className="hexagon" />
+      </div>
+      <div className="row">
+        <div className="hexagon" />
+        <div className="hexagon" />
+        <div className="hexagon" />
+        <div className="hexagon" />
+        <div className="hexagon" />
+        <div className="hexagon" />
+        <div className="hexagon" />
+        <div className="hexagon" />
+        <div className="hexagon" />
+        <div className="hexagon" />
+        <div className="hexagon" />
+        <div className="hexagon" />
+        <div className="hexagon" />
+        <div className="hexagon" />
+        <div className="hexagon" />
+        <div className="hexagon" />
+        <div className="hexagon" />
+        <div className="hexagon" />
+        <div className="hexagon" />
+      </div>
+      <div className="row row-moved">
+        <div className="hexagon" />
+        <div className="hexagon" />
+        <div className="hexagon" />
+        <div className="hexagon" />
+        <div className="hexagon" />
+        <div className="hexagon" />
+        <div className="hexagon" />
+        <div className="hexagon" />
+        <div className="hexagon" />
+        <div className="hexagon" />
+        <div className="hexagon" />
+        <div className="hexagon" />
+        <div className="hexagon" />
+        <div className="hexagon" />
+        <div className="hexagon" />
+        <div className="hexagon" />
+        <div className="hexagon" />
+        <div className="hexagon" />
+        <div className="hexagon" />
+      </div>
+      <div className="row">
+        <div className="hexagon" />
+        <div className="hexagon" />
+        <div className="hexagon" />
+        <div className="hexagon" />
+        <div className="hexagon" />
+        <div className="hexagon" />
+        <div className="hexagon" />
+        <div className="hexagon" />
+        <div className="hexagon" />
+        <div className="hexagon" />
+        <div className="hexagon" />
+        <div className="hexagon" />
+        <div className="hexagon" />
+        <div className="hexagon" />
+        <div className="hexagon" />
+        <div className="hexagon" />
+        <div className="hexagon" />
+        <div className="hexagon" />
+        <div className="hexagon" />
+      </div>
+      <div className="row row-moved">
+        <div className="hexagon" />
+        <div className="hexagon" />
+        <div className="hexagon" />
+        <div className="hexagon" />
+        <div className="hexagon" />
+        <div className="hexagon" />
+        <div className="hexagon" />
+        <div className="hexagon" />
+        <div className="hexagon" />
+        <div className="hexagon" />
+        <div className="hexagon" />
+        <div className="hexagon" />
+        <div className="hexagon" />
+        <div className="hexagon" />
+        <div className="hexagon" />
+        <div className="hexagon" />
+        <div className="hexagon" />
+        <div className="hexagon" />
+        <div className="hexagon" />
+      </div>
+    </>
+  );
+}
+
 function Background() {
   return (
     <div className="animation-container">
@@ -412,6 +716,7 @@ function Content() {
   return (
     <Box className="content">
       <ContentItem />
+      <Honeycomb />
       <Footer />
     </Box>
   );
@@ -420,6 +725,7 @@ function Content() {
 export default function Landing() {
   return (
     <Box className="app">
+      <Cursor />
       <Content />
     </Box>
   );
