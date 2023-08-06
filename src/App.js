@@ -4,7 +4,7 @@ import { Route, Routes } from "react-router-dom";
 import "./App.css";
 // import RequireAuth from "contexts/RequireAuth";
 // import PersistLogin from "contexts/PersistLogin";
-// import Layout from "contexts/Layouts/Layout";
+import Layout from "contexts/Layouts/Layout";
 import {
   Unauthorized,
   Missing,
@@ -40,7 +40,10 @@ function App() {
             <Route path="/bontrade" element={<Bontrade />} />
             <Route path="/ugtrade" element={<UGTrade />} />
             <Route path="/erotas" element={<Erotas />} />
-            <Route path="/dashboard" element={<Dashboard />} />
+
+            <Route path="/" element={<Layout />}>
+              <Route path="/dashboard" element={<Dashboard />} />
+            </Route>
 
             {/* <Route element={<PersistLogin />}>
               <Route element={<RequireAuth allowedRoles="eglogistics" />}>

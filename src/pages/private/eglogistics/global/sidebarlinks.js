@@ -1,13 +1,5 @@
 import DashboardIcon from "@mui/icons-material/Dashboard";
-import { TbSeeding, TbVirusOff, TbButterfly } from "react-icons/tb";
-import HandshakeOutlinedIcon from "@mui/icons-material/HandshakeOutlined";
-import { LiaBaconSolid } from "react-icons/lia";
-import { TiWeatherWindyCloudy } from "react-icons/ti";
-import SchoolOutlinedIcon from "@mui/icons-material/SchoolOutlined";
-import { HiOutlineDocumentDuplicate } from "react-icons/hi";
-import { PiTreePalmBold } from "react-icons/pi";
-import { GiPlantSeed } from "react-icons/gi";
-import CycloneIcon from "@mui/icons-material/Cyclone";
+import { UilClipboardAlt } from "@iconscout/react-unicons";
 
 const links = [
   {
@@ -22,65 +14,145 @@ const links = [
   },
 
   {
-    title: "Reports",
+    title: "Procurement",
     links: [
       {
-        name: "Nursery Reports",
-        path: "nursery",
-        icon: <TbSeeding style={{ fontSize: 29 }} />,
+        name: "Purchase Request",
+        path: "purchaserequest",
+        icon: <UilClipboardAlt style={{ fontSize: 29 }} />,
       },
       {
-        name: "Distribution Reports",
-        path: "distribution",
-        icon: <HandshakeOutlinedIcon />,
+        name: "Canvass Sheet",
+        path: "canvasssheet",
+        icon: <UilClipboardAlt />,
       },
       {
-        name: "PM Survived Reports",
-        path: "pmsurvived",
-        icon: <GiPlantSeed style={{ fontSize: 24 }} />,
+        name: "Purchase Order",
+        path: "purchaseorder",
+        icon: <UilClipboardAlt style={{ fontSize: 24 }} />,
       },
       {
-        name: "Expansion and Rehabilitation Reports",
-        path: "expansionandrehab",
-        icon: <LiaBaconSolid style={{ fontSize: 27 }} />,
+        name: "Received Purchase and Transfer",
+        path: "receivedpurchaseandtransfer",
+        icon: <UilClipboardAlt style={{ fontSize: 27 }} />,
       },
       {
-        name: "Cotton Reports",
-        path: "cotton",
-        icon: <TiWeatherWindyCloudy style={{ fontSize: 27 }} />,
-      },
-      {
-        name: "Cocoon Reports",
-        path: "cocoon",
-        icon: <TbButterfly style={{ fontSize: 27 }} />,
-      },
-      {
-        name: "Training Reports",
-        path: "training",
-        icon: <SchoolOutlinedIcon style={{ fontSize: 27 }} />,
-      },
-      {
-        name: "IEC Material Reports",
-        path: "iec",
-        icon: <HiOutlineDocumentDuplicate style={{ fontSize: 27 }} />,
-      },
-      {
-        name: "Expansion Under Coconut Projects Reports",
-        path: "expansioncoconut",
-        icon: <PiTreePalmBold style={{ fontSize: 29 }} />,
-      },
-      {
-        name: "Abaca Disease Management Project Reports",
-        path: "diseasemanagement",
-        icon: <TbVirusOff style={{ fontSize: 36 }} />,
-      },
-      {
-        name: "National Disaster Risk Reduction Management Reports",
-        path: "ndrrm",
-        icon: <CycloneIcon style={{ fontSize: 36 }} />,
+        name: "Purchase History",
+        path: "purchasehistory",
+        icon: <UilClipboardAlt style={{ fontSize: 27 }} />,
       },
     ],
   },
+  {
+    title: "Inventory",
+    links: [
+      {
+        name: "Item Inventory",
+        path: "purchaserequest",
+        icon: <UilClipboardAlt style={{ fontSize: 29 }} />,
+      },
+      {
+        name: "Item Withdrawal and Transfer",
+        path: "canvasssheet",
+        icon: <UilClipboardAlt />,
+      },
+      {
+        name: "Item Delivery and Returns",
+        path: "purchaseorder",
+        icon: <UilClipboardAlt style={{ fontSize: 24 }} />,
+      },
+    ],
+  },
+  // {
+  //   title: "Procurement",
+  //   links: [
+  //     {
+  //       name: "Purchase Request",
+  //       path: "purchaserequest",
+  //       icon: <UilClipboardAlt style={{ fontSize: 29 }} />,
+  //     },
+  //     {
+  //       name: "Canvass Sheet",
+  //       path: "canvasssheet",
+  //       icon: <UilClipboardAlt />,
+  //     },
+  //     {
+  //       name: "Purchase Order",
+  //       path: "purchaseorder",
+  //       icon: <UilClipboardAlt style={{ fontSize: 24 }} />,
+  //     },
+  //     {
+  //       name: "Received Purchase and Transfer",
+  //       path: "receivedpurchaseandtransfer",
+  //       icon: <UilClipboardAlt style={{ fontSize: 27 }} />,
+  //     },
+  //     {
+  //       name: "Purchase History",
+  //       path: "purchasehistory",
+  //       icon: <UilClipboardAlt style={{ fontSize: 27 }} />,
+  //     },
+  //   ],
+  // },
+  // {
+  //   title: "Procurement",
+  //   links: [
+  //     {
+  //       name: "Purchase Request",
+  //       path: "purchaserequest",
+  //       icon: <UilClipboardAlt style={{ fontSize: 29 }} />,
+  //     },
+  //     {
+  //       name: "Canvass Sheet",
+  //       path: "canvasssheet",
+  //       icon: <UilClipboardAlt />,
+  //     },
+  //     {
+  //       name: "Purchase Order",
+  //       path: "purchaseorder",
+  //       icon: <UilClipboardAlt style={{ fontSize: 24 }} />,
+  //     },
+  //     {
+  //       name: "Received Purchase and Transfer",
+  //       path: "receivedpurchaseandtransfer",
+  //       icon: <UilClipboardAlt style={{ fontSize: 27 }} />,
+  //     },
+  //     {
+  //       name: "Purchase History",
+  //       path: "purchasehistory",
+  //       icon: <UilClipboardAlt style={{ fontSize: 27 }} />,
+  //     },
+  //   ],
+  // },
+  // {
+  //   title: "Procurement",
+  //   links: [
+  //     {
+  //       name: "Purchase Request",
+  //       path: "purchaserequest",
+  //       icon: <UilClipboardAlt style={{ fontSize: 29 }} />,
+  //     },
+  //     {
+  //       name: "Canvass Sheet",
+  //       path: "canvasssheet",
+  //       icon: <UilClipboardAlt />,
+  //     },
+  //     {
+  //       name: "Purchase Order",
+  //       path: "purchaseorder",
+  //       icon: <UilClipboardAlt style={{ fontSize: 24 }} />,
+  //     },
+  //     {
+  //       name: "Received Purchase and Transfer",
+  //       path: "receivedpurchaseandtransfer",
+  //       icon: <UilClipboardAlt style={{ fontSize: 27 }} />,
+  //     },
+  //     {
+  //       name: "Purchase History",
+  //       path: "purchasehistory",
+  //       icon: <UilClipboardAlt style={{ fontSize: 27 }} />,
+  //     },
+  //   ],
+  // },
 ];
 
 export default links;
