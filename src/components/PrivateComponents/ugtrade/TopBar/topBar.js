@@ -1,4 +1,5 @@
 import * as React from "react";
+import { useNavigate } from "react-router-dom";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
@@ -8,6 +9,12 @@ import IconButton from "@mui/material/IconButton";
 import Logo from "assets/images/UGlogo1.png";
 
 function StickyAppBar() {
+  const navigate = useNavigate();
+
+  const handleGoBack = () => {
+    navigate("/");
+  };
+
   return (
     <Box sx={{ flexGrow: 1, position: "sticky", top: 0, zIndex: 100 }}>
       <AppBar
@@ -24,6 +31,7 @@ function StickyAppBar() {
             edge="start"
             color="inherit"
             aria-label="menu"
+            onClick={handleGoBack}
             sx={{ mr: 2, ml: 5 }}
           >
             <img src={Logo} alt="Logo" style={{ height: "50px" }} />
@@ -37,7 +45,6 @@ function StickyAppBar() {
               fontFamily: "Poppins", // Your desired font family
               fontSize: 18, // Your desired font size
               fontWeight: "bold", // Your desired font weight
-              mt: 1, // Move the text downwards by adding margin top
             }}
           >
             Universal Grace Trading Corporation

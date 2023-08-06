@@ -1,9 +1,9 @@
 import React from "react";
 import { Box, Grid } from "@mui/material";
-import TopBar from "../../../components/PrivateComponents/ugtrade/TopBar/topBar";
-import BillingStatement from "./scenes/BillingStatement";
+import TopBar from "../../../components/PrivateComponents/bonatrade/TopBar/topBar";
 import MyChart from "../../../components/PrivateComponents/ugtrade/Charts/StaticChart";
 import MyChart2 from "../../../components/PrivateComponents/ugtrade/Charts/StaticChart2";
+import BillingStatement from "./scenes/BillingStatement";
 
 function Bonatrade() {
   return (

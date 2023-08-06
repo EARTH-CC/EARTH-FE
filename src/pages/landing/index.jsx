@@ -14,8 +14,12 @@ import Login from "../../modal/login";
 function ContentItem() {
   const [open, setOpen] = useState(false);
 
-  const handleEGLClick = () => {
+  const handleClickLogin = () => {
     setOpen(true);
+  };
+
+  const handleCloseLogin = () => {
+    setOpen(false);
   };
 
   return (
@@ -218,6 +222,7 @@ function ContentItem() {
         }}
       >
         <Button
+          onClick={handleClickLogin}
           sx={{
             display: "flex",
             justifyContent: "center",
@@ -237,6 +242,7 @@ function ContentItem() {
           }}
         />
         <Button
+          onClick={handleClickLogin}
           sx={{
             display: "flex",
             justifyContent: "center",
@@ -256,7 +262,7 @@ function ContentItem() {
           }}
         />
         <Button
-          onClick={handleEGLClick}
+          onClick={handleClickLogin}
           sx={{
             display: "flex",
             justifyContent: "center",
@@ -276,6 +282,7 @@ function ContentItem() {
           }}
         />
         <Button
+          onClick={handleClickLogin}
           sx={{
             display: "flex",
             justifyContent: "center",
@@ -295,7 +302,7 @@ function ContentItem() {
           }}
         />
       </Grid>
-      <Login open={open} />
+      <Login open={open} handleClose={handleCloseLogin} />
     </Grid>
   );
 }

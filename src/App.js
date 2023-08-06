@@ -12,6 +12,7 @@ import {
   Login,
   Bonatrade,
   UGTrade,
+  Erotas,
 } from "pages";
 import themes from "./themes/theme";
 import LandingPage from "./pages/landing";
@@ -36,15 +37,17 @@ function App() {
           <Routes>
             <Route path="/" element={<LandingPage />} />
             <Route path="/sign-in" element={<Login />} />
+            <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/bonatrade" element={<Bonatrade />} />
             <Route path="/ugtrade" element={<UGTrade />} />
+            <Route path="/erotas" element={<Erotas />} />
 
             <Route element={<PersistLogin />}>
-              <Route element={<RequireAuth allowedRoles="eglogistics" />}>
+              {/* <Route element={<RequireAuth allowedRoles="eglogistics" />}>
                 <Route path="/" element={<Layout />}>
-                  <Route path="/dashboard" element={<Dashboard />} />
+                 
                 </Route>
-              </Route>
+              </Route> */}
 
               {/* <Route element={<RequireAuth allowedRoles="bonatrade" />}>
                 <Route path="/" element={<Layout />}>
