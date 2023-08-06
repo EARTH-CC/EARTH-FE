@@ -2,10 +2,10 @@
 /* eslint-disable react/jsx-boolean-value */
 import { Box, Button, Typography, useTheme } from "@mui/material";
 import DownloadOutlinedIcon from "@mui/icons-material/DownloadOutlined";
-import EmailIcon from "@mui/icons-material/Email";
-import FactCheckIcon from "@mui/icons-material/FactCheck";
-import PersonAddIcon from "@mui/icons-material/PersonAdd";
-import PictureAsPdfIcon from "@mui/icons-material/PictureAsPdf";
+import AttachMoneyIcon from "@mui/icons-material/AttachMoney";
+import ShoppingBasketIcon from "@mui/icons-material/ShoppingBasket";
+import ShoppingBagIcon from "@mui/icons-material/ShoppingBag";
+import ShoppingCartCheckoutIcon from "@mui/icons-material/ShoppingCartCheckout";
 import themes from "../../../../../themes/theme";
 import mockTransaction from "../../../../../data/mockData";
 import Header from "../../../../../components/PrivateComponents/eglogistics/Header";
@@ -68,11 +68,11 @@ export default function Dashboard() {
         >
           <StatBox
             title="12"
-            subtitle="New Applicants"
+            subtitle="Purchase Request"
             progress="0.33"
             increase="+33.4%"
             icon={
-              <PersonAddIcon
+              <ShoppingBagIcon
                 sx={{ color: colors.theme[100], fontSize: "26px" }}
               />
             }
@@ -89,11 +89,11 @@ export default function Dashboard() {
         >
           <StatBox
             title="24"
-            subtitle="Reviewed Applications"
+            subtitle="Purchase Order"
             progress="0.66"
             increase="+66.7%"
             icon={
-              <FactCheckIcon
+              <ShoppingBasketIcon
                 sx={{ color: colors.theme[100], fontSize: "26px" }}
               />
             }
@@ -110,11 +110,11 @@ export default function Dashboard() {
         >
           <StatBox
             title="63"
-            subtitle="Files Received"
+            subtitle="Received Purchase and Transfer"
             progress="0.43"
             increase="+43%"
             icon={
-              <PictureAsPdfIcon
+              <ShoppingCartCheckoutIcon
                 sx={{ color: colors.theme[100], fontSize: "26px" }}
               />
             }
@@ -130,12 +130,14 @@ export default function Dashboard() {
           boxShadow="0px 5px 10px rgba(0, 0, 0, 0.4)"
         >
           <StatBox
-            title="5"
-            subtitle="Emails Sent"
+            title="$4,270"
+            subtitle="Revenue"
             progress="0.05"
             increase="+5%"
             icon={
-              <EmailIcon sx={{ color: colors.theme[100], fontSize: "26px" }} />
+              <AttachMoneyIcon
+                sx={{ color: colors.theme[100], fontSize: "26px" }}
+              />
             }
           />
         </Box>
@@ -153,7 +155,7 @@ export default function Dashboard() {
             fontWeight="600"
             sx={{ padding: "30px 30px 0 30px" }}
           >
-            Applied Positions
+            Inventory
           </Typography>
           <Box height="260px" mt="-20px">
             <BarChart isDashboard={true} />

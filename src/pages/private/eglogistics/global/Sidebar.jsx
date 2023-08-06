@@ -52,13 +52,13 @@ function Sidebar() {
           padding: "5px 35px 5px 20px !important",
         },
         "& .pro-inner-item:hover": {
-          color: "#00FFF7 !important",
+          color: "#9100FF !important",
         },
         "& .pro-menu-item.active": {
           color: "black !important",
           backgroundColor: "#d2bfcd",
           marginRight: isCollapsed ? "0.5px" : "29px",
-          borderRadius: "10px",
+          borderRadius: "50px",
         },
       }}
     >

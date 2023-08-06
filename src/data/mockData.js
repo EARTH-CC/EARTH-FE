@@ -473,27 +473,27 @@ const mockTransactions = [
 
 const mockBarData = [
   {
-    country: "Web Dev",
+    country: "Item Inventory",
     Total: 90,
     TotalColor: "hsl(111, 70%, 50%)",
   },
   {
-    country: "Software Engr",
+    country: "Item Withdrawal",
     Total: 38,
     TotalColor: "hsl(111, 70%, 50%)",
   },
   {
-    country: "IT Spec",
+    country: "Item Transfer",
     Total: 23,
     TotalColor: "hsl(96, 70%, 50%)",
   },
   {
-    country: "Data Analyst",
+    country: "Item Delivery",
     Total: 52,
     TotalColor: "hsl(326, 70%, 50%)",
   },
   {
-    country: "Project Manager",
+    country: "Item Return",
     Total: 80,
     TotalColor: "hsl(325, 70%, 50%)",
   },
