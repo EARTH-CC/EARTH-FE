@@ -303,6 +303,7 @@ function ContentItem() {
             height: "120px",
             minWidth: "120px",
             backgroundRepeat: "no-repeat",
+            border: "2px solid black",
             borderRadius: "50%",
             "&:hover": {
               transition: "all 0.1s ease-in-out",
@@ -326,6 +327,7 @@ function ContentItem() {
             height: "120px",
             minWidth: "120px",
             backgroundRepeat: "no-repeat",
+            border: "2px solid black",
             borderRadius: "50%",
             "&:hover": {
               transition: "all 0.1s ease-in-out",
@@ -349,6 +351,7 @@ function ContentItem() {
             height: "120px",
             minWidth: "120px",
             backgroundRepeat: "no-repeat",
+            border: "2px solid black",
             borderRadius: "50%",
             "&:hover": {
               transition: "all 0.1s ease-in-out",
@@ -372,6 +375,7 @@ function ContentItem() {
             height: "120px",
             minWidth: "120px",
             backgroundRepeat: "no-repeat",
+            border: "2px solid black",
             borderRadius: "50%",
             "&:hover": {
               transition: "all 0.1s ease-in-out",
