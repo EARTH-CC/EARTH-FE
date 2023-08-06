@@ -77,8 +77,7 @@ export default function BontradeLogin({ open, handleClose }) {
               alignItems: "center",
               justifyContent: "center",
               height: "85vh",
-              background:
-                "linear-gradient(160deg, rgb(236, 28, 36), rgb(0, 119, 225))",
+              background: "linear-gradient(160deg, #000000, rgb(0, 119, 225))",
             }}
           >
             <Box
