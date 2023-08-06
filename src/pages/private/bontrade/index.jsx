@@ -1,6 +1,6 @@
 import React from "react";
 import { Box, Grid } from "@mui/material";
-import TopBar from "../../../components/PrivateComponents/bonatrade/TopBar/topBar";
+import TopBar from "../../../components/PrivateComponents/bontrade/TopBar/topBar";
 import MyChart from "../../../components/PrivateComponents/ugtrade/Charts/StaticChart";
 import MyChart2 from "../../../components/PrivateComponents/ugtrade/Charts/StaticChart2";
 import BillingStatement from "./scenes/BillingStatement";

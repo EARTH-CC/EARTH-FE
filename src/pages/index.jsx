@@ -7,7 +7,7 @@ export { default as Missing } from "./errorPages/missing";
 export { default as Dashboard } from "./private/eglogistics/global/Dashboard";
 
 // Bonatrade
-export { default as Bonatrade } from "./private/bonatrade";
+export { default as Bontrade } from "./private/bontrade";
 
 // Erotas
 export { default as Erotas } from "./private/erotas";

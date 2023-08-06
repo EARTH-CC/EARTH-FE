@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Box, Button, Grid, Typography } from "@mui/material";
 import Logo from "../../assets/images/logo.png";
-import Bonatrade from "../../assets/bonatrade.png";
+import Bontrade from "../../assets/bontrade.png";
 import UGTrade from "../../assets/ugtrade.png";
 import EGLogistics from "../../assets/eglogistics.png";
 import Erotas from "../../assets/erotas.png";
@@ -9,17 +9,44 @@ import "./container.css";
 import waveTop from "../../assets/wave-top.png";
 import waveMid from "../../assets/wave-mid.png";
 import waveBot from "../../assets/wave-bot.png";
-import Login from "../../modal/login";
+import EGLogisticsLogin from "../../modal/EGLogisticsLogin";
+import BontradeLogin from "../../modal/BontradeLogin";
+import UGTradeLogin from "../../modal/UGTradeLogin";
+import ErotasLogin from "../../modal/ErotasLogin";
 
 function ContentItem() {
-  const [open, setOpen] = useState(false);
+  const [openEG, setOpenEG] = useState(false);
+  const [openBon, setOpenBon] = useState(false);
+  const [openUG, setOpenUG] = useState(false);
+  const [openEro, setOpenEro] = useState(false);
 
-  const handleClickLogin = () => {
-    setOpen(true);
+  const handleOpenEG = () => {
+    setOpenEG(true);
   };
 
-  const handleCloseLogin = () => {
-    setOpen(false);
+  const handleCloseEG = () => {
+    setOpenEG(false);
+  };
+  const handleOpenBon = () => {
+    setOpenBon(true);
+  };
+
+  const handleCloseBon = () => {
+    setOpenBon(false);
+  };
+  const handleOpenUG = () => {
+    setOpenUG(true);
+  };
+
+  const handleCloseUG = () => {
+    setOpenUG(false);
+  };
+  const handleOpenEro = () => {
+    setOpenEro(true);
+  };
+
+  const handleCloseEro = () => {
+    setOpenEro(false);
   };
 
   return (
@@ -224,7 +251,7 @@ function ContentItem() {
         }}
       >
         <Button
-          onClick={handleClickLogin}
+          onClick={handleOpenEG}
           sx={{
             display: "flex",
             justifyContent: "center",
@@ -244,11 +271,11 @@ function ContentItem() {
           }}
         />
         <Button
-          onClick={handleClickLogin}
+          onClick={handleOpenBon}
           sx={{
             display: "flex",
             justifyContent: "center",
-            backgroundImage: `url(${Bonatrade})`,
+            backgroundImage: `url(${Bontrade})`,
             backgroundSize: "contain",
             backgroundPosition: "center",
             height: "120px",
@@ -264,7 +291,7 @@ function ContentItem() {
           }}
         />
         <Button
-          onClick={handleClickLogin}
+          onClick={handleOpenUG}
           sx={{
             display: "flex",
             justifyContent: "center",
@@ -284,7 +311,7 @@ function ContentItem() {
           }}
         />
         <Button
-          onClick={handleClickLogin}
+          onClick={handleOpenEro}
           sx={{
             display: "flex",
             justifyContent: "center",
@@ -304,7 +331,10 @@ function ContentItem() {
           }}
         />
       </Grid>
-      <Login open={open} handleClose={handleCloseLogin} />
+      <EGLogisticsLogin open={openEG} handleClose={handleCloseEG} />
+      <BontradeLogin open={openBon} handleClose={handleCloseBon} />
+      <UGTradeLogin open={openUG} handleClose={handleCloseUG} />
+      <ErotasLogin open={openEro} handleClose={handleCloseEro} />
     </Grid>
   );
 }

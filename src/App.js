@@ -10,7 +10,7 @@ import {
   Missing,
   Dashboard,
   Login,
-  Bonatrade,
+  Bontrade,
   UGTrade,
   Erotas,
 } from "pages";
@@ -38,7 +38,7 @@ function App() {
             <Route path="/" element={<LandingPage />} />
             <Route path="/sign-in" element={<Login />} />
             <Route path="/dashboard" element={<Dashboard />} />
-            <Route path="/bonatrade" element={<Bonatrade />} />
+            <Route path="/bontrade" element={<Bontrade />} />
             <Route path="/ugtrade" element={<UGTrade />} />
             <Route path="/erotas" element={<Erotas />} />
 

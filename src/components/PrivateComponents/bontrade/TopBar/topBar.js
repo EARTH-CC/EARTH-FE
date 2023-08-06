@@ -7,7 +7,7 @@ import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 // import Button from "@mui/material/Button";
 import IconButton from "@mui/material/IconButton";
-import Logo from "assets/bonatrade.png";
+import Logo from "assets/bontrade.png";
 
 function StickyAppBar() {
   const navigate = useNavigate();
