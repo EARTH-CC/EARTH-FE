@@ -226,11 +226,31 @@ function ContentItem() {
           sx={{
             display: "flex",
             justifyContent: "center",
+            backgroundImage: `url(${EGLogistics})`,
+            backgroundSize: "contain",
+            backgroundPosition: "center",
+            height: "120px",
+            minWidth: "120px",
+            backgroundRepeat: "no-repeat",
+            borderRadius: "50%",
+            "&:hover": {
+              color: "#00c0fe",
+            },
+            "&:active": {
+              color: "#00c0fe",
+            },
+          }}
+        />
+        <Button
+          onClick={handleClickLogin}
+          sx={{
+            display: "flex",
+            justifyContent: "center",
             backgroundImage: `url(${Bonatrade})`,
             backgroundSize: "contain",
             backgroundPosition: "center",
-            height: "100px",
-            minWidth: "100px",
+            height: "120px",
+            minWidth: "120px",
             backgroundRepeat: "no-repeat",
             borderRadius: "50%",
             "&:hover": {
@@ -249,28 +269,8 @@ function ContentItem() {
             backgroundImage: `url(${UGTrade})`,
             backgroundSize: "contain",
             backgroundPosition: "center",
-            height: "100px",
-            minWidth: "100px",
-            backgroundRepeat: "no-repeat",
-            borderRadius: "50%",
-            "&:hover": {
-              color: "#00c0fe",
-            },
-            "&:active": {
-              color: "#00c0fe",
-            },
-          }}
-        />
-        <Button
-          onClick={handleClickLogin}
-          sx={{
-            display: "flex",
-            justifyContent: "center",
-            backgroundImage: `url(${EGLogistics})`,
-            backgroundSize: "contain",
-            backgroundPosition: "center",
-            height: "100px",
-            minWidth: "100px",
+            height: "120px",
+            minWidth: "120px",
             backgroundRepeat: "no-repeat",
             borderRadius: "50%",
             "&:hover": {
@@ -289,8 +289,8 @@ function ContentItem() {
             backgroundImage: `url(${Erotas})`,
             backgroundSize: "contain",
             backgroundPosition: "center",
-            height: "100px",
-            minWidth: "100px",
+            height: "120px",
+            minWidth: "120px",
             backgroundRepeat: "no-repeat",
             borderRadius: "50%",
             "&:hover": {
