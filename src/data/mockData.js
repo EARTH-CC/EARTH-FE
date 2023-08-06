@@ -524,14 +524,14 @@ const mockBarDataUsers = [
 
 const mockPieData = [
   {
-    id: "Male",
-    label: "Male",
+    id: "Expenses",
+    label: "Expenses",
     value: 20,
     color: "hsl(104, 70%, 50%)",
   },
   {
-    id: "Female",
-    label: "Female",
+    id: "Sales",
+    label: "Sales",
     value: 16,
     color: "hsl(162, 70%, 50%)",
   },
@@ -539,91 +539,91 @@ const mockPieData = [
 
 const mockLineData = [
   {
-    id: "Web Developer",
+    id: "Period 1",
     color: tokens("dark").greenAccent[500],
     data: [
       {
-        x: "February",
+        x: "Barge 1",
         y: 88,
       },
       {
-        x: "March",
+        x: "Barge 2",
         y: 232,
       },
       {
-        x: "April",
+        x: "Barge 3",
         y: 281,
       },
       {
-        x: "May",
+        x: "Barge 4",
         y: 1,
       },
       {
-        x: "June",
+        x: "Barge 5",
         y: 35,
       },
       {
-        x: "July",
+        x: "Barge 6",
         y: 236,
       },
     ],
   },
   {
-    id: "Software Engineer",
+    id: "Period 2",
     color: tokens("dark").blueAccent[300],
     data: [
       {
-        x: "February",
+        x: "Barge 1",
         y: 189,
       },
       {
-        x: "March",
+        x: "Barge 2",
         y: 97,
       },
       {
-        x: "April",
+        x: "Barge 3",
         y: 87,
       },
       {
-        x: "May",
+        x: "Barge 4",
         y: 299,
       },
       {
-        x: "June",
+        x: "Barge 5",
         y: 251,
       },
       {
-        x: "July",
+        x: "Barge 6",
         y: 33,
       },
     ],
   },
   {
-    id: "IT Specialist",
+    id: "Period 3",
     color: tokens("dark").redAccent[200],
     data: [
       {
-        x: "February",
+        x: "Barge 1",
         y: 152,
       },
       {
-        x: "March",
+        x: "Barge 2",
         y: 8,
       },
       {
-        x: "April",
+        x: "Barge 3",
         y: 197,
       },
       {
-        x: "May",
+        x: "Barge 4",
         y: 107,
       },
       {
-        x: "June",
+        x: "Barge 5",
         y: 170,
       },
       {
-        x: "July",
+        x: "Barge 6",
         y: 189,
       },
     ],

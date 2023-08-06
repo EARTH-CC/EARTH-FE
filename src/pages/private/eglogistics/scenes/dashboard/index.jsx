@@ -230,7 +230,7 @@ export default function Dashboard() {
           boxShadow="0px 5px 10px rgba(0, 0, 0, 0.4)"
         >
           <Typography variant="h5" fontWeight="600">
-            Applicants Gender
+            Recent Costs Data (2023)
           </Typography>
           <Box
             display="flex"
@@ -264,7 +264,7 @@ export default function Dashboard() {
                 fontWeight="600"
                 color={colors.grey[100]}
               >
-                Applications
+                Recent Data (2023)
               </Typography>
               {/* <Typography
                 variant="h7"
