@@ -30,7 +30,7 @@ export default function UGTradeLogin({ open, handleClose }) {
   const navigate = useNavigate();
 
   const handleSubmit = () => {
-    if (username === "ug" && password === "ug") {
+    if (username === "ugtrading" && password === "ugtrading") {
       navigate("/ugtrade");
     } else {
       setError("Invalid Login Credentials");

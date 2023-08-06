@@ -30,7 +30,7 @@ export default function ErotasLogin({ open, handleClose }) {
   const navigate = useNavigate();
 
   const handleSubmit = () => {
-    if (username === "ero" && password === "ero") {
+    if (username === "erotas" && password === "erotas") {
       navigate("/erotas");
     } else {
       setError("Invalid Login Credentials");

@@ -30,7 +30,7 @@ export default function BontradeLogin({ open, handleClose }) {
   const navigate = useNavigate();
 
   const handleSubmit = () => {
-    if (username === "bon" && password === "bon") {
+    if (username === "bontrade" && password === "bontrade") {
       navigate("/bontrade");
     } else {
       setError("Invalid Login Credentials");
