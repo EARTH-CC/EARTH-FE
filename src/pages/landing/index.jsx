@@ -241,10 +241,8 @@ function ContentItem() {
         item
         xs={12}
         sx={{
-          // height: "60vh",
-          mt: "20px",
+          height: "20vh",
           display: "flex",
-          flexDirection: "row",
           alignItems: "center",
           justifyContent: "center",
           gap: "2em",
@@ -263,7 +261,10 @@ function ContentItem() {
             backgroundRepeat: "no-repeat",
             borderRadius: "50%",
             "&:hover": {
-              color: "#00c0fe",
+              transition: "all 0.1s ease-in-out",
+              mx: "5px",
+              width: "150px",
+              height: "150px",
             },
             "&:active": {
               color: "#00c0fe",
@@ -283,7 +284,10 @@ function ContentItem() {
             backgroundRepeat: "no-repeat",
             borderRadius: "50%",
             "&:hover": {
-              color: "#00c0fe",
+              transition: "all 0.1s ease-in-out",
+              mx: "5px",
+              width: "150px",
+              height: "150px",
             },
             "&:active": {
               color: "#00c0fe",
@@ -303,7 +307,10 @@ function ContentItem() {
             backgroundRepeat: "no-repeat",
             borderRadius: "50%",
             "&:hover": {
-              color: "#00c0fe",
+              transition: "all 0.1s ease-in-out",
+              mx: "5px",
+              width: "150px",
+              height: "150px",
             },
             "&:active": {
               color: "#00c0fe",
@@ -323,7 +330,10 @@ function ContentItem() {
             backgroundRepeat: "no-repeat",
             borderRadius: "50%",
             "&:hover": {
-              color: "#00c0fe",
+              transition: "all 0.1s ease-in-out",
+              mx: "5px",
+              width: "150px",
+              height: "150px",
             },
             "&:active": {
               color: "#00c0fe",

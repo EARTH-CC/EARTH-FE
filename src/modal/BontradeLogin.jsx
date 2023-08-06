@@ -61,6 +61,7 @@ export default function BontradeLogin({ open, handleClose }) {
                 width: "500px",
                 height: "500px",
                 display: "block",
+                borderRadius: "50%",
               }}
             />
             <Typography sx={{ fontSize: "30px" }}>
@@ -77,7 +78,7 @@ export default function BontradeLogin({ open, handleClose }) {
               justifyContent: "center",
               height: "85vh",
               background:
-                "linear-gradient(160deg, rgba(236, 28, 36, 0.9), rgba(0, 119, 225, 0.9))",
+                "linear-gradient(160deg, rgb(236, 28, 36), rgb(0, 119, 225))",
             }}
           >
             <Box
@@ -89,12 +90,14 @@ export default function BontradeLogin({ open, handleClose }) {
                 width: "700px",
                 height: "700px",
                 position: "absolute",
-                zIndex: -1,
+                opacity: "0.3",
               }}
             />
             <Box
               sx={{
                 mb: "100px",
+                textAlign: "center",
+                zIndex: 1,
               }}
             >
               <Typography
@@ -111,9 +114,9 @@ export default function BontradeLogin({ open, handleClose }) {
 
               <Typography
                 sx={{
-                  color: "#A200FF",
+                  color: "#fe8383",
                   fontWeight: "bolder",
-                  fontSize: "20px",
+                  fontSize: "15px",
                 }}
               >
                 {error}
@@ -125,6 +128,7 @@ export default function BontradeLogin({ open, handleClose }) {
                 flexDirection: "column",
                 alignItem: "center",
                 justifyContent: "space-between",
+                zIndex: 1,
               }}
             >
               <TextField
@@ -242,7 +246,7 @@ export default function BontradeLogin({ open, handleClose }) {
                 <Typography
                   sx={{
                     fontSize: "14px",
-                    color: "#0bc6ff",
+                    color: "#fff",
                     m: 0,
                     mr: "10px",
                   }}
@@ -254,7 +258,7 @@ export default function BontradeLogin({ open, handleClose }) {
                     sx={{
                       fontSize: "14px",
                       fontWeight: "bold",
-                      color: "#0bc6ff",
+                      color: "#fff",
                       m: 0,
                       "&:hover": {
                         textDecoration: "underline",
