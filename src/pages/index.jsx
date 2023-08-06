@@ -4,7 +4,7 @@ export { default as Unauthorized } from "./errorPages/unauthorized";
 export { default as Missing } from "./errorPages/missing";
 
 // EnG Logistics
-export { default as Dashboard } from "./private/eglogistics/global/Dashboard";
+export { default as Dashboard } from "./private/eglogistics";
 
 // Bonatrade
 export { default as Bontrade } from "./private/bontrade";

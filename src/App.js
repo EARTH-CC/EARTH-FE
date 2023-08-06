@@ -2,9 +2,9 @@ import React from "react";
 import { Box, CssBaseline, ThemeProvider } from "@mui/material";
 import { Route, Routes } from "react-router-dom";
 import "./App.css";
-import RequireAuth from "contexts/RequireAuth";
-import PersistLogin from "contexts/PersistLogin";
-import Layout from "contexts/Layouts/Layout";
+// import RequireAuth from "contexts/RequireAuth";
+// import PersistLogin from "contexts/PersistLogin";
+// import Layout from "contexts/Layouts/Layout";
 import {
   Unauthorized,
   Missing,
@@ -37,30 +37,18 @@ function App() {
           <Routes>
             <Route path="/" element={<LandingPage />} />
             <Route path="/sign-in" element={<Login />} />
-            <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/bontrade" element={<Bontrade />} />
             <Route path="/ugtrade" element={<UGTrade />} />
             <Route path="/erotas" element={<Erotas />} />
+            <Route path="/dashboard" element={<Dashboard />} />
 
-            <Route element={<PersistLogin />}>
-              {/* <Route element={<RequireAuth allowedRoles="eglogistics" />}>
+            {/* <Route element={<PersistLogin />}>
+              <Route element={<RequireAuth allowedRoles="eglogistics" />}>
                 <Route path="/" element={<Layout />}>
                  
                 </Route>
-              </Route> */}
-
-              {/* <Route element={<RequireAuth allowedRoles="bonatrade" />}>
-                <Route path="/" element={<Layout />}>
-                  
-                </Route>
-              </Route> */}
-
-              <Route element={<RequireAuth allowedRoles="erotas" />}>
-                <Route path="/" element={<Layout />}>
-                  <Route path="/dashboard" element={<Dashboard />} />
-                </Route>
-              </Route>
-            </Route>
+              </Route> 
+            </Route> */}
 
             <Route path="/unauthorized" element={<Unauthorized />} />
             <Route path="*" element={<Missing />} />
