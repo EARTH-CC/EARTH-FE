@@ -1,10 +1,10 @@
 import { useState } from "react";
 import { Box, Button, Grid, Typography } from "@mui/material";
 import Logo from "../../assets/images/logo.png";
-import First from "../../assets/1.png";
-import Second from "../../assets/2.png";
-import Third from "../../assets/3.png";
-import Fourth from "../../assets/4.png";
+import Bonatrade from "../../assets/bonatrade.png";
+import UGTrade from "../../assets/ugtrade.png";
+import EGLogistics from "../../assets/eglogistics.png";
+import Erotas from "../../assets/erotas.png";
 import "./container.css";
 import waveTop from "../../assets/wave-top.png";
 import waveMid from "../../assets/wave-mid.png";
@@ -221,7 +221,7 @@ function ContentItem() {
           sx={{
             display: "flex",
             justifyContent: "center",
-            backgroundImage: `url(${First})`,
+            backgroundImage: `url(${Bonatrade})`,
             backgroundSize: "contain",
             backgroundPosition: "center",
             height: "100px",
@@ -240,7 +240,7 @@ function ContentItem() {
           sx={{
             display: "flex",
             justifyContent: "center",
-            backgroundImage: `url(${Second})`,
+            backgroundImage: `url(${UGTrade})`,
             backgroundSize: "contain",
             backgroundPosition: "center",
             height: "100px",
@@ -260,7 +260,7 @@ function ContentItem() {
           sx={{
             display: "flex",
             justifyContent: "center",
-            backgroundImage: `url(${Third})`,
+            backgroundImage: `url(${EGLogistics})`,
             backgroundSize: "contain",
             backgroundPosition: "center",
             height: "100px",
@@ -279,7 +279,7 @@ function ContentItem() {
           sx={{
             display: "flex",
             justifyContent: "center",
-            backgroundImage: `url(${Fourth})`,
+            backgroundImage: `url(${Erotas})`,
             backgroundSize: "contain",
             backgroundPosition: "center",
             height: "100px",
