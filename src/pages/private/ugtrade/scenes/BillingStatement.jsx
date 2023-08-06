@@ -42,15 +42,15 @@ function BillingStatement() {
       <Box sx={{ display: "flex", justifyContent: "space-between" }}>
         <Box
           component="img"
-          alt="eglogo"
-          src={eglogo}
+          alt="uglogo"
+          src={uglogo}
           height="80px"
           width="80px"
         />
         <Box
           component="img"
-          alt="uglogo"
-          src={uglogo}
+          alt="eglogo"
+          src={eglogo}
           height="80px"
           width="80px"
         />
@@ -230,11 +230,21 @@ function BillingStatement() {
       <Table>
         <TableHead>
           <TableRow>
-            <TableCell>Item Description</TableCell>
-            <TableCell>Quantity</TableCell>
-            <TableCell>Unit</TableCell>
-            <TableCell>Unit Cost</TableCell>
-            <TableCell>Amount Due</TableCell>
+            <TableCell>
+              <b>Item Description</b>
+            </TableCell>
+            <TableCell>
+              <b>Quantity</b>
+            </TableCell>
+            <TableCell>
+              <b>Unit</b>
+            </TableCell>
+            <TableCell>
+              <b>Unit Cost</b>
+            </TableCell>
+            <TableCell>
+              <b>Amount Due</b>
+            </TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
