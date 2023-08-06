@@ -10,7 +10,11 @@ import {
   TableRow,
   Typography,
 } from "@mui/material";
-import logo from "../../../../assets/images/EARTH-Logo.png";
+// import logo from "../../../../assets/images/EARTH-Logo.png";
+import uglogo from "../../../../assets/ugtrade.png";
+import bonalogo from "../../../../assets/bontrade.png";
+import eglogo from "../../../../assets/eglogistics.png";
+import erologo from "../../../../assets/erotas.png";
 
 function BillingStatement() {
   return (
@@ -27,17 +31,29 @@ function BillingStatement() {
         py: 4,
       }}
     >
-      <Box
+      {/* <Box
         component="img"
         alt="logo"
         src={logo}
         height="80px"
         width="80px"
         sx={{ position: "absolute" }}
-      />
+      /> */}
       <Box sx={{ display: "flex", justifyContent: "space-between" }}>
-        <Box component="img" alt="logo" src={logo} height="80px" width="80px" />
-        <Box component="img" alt="logo" src={logo} height="80px" width="80px" />
+        <Box
+          component="img"
+          alt="bonalogo"
+          src={bonalogo}
+          height="80px"
+          width="80px"
+        />
+        <Box
+          component="img"
+          alt="eglogo"
+          src={eglogo}
+          height="80px"
+          width="80px"
+        />
         <Box
           sx={{
             display: "flex",
@@ -69,8 +85,20 @@ function BillingStatement() {
             Reclamation Project
           </Typography>
         </Box>
-        <Box component="img" alt="logo" src={logo} height="80px" width="80px" />
-        <Box component="img" alt="logo" src={logo} height="80px" width="80px" />
+        <Box
+          component="img"
+          alt="erologo"
+          src={erologo}
+          height="80px"
+          width="80px"
+        />
+        <Box
+          component="img"
+          alt="uglogo"
+          src={uglogo}
+          height="80px"
+          width="80px"
+        />
       </Box>
       <Divider sx={{ color: "black", height: 2 }} />
       <Box sx={{ mb: 4 }}>
@@ -202,11 +230,21 @@ function BillingStatement() {
       <Table>
         <TableHead>
           <TableRow>
-            <TableCell>Item Description</TableCell>
-            <TableCell>Quantity</TableCell>
-            <TableCell>Unit</TableCell>
-            <TableCell>Unit Cost</TableCell>
-            <TableCell>Amount Due</TableCell>
+            <TableCell>
+              <b>Item Description</b>
+            </TableCell>
+            <TableCell>
+              <b>Quantity</b>
+            </TableCell>
+            <TableCell>
+              <b>Unit</b>
+            </TableCell>
+            <TableCell>
+              <b>Unit Cost</b>
+            </TableCell>
+            <TableCell>
+              <b>Amount Due</b>
+            </TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
