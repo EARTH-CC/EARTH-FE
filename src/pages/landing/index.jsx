@@ -207,8 +207,10 @@ function ContentItem() {
             my: "20px",
           }}
         />
+        <Background />
       </Grid>
-      <Grid
+
+      <Grid // Underline
         item
         xs={12}
         sx={{
@@ -307,6 +309,32 @@ function ContentItem() {
   );
 }
 
+function Background() {
+  return (
+    <div className="animation-container">
+      <div className="boom-container">
+        <div className="shape circle big white" />
+        <div className="shape circle white" />
+        <div className="shape triangle big yellow" />
+        <div className="shape disc white" />
+        <div className="shape triangle blue" />
+      </div>
+      <div className="boom-container second">
+        <div className="shape circle big white" />
+        <div className="shape circle white" />
+        <div className="shape disc white" />
+        <div className="shape triangle blue" />
+      </div>
+      <div className="boom-container third">
+        <div className="shape circle big white" />
+        <div className="shape circle white" />
+        <div className="shape disc white" />
+        <div className="shape triangle blue" />
+      </div>
+    </div>
+  );
+}
+
 function Footer() {
   return (
     <Box className="bg-animation">
@@ -344,6 +372,7 @@ function Content() {
   return (
     <Box className="content">
       <ContentItem />
+      <Footer />
     </Box>
   );
 }
@@ -351,7 +380,6 @@ function Content() {
 export default function Landing() {
   return (
     <Box className="app">
-      <Footer />
       <Content />
     </Box>
   );
