@@ -28,16 +28,16 @@ export default function Landing1() {
           backgroundPosition: "center",
           height: "700px",
           width: "700px",
-          color: "transparent", // Make the text transparent
-          backgroundColor: "transparent", // Make the background transparent
-          boxShadow: "none", // Remove any box shadow
+          color: "transparent",
+          backgroundColor: "transparent",
+          boxShadow: "none",
           "&:hover": {
-            color: "transparent", // Make the text transparent on hover
-            backgroundColor: "transparent", // Make the background transparent on hover
+            color: "transparent",
+            backgroundColor: "transparent",
           },
           "&:active": {
-            color: "transparent", // Make the text transparent on active state (click)
-            backgroundColor: "transparent", // Make the background transparent on active state (click)
+            color: "transparent",
+            backgroundColor: "transparent",
           },
           // backgroundRepeat: "no-repeat",
         }}

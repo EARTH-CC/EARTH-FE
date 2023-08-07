@@ -4,6 +4,19 @@ import TopBar from "../../../components/PrivateComponents/bontrade/TopBar/topBar
 import MyChart from "../../../components/PrivateComponents/ugtrade/Charts/StaticChart";
 import MyChart2 from "../../../components/PrivateComponents/ugtrade/Charts/StaticChart2";
 import BillingStatement from "./scenes/BillingStatement";
+import exampleVideo from "../../../assets/Video.mp4";
+
+function VideoPlayer() {
+  return (
+    <div>
+      <video controls width="500" height="300">
+        <source src={exampleVideo} type="video/mp4" />
+        <track kind="captions" label="English Captions" />
+        Your browser does not support the video tag.
+      </video>
+    </div>
+  );
+}
 
 function Bonatrade() {
   return (
@@ -22,6 +35,7 @@ function Bonatrade() {
         >
           <MyChart />
           <MyChart2 />
+          <VideoPlayer />
         </Grid>
         <Grid item xs={6}>
           <BillingStatement />
