@@ -50,7 +50,7 @@ function App() {
             {/* <Route element={<PersistLogin />}>
               <Route element={<RequireAuth allowedRoles="eglogistics" />}>
                 <Route path="/" element={<Layout />}>
-                 
+                
                 </Route>
               </Route> 
             </Route> */}

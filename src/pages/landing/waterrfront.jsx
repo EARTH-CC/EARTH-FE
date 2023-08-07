@@ -6,7 +6,6 @@ import Bontrade from "../../assets/bontrade.png";
 import UGTrade from "../../assets/ugtrade.png";
 import EGLogistics from "../../assets/eglogistics.png";
 import Erotas from "../../assets/erotas.png";
-import "./container.css";
 import waveTop from "../../assets/wave-top.png";
 import waveMid from "../../assets/wave-mid.png";
 import waveBot from "../../assets/wave-bot.png";
@@ -14,6 +13,7 @@ import EGLogisticsLogin from "../../modal/EGLogisticsLogin";
 import BontradeLogin from "../../modal/BontradeLogin";
 import UGTradeLogin from "../../modal/UGTradeLogin";
 import ErotasLogin from "../../modal/ErotasLogin";
+import "./container.css";
 
 function Cursor() {
   const [cursorPosition, setCursorPosition] = useState({
@@ -101,7 +101,15 @@ function ContentItem() {
   };
 
   return (
-    <Grid container spacing={0}>
+    <Grid
+      container
+      spacing={0}
+      sx={{
+        position: "absolute",
+        backgroundColor: "transparent",
+        zIndex: 2,
+      }}
+    >
       <Grid
         item
         xs={12}
@@ -283,7 +291,7 @@ function ContentItem() {
             my: "20px",
           }}
         />
-        <Background />
+        {/* <Background /> */}
       </Grid>
 
       <Grid // Underline
@@ -662,31 +670,31 @@ function Honeycomb() {
   );
 }
 
-function Background() {
-  return (
-    <div className="animation-container">
-      <div className="boom-container">
-        <div className="shape circle big white" />
-        <div className="shape circle white" />
-        <div className="shape triangle big yellow" />
-        <div className="shape disc white" />
-        <div className="shape triangle blue" />
-      </div>
-      <div className="boom-container second">
-        <div className="shape circle big white" />
-        <div className="shape circle white" />
-        <div className="shape disc white" />
-        <div className="shape triangle blue" />
-      </div>
-      <div className="boom-container third">
-        <div className="shape circle big white" />
-        <div className="shape circle white" />
-        <div className="shape disc white" />
-        <div className="shape triangle blue" />
-      </div>
-    </div>
-  );
-}
+// function Background() {
+//   return (
+//     <div className="animation-container">
+//       <div className="boom-container">
+//         <div className="shape circle big white" />
+//         <div className="shape circle white" />
+//         <div className="shape triangle big yellow" />
+//         <div className="shape disc white" />
+//         <div className="shape triangle blue" />
+//       </div>
+//       <div className="boom-container second">
+//         <div className="shape circle big white" />
+//         <div className="shape circle white" />
+//         <div className="shape disc white" />
+//         <div className="shape triangle blue" />
+//       </div>
+//       <div className="boom-container third">
+//         <div className="shape circle big white" />
+//         <div className="shape circle white" />
+//         <div className="shape disc white" />
+//         <div className="shape triangle blue" />
+//       </div>
+//     </div>
+//   );
+// }
 
 function Footer() {
   return (
@@ -725,8 +733,9 @@ function Content() {
   return (
     <Box className="content">
       <ContentItem />
-      <Honeycomb />
       <Footer />
+      <Cursor />
+      <Honeycomb />
     </Box>
   );
 }
@@ -734,7 +743,6 @@ function Content() {
 export default function Landing() {
   return (
     <Box className="app">
-      <Cursor />
       <Content />
     </Box>
   );

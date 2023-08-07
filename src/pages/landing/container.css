@@ -31,7 +31,7 @@ footer a:after {
   background: inherit;
   border-radius: 2px;
   overflow: hidden;
-  box-shadow:  5px 8px 15px .5px #3c3c3c;
+  box-shadow: 5px 8px 15px 0.5px #3c3c3c;
 }
 
 .login-form {
@@ -51,8 +51,6 @@ footer a:after {
   box-shadow: inset 0 0 0 500px rgba(127, 139, 199, 0.312);
 }
 
-
-
 .app {
   position: relative;
   width: 100%;
@@ -62,18 +60,17 @@ footer a:after {
 
 .bg-animation {
   position: absolute;
-  top: 0;
+  bottom: 0;
   left: 0;
   width: 100%;
-  height: 100%;
-  z-index: -1;
+  height: 12%;
+  z-index: 1;
 }
 
 .content {
   position: relative;
   z-index: 1;
 }
-
 
 @keyframes move_wave {
   0% {
@@ -101,7 +98,7 @@ footer a:after {
   overflow: hidden;
   height: 100%;
   bottom: -1px;
-  background-image: linear-gradient(to top, #ffffff 10%, #f3f3f3 100%);
+  background-color: transparent;
 }
 .bgTop {
   z-index: 15;
@@ -144,7 +141,6 @@ footer a:after {
 .waveAnimation .waveBottom {
   animation: move_wave 15s linear infinite;
 }
-
 
 /* Background Animation */
 
@@ -430,13 +426,9 @@ footer a:after {
   }
 }
 
-
 /* Honeycomb */
 
-
-/* Honeycomb */
-
-/* .row {
+.row {
   display: block;
   width: 100vw;
   height: 125px;
@@ -453,10 +445,10 @@ footer a:after {
   position: relative;
   width: 100px;
   height: 57.74px;
-  background-color: #fff;
+  background-color: #f5f5f5;
   margin: 32.87px 2px;
   display: block;
-  transition: all .2s linear;
+  transition: all 0.2s linear;
 }
 
 .hexagon::after {
@@ -467,8 +459,8 @@ footer a:after {
   border-right: 50px solid transparent;
   top: 100%;
   width: 0;
-  border-top: 28.87px solid #fff;
-  transition: all .2s linear;
+  border-top: 28.87px solid #f5f5f5;
+  transition: all 0.2s linear;
 }
 
 .hexagon::before {
@@ -478,13 +470,13 @@ footer a:after {
   border-left: 50px solid transparent;
   border-right: 50px solid transparent;
   bottom: 100%;
-  border-bottom: 28.87px solid #fff;
-  transition: all .2s linear;
+  border-bottom: 28.87px solid #f5f5f5;
+  transition: all 0.2s linear;
 }
 
 .row-moved {
   margin-left: 19px;
-} */
+}
 
 /* Cursor */
 
@@ -496,7 +488,18 @@ footer a:after {
   box-shadow: 2px -3px 41px -1px rgba(241, 196, 15, 0.64);
   z-index: 0;
   opacity: 0;
-  background: linear-gradient(45deg, #009aff, #a200ff, #1500ce, #00bace, #8f00e2, #ffa112, #ce00c0, #ce006e, #ce0022);
+  background: linear-gradient(
+    45deg,
+    #009aff,
+    #a200ff,
+    #1500ce,
+    #00bace,
+    #8f00e2,
+    #ffa112,
+    #ce00c0,
+    #ce006e,
+    #ce0022
+  );
   background-size: 400%;
   animation: glower 20s linear infinite;
   filter: blur(40px);
@@ -506,11 +509,11 @@ footer a:after {
   0% {
     background-position: 0 0;
   }
-  
+
   50% {
     background-position: 400% 0;
   }
-  
+
   100% {
     background-position: 0 0;
   }
