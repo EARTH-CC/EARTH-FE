@@ -21,7 +21,8 @@ function StickyAppBar() {
       <AppBar
         position="static"
         sx={{
-          borderBottom: "3px solid #830076", // Your desired color for the bottom border
+          width: "100%",
+          borderBottom: "3px solid #830076", // Your desired color and size for the bottom border (fixed)
           backgroundColor: "white",
           boxShadow: "none",
         }}

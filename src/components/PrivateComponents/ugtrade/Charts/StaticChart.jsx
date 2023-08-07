@@ -36,7 +36,7 @@ function MyChart() {
   };
 
   return (
-    <div style={{ width: "100%", marginTop: "10px", marginLeft: "160px" }}>
+    <div style={{ width: "900px", marginTop: "10px", marginLeft: "30px" }}>
       <Typography
         sx={{
           color: "Black",

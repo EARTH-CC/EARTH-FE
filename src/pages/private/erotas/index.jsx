@@ -36,7 +36,15 @@ function Erotas() {
         >
           <MyChart />
           <MyChart2 />
-          <VideoPlayer />
+          <div
+            style={{
+              width: "100%",
+              paddingTop: "56.25%",
+              position: "relative",
+            }}
+          >
+            <VideoPlayer />
+          </div>
         </Grid>
         <Grid item xs={6}>
           <BillingStatement />

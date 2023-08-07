@@ -26,7 +26,6 @@ function BillingStatement() {
         width: "743px",
         backgroundColor: "#fff",
         border: "solid 1px black",
-        margin: "auto",
         px: 6,
         py: 4,
       }}
