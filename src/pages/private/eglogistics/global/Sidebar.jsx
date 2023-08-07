@@ -21,7 +21,7 @@ function Item({ title, to, icon, selected, setSelected }) {
     <MenuItem
       active={selected === title}
       style={{
-        color: "black",
+        color: "white",
       }}
       onClick={() => setSelected(title)}
       icon={icon}
@@ -43,7 +43,7 @@ function Sidebar() {
     <Box
       sx={{
         "& .pro-sidebar-inner": {
-          background: `linear-gradient(100deg, #c0d3e1, #c0d3e1)`,
+          background: `linear-gradient(100deg, #262a67, #262a67)`,
         },
         "& .pro-icon-wrapper": {
           backgroundColor: "transparent !important",
@@ -55,8 +55,8 @@ function Sidebar() {
           color: "#9100FF !important",
         },
         "& .pro-menu-item.active": {
-          color: "black !important",
-          backgroundColor: "#d2bfcd",
+          color: "white !important",
+          backgroundColor: "#31346b",
           marginRight: isCollapsed ? "0.5px" : "29px",
           borderRadius: "50px",
         },
@@ -69,7 +69,7 @@ function Sidebar() {
             onClick={() => setIsCollapsed(!isCollapsed)}
             icon={
               isCollapsed ? (
-                <MenuOutlinedIcon sx={{ color: "black" }} />
+                <MenuOutlinedIcon sx={{ color: "white" }} />
               ) : undefined
             }
           >
@@ -81,7 +81,7 @@ function Sidebar() {
                 ml="15px"
               >
                 <IconButton onClick={() => setIsCollapsed(!isCollapsed)}>
-                  <MenuOutlinedIcon sx={{ color: "black" }} />
+                  <MenuOutlinedIcon sx={{ color: "white" }} />
                 </IconButton>
               </Box>
             )}
@@ -120,7 +120,7 @@ function Sidebar() {
               <Box key={item.title} sx={{ width: "100%" }}>
                 <Typography
                   sx={{
-                    color: "black",
+                    color: "white",
                     m: 2,
                     mt: 4,
                     textTransform: "uppercase",

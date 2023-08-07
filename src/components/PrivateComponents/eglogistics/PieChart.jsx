@@ -51,7 +51,7 @@ function PieChart() {
       cornerRadius={3}
       activeInnerRadiusOffset={10}
       activeOuterRadiusOffset={8}
-      colors={{ scheme: "accent" }}
+      colors={{ scheme: "category10" }}
       borderWidth={1}
       borderColor={{
         from: "color",

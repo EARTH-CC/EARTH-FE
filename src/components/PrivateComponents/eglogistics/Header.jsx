@@ -17,7 +17,7 @@ function Header({ title, subtitle }) {
       >
         {title}
       </Typography>
-      <Typography variant="h5" color={colors.greenAccent[300]}>
+      <Typography variant="h5" color={colors.redAccent[300]} fontWeight={600}>
         {subtitle}
       </Typography>
     </Box>

@@ -30,10 +30,10 @@ export default function Dashboard() {
         <Box>
           <Button
             sx={{
-              backgroundColor: colors.theme[100],
+              backgroundColor: "#334b5f",
               color: colors.grey[100],
               "&:hover": {
-                color: "black",
+                color: "white",
                 backgroundColor: colors.redAccent[700],
               },
               fontSize: "14px",
@@ -73,7 +73,7 @@ export default function Dashboard() {
             increase="+33.4%"
             icon={
               <ShoppingBagIcon
-                sx={{ color: colors.theme[100], fontSize: "26px" }}
+                sx={{ color: colors.blueAccent[400], fontSize: "26px" }}
               />
             }
           />
@@ -94,7 +94,7 @@ export default function Dashboard() {
             increase="+66.7%"
             icon={
               <ShoppingBasketIcon
-                sx={{ color: colors.theme[100], fontSize: "26px" }}
+                sx={{ color: colors.blueAccent[400], fontSize: "26px" }}
               />
             }
           />
@@ -115,7 +115,7 @@ export default function Dashboard() {
             increase="+43%"
             icon={
               <ShoppingCartCheckoutIcon
-                sx={{ color: colors.theme[100], fontSize: "26px" }}
+                sx={{ color: colors.blueAccent[400], fontSize: "26px" }}
               />
             }
           />
@@ -136,7 +136,7 @@ export default function Dashboard() {
             increase="+5%"
             icon={
               <AttachMoneyIcon
-                sx={{ color: colors.theme[100], fontSize: "26px" }}
+                sx={{ color: colors.blueAccent[400], fontSize: "26px" }}
               />
             }
           />
@@ -206,7 +206,7 @@ export default function Dashboard() {
                     }}
                   >
                     <Typography
-                      color={colors.greenAccent[300]}
+                      color={colors.blueAccent[300]}
                       variant="h5"
                       fontWeight="600"
                     >

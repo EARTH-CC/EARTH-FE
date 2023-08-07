@@ -57,7 +57,7 @@ function BarChart({ isDashboard }) {
       padding={0.3}
       valueScale={{ type: "linear" }}
       indexScale={{ type: "band", round: true }}
-      colors={{ scheme: "accent" }}
+      colors={{ scheme: "category10" }}
       defs={[
         {
           id: "dots",
