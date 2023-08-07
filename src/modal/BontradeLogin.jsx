@@ -8,7 +8,7 @@ import { AccountCircle } from "@mui/icons-material";
 import LockIcon from "@mui/icons-material/Lock";
 import ForwardRoundedIcon from "@mui/icons-material/ForwardRounded";
 import Logo from "../assets/images/logo.png";
-import BontradeLogo from "../assets/bontrade.png";
+import BontradeLogo from "../assets/bontrade1.png";
 
 const style = {
   position: "absolute",
@@ -41,32 +41,31 @@ export default function BontradeLogin({ open, handleClose }) {
       <Box sx={style}>
         {/* <form className="login-form" autoComplete="off"> */}
         <Grid container spacing={0}>
-          <Grid
-            item
-            xs={6}
-            sx={{
-              display: "flex",
-              flexDirection: "column",
-              alignItems: "center",
-              justifyContent: "center",
-              backgroundColor: "#fff",
-            }}
-          >
+          <Grid item xs={6}>
             <Box
-              component="img"
-              src={BontradeLogo}
-              alt="Bontrade Logo"
               sx={{
-                my: "20px",
-                width: "500px",
-                height: "500px",
-                display: "block",
-                borderRadius: "50%",
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+                justifyContent: "center",
+                backgroundColor: "#fff",
+                height: "85vh",
               }}
-            />
-            <Typography sx={{ fontSize: "30px" }}>
-              Bontrade Premier Ventures
-            </Typography>
+            >
+              <Box
+                component="img"
+                src={BontradeLogo}
+                alt="Bontrade Logo"
+                style={{
+                  marginTop: "-150px",
+                  width: "450px",
+                  height: "300px",
+                  display: "block",
+                  WebkitBoxReflect:
+                    "below -80px -webkit-gradient(linear, right top, right bottom, from(transparent), to(rgba(255, 255, 255, 0.4)))",
+                }}
+              />
+            </Box>
           </Grid>
           <Grid
             item
@@ -77,7 +76,8 @@ export default function BontradeLogin({ open, handleClose }) {
               alignItems: "center",
               justifyContent: "center",
               height: "85vh",
-              background: "linear-gradient(160deg, #000000, rgb(0, 119, 225))",
+              background:
+                "linear-gradient(160deg, #281e67, #2c2b65, #2e2e62, #47455d, #4a817f, #4c535d, #494d58, #46454a, #484848, #313130, #020307)",
             }}
           >
             <Box

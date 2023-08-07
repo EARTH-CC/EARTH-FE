@@ -41,27 +41,33 @@ export default function ErotasLogin({ open, handleClose }) {
       <Box sx={style}>
         {/* <form className="login-form" autoComplete="off"> */}
         <Grid container spacing={0}>
-          <Grid
-            item
-            xs={6}
-            sx={{
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              backgroundColor: "#fff",
-            }}
-          >
+          <Grid item xs={6}>
             <Box
-              component="img"
-              src={EroLogo}
-              alt="EroLogo"
               sx={{
-                my: "20px",
-                width: "700px",
-                height: "700px",
-                display: "block",
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+                justifyContent: "center",
+                backgroundColor: "#fff",
+                height: "85vh",
               }}
-            />
+            >
+              <Box
+                component="img"
+                src={EroLogo}
+                alt="EroLogo"
+                style={{
+                  marginTop: "-150px",
+                  width: "300px",
+                  height: "300px",
+                  display: "block",
+                  borderRadius: "50%",
+                  border: "solid 1px black",
+                  WebkitBoxReflect:
+                    "below 0 -webkit-gradient(linear, right top, right bottom, from(transparent), to(rgba(255, 255, 255, 0.4)))",
+                }}
+              />
+            </Box>
           </Grid>
           <Grid
             item
@@ -72,7 +78,8 @@ export default function ErotasLogin({ open, handleClose }) {
               alignItems: "center",
               justifyContent: "center",
               height: "85vh",
-              background: "linear-gradient(160deg, #000000, rgb(0, 119, 225))",
+              background:
+                "linear-gradient(160deg, #281e67, #2c2b65, #2e2e62, #47455d, #4a817f, #4c535d, #494d58, #46454a, #484848, #313130, #020307)",
             }}
           >
             <Box
