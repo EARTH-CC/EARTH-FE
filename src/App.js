@@ -15,7 +15,7 @@ import {
   Erotas,
 } from "pages";
 import themes from "./themes/theme";
-import LandingPage from "./pages/landing";
+import LandingPage from "./pages/landing/waterrfront";
 
 const { ColorModeContext, useMode } = themes;
 

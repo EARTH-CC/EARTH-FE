@@ -1,4 +1,4 @@
-export { default as LandingPage } from "./landing";
+export { default as LandingPage } from "./landing/waterrfront";
 export { default as Login } from "./auth/sign-in";
 export { default as Unauthorized } from "./errorPages/unauthorized";
 export { default as Missing } from "./errorPages/missing";

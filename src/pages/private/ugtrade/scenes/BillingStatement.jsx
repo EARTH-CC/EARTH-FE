@@ -11,8 +11,8 @@ import {
   Typography,
 } from "@mui/material";
 // import logo from "../../../../assets/images/EARTH-Logo.png";
-import uglogo from "../../../../assets/uglogoedited.png";
-import bonalogo from "../../../../assets/bontradelogoedited.png";
+import uglogo from "../../../../assets/ugtrade.png";
+import bonalogo from "../../../../assets/bontrade.png";
 import eglogo from "../../../../assets/eglogistics.png";
 import erologo from "../../../../assets/erotas.png";
 
