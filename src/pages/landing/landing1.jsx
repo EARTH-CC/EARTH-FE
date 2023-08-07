@@ -1,9 +1,16 @@
 import React from "react";
 import { Box, Button, Typography } from "@mui/material";
+import { useNavigate } from "react-router-dom";
 import bg from "../../assets/honeycomb.png";
 import earth from "../../assets/images/logo.png";
 
 export default function Landing1() {
+  const navigate = useNavigate();
+
+  const handleNextLanding = () => {
+    navigate("/landing");
+  };
+
   return (
     <Box
       sx={{
@@ -21,6 +28,7 @@ export default function Landing1() {
       }}
     >
       <Button
+        onClick={handleNextLanding}
         sx={{
           display: "flex",
           backgroundImage: `url(${earth})`,

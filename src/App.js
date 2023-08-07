@@ -10,6 +10,7 @@ import {
   Missing,
   Dashboard,
   Login,
+  Landing,
   Bontrade,
   UGTrade,
   Erotas,
@@ -36,6 +37,7 @@ function App() {
         <Box sx={{ zIndex: 1500 }}>
           <Routes>
             <Route path="/" element={<LandingPage />} />
+            <Route path="/landing" element={<Landing />} />
             <Route path="/sign-in" element={<Login />} />
             <Route path="/bontrade" element={<Bontrade />} />
             <Route path="/ugtrade" element={<UGTrade />} />

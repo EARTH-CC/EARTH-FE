@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Box, Button, Grid, Typography } from "@mui/material";
+import { useNavigate } from "react-router-dom";
 import Logo from "../../assets/images/logo.png";
 import Bontrade from "../../assets/bontrade.png";
 import UGTrade from "../../assets/ugtrade.png";
@@ -64,6 +65,12 @@ function ContentItem() {
   const [openUG, setOpenUG] = useState(false);
   const [openEro, setOpenEro] = useState(false);
 
+  const navigate = useNavigate();
+
+  const handleGoBack = () => {
+    navigate("/");
+  };
+
   const handleOpenEG = () => {
     setOpenEG(true);
   };
@@ -106,18 +113,15 @@ function ContentItem() {
         }}
       >
         <Box
-          sx={{
-            display: "flex",
-            justifyContent: "flex-start",
-            backgroundImage: `url(${Logo})`,
-            backgroundSize: "contain",
-            backgroundPosition: "left",
-            height: "100px",
-            minWidth: "140px",
-            ml: "10rem",
-            backgroundRepeat: "no-repeat",
-          }}
+          onClick={handleGoBack}
+          component="img"
+          alt="logo"
+          src={Logo}
+          height="100px"
+          width="100px"
+          sx={{ ml: "10rem", cursor: "pointer" }}
         />
+
         <Box
           sx={{
             mr: "10rem",
