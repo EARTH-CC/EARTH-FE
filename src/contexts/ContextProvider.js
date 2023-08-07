@@ -5,13 +5,16 @@ const StateContext = createContext();
 
 export function ContextProvider({ children }) {
   const [auth, setAuth] = useState(null);
+  const [isMainLanding, setIsMainLanding] = useState(false);
 
   const contextValue = useMemo(
     () => ({
       auth,
       setAuth,
+      isMainLanding,
+      setIsMainLanding,
     }),
-    [auth, setAuth]
+    [auth, setAuth, isMainLanding, setIsMainLanding]
   );
 
   return (

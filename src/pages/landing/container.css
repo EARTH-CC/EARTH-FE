@@ -1,26 +1,51 @@
+.landing-bg {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  background-image: url("../../assets/honeycomb.png");
+  background-size: cover;
+  background-position: center;
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden;
+}
+
+.landing-bg .intro {
+  position: absolute;
+  text-align: center;
+  width: 100vw;
+  overflow: auto;
+}
+
 /*BODY*/
 body {
   font-family: "Roboto", sans-serif;
 }
+
 body,
 .button:after {
   background: #ffffff;
 }
+
 .ctn {
   display: block;
   margin: auto;
   text-align: center;
 }
+
 footer {
   position: fixed;
   bottom: 5px;
   right: 5px;
   color: #fff;
 }
+
 footer a,
 footer a:after {
   font-size: 1em !important;
 }
+
 /*END BODY*/
 
 /*LOG IN*/
@@ -76,13 +101,16 @@ footer a:after {
   0% {
     transform: translateX(0) translateZ(0) scaleY(1);
   }
+
   50% {
     transform: translateX(-25%) translateZ(0) scaleY(0.55);
   }
+
   100% {
     transform: translateX(-50%) translateZ(0) scaleY(1);
   }
 }
+
 .waveWrapper {
   overflow: hidden;
   position: absolute;
@@ -92,6 +120,7 @@ footer a:after {
   top: 0;
   margin: auto;
 }
+
 .waveWrapperInner {
   position: absolute;
   width: 100%;
@@ -100,17 +129,21 @@ footer a:after {
   bottom: -1px;
   background-color: transparent;
 }
+
 .bgTop {
   z-index: 15;
   opacity: 0.5;
 }
+
 .bgMiddle {
   z-index: 10;
   opacity: 0.75;
 }
+
 .bgBottom {
   z-index: 5;
 }
+
 .wave {
   position: absolute;
   left: 0;
@@ -120,24 +153,30 @@ footer a:after {
   background-position: 0 bottom;
   transform-origin: center bottom;
 }
+
 .waveTop {
   background-size: 50% 100px;
 }
+
 .waveAnimation .waveTop {
   animation: move-wave 3s;
   -webkit-animation: move-wave 3s;
   -webkit-animation-delay: 1s;
   animation-delay: 1s;
 }
+
 .waveMiddle {
   background-size: 50% 120px;
 }
+
 .waveAnimation .waveMiddle {
   animation: move_wave 10s linear infinite;
 }
+
 .waveBottom {
   background-size: 50% 100px;
 }
+
 .waveAnimation .waveBottom {
   animation: move_wave 15s linear infinite;
 }
@@ -264,6 +303,7 @@ footer a:after {
     }
 
     .shape {
+
       &.triangle,
       &.circle,
       &.circle.big,
@@ -280,28 +320,35 @@ footer a:after {
     &.second {
       left: 485px;
       top: 205px;
+
       .shape {
+
         &.triangle,
         &.circle,
         &.circle.big,
         &.disc {
           animation-delay: 1.9s;
         }
+
         &.circle {
           animation-delay: 2.15s;
         }
       }
     }
+
     &.third {
       left: -500px;
       top: 75px;
+
       .shape {
+
         &.triangle,
         &.circle,
         &.circle.big,
         &.disc {
           animation-delay: 2.9s;
         }
+
         &.circle {
           animation-delay: 3.15s;
         }
@@ -315,23 +362,29 @@ footer a:after {
     width: 12px;
     transform: translate(0px, 0px) rotate(-35deg);
   }
+
   15% {
     width: 50px;
   }
+
   30% {
     width: 12px;
     transform: translate(214px, -150px) rotate(-35deg);
   }
+
   30.1% {
     transform: translate(214px, -150px) rotate(46deg);
   }
+
   50% {
     width: 110px;
   }
+
   70% {
     width: 12px;
     transform: translate(500px, 150px) rotate(46deg);
   }
+
   70.1% {
     transform: translate(500px, 150px) rotate(-37deg);
   }
@@ -339,6 +392,7 @@ footer a:after {
   85% {
     width: 50px;
   }
+
   100% {
     width: 12px;
     transform: translate(700px, 0) rotate(-37deg);
@@ -349,21 +403,24 @@ footer a:after {
   0% {
     opacity: 0;
   }
+
   5% {
     opacity: 1;
   }
+
   30% {
     opacity: 0;
     transform: scale(3);
   }
-  100% {
-  }
+
+  100% {}
 }
 
 @keyframes boom-triangle-big {
   0% {
     opacity: 0;
   }
+
   5% {
     opacity: 1;
   }
@@ -372,14 +429,15 @@ footer a:after {
     opacity: 0;
     transform: scale(2.5) translate(50px, -50px) rotate(360deg);
   }
-  100% {
-  }
+
+  100% {}
 }
 
 @keyframes boom-triangle {
   0% {
     opacity: 0;
   }
+
   5% {
     opacity: 1;
   }
@@ -389,23 +447,24 @@ footer a:after {
     transform: scale(3) translate(20px, 40px) rotate(360deg);
   }
 
-  100% {
-  }
+  100% {}
 }
 
 @keyframes boom-disc {
   0% {
     opacity: 0;
   }
+
   5% {
     opacity: 1;
   }
+
   40% {
     opacity: 0;
     transform: scale(2) translate(-70px, -30px);
   }
-  100% {
-  }
+
+  100% {}
 }
 
 .footer {
@@ -417,6 +476,7 @@ footer a:after {
   padding: 10px 20px;
 
   a {
+
     &,
     &:hover,
     &:focus,
@@ -488,18 +548,16 @@ footer a:after {
   box-shadow: 2px -3px 41px -1px rgba(241, 196, 15, 0.64);
   z-index: 0;
   opacity: 0;
-  background: linear-gradient(
-    45deg,
-    #009aff,
-    #a200ff,
-    #1500ce,
-    #00bace,
-    #8f00e2,
-    #ffa112,
-    #ce00c0,
-    #ce006e,
-    #ce0022
-  );
+  background: linear-gradient(45deg,
+      #009aff,
+      #a200ff,
+      #1500ce,
+      #00bace,
+      #8f00e2,
+      #ffa112,
+      #ce00c0,
+      #ce006e,
+      #ce0022);
   background-size: 400%;
   animation: glower 20s linear infinite;
   filter: blur(40px);

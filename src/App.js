@@ -10,13 +10,13 @@ import {
   Missing,
   Dashboard,
   Login,
+  Waterfront,
   Landing,
   Bontrade,
   UGTrade,
   Erotas,
 } from "pages";
 import themes from "./themes/theme";
-import LandingPage from "./pages/landing/landing1";
 
 const { ColorModeContext, useMode } = themes;
 
@@ -36,9 +36,9 @@ function App() {
         <CssBaseline />
         <Box sx={{ zIndex: 1500 }}>
           <Routes>
-            <Route path="/" element={<LandingPage />} />
-            <Route path="/landing" element={<Landing />} />
+            <Route path="/" element={<Landing />} />
             <Route path="/sign-in" element={<Login />} />
+            <Route path="/waterfront" element={<Waterfront />} />
             <Route path="/bontrade" element={<Bontrade />} />
             <Route path="/ugtrade" element={<UGTrade />} />
             <Route path="/erotas" element={<Erotas />} />

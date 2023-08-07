@@ -88,8 +88,8 @@ export default function EGLogisticsLogin({ open, handleClose }) {
               alt="Logo"
               sx={{
                 mt: "35px",
-                width: "700px",
-                height: "700px",
+                width: "500px",
+                height: "500px",
                 position: "absolute",
                 opacity: "0.3",
               }}
