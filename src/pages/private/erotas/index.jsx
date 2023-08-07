@@ -9,8 +9,8 @@ import exampleVideo from "../../../assets/Video.mp4";
 
 function VideoPlayer() {
   return (
-    <div>
-      <video controls width="500" height="300">
+    <div style={{ marginLeft: "160px" }}>
+      <video controls width="1000" height="800">
         <source src={exampleVideo} type="video/mp4" />
         <track kind="captions" label="English Captions" />
         Your browser does not support the video tag.
