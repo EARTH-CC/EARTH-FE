@@ -8,6 +8,7 @@ import Typography from "@mui/material/Typography";
 // import Button from "@mui/material/Button";
 import IconButton from "@mui/material/IconButton";
 import Logo from "assets/bontrade.png";
+// import { borderRadius } from "@mui/system";
 
 function StickyAppBar() {
   const navigate = useNavigate();
@@ -48,7 +49,15 @@ function StickyAppBar() {
               onClick={handleGoBack}
               sx={{ mr: 2, ml: 5 }}
             >
-              <img src={Logo} alt="Logo" style={{ height: "100px" }} />
+              <img
+                src={Logo}
+                alt="Logo"
+                style={{
+                  height: "100px",
+                  border: "2px solid black",
+                  borderRadius: "50%",
+                }}
+              />
             </IconButton>
             <Box>
               <Typography
