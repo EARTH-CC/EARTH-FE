@@ -65,8 +65,15 @@ export default function Landing1() {
                 width: "100%",
               }}
             >
-              <Typography sx={{ color: "#fff", fontSize: "30px" }}>
-                Projects
+              <Typography
+                sx={{
+                  fontFamily: "poppins",
+                  color: "#e3e3e3",
+                  fontSize: "25px",
+                  ml: 2,
+                }}
+              >
+                PROJECTS
               </Typography>
               <Grid container spacing={0} sx={{ height: "90%" }}>
                 <Grid
@@ -74,27 +81,40 @@ export default function Landing1() {
                   xs={12}
                   sx={{ display: "flex", alignItems: "center" }}
                 >
-                  <Button
-                    onClick={handleFirstProj}
+                  <Box
                     sx={{
-                      backgroundImage: `url(${waterfront})`,
-                      backgroundSize: "contain",
-                      backgroundPosition: "center",
-                      height: "100px",
-                      minWidth: "100px",
-                      backgroundRepeat: "no-repeat",
-                      border: "2px solid black",
-                      borderRadius: "50%",
-                      backgroundColor: "#cacaca",
-                      "&:hover": {
-                        backgroundColor: "#fff",
-                        transition: "all 0.1s ease-in-out",
-                        my: "5px",
-                        width: "110px",
-                        height: "110px",
-                      },
+                      display: "flex",
+                      justifyContent: "center",
+                      alignItems: "center",
+                      height: "120px",
+                      width: "auto",
                     }}
-                  />
+                  >
+                    <Button
+                      onClick={handleFirstProj}
+                      sx={{
+                        backgroundImage: `url(${waterfront})`,
+                        backgroundSize: "150px",
+                        backgroundPosition: "center",
+                        height: "100px",
+                        minWidth: "100px",
+                        backgroundRepeat: "no-repeat",
+                        border: "2px solid #e3e3e3",
+                        borderRadius: "50%",
+                        backgroundColor: "#cacaca",
+                        "&:hover": {
+                          backgroundSize: "160px",
+                          backgroundColor: "#fff",
+                          transition: "all 0.1s ease-in-out",
+                          boxShadow: "0 0 10px 5px rgba(255, 255, 255, 0.7)",
+                          my: "5px",
+                          width: "110px",
+                          height: "110px",
+                        },
+                      }}
+                    />
+                  </Box>
+
                   <Box
                     sx={{
                       display: "flex",
@@ -106,7 +126,7 @@ export default function Landing1() {
                     <Typography
                       sx={{
                         fontSize: "20px",
-                        color: "#fff",
+                        color: "#e3e3e3",
                       }}
                     >
                       Manila Waterfront City
@@ -126,26 +146,38 @@ export default function Landing1() {
                   xs={12}
                   sx={{ display: "flex", alignItems: "center" }}
                 >
-                  <Button
+                  <Box
                     sx={{
-                      backgroundImage: `url(${earth})`,
-                      backgroundSize: "contain",
-                      backgroundPosition: "center",
-                      height: "100px",
-                      minWidth: "100px",
-                      backgroundRepeat: "no-repeat",
-                      border: "2px solid black",
-                      borderRadius: "50%",
-                      backgroundColor: "#cacaca",
-                      "&:hover": {
-                        backgroundColor: "#fff",
-                        transition: "all 0.1s ease-in-out",
-                        my: "5px",
-                        width: "110px",
-                        height: "110px",
-                      },
+                      display: "flex",
+                      justifyContent: "center",
+                      alignItems: "center",
+                      height: "120px",
+                      width: "auto",
                     }}
-                  />
+                  >
+                    <Button
+                      sx={{
+                        backgroundImage: `url(${earth})`,
+                        backgroundSize: "contain",
+                        backgroundPosition: "center",
+                        height: "100px",
+                        minWidth: "100px",
+                        backgroundRepeat: "no-repeat",
+                        border: "2px solid #e3e3e3",
+                        borderRadius: "50%",
+                        backgroundColor: "#cacaca",
+                        "&:hover": {
+                          backgroundColor: "#fff",
+                          boxShadow: "0 0 10px 5px rgba(255, 255, 255, 0.7)",
+                          transition: "all 0.1s ease-in-out",
+                          my: "5px",
+                          width: "110px",
+                          height: "110px",
+                        },
+                      }}
+                    />
+                  </Box>
+
                   <Box
                     sx={{
                       display: "flex",
@@ -177,26 +209,38 @@ export default function Landing1() {
                   xs={12}
                   sx={{ display: "flex", alignItems: "center" }}
                 >
-                  <Button
+                  <Box
                     sx={{
-                      backgroundImage: `url(${earth})`,
-                      backgroundSize: "contain",
-                      backgroundPosition: "center",
-                      height: "100px",
-                      minWidth: "100px",
-                      backgroundRepeat: "no-repeat",
-                      border: "2px solid black",
-                      borderRadius: "50%",
-                      backgroundColor: "#cacaca",
-                      "&:hover": {
-                        backgroundColor: "#fff",
-                        transition: "all 0.1s ease-in-out",
-                        my: "5px",
-                        width: "110px",
-                        height: "110px",
-                      },
+                      display: "flex",
+                      justifyContent: "center",
+                      alignItems: "center",
+                      height: "120px",
+                      width: "auto",
                     }}
-                  />
+                  >
+                    <Button
+                      sx={{
+                        backgroundImage: `url(${earth})`,
+                        backgroundSize: "contain",
+                        backgroundPosition: "center",
+                        height: "100px",
+                        minWidth: "100px",
+                        backgroundRepeat: "no-repeat",
+                        border: "2px solid #e3e3e3",
+                        borderRadius: "50%",
+                        backgroundColor: "#cacaca",
+                        "&:hover": {
+                          backgroundColor: "#fff",
+                          boxShadow: "0 0 10px 5px rgba(255, 255, 255, 0.7)",
+                          transition: "all 0.1s ease-in-out",
+                          my: "5px",
+                          width: "110px",
+                          height: "110px",
+                        },
+                      }}
+                    />
+                  </Box>
+
                   <Box
                     sx={{
                       display: "flex",
@@ -228,26 +272,38 @@ export default function Landing1() {
                   xs={12}
                   sx={{ display: "flex", alignItems: "center" }}
                 >
-                  <Button
+                  <Box
                     sx={{
-                      backgroundImage: `url(${earth})`,
-                      backgroundSize: "contain",
-                      backgroundPosition: "center",
-                      height: "100px",
-                      minWidth: "100px",
-                      backgroundRepeat: "no-repeat",
-                      border: "2px solid black",
-                      borderRadius: "50%",
-                      backgroundColor: "#cacaca",
-                      "&:hover": {
-                        backgroundColor: "#fff",
-                        transition: "all 0.1s ease-in-out",
-                        my: "5px",
-                        width: "110px",
-                        height: "110px",
-                      },
+                      display: "flex",
+                      justifyContent: "center",
+                      alignItems: "center",
+                      height: "120px",
+                      width: "auto",
                     }}
-                  />
+                  >
+                    <Button
+                      sx={{
+                        backgroundImage: `url(${earth})`,
+                        backgroundSize: "contain",
+                        backgroundPosition: "center",
+                        height: "100px",
+                        minWidth: "100px",
+                        backgroundRepeat: "no-repeat",
+                        border: "2px solid #e3e3e3",
+                        borderRadius: "50%",
+                        backgroundColor: "#cacaca",
+                        "&:hover": {
+                          backgroundColor: "#fff",
+                          boxShadow: "0 0 10px 5px rgba(255, 255, 255, 0.7)",
+                          transition: "all 0.1s ease-in-out",
+                          my: "5px",
+                          width: "110px",
+                          height: "110px",
+                        },
+                      }}
+                    />
+                  </Box>
+
                   <Box
                     sx={{
                       display: "flex",
@@ -279,26 +335,38 @@ export default function Landing1() {
                   xs={12}
                   sx={{ display: "flex", alignItems: "center" }}
                 >
-                  <Button
+                  <Box
                     sx={{
-                      backgroundImage: `url(${earth})`,
-                      backgroundSize: "contain",
-                      backgroundPosition: "center",
-                      height: "100px",
-                      minWidth: "100px",
-                      backgroundRepeat: "no-repeat",
-                      border: "2px solid black",
-                      borderRadius: "50%",
-                      backgroundColor: "#cacaca",
-                      "&:hover": {
-                        backgroundColor: "#fff",
-                        transition: "all 0.1s ease-in-out",
-                        my: "5px",
-                        width: "110px",
-                        height: "110px",
-                      },
+                      display: "flex",
+                      justifyContent: "center",
+                      alignItems: "center",
+                      height: "120px",
+                      width: "auto",
                     }}
-                  />
+                  >
+                    <Button
+                      sx={{
+                        backgroundImage: `url(${earth})`,
+                        backgroundSize: "contain",
+                        backgroundPosition: "center",
+                        height: "100px",
+                        minWidth: "100px",
+                        backgroundRepeat: "no-repeat",
+                        border: "2px solid #e3e3e3",
+                        borderRadius: "50%",
+                        backgroundColor: "#cacaca",
+                        "&:hover": {
+                          backgroundColor: "#fff",
+                          boxShadow: "0 0 10px 5px rgba(255, 255, 255, 0.7)",
+                          transition: "all 0.1s ease-in-out",
+                          my: "5px",
+                          width: "110px",
+                          height: "110px",
+                        },
+                      }}
+                    />
+                  </Box>
+
                   <Box
                     sx={{
                       display: "flex",
@@ -330,25 +398,6 @@ export default function Landing1() {
           </Box>
         </Grid>
       </Grid>
-
-      <Box
-        sx={{
-          position: "absolute",
-          bottom: 0,
-          width: "100vw",
-          margin: "auto",
-        }}
-      >
-        <Typography
-          sx={{
-            fontWeight: "bold",
-            textShadow: "0 0 10px white",
-          }}
-        >
-          Copyright © 2023. E.A.R.T.H. Command Center - a subsidiary business
-          unit of E & G Logistics. All rights reserved
-        </Typography>
-      </Box>
     </Box>
   );
 }

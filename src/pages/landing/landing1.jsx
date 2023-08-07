@@ -34,26 +34,26 @@ export default function Landing1() {
               },
             }}
           />
-          <Box
-            sx={{
-              position: "absolute",
-              bottom: 0,
-              width: "100vw",
-              margin: "auto",
-            }}
-          >
-            <Typography
-              sx={{
-                fontWeight: "bold",
-                textShadow: "0 0 10px white",
-              }}
-            >
-              Copyright © 2023. E.A.R.T.H. Command Center - a subsidiary
-              business unit of E & G Logistics. All rights reserved
-            </Typography>
-          </Box>
         </Box>
       </Zoom>
+      <Box
+        sx={{
+          position: "absolute",
+          bottom: 60,
+          width: "100vw",
+          textAlign: "center",
+        }}
+      >
+        <Typography
+          sx={{
+            fontWeight: "bold",
+            textShadow: "0 0 10px white",
+          }}
+        >
+          Copyright © 2023. E.A.R.T.H. Command Center - a subsidiary business
+          unit of E & G Logistics. All rights reserved
+        </Typography>
+      </Box>
     </Box>
   );
 }
