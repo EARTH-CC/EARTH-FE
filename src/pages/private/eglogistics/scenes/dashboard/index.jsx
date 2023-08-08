@@ -24,7 +24,12 @@ export default function Dashboard() {
   return (
     <Box m="20px">
       {/* HEADER */}
-      <Box display="flex" justifyContent="space-between" alignItems="center">
+      <Box
+        display="flex"
+        justifyContent="space-between"
+        alignItems="center"
+        marginTop="-15px"
+      >
         <Header title="DASHBOARD" subtitle="Welcome E&G Logistics dashboard" />
 
         <Box>

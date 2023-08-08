@@ -236,7 +236,7 @@ function ContentItem() {
               fontFamily: "poppins",
               mr: 0.2,
               color: "black",
-              backgroundColor: "#cef9ff",
+              backgroundColor: "rgba(206, 249, 255, 0.9)",
               boxShadow: "1px 1px 5px #b8f6ff, 4px 10px 4px #b8f6ff",
               "&:hover": {
                 textShadow: "0 0 0.5rem rgba(255, 255, 255, 0.75)",
