@@ -1,5 +1,5 @@
 import React from "react";
-import { Box, Button, Slide, Typography, Zoom } from "@mui/material";
+import { Box, Slide, Typography, Zoom } from "@mui/material";
 import { useStateContext } from "contexts/ContextProvider";
 import earth from "../../assets/images/logo.png";
 import Landing2 from "./landing2";
@@ -20,8 +20,15 @@ export default function Landing1() {
         </Box>
       </Slide>
       <Zoom in={!isMainLanding}>
-        <Box className="intro">
-          <Button // Earth Logo
+        <Box
+          sx={{
+            position: "absolute",
+            textAlign: "center",
+            width: "100vw",
+            overflow: "auto",
+          }}
+        >
+          <Box // Earth Logo
             onClick={handleClick}
             sx={{
               backgroundImage: `url(${earth})`,
@@ -29,9 +36,7 @@ export default function Landing1() {
               height: "700px",
               width: "700px",
               m: "auto",
-              "&:hover": {
-                backgroundColor: "transparent",
-              },
+              cursor: "pointer",
             }}
           />
         </Box>

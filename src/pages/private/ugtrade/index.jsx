@@ -21,7 +21,7 @@ function VideoPlayer() {
   );
 }
 
-function Bonatrade() {
+function UGTrade() {
   return (
     <Box>
       <TopBar />
@@ -62,4 +62,4 @@ function Bonatrade() {
   );
 }
 
-export default Bonatrade;
+export default UGTrade;

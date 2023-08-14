@@ -11,13 +11,6 @@
   overflow: hidden;
 }
 
-.landing-bg .intro {
-  position: absolute;
-  text-align: center;
-  width: 100vw;
-  overflow: auto;
-}
-
 /*BODY*/
 body {
   font-family: "Roboto", sans-serif;

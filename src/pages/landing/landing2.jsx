@@ -30,7 +30,7 @@ export default function Landing1() {
             height: "100vh",
           }}
         >
-          <Button // Earth Logo
+          <Box // Earth Logo
             onClick={handleClick}
             sx={{
               backgroundImage: `url(${earth})`,
@@ -39,9 +39,7 @@ export default function Landing1() {
               height: "700px",
               width: "700px",
               ml: "150px",
-              "&:hover": {
-                backgroundColor: "transparent",
-              },
+              cursor: "pointer",
             }}
           />
           <Box // Side Nav
