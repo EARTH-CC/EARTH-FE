@@ -1,3 +1,4 @@
+/* eslint-disable no-plusplus */
 import React, { useEffect, useState } from "react";
 import { Box, Button, Grid, Typography } from "@mui/material";
 import { useNavigate } from "react-router-dom";
@@ -107,6 +108,8 @@ function ContentItem() {
       sx={{
         position: "absolute",
         backgroundColor: "transparent",
+        display: "flex",
+        justifyContent: "center",
         zIndex: 2,
       }}
     >
@@ -118,6 +121,7 @@ function ContentItem() {
           flexDirection: "row",
           alignItems: "center",
           justifyContent: "space-between",
+          mx: "10rem",
         }}
       >
         <Box
@@ -127,27 +131,24 @@ function ContentItem() {
           src={Logo}
           height="100px"
           width="100px"
-          sx={{ ml: "10rem", cursor: "pointer" }}
+          sx={{ cursor: "pointer" }}
         />
 
         <Box
           sx={{
-            mr: "10rem",
             display: "flex",
-            justifyContent: "flex-end",
-            gap: "4rem",
+            gap: "2em",
           }}
         >
           <Button
             type="button"
             // onClick={handleClickLogin}
             sx={{
-              width: 130,
+              minWidth: 120,
               height: 50,
               fontFamily: "poppins",
               // backgroundColor: "#304ea84",
               backgroundColor: "rgba(48, 78, 168, 0.9)",
-              mr: 0.2,
               color: "black",
               boxShadow: "3px 3px 5px #56d5ff, 10px 10px 40px #56d5ff",
               "&:hover": {
@@ -156,9 +157,6 @@ function ContentItem() {
                 backgroundColor: "red",
                 boxShadow: "3px 3px 5px red, 10px 10px 40px red",
               },
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center",
               cursor: "pointer",
               fontWeight: "bold",
             }}
@@ -174,10 +172,9 @@ function ContentItem() {
             type="button"
             // onClick={handleClickLogin}
             sx={{
-              width: 130,
+              minWidth: 170,
               height: 50,
               fontFamily: "poppins",
-              mr: 0.2,
               color: "black",
               "&:hover": {
                 textShadow: "0 0 0.5rem rgba(255, 255, 255, 0.75)",
@@ -185,9 +182,6 @@ function ContentItem() {
                 backgroundColor: "red",
                 boxShadow: "3px 3px 5px red, 10px 10px 40px red",
               },
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center",
               cursor: "pointer",
               fontWeight: "bold",
             }}
@@ -203,10 +197,9 @@ function ContentItem() {
             type="button"
             // onClick={handleOpenAppForm}
             sx={{
-              width: 130,
+              minWidth: 130,
               height: 50,
               fontFamily: "poppins",
-              mr: 0.2,
               color: "black",
               "&:hover": {
                 textShadow: "0 0 0.5rem rgba(255, 255, 255, 0.75)",
@@ -214,9 +207,6 @@ function ContentItem() {
                 backgroundColor: "red",
                 boxShadow: "3px 3px 5px red, 10px 10px 40px red",
               },
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center",
               cursor: "pointer",
               fontWeight: "bold",
             }}
@@ -231,10 +221,9 @@ function ContentItem() {
             type="button"
             // onClick={handleOpenAppForm}
             sx={{
-              width: 200,
+              minWidth: 210,
               height: 50,
               fontFamily: "poppins",
-              mr: 0.2,
               color: "black",
               backgroundColor: "rgba(206, 249, 255, 0.9)",
               boxShadow: "1px 1px 5px #b8f6ff, 4px 10px 4px #b8f6ff",
@@ -244,9 +233,6 @@ function ContentItem() {
                 backgroundColor: "red",
                 boxShadow: "3px 3px 5px red, 10px 10px 40px red",
               },
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center",
               cursor: "pointer",
               fontWeight: "bold",
             }}
@@ -291,7 +277,6 @@ function ContentItem() {
             my: "20px",
           }}
         />
-        {/* <Background /> */}
       </Grid>
 
       <Grid // Underline
@@ -410,291 +395,60 @@ function ContentItem() {
   );
 }
 
-function Honeycomb() {
-  return (
-    <>
-      <div className="cursor" />
-      <div className="row">
-        <div className="hexagon" />
-        <div className="hexagon" />
-        <div className="hexagon" />
-        <div className="hexagon" />
-        <div className="hexagon" />
-        <div className="hexagon" />
-        <div className="hexagon" />
-        <div className="hexagon" />
-        <div className="hexagon" />
-        <div className="hexagon" />
-        <div className="hexagon" />
-        <div className="hexagon" />
-        <div className="hexagon" />
-        <div className="hexagon" />
-        <div className="hexagon" />
-        <div className="hexagon" />
-        <div className="hexagon" />
-        <div className="hexagon" />
-        <div className="hexagon" />
-      </div>
-      <div className="row row-moved">
-        <div className="hexagon" />
-        <div className="hexagon" />
-        <div className="hexagon" />
-        <div className="hexagon" />
-        <div className="hexagon" />
-        <div className="hexagon" />
-        <div className="hexagon" />
-        <div className="hexagon" />
-        <div className="hexagon" />
-        <div className="hexagon" />
-        <div className="hexagon" />
-        <div className="hexagon" />
-        <div className="hexagon" />
-        <div className="hexagon" />
-        <div className="hexagon" />
-        <div className="hexagon" />
-        <div className="hexagon" />
-        <div className="hexagon" />
-        <div className="hexagon" />
-      </div>
-      <div className="row">
-        <div className="hexagon" />
-        <div className="hexagon" />
-        <div className="hexagon" />
-        <div className="hexagon" />
-        <div className="hexagon" />
-        <div className="hexagon" />
-        <div className="hexagon" />
-        <div className="hexagon" />
-        <div className="hexagon" />
-        <div className="hexagon" />
-        <div className="hexagon" />
-        <div className="hexagon" />
-        <div className="hexagon" />
-        <div className="hexagon" />
-        <div className="hexagon" />
-        <div className="hexagon" />
-        <div className="hexagon" />
-        <div className="hexagon" />
-        <div className="hexagon" />
-      </div>
-      <div className="row row-moved">
-        <div className="hexagon" />
-        <div className="hexagon" />
-        <div className="hexagon" />
-        <div className="hexagon" />
-        <div className="hexagon" />
-        <div className="hexagon" />
-        <div className="hexagon" />
-        <div className="hexagon" />
-        <div className="hexagon" />
-        <div className="hexagon" />
-        <div className="hexagon" />
-        <div className="hexagon" />
-        <div className="hexagon" />
-        <div className="hexagon" />
-        <div className="hexagon" />
-        <div className="hexagon" />
-        <div className="hexagon" />
-        <div className="hexagon" />
-        <div className="hexagon" />
-      </div>
-      <div className="row">
-        <div className="hexagon" />
-        <div className="hexagon" />
-        <div className="hexagon" />
-        <div className="hexagon" />
-        <div className="hexagon" />
-        <div className="hexagon" />
-        <div className="hexagon" />
-        <div className="hexagon" />
-        <div className="hexagon" />
-        <div className="hexagon" />
-        <div className="hexagon" />
-        <div className="hexagon" />
-        <div className="hexagon" />
-        <div className="hexagon" />
-        <div className="hexagon" />
-        <div className="hexagon" />
-        <div className="hexagon" />
-        <div className="hexagon" />
-        <div className="hexagon" />
-      </div>
-      <div className="row row-moved">
-        <div className="hexagon" />
-        <div className="hexagon" />
-        <div className="hexagon" />
-        <div className="hexagon" />
-        <div className="hexagon" />
-        <div className="hexagon" />
-        <div className="hexagon" />
-        <div className="hexagon" />
-        <div className="hexagon" />
-        <div className="hexagon" />
-        <div className="hexagon" />
-        <div className="hexagon" />
-        <div className="hexagon" />
-        <div className="hexagon" />
-        <div className="hexagon" />
-        <div className="hexagon" />
-        <div className="hexagon" />
-        <div className="hexagon" />
-        <div className="hexagon" />
-      </div>
-      <div className="row">
-        <div className="hexagon" />
-        <div className="hexagon" />
-        <div className="hexagon" />
-        <div className="hexagon" />
-        <div className="hexagon" />
-        <div className="hexagon" />
-        <div className="hexagon" />
-        <div className="hexagon" />
-        <div className="hexagon" />
-        <div className="hexagon" />
-        <div className="hexagon" />
-        <div className="hexagon" />
-        <div className="hexagon" />
-        <div className="hexagon" />
-        <div className="hexagon" />
-        <div className="hexagon" />
-        <div className="hexagon" />
-        <div className="hexagon" />
-        <div className="hexagon" />
-      </div>
-      <div className="row row-moved">
-        <div className="hexagon" />
-        <div className="hexagon" />
-        <div className="hexagon" />
-        <div className="hexagon" />
-        <div className="hexagon" />
-        <div className="hexagon" />
-        <div className="hexagon" />
-        <div className="hexagon" />
-        <div className="hexagon" />
-        <div className="hexagon" />
-        <div className="hexagon" />
-        <div className="hexagon" />
-        <div className="hexagon" />
-        <div className="hexagon" />
-        <div className="hexagon" />
-        <div className="hexagon" />
-        <div className="hexagon" />
-        <div className="hexagon" />
-        <div className="hexagon" />
-      </div>
-      <div className="row">
-        <div className="hexagon" />
-        <div className="hexagon" />
-        <div className="hexagon" />
-        <div className="hexagon" />
-        <div className="hexagon" />
-        <div className="hexagon" />
-        <div className="hexagon" />
-        <div className="hexagon" />
-        <div className="hexagon" />
-        <div className="hexagon" />
-        <div className="hexagon" />
-        <div className="hexagon" />
-        <div className="hexagon" />
-        <div className="hexagon" />
-        <div className="hexagon" />
-        <div className="hexagon" />
-        <div className="hexagon" />
-        <div className="hexagon" />
-        <div className="hexagon" />
-      </div>
-      <div className="row row-moved">
-        <div className="hexagon" />
-        <div className="hexagon" />
-        <div className="hexagon" />
-        <div className="hexagon" />
-        <div className="hexagon" />
-        <div className="hexagon" />
-        <div className="hexagon" />
-        <div className="hexagon" />
-        <div className="hexagon" />
-        <div className="hexagon" />
-        <div className="hexagon" />
-        <div className="hexagon" />
-        <div className="hexagon" />
-        <div className="hexagon" />
-        <div className="hexagon" />
-        <div className="hexagon" />
-        <div className="hexagon" />
-        <div className="hexagon" />
-        <div className="hexagon" />
-      </div>
-      <div className="row">
-        <div className="hexagon" />
-        <div className="hexagon" />
-        <div className="hexagon" />
-        <div className="hexagon" />
-        <div className="hexagon" />
-        <div className="hexagon" />
-        <div className="hexagon" />
-        <div className="hexagon" />
-        <div className="hexagon" />
-        <div className="hexagon" />
-        <div className="hexagon" />
-        <div className="hexagon" />
-        <div className="hexagon" />
-        <div className="hexagon" />
-        <div className="hexagon" />
-        <div className="hexagon" />
-        <div className="hexagon" />
-        <div className="hexagon" />
-        <div className="hexagon" />
-      </div>
-      <div className="row row-moved">
-        <div className="hexagon" />
-        <div className="hexagon" />
-        <div className="hexagon" />
-        <div className="hexagon" />
-        <div className="hexagon" />
-        <div className="hexagon" />
-        <div className="hexagon" />
-        <div className="hexagon" />
-        <div className="hexagon" />
-        <div className="hexagon" />
-        <div className="hexagon" />
-        <div className="hexagon" />
-        <div className="hexagon" />
-        <div className="hexagon" />
-        <div className="hexagon" />
-        <div className="hexagon" />
-        <div className="hexagon" />
-        <div className="hexagon" />
-        <div className="hexagon" />
-      </div>
-    </>
-  );
+function Hexagon() {
+  return <div className="hexagon" />;
 }
 
-// function Background() {
-//   return (
-//     <div className="animation-container">
-//       <div className="boom-container">
-//         <div className="shape circle big white" />
-//         <div className="shape circle white" />
-//         <div className="shape triangle big yellow" />
-//         <div className="shape disc white" />
-//         <div className="shape triangle blue" />
-//       </div>
-//       <div className="boom-container second">
-//         <div className="shape circle big white" />
-//         <div className="shape circle white" />
-//         <div className="shape disc white" />
-//         <div className="shape triangle blue" />
-//       </div>
-//       <div className="boom-container third">
-//         <div className="shape circle big white" />
-//         <div className="shape circle white" />
-//         <div className="shape disc white" />
-//         <div className="shape triangle blue" />
-//       </div>
-//     </div>
-//   );
-// }
+function Honeycomb() {
+  const [gridInfo, setGridInfo] = useState({
+    numRows: 0,
+    numHexagonsPerRow: 0,
+  });
+
+  useEffect(() => {
+    function handleResize() {
+      const screenWidth = window.innerWidth;
+      const hexagonSize = 100; // Adjust this value as needed
+      const numHexagonsPerRow = Math.floor(screenWidth / hexagonSize);
+      const numRows = Math.max(
+        Math.floor(window.innerHeight / (hexagonSize * 0.75)),
+        1
+      );
+
+      setGridInfo({ numRows, numHexagonsPerRow });
+    }
+
+    handleResize();
+    window.addEventListener("resize", handleResize);
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+
+  const honeycombRows = [];
+
+  for (let row = 0; row < gridInfo.numRows; row++) {
+    const rowClassName = row % 2 === 0 ? "row" : "row row-moved";
+    const hexagons = [];
+
+    for (let hexagon = 0; hexagon < gridInfo.numHexagonsPerRow; hexagon++) {
+      hexagons.push(<Hexagon key={hexagon} />);
+    }
+
+    honeycombRows.push(
+      <div key={row} className={rowClassName}>
+        {hexagons}
+      </div>
+    );
+  }
+
+  return (
+    <Box sx={{ pl: "6px" }}>
+      <div className="cursor" />
+      {honeycombRows}
+    </Box>
+  );
+}
 
 function Footer() {
   return (
@@ -729,10 +483,28 @@ function Footer() {
   );
 }
 
+// function Earth() {
+//   return (
+//     <Box
+//       sx={{
+//         display: "flex",
+//         position: "absolute",
+//         bottom: 30,
+//         width: "100%",
+//         justifyContent: "center",
+//       }}
+//     >
+//       <div className="earth" />
+//       <div className="earth-shadow" />
+//     </Box>
+//   );
+// }
+
 function Content() {
   return (
     <Box className="content">
       <ContentItem />
+      {/* <Earth /> */}
       <Footer />
       <Cursor />
       <Honeycomb />

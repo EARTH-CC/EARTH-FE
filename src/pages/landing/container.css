@@ -11,6 +11,13 @@
   overflow: hidden;
 }
 
+.landing-bg .intro {
+  position: absolute;
+  text-align: center;
+  width: 100vw;
+  overflow: auto;
+}
+
 /*BODY*/
 body {
   font-family: "Roboto", sans-serif;
@@ -567,5 +574,55 @@ footer a:after {
 
   100% {
     background-position: 0 0;
+  }
+}
+
+/* EARTH PLANET */
+
+.earth {
+  width:200px;
+  height:200px;
+  margin:250px auto 0 auto;
+  border-radius:100%;
+  background: url(https://lh5.googleusercontent.com/-kkxEx-SkRaY/VBLF4BV2lZI/AAAAAAAAKao/FnKsv7402_c/s0/earthmap.jpg) 0 0 repeat;
+  background-size:cover;
+  position:relative;
+  animation:earthBounce 1s cubic-bezier(0.165, 0.840, 0.440, 1.000) alternate infinite, slowSpin 6s linear infinite, earthRotate 12s linear infinite;
+  z-index:1;
+}
+
+@keyframes earthBounce {
+  0% {
+    top:0;
+  }
+  100% {
+    top:-20px;
+  }
+}
+
+@keyframes slowSpin {
+  0% {
+    transform:rotate(0);
+  }
+  100% {
+    transform:rotate(360deg);
+  }
+}
+
+@keyframes backgroundCrawl {
+  0% {
+    background-position:0 0;
+  }
+  100%{
+    background-position:-2000px 0;
+  }
+}
+
+@keyframes earthRotate {
+  0% {
+    background-position:0 0;
+  }
+  100%{
+    background-position:-500px 0;
   }
 }
