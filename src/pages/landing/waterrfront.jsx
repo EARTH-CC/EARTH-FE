@@ -247,146 +247,172 @@ function ContentItem() {
         item
         xs={12}
         sx={{
-          // height: "60vh",
-          mt: "200px",
+          mt: "100px",
           display: "flex",
           flexDirection: "column",
           alignItems: "center",
           justifyContent: "center",
         }}
       >
-        <Typography variant="h1" sx={{ fontWeight: "bold", color: "#231a8b" }}>
-          MANILA WATERFRONT CITY <break />
-        </Typography>
-        <Typography
-          variant="h2"
-          sx={{
-            fontWeight: "bold",
-            color: "#606060",
-            my: "-5px",
-            letterSpacing: "4px",
-          }}
-        >
-          RECLAMATION PROJECT
-        </Typography>
         <Box
           sx={{
-            backgroundColor: "black",
-            height: "6px",
-            width: "500px",
-            my: "20px",
+            // clipPath:
+            //   "polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%)",
+            p: "100px 50px",
+            borderRadius: "50px",
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            justifyContent: "center",
+            // backgroundColor: "rgba(236, 181, 42, 0.9)",
+            background:
+              "linear-gradient(160deg, rgba(119, 185, 232, 0.9), rgba(8, 59, 95, 0.9))",
+            boxShadow: "0 0 10px 5px rgba(48, 78, 168, 0.7)",
           }}
-        />
+        >
+          <Typography
+            variant="h1"
+            sx={{ fontWeight: "bold", color: "#231a8b" }}
+          >
+            MANILA WATERFRONT CITY <break />
+          </Typography>
+          <Typography
+            variant="h2"
+            sx={{
+              fontWeight: "bold",
+              color: "#606060",
+              my: "-5px",
+              letterSpacing: "4px",
+            }}
+          >
+            RECLAMATION PROJECT
+          </Typography>
+          <Box // Underline
+            sx={{
+              backgroundColor: "black",
+              height: "6px",
+              width: "500px",
+              mt: "20px",
+            }}
+          />
+          <Box
+            sx={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              height: "180px",
+              width: "600px",
+              gap: "2em",
+            }}
+          >
+            <Button
+              onClick={handleOpenEG}
+              sx={{
+                display: "flex",
+                justifyContent: "center",
+                backgroundImage: `url(${EGLogistics})`,
+                backgroundSize: "contain",
+                backgroundPosition: "center",
+                backgroundColor: "#ececec",
+                height: "120px",
+                minWidth: "120px",
+                backgroundRepeat: "no-repeat",
+                borderRadius: "50%",
+                "&:hover": {
+                  backgroundColor: "#fff",
+                  boxShadow: "0 0 10px 5px rgba(255, 255, 255, 0.7)",
+                  transition: "all 0.1s ease-in-out",
+                  mx: "5px",
+                  width: "150px",
+                  height: "150px",
+                },
+                "&:active": {
+                  color: "#00c0fe",
+                },
+              }}
+            />
+            <Button
+              onClick={handleOpenBon}
+              sx={{
+                display: "flex",
+                justifyContent: "center",
+                backgroundImage: `url(${Bontrade})`,
+                backgroundSize: "contain",
+                backgroundPosition: "center",
+                backgroundColor: "#ececec",
+                height: "120px",
+                minWidth: "120px",
+                backgroundRepeat: "no-repeat",
+                borderRadius: "50%",
+                "&:hover": {
+                  backgroundColor: "#fff",
+                  boxShadow: "0 0 10px 5px rgba(255, 255, 255, 0.7)",
+                  transition: "all 0.1s ease-in-out",
+                  mx: "5px",
+                  width: "150px",
+                  height: "150px",
+                },
+                "&:active": {
+                  color: "#00c0fe",
+                },
+              }}
+            />
+            <Button
+              onClick={handleOpenUG}
+              sx={{
+                display: "flex",
+                justifyContent: "center",
+                backgroundImage: `url(${UGTrade})`,
+                backgroundSize: "contain",
+                backgroundPosition: "center",
+                backgroundColor: "#ececec",
+                height: "120px",
+                minWidth: "120px",
+                backgroundRepeat: "no-repeat",
+                borderRadius: "50%",
+                "&:hover": {
+                  backgroundColor: "#fff",
+                  boxShadow: "0 0 10px 5px rgba(255, 255, 255, 0.7)",
+                  transition: "all 0.1s ease-in-out",
+                  mx: "5px",
+                  width: "150px",
+                  height: "150px",
+                },
+                "&:active": {
+                  color: "#00c0fe",
+                },
+              }}
+            />
+            <Button
+              onClick={handleOpenEro}
+              sx={{
+                display: "flex",
+                justifyContent: "center",
+                backgroundImage: `url(${Erotas})`,
+                backgroundSize: "contain",
+                backgroundPosition: "center",
+                backgroundColor: "#ececec",
+                height: "120px",
+                minWidth: "120px",
+                backgroundRepeat: "no-repeat",
+                borderRadius: "50%",
+                "&:hover": {
+                  backgroundColor: "#fff",
+                  boxShadow: "0 0 10px 5px rgba(255, 255, 255, 0.7)",
+                  transition: "all 0.1s ease-in-out",
+                  mx: "5px",
+                  width: "150px",
+                  height: "150px",
+                },
+                "&:active": {
+                  color: "#00c0fe",
+                },
+              }}
+            />
+          </Box>
+        </Box>
       </Grid>
 
-      <Grid // Underline
-        item
-        xs={12}
-        sx={{
-          height: "20vh",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          gap: "2em",
-        }}
-      >
-        <Button
-          onClick={handleOpenEG}
-          sx={{
-            display: "flex",
-            justifyContent: "center",
-            backgroundImage: `url(${EGLogistics})`,
-            backgroundSize: "contain",
-            backgroundPosition: "center",
-            height: "120px",
-            minWidth: "120px",
-            backgroundRepeat: "no-repeat",
-            border: "2px solid black",
-            borderRadius: "50%",
-            "&:hover": {
-              transition: "all 0.1s ease-in-out",
-              mx: "5px",
-              width: "150px",
-              height: "150px",
-            },
-            "&:active": {
-              color: "#00c0fe",
-            },
-          }}
-        />
-        <Button
-          onClick={handleOpenBon}
-          sx={{
-            display: "flex",
-            justifyContent: "center",
-            backgroundImage: `url(${Bontrade})`,
-            backgroundSize: "contain",
-            backgroundPosition: "center",
-            height: "120px",
-            minWidth: "120px",
-            backgroundRepeat: "no-repeat",
-            border: "2px solid black",
-            borderRadius: "50%",
-            "&:hover": {
-              transition: "all 0.1s ease-in-out",
-              mx: "5px",
-              width: "150px",
-              height: "150px",
-            },
-            "&:active": {
-              color: "#00c0fe",
-            },
-          }}
-        />
-        <Button
-          onClick={handleOpenUG}
-          sx={{
-            display: "flex",
-            justifyContent: "center",
-            backgroundImage: `url(${UGTrade})`,
-            backgroundSize: "contain",
-            backgroundPosition: "center",
-            height: "120px",
-            minWidth: "120px",
-            backgroundRepeat: "no-repeat",
-            border: "2px solid black",
-            borderRadius: "50%",
-            "&:hover": {
-              transition: "all 0.1s ease-in-out",
-              mx: "5px",
-              width: "150px",
-              height: "150px",
-            },
-            "&:active": {
-              color: "#00c0fe",
-            },
-          }}
-        />
-        <Button
-          onClick={handleOpenEro}
-          sx={{
-            display: "flex",
-            justifyContent: "center",
-            backgroundImage: `url(${Erotas})`,
-            backgroundSize: "contain",
-            backgroundPosition: "center",
-            height: "120px",
-            minWidth: "120px",
-            backgroundRepeat: "no-repeat",
-            border: "2px solid black",
-            borderRadius: "50%",
-            "&:hover": {
-              transition: "all 0.1s ease-in-out",
-              mx: "5px",
-              width: "150px",
-              height: "150px",
-            },
-            "&:active": {
-              color: "#00c0fe",
-            },
-          }}
-        />
-      </Grid>
       <EGLogisticsLogin open={openEG} handleClose={handleCloseEG} />
       <BontradeLogin open={openBon} handleClose={handleCloseBon} />
       <UGTradeLogin open={openUG} handleClose={handleCloseUG} />
