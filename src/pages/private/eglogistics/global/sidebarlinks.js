@@ -18,7 +18,7 @@ const links = [
     links: [
       {
         name: "Purchase Request",
-        path: "purchaserequest",
+        path: "purchase-request",
         icon: <UilClipboardAlt style={{ fontSize: 29 }} />,
       },
       {

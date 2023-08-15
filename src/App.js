@@ -16,6 +16,7 @@ import {
   UGTrade,
   Erotas,
 } from "pages";
+import PurchaseRequest from "pages/private/eglogistics/scenes/pr_request";
 import themes from "./themes/theme";
 
 const { ColorModeContext, useMode } = themes;
@@ -45,6 +46,7 @@ function App() {
 
             <Route path="/" element={<Layout />}>
               <Route path="/dashboard" element={<Dashboard />} />
+              <Route path="/purchase-request" element={<PurchaseRequest />} />
             </Route>
 
             {/* <Route element={<PersistLogin />}>
