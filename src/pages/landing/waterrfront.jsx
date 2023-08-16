@@ -225,8 +225,7 @@ function ContentItem() {
               height: 50,
               fontFamily: "poppins",
               color: "black",
-              backgroundColor: "rgba(206, 249, 255, 0.9)",
-              boxShadow: "1px 1px 5px #b8f6ff, 4px 10px 4px #b8f6ff",
+              backgroundColor: "rgba(206, 200, 255, 0.9)",
               "&:hover": {
                 textShadow: "0 0 0.5rem rgba(255, 255, 255, 0.75)",
                 color: "black",
@@ -266,7 +265,7 @@ function ContentItem() {
             justifyContent: "center",
             // backgroundColor: "rgba(236, 181, 42, 0.9)",
             background:
-              "linear-gradient(160deg, rgba(119, 185, 232, 0.9), rgba(8, 59, 95, 0.9))",
+              "linear-gradient(160deg, rgba(238, 238, 238, 0.9), rgba(200, 200, 200, 0.9))",
             boxShadow: "0 0 10px 5px rgba(48, 78, 168, 0.7)",
           }}
         >
@@ -317,10 +316,10 @@ function ContentItem() {
                 height: "120px",
                 minWidth: "120px",
                 backgroundRepeat: "no-repeat",
+                border: "solid 2px black",
                 borderRadius: "50%",
                 "&:hover": {
                   backgroundColor: "#fff",
-                  boxShadow: "0 0 10px 5px rgba(255, 255, 255, 0.7)",
                   transition: "all 0.1s ease-in-out",
                   mx: "5px",
                   width: "150px",
@@ -343,10 +342,10 @@ function ContentItem() {
                 height: "120px",
                 minWidth: "120px",
                 backgroundRepeat: "no-repeat",
+                border: "solid 2px black",
                 borderRadius: "50%",
                 "&:hover": {
                   backgroundColor: "#fff",
-                  boxShadow: "0 0 10px 5px rgba(255, 255, 255, 0.7)",
                   transition: "all 0.1s ease-in-out",
                   mx: "5px",
                   width: "150px",
@@ -369,10 +368,10 @@ function ContentItem() {
                 height: "120px",
                 minWidth: "120px",
                 backgroundRepeat: "no-repeat",
+                border: "solid 2px black",
                 borderRadius: "50%",
                 "&:hover": {
                   backgroundColor: "#fff",
-                  boxShadow: "0 0 10px 5px rgba(255, 255, 255, 0.7)",
                   transition: "all 0.1s ease-in-out",
                   mx: "5px",
                   width: "150px",
@@ -395,10 +394,10 @@ function ContentItem() {
                 height: "120px",
                 minWidth: "120px",
                 backgroundRepeat: "no-repeat",
+                border: "solid 2px black",
                 borderRadius: "50%",
                 "&:hover": {
                   backgroundColor: "#fff",
-                  boxShadow: "0 0 10px 5px rgba(255, 255, 255, 0.7)",
                   transition: "all 0.1s ease-in-out",
                   mx: "5px",
                   width: "150px",

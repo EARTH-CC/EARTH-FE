@@ -1,8 +1,8 @@
 import { Box, useTheme } from "@mui/material";
 import { DataGrid, GridToolbar } from "@mui/x-data-grid";
-import themes from "../../../../themes/co-theme";
-import mockData from "../../../../data/mockData";
-import Header from "../../../../components/co/Header";
+import themes from "../../../../../themes/theme";
+import mockData from "../../../../../data/mockData";
+import Header from "../../../../../components/PrivateComponents/eglogistics/Header";
 
 const { tokens } = themes;
 const { mockDataContacts } = mockData;

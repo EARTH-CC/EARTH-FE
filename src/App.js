@@ -2,16 +2,17 @@ import React from "react";
 import { Box, CssBaseline, ThemeProvider } from "@mui/material";
 import { Route, Routes } from "react-router-dom";
 import "./App.css";
-// import RequireAuth from "contexts/RequireAuth";
-// import PersistLogin from "contexts/PersistLogin";
+import EGAuth from "contexts/EGAuth";
+import PersistLogin from "contexts/PersistLogin";
 import Layout from "contexts/Layouts/Layout";
 import {
   Unauthorized,
   Missing,
-  Dashboard,
   Login,
   Waterfront,
   Landing,
+  Dashboard,
+  PurchaseLibraries,
   Bontrade,
   UGTrade,
   Erotas,
@@ -43,17 +44,21 @@ function App() {
             <Route path="/ugtrade" element={<UGTrade />} />
             <Route path="/erotas" element={<Erotas />} />
 
-            <Route path="/" element={<Layout />}>
+            {/* <Route path="/" element={<Layout />}>
               <Route path="/dashboard" element={<Dashboard />} />
-            </Route>
-
-            {/* <Route element={<PersistLogin />}>
-              <Route element={<RequireAuth allowedRoles="eglogistics" />}>
-                <Route path="/" element={<Layout />}>
-                
-                </Route>
-              </Route> 
             </Route> */}
+
+            <Route element={<PersistLogin />}>
+              <Route element={<EGAuth allowedRoles="superadmin" />}>
+                <Route path="/" element={<Layout />}>
+                  <Route path="/dashboard" element={<Dashboard />} />
+                  <Route
+                    path="/purchaselibraries"
+                    element={<PurchaseLibraries />}
+                  />
+                </Route>
+              </Route>
+            </Route>
 
             <Route path="/unauthorized" element={<Unauthorized />} />
             <Route path="*" element={<Missing />} />
