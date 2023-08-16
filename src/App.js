@@ -58,21 +58,15 @@ function App() {
               </Route>
 
               <Route element={<RequireAuth allowedRoles="bontrade" />}>
-                <Route path="/" element={<Layout />}>
-                  <Route path="/bontrade" element={<Bontrade />} />
-                </Route>
+                <Route path="/bontrade" element={<Bontrade />} />
               </Route>
 
               <Route element={<RequireAuth allowedRoles="ugtrade" />}>
-                <Route path="/" element={<Layout />}>
-                  <Route path="/ugtrade" element={<UGTrade />} />
-                </Route>
+                <Route path="/ugtrade" element={<UGTrade />} />
               </Route>
 
               <Route element={<RequireAuth allowedRoles="erotas" />}>
-                <Route path="/" element={<Layout />}>
-                  <Route path="/erotas" element={<Erotas />} />
-                </Route>
+                <Route path="/erotas" element={<Erotas />} />
               </Route>
             </Route>
 
