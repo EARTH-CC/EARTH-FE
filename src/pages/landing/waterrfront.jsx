@@ -266,7 +266,7 @@ function ContentItem() {
             // backgroundColor: "rgba(236, 181, 42, 0.9)",
             background:
               "linear-gradient(160deg, rgba(238, 238, 238, 0.9), rgba(200, 200, 200, 0.9))",
-            boxShadow: "0 0 10px 5px rgba(48, 78, 168, 0.7)",
+            boxShadow: "0 0 10px 5px rgba(150, 150, 150, 0.7)",
           }}
         >
           <Typography
