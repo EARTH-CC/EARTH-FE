@@ -2,7 +2,7 @@ import PropTypes from "prop-types";
 import { Navigate, Outlet, useLocation } from "react-router-dom";
 import { useStateContext } from "./ContextProvider";
 
-export default function EGRequireAuth({ allowedRoles }) {
+export default function RequireAuth({ allowedRoles }) {
   const { auth } = useStateContext();
   const location = useLocation();
 
@@ -24,15 +24,15 @@ export default function EGRequireAuth({ allowedRoles }) {
   ) : auth?.username ? (
     <Navigate to="/unauthorized" state={{ from: location }} replace />
   ) : (
-    <Navigate to="/sign-in" state={{ from: location }} replace />
+    <Navigate to="/waterfront" state={{ from: location }} replace />
   );
 }
 
-EGRequireAuth.defaultProps = {
+RequireAuth.defaultProps = {
   allowedRoles: null,
 };
 
-EGRequireAuth.propTypes = {
+RequireAuth.propTypes = {
   allowedRoles: PropTypes.oneOfType([
     PropTypes.string,
     PropTypes.arrayOf(PropTypes.string),

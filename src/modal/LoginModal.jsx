@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import { Link, useNavigate } from "react-router-dom";
 import Typography from "@mui/material/Typography";
@@ -21,6 +21,9 @@ import { useStateContext } from "contexts/ContextProvider";
 import accountService from "services/account-service";
 import Logo from "../assets/images/logo.png";
 import EGLogo from "../assets/eglogistics.png";
+import BontradeLogo from "../assets/bontrade1.png";
+import UGLogo from "../assets/ugtrade.png";
+import EroLogo from "../assets/erotas.png";
 import loginValidation, { initialLog } from "../validation/login";
 
 const style = {
@@ -30,12 +33,13 @@ const style = {
   transform: "translate(-50%, -50%)",
   height: "85vh",
   width: "75vw",
-  border: "2px solid #000",
   boxShadow: 24,
 };
 
-export default function EGLogisticsLogin({ open, handleClose }) {
+export default function LoginModal({ open, handleClose, logo }) {
   const { setAuth } = useStateContext();
+
+  const [logoDisplay, setLogoDisplay] = useState({});
 
   const navigate = useNavigate();
 
@@ -53,14 +57,28 @@ export default function EGLogisticsLogin({ open, handleClose }) {
         const res = await accountService.authenticate(formik?.values);
         if (res.valid) {
           setAuth(res.data);
-          if (res.data.role === "superadmin") {
-            navigate("/dashboard");
+          if (logo === "eg") {
+            if (res.data.role === "superadmin") {
+              navigate("/dashboard");
+            }
+          } else if (logo === "bon") {
+            if (res.data.role === "bontrade") {
+              navigate("/bontrade");
+            }
+          } else if (logo === "ug") {
+            if (res.data.role === "ugtrade") {
+              navigate("/ugtrade");
+            }
+          } else if (logo === "ero") {
+            if (res.data.role === "erotas") {
+              navigate("/erotas");
+            }
           }
         }
       } catch (err) {
         let message = "";
         if (err?.response?.status === 404) {
-          message = "err.response.data.error";
+          message = "Invalid Login Credentials";
         } else if (err?.response?.status === 401) {
           message = err.response.data.error;
         } else if (err?.response?.status === 500) {
@@ -75,8 +93,27 @@ export default function EGLogisticsLogin({ open, handleClose }) {
     },
   });
 
+  useEffect(() => {
+    if (logo === "eg") {
+      setLogoDisplay(EGLogo);
+    } else if (logo === "bon") {
+      setLogoDisplay(BontradeLogo);
+    } else if (logo === "ug") {
+      setLogoDisplay(UGLogo);
+    } else if (logo === "ero") {
+      setLogoDisplay(EroLogo);
+    }
+  }, [logo]);
+
   return (
-    <Modal open={open} onClose={handleClose}>
+    <Modal
+      open={open}
+      onClose={() => {
+        handleClose();
+        formik.resetForm();
+        setError("");
+      }}
+    >
       <Box sx={style}>
         <form onSubmit={formik.handleSubmit} autoComplete="off">
           <Grid container spacing={0}>
@@ -91,21 +128,38 @@ export default function EGLogisticsLogin({ open, handleClose }) {
                   height: "85vh",
                 }}
               >
-                <Box
-                  component="img"
-                  src={EGLogo}
-                  alt="EGLogo"
-                  style={{
-                    marginTop: "-150px",
-                    width: "300px",
-                    height: "300px",
-                    display: "block",
-                    borderRadius: "50%",
-                    border: "solid 1px black",
-                    WebkitBoxReflect:
-                      "below 0 -webkit-gradient(linear, right top, right bottom, from(transparent), to(rgba(255, 255, 255, 0.4)))",
-                  }}
-                />
+                {logo === "bon" ? (
+                  <Box
+                    component="img"
+                    src={logoDisplay}
+                    alt="Logo"
+                    style={{
+                      marginTop: "-150px",
+                      width: "400px",
+                      height: "300px",
+                      display: "block",
+                      borderRadius: "50%",
+                      WebkitBoxReflect:
+                        "below 0 -webkit-gradient(linear, right top, right bottom, from(transparent), to(rgba(255, 255, 255, 0.4)))",
+                    }}
+                  />
+                ) : (
+                  <Box
+                    component="img"
+                    src={logoDisplay}
+                    alt="Logo"
+                    style={{
+                      marginTop: "-150px",
+                      width: "300px",
+                      height: "300px",
+                      display: "block",
+                      borderRadius: "50%",
+                      border: "solid 1px black",
+                      WebkitBoxReflect:
+                        "below 0 -webkit-gradient(linear, right top, right bottom, from(transparent), to(rgba(255, 255, 255, 0.4)))",
+                    }}
+                  />
+                )}
               </Box>
             </Grid>
             <Grid
@@ -327,11 +381,13 @@ export default function EGLogisticsLogin({ open, handleClose }) {
   );
 }
 
-EGLogisticsLogin.defaultProps = {
+LoginModal.defaultProps = {
   handleClose: () => {},
+  logo: "",
 };
 
-EGLogisticsLogin.propTypes = {
+LoginModal.propTypes = {
   open: PropTypes.bool.isRequired,
   handleClose: PropTypes.func,
+  logo: PropTypes.string,
 };

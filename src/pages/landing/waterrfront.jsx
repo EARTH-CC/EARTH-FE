@@ -10,10 +10,7 @@ import Erotas from "../../assets/erotas.png";
 import waveTop from "../../assets/wave-top.png";
 import waveMid from "../../assets/wave-mid.png";
 import waveBot from "../../assets/wave-bot.png";
-import EGLogisticsLogin from "../../modal/EGLogisticsLogin";
-import BontradeLogin from "../../modal/BontradeLogin";
-import UGTradeLogin from "../../modal/UGTradeLogin";
-import ErotasLogin from "../../modal/ErotasLogin";
+import LoginModal from "../../modal/LoginModal";
 import "./container.css";
 
 function Cursor() {
@@ -61,10 +58,9 @@ function Cursor() {
 }
 
 function ContentItem() {
-  const [openEG, setOpenEG] = useState(false);
-  const [openBon, setOpenBon] = useState(false);
-  const [openUG, setOpenUG] = useState(false);
-  const [openEro, setOpenEro] = useState(false);
+  const [logo, setLogo] = useState("");
+
+  const [open, setOpen] = useState(false);
 
   const navigate = useNavigate();
 
@@ -73,32 +69,24 @@ function ContentItem() {
   };
 
   const handleOpenEG = () => {
-    setOpenEG(true);
-  };
-
-  const handleCloseEG = () => {
-    setOpenEG(false);
+    setLogo("eg");
+    setOpen(true);
   };
   const handleOpenBon = () => {
-    setOpenBon(true);
-  };
-
-  const handleCloseBon = () => {
-    setOpenBon(false);
+    setLogo("bon");
+    setOpen(true);
   };
   const handleOpenUG = () => {
-    setOpenUG(true);
+    setLogo("ug");
+    setOpen(true);
   };
 
-  const handleCloseUG = () => {
-    setOpenUG(false);
-  };
   const handleOpenEro = () => {
-    setOpenEro(true);
+    setLogo("ero");
+    setOpen(true);
   };
-
-  const handleCloseEro = () => {
-    setOpenEro(false);
+  const handleClose = () => {
+    setOpen(false);
   };
 
   return (
@@ -118,10 +106,12 @@ function ContentItem() {
         xs={12}
         sx={{
           display: "flex",
+          background: "rgba(245, 245, 245, 0.9)",
+          width: "100%",
           flexDirection: "row",
           alignItems: "center",
           justifyContent: "space-between",
-          mx: "10rem",
+          px: "10rem",
         }}
       >
         <Box
@@ -246,7 +236,7 @@ function ContentItem() {
         item
         xs={12}
         sx={{
-          mt: "100px",
+          mt: "120px",
           display: "flex",
           flexDirection: "column",
           alignItems: "center",
@@ -257,7 +247,7 @@ function ContentItem() {
           sx={{
             // clipPath:
             //   "polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%)",
-            p: "100px 50px",
+            p: "80px 40px",
             borderRadius: "50px",
             display: "flex",
             flexDirection: "column",
@@ -302,6 +292,7 @@ function ContentItem() {
               height: "180px",
               width: "600px",
               gap: "2em",
+              mt: "20px",
             }}
           >
             <Button
@@ -412,10 +403,7 @@ function ContentItem() {
         </Box>
       </Grid>
 
-      <EGLogisticsLogin open={openEG} handleClose={handleCloseEG} />
-      <BontradeLogin open={openBon} handleClose={handleCloseBon} />
-      <UGTradeLogin open={openUG} handleClose={handleCloseUG} />
-      <ErotasLogin open={openEro} handleClose={handleCloseEro} />
+      <LoginModal open={open} handleClose={handleClose} logo={logo} />
     </Grid>
   );
 }

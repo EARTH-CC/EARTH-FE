@@ -2,7 +2,7 @@ import React from "react";
 import { Box, CssBaseline, ThemeProvider } from "@mui/material";
 import { Route, Routes } from "react-router-dom";
 import "./App.css";
-import EGAuth from "contexts/EGAuth";
+import RequireAuth from "contexts/RequireAuth";
 import PersistLogin from "contexts/PersistLogin";
 import Layout from "contexts/Layouts/Layout";
 import {
@@ -24,7 +24,7 @@ const { ColorModeContext, useMode } = themes;
 
 function App() {
   const [theme, colorMode] = useMode();
-  // const TADRoles = {
+  // const EGRoles = {
   //   admin: "admin",
   //   superadmin: "superadmin",
   //   reviewer: "reviewer",
@@ -41,24 +41,37 @@ function App() {
             <Route path="/" element={<Landing />} />
             <Route path="/sign-in" element={<Login />} />
             <Route path="/waterfront" element={<Waterfront />} />
-            <Route path="/dashboard" element={<Dashboard />} />
-            <Route path="/bontrade" element={<Bontrade />} />
-            <Route path="/ugtrade" element={<UGTrade />} />
-            <Route path="/erotas" element={<Erotas />} />
-
-            <Route path="/" element={<Layout />}>
-              <Route path="/dashboard" element={<Dashboard />} />
-              <Route path="/purchase-request" element={<PurchaseRequest />} />
-            </Route>
 
             <Route element={<PersistLogin />}>
-              <Route element={<EGAuth allowedRoles="superadmin" />}>
+              <Route element={<RequireAuth allowedRoles="superadmin" />}>
                 <Route path="/" element={<Layout />}>
                   <Route path="/dashboard" element={<Dashboard />} />
                   <Route
                     path="/purchaselibraries"
                     element={<PurchaseLibraries />}
                   />
+                  <Route
+                    path="/purchase-request"
+                    element={<PurchaseRequest />}
+                  />
+                </Route>
+              </Route>
+
+              <Route element={<RequireAuth allowedRoles="bontrade" />}>
+                <Route path="/" element={<Layout />}>
+                  <Route path="/bontrade" element={<Bontrade />} />
+                </Route>
+              </Route>
+
+              <Route element={<RequireAuth allowedRoles="ugtrade" />}>
+                <Route path="/" element={<Layout />}>
+                  <Route path="/ugtrade" element={<UGTrade />} />
+                </Route>
+              </Route>
+
+              <Route element={<RequireAuth allowedRoles="erotas" />}>
+                <Route path="/" element={<Layout />}>
+                  <Route path="/erotas" element={<Erotas />} />
                 </Route>
               </Route>
             </Route>
