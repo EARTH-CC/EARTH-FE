@@ -17,8 +17,13 @@ const links = [
     title: "Procurement",
     links: [
       {
+        name: "Purchase Libraries",
+        path: "purchaselibraries",
+        icon: <UilClipboardAlt style={{ fontSize: 29 }} />,
+      },
+      {
         name: "Purchase Request",
-        path: "purchaserequest",
+        path: "purchase-request",
         icon: <UilClipboardAlt style={{ fontSize: 29 }} />,
       },
       {
@@ -32,8 +37,8 @@ const links = [
         icon: <UilClipboardAlt style={{ fontSize: 24 }} />,
       },
       {
-        name: "Received Purchase and Transfer",
-        path: "receivedpurchaseandtransfer",
+        name: "Transmittal",
+        path: "transmittal",
         icon: <UilClipboardAlt style={{ fontSize: 27 }} />,
       },
       {

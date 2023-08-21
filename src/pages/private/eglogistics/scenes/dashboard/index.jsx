@@ -30,7 +30,7 @@ export default function Dashboard() {
         alignItems="center"
         marginTop="-15px"
       >
-        <Header title="DASHBOARD" subtitle="Welcome E&G Logistics dashboard" />
+        <Header title="Dashboard" subtitle="Welcome E&G Logistics dashboard" />
 
         <Box>
           <Button

@@ -2,7 +2,7 @@
 import axios from "axios";
 // import BASE_URL from "env";
 
-const BASE_URL = "https://phil-fida-app.vercel.app";
+const BASE_URL = "http://localhost:9000";
 
 function authenticate(account) {
   return axios

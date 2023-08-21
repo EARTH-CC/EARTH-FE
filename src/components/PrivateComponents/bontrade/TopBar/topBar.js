@@ -54,7 +54,7 @@ function StickyAppBar() {
                 alt="Logo"
                 style={{
                   height: "100px",
-                  border: "2px solid black",
+                  border: "1px solid black",
                   borderRadius: "50%",
                 }}
               />

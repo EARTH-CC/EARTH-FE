@@ -47,7 +47,15 @@ function StickyAppBar() {
               onClick={handleGoBack}
               sx={{ mr: 2, ml: 5 }}
             >
-              <img src={Logo} alt="Logo" style={{ height: "100px" }} />
+              <img
+                src={Logo}
+                alt="Logo"
+                style={{
+                  height: "100px",
+                  border: "1px solid black",
+                  borderRadius: "50%",
+                }}
+              />
             </IconButton>
             <Box>
               <Typography

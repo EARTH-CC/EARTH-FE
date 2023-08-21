@@ -24,7 +24,7 @@ export default function RequireAuth({ allowedRoles }) {
   ) : auth?.username ? (
     <Navigate to="/unauthorized" state={{ from: location }} replace />
   ) : (
-    <Navigate to="/sign-in" state={{ from: location }} replace />
+    <Navigate to="/waterfront" state={{ from: location }} replace />
   );
 }
 
