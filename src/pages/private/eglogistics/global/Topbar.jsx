@@ -8,6 +8,7 @@ import NotificationsOutlinedIcon from "@mui/icons-material/NotificationsOutlined
 import LogoutIcon from "@mui/icons-material/Logout";
 import SearchIcon from "@mui/icons-material/Search";
 import { useNavigate } from "react-router-dom";
+import SettingsIcon from "@mui/icons-material/Settings";
 import themes from "../../../../themes/theme";
 
 const { tokens, ColorModeContext } = themes;
@@ -20,6 +21,10 @@ function Topbar() {
 
   const handleLogout = () => {
     navigate("/");
+  };
+
+  const handleSettings = () => {
+    navigate("/settings");
   };
 
   return (
@@ -49,6 +54,9 @@ function Topbar() {
 
       {/* ICONS */}
       <Box display="flex">
+        <IconButton onClick={handleSettings}>
+          <SettingsIcon />
+        </IconButton>
         <IconButton onClick={toggleColorMode}>
           {theme.palette.mode === "dark" ? (
             <DarkModeOutlinedIcon />

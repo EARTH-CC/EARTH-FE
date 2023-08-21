@@ -16,6 +16,7 @@ import {
   UGTrade,
   Erotas,
 } from "pages";
+import Settings from "pages/private/eglogistics/scenes/settings";
 import themes from "./themes/theme";
 
 const { ColorModeContext, useMode } = themes;
@@ -45,6 +46,7 @@ function App() {
 
             <Route path="/" element={<Layout />}>
               <Route path="/dashboard" element={<Dashboard />} />
+              <Route path="/settings" element={<Settings />} />
             </Route>
 
             {/* <Route element={<PersistLogin />}>

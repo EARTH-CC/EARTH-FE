@@ -39,7 +39,7 @@ export default function Dashboard() {
               color: colors.grey[100],
               "&:hover": {
                 color: "white",
-                backgroundColor: colors.redAccent[700],
+                backgroundColor: colors.redAccent[900],
               },
               fontSize: "14px",
               fontWeight: "bold",
