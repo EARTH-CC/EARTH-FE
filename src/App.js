@@ -49,7 +49,7 @@ function App() {
             </Route>
 
             <Route element={<PersistLogin />}>
-              <Route element={<RequireAuth allowedRoles="eglogistics" />}>
+              <Route element={<RequireAuth allowedRoles="superadmin" />}>
                 <Route path="/" element={<Layout />}>
                   <Route path="/dashboard" element={<Dashboard />} />
                   <Route

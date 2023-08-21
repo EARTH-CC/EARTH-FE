@@ -81,10 +81,8 @@ export default function LoginModal({ open, handleClose, logo }) {
           message = "Invalid Login Credentials";
         } else if (err?.response?.status === 401) {
           message = err.response.data.error;
-        } else if (err?.response?.status === 500) {
-          message = "Internal Server Error";
         } else {
-          message = "An error occurred";
+          message = "Internal Server Error";
         }
         setError(message || err?.message);
       } finally {

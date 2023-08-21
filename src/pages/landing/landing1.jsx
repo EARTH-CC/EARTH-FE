@@ -55,7 +55,7 @@ export default function Landing1() {
             textShadow: "0 0 10px white",
           }}
         >
-          Copyright © 2023. E.A.R.T.H. Command Center - a subsidiary business
+          Copyright © 2023. E.A.R.T.H. Command Center - A subsidiary business
           unit of E & G Logistics. All rights reserved
         </Typography>
       </Box>
