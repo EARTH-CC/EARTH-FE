@@ -34,7 +34,7 @@ function Layout() {
     >
       <div className="app" style={{ display: extension ? "none" : "flex" }}>
         <Sidebar isSidebar={isSidebar} />
-        <main className="content">
+        <main className="content" style={{ overflowY: "scroll" }}>
           <Topbar setIsSidebar={setIsSidebar} />
           <Outlet />
         </main>

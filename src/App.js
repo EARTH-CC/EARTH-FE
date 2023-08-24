@@ -13,12 +13,12 @@ import {
   Landing,
   Dashboard,
   PurchaseLibraries,
+  PurchaseRequest,
   Bontrade,
   UGTrade,
   Erotas,
 } from "pages";
 import Settings from "pages/private/eglogistics/scenes/settings";
-import PurchaseRequest from "pages/private/eglogistics/scenes/pr_request";
 import themes from "./themes/theme";
 
 const { ColorModeContext, useMode } = themes;

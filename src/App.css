@@ -9,6 +9,7 @@ body,
   width: 100vw;
   font-family: "Source Sans 3", sans-serif;
   background: "linear-gradient(160deg, #bce1ff, #f3cdc6)";
+  overflow-y: "auto",
 }
 
 .app {

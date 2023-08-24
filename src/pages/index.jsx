@@ -8,7 +8,8 @@ export { default as Waterfront } from "./landing/waterrfront";
 
 // EnG Logistics
 export { default as Dashboard } from "./private/eglogistics/scenes/dashboard";
-export { default as PurchaseLibraries } from "./private/eglogistics/scenes/purchaselibraries";
+export { default as PurchaseLibraries } from "./private/eglogistics/scenes/procurement/pr_libraries";
+export { default as PurchaseRequest } from "./private/eglogistics/scenes/procurement/pr_request";
 
 // Bonatrade
 export { default as Bontrade } from "./private/bontrade";

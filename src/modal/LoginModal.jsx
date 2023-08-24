@@ -57,22 +57,17 @@ export default function LoginModal({ open, handleClose, logo }) {
         const res = await accountService.authenticate(formik?.values);
         if (res.valid) {
           setAuth(res.data);
-          if (logo === "eg") {
-            if (res.data.role === "superadmin") {
-              navigate("/dashboard");
-            }
-          } else if (logo === "bon") {
-            if (res.data.role === "bontrade") {
-              navigate("/bontrade");
-            }
-          } else if (logo === "ug") {
-            if (res.data.role === "ugtrade") {
-              navigate("/ugtrade");
-            }
-          } else if (logo === "ero") {
-            if (res.data.role === "erotas") {
-              navigate("/erotas");
-            }
+
+          if (logo === "eg" && res.data.role === "superadmin") {
+            navigate("/dashboard");
+          } else if (logo === "bon" && res.data.role === "bontrade") {
+            navigate("/bontrade");
+          } else if (logo === "ug" && res.data.role === "ugtrade") {
+            navigate("/ugtrade");
+          } else if (logo === "ero" && res.data.role === "erotas") {
+            navigate("/erotas");
+          } else {
+            setError("Invalid Login Credentials");
           }
         }
       } catch (err) {

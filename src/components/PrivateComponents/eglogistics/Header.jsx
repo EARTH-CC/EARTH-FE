@@ -4,11 +4,11 @@ import themes from "../../../themes/theme";
 
 const { tokens } = themes;
 
-function Header({ title, subtitle }) {
+function Header({ title, subtitle, ...rest }) {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
   return (
-    <Box mb="30px">
+    <Box {...rest}>
       <Typography
         variant="h2"
         color={colors.grey[100]}

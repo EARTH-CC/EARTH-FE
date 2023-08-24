@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Outlet } from "react-router-dom";
-import { Typography } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 import useRefreshToken from "../hooks/useRefreshToken";
 import { useStateContext } from "./ContextProvider";
 
@@ -33,5 +33,17 @@ export default function PersistLogin() {
   }, [loading]);
 
   // eslint-disable-next-line react/jsx-no-useless-fragment
-  return <>{loading ? <Typography>Loading...</Typography> : <Outlet />}</>;
+  return (
+    <Box
+      sx={{
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        height: "100vh",
+        width: "100vw",
+      }}
+    >
+      {loading ? <Typography>Loading...</Typography> : <Outlet />}
+    </Box>
+  );
 }

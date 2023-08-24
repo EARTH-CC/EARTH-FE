@@ -13,7 +13,7 @@ export default function DataGridTable({ data, columns }) {
 
   return (
     <Box
-      height="75vh"
+      height="70vh"
       sx={{
         "& .MuiDataGrid-root": {
           border: "none",
@@ -25,8 +25,8 @@ export default function DataGridTable({ data, columns }) {
           color: colors.greenAccent[300],
         },
         "& .MuiDataGrid-columnHeaders": {
-          color: "#FFF",
-          backgroundColor: colors.greenAccent[200],
+          color: colors.grey[900],
+          backgroundColor: colors.greenAccent[300],
           borderBottom: "none",
         },
         "& .MuiDataGrid-virtualScroller": {
