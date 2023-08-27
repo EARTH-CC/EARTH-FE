@@ -26,10 +26,9 @@ export default function TextFieldDatePicker({
           textField: {
             size: "small",
             error: false,
-            variant: "standard",
+            ...rest,
           },
         }}
-        {...rest}
       />
     </LocalizationProvider>
   );

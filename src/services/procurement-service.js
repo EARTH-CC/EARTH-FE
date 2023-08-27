@@ -7,14 +7,14 @@ const DEFAULT_DELAY = 1000;
 const BASE_URL = "http://localhost:9000";
 
 function getItem(id) {
-  return axios.get(`${BASE_URL}/item/get/${id}`);
+  return axios.get(`${BASE_URL}/purchaseItems/get/${id}`);
 }
 
 function searchItem(search = "") {
   return new Promise((resolve, reject) => {
     setTimeout(() => {
       axios
-        .get(`${BASE_URL}/item/data`, { params: { search } })
+        .get(`${BASE_URL}/purchaseItems/data`, { params: { search } })
         .then((res) => resolve(res.data))
         .catch((err) => {
           reject(err);
@@ -24,11 +24,11 @@ function searchItem(search = "") {
 }
 
 function addItem(item) {
-  return axios.post(`${BASE_URL}/item`, item);
+  return axios.post(`${BASE_URL}/purchaseItems`, item);
 }
 
 function deleteItem(id) {
-  return axios.delete(`${BASE_URL}/item/delete/${id}`);
+  return axios.delete(`${BASE_URL}/purchaseItems/delete/${id}`);
 }
 
 export default {

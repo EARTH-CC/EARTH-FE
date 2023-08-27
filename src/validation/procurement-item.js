@@ -1,18 +1,18 @@
 import { string, object } from "yup";
 
 const ProcurementItem = object().shape({
-  name: string().required("Required"),
-  type: string().required("Required"),
+  item_name: string().required("Required"),
+  item_type: string().required("Required"),
+  item_code: string().required("Required"),
   description: string().required("Required"),
-  qty: string().required("Required"),
-  unit: string().required("Required"),
+  date: string().required("Required"),
 });
 
 export const initialPRItem = {
-  name: "",
-  type: "",
+  item_name: "",
+  item_type: "",
+  item_code: "",
   description: "",
-  qty: "",
-  unit: "",
+  date: "",
 };
 export default ProcurementItem;

@@ -155,10 +155,10 @@ function PurchaseLibraries() {
       <AddItemModal
         open={openItemModal}
         handleClose={handleCloseItem}
-        // onSuccess={() => {
-        //   setSelected(null);
-        //   handleSearch();
-        // }}
+        onSuccess={() => {
+          setOpenItemModal(false);
+          // handleSearch();
+        }}
       />
       <Box>
         <DataGrid data={mockDataItems} columns={columns} />

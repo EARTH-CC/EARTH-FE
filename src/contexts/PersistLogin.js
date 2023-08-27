@@ -27,10 +27,10 @@ export default function PersistLogin() {
       setLoading(false);
     }
   }, []);
-  useEffect(() => {
-    console.log(`Loading Status: ${loading}`);
-    console.log(`AT: ${JSON.stringify(auth?.accessToken)}`);
-  }, [loading]);
+  // useEffect(() => {
+  //   console.log(`Loading Status: ${loading}`);
+  //   console.log(`AT: ${JSON.stringify(auth?.accessToken)}`);
+  // }, [loading]);
 
   // eslint-disable-next-line react/jsx-no-useless-fragment
   return (

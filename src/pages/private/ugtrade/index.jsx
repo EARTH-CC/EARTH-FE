@@ -23,41 +23,40 @@ function VideoPlayer() {
 
 function UGTrade() {
   return (
-    <Box>
+    <Box sx={{ height: "100vh", width: "100vw" }}>
       <TopBar />
-      <Box
-        sx={{
-          display: "flex",
-          justifyContent: "center",
-          flexDirection: "row", // Default direction is column
-          "@media (min-width: 768px)": {
-            // Adjust styles for medium-sized devices (width greater than or equal to 600px)
-            flexDirection: "block", // Change direction to row for medium-sized devices
-            gap: "20px", // Add some spacing between the MyChart components
-          },
-        }}
-      >
-        <Box xs={6} md={12}>
-          <MyChart />
+      <Box>
+        <Box
+          sx={{
+            display: "flex",
+            justifyContent: "center",
+            "@media (min-width: 768px)": {
+              // Adjust styles for medium-sized devices (width greater than or equal to 600px)
+              flexDirection: "block", // Change direction to row for medium-sized devices
+              gap: "20px", // Add some spacing between the MyChart components
+            },
+          }}
+        >
+          <Box md={12}>
+            <MyChart />
+          </Box>
+          <Box md={12}>
+            <MyChart2 />
+          </Box>
         </Box>
-        <Box xs={6} md={12}>
-          <MyChart2 />
+        <Box
+          sx={{
+            display: "flex",
+            justifyContent: "center",
+            marginTop: "50px",
+          }}
+        >
+          <BillingStatement />
         </Box>
+        <Grid>
+          <VideoPlayer />
+        </Grid>
       </Box>
-      <Box
-        sx={{
-          display: "flex",
-          justifyContent: "center",
-          marginTop: "50px",
-        }}
-        xs={6}
-        md={12}
-      >
-        <BillingStatement />
-      </Box>
-      <Grid>
-        <VideoPlayer />
-      </Grid>
     </Box>
   );
 }
