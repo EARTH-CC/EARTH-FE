@@ -62,10 +62,11 @@ function Sidebar() {
         },
         "& .pro-menu-item.active": {
           color: "white !important",
-          backgroundColor: "#31346b",
+          backgroundColor: "#3F418B",
           marginRight: isCollapsed ? "0.5px" : "29px",
-          borderRadius: "50px",
+          borderRadius: "15px",
         },
+        fontFamily: "sans-serif",
       }}
     >
       <ProSidebar collapsed={isCollapsed}>

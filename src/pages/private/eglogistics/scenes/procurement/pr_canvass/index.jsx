@@ -14,6 +14,7 @@ import Slider from "@mui/material/Slider";
 import DownloadOutlinedIcon from "@mui/icons-material/DownloadOutlined";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import LibraryTextfield from "components/PrivateComponents/eglogistics/Textfields/LibraryTextfield";
+import CanvasTable from "./canvasTable";
 import themes from "../../../../../../themes/theme";
 import Header from "../../../../../../components/PrivateComponents/eglogistics/Header";
 
@@ -96,14 +97,14 @@ export default function CanvassSheet() {
                   fontWeight="900"
                   sx={{
                     letterSpacing: "0.3em",
-                    fontFamily: "Poppins, sans-serif",
+                    fontSize: "small",
                   }}
                 >
-                  SHOPPING CART
+                  CANVASS CART
                 </Typography>
                 <Divider
                   variant="middle"
-                  sx={{ borderTopWidth: "2px", borderTopColor: "black" }}
+                  sx={{ borderTopWidth: "1px", borderTopColor: "black" }}
                 />
                 <ShoppingCartIcon
                   style={{
@@ -117,14 +118,14 @@ export default function CanvassSheet() {
                   fontWeight="900"
                   sx={{
                     letterSpacing: "0.3em",
-                    fontFamily: "Poppins, sans-serif",
+                    fontSize: "small",
                   }}
                 >
                   FILTERS
                 </Typography>
                 <Divider
                   variant="middle"
-                  sx={{ borderTopWidth: "2px", borderTopColor: "black" }}
+                  sx={{ borderTopWidth: "1px", borderTopColor: "black" }}
                 />
                 <LibraryTextfield label="Category" />
                 <Divider variant="middle" />
@@ -160,26 +161,34 @@ export default function CanvassSheet() {
                   }}
                 >
                   <FormControlLabel
-                    control={<Checkbox defaultChecked />}
+                    control={
+                      <Checkbox
+                        defaultChecked
+                        style={{ color: colors.grey[300] }}
+                      />
+                    }
                     label="All"
                   />
                   <FormControlLabel
-                    control={<Checkbox />}
+                    control={<Checkbox style={{ color: colors.grey[300] }} />}
                     label={<Rating name="5 stars" value={5} readOnly />}
                   />
                   <FormControlLabel
-                    control={<Checkbox />}
+                    control={<Checkbox style={{ color: colors.grey[300] }} />}
                     label={<Rating name="4 stars" value={4} readOnly />}
                   />
                   <FormControlLabel
-                    control={<Checkbox />}
+                    control={<Checkbox style={{ color: colors.grey[300] }} />}
                     label={<Rating name="3 stars" value={3} readOnly />}
                   />
                   <FormControlLabel
-                    control={<Checkbox />}
+                    control={<Checkbox style={{ color: colors.grey[300] }} />}
                     label={<Rating name="2 stars" value={2} readOnly />}
                   />
-                  <FormControlLabel control={<Checkbox />} label="Unrated" />
+                  <FormControlLabel
+                    control={<Checkbox style={{ color: colors.grey[300] }} />}
+                    label="Unrated"
+                  />
                 </FormGroup>
               </Box>
 
@@ -194,8 +203,8 @@ export default function CanvassSheet() {
                   borderLeftColor: "#C0C0C0",
                 }}
               />
-              <Box sx={{ width: "100%" }}>
-                <Typography>Data Table</Typography>
+              <Box sx={{ width: "100%", paddingTop: "20px" }}>
+                <CanvasTable />
               </Box>
             </Box>
           </Box>

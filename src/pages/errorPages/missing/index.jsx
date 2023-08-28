@@ -14,7 +14,7 @@ export default function Missing() {
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
-        backgroundColor: "#FF7F2E",
+        backgroundColor: "#6669BC",
       }}
     >
       <Box className="text">

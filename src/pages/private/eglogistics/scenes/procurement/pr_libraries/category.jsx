@@ -103,7 +103,7 @@ function CategoryLibraries() {
             fontSize: "25px",
           }}
         >
-          Category
+          Categories
         </Typography>
       </Divider>
       <AddCategoryModal
