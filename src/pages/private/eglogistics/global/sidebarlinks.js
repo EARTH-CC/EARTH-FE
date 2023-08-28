@@ -35,12 +35,12 @@ const links = [
       {
         name: "Purchase Request",
         path: "purchase-request",
-        icon: <ProductionQuantityLimitsOutlinedIcon style={{ fontSize: 29 }} />,
+        icon: <AddShoppingCartOutlinedIcon style={{ fontSize: 29 }} />,
       },
       {
         name: "Purchase Order",
         path: "purchaseorder",
-        icon: <AddShoppingCartOutlinedIcon style={{ fontSize: 29 }} />,
+        icon: <ProductionQuantityLimitsOutlinedIcon style={{ fontSize: 29 }} />,
       },
       {
         name: "Transmittal",

@@ -40,7 +40,7 @@ function Topbar() {
         alignItems="center"
         paddingLeft="16px"
         paddingRight="16px"
-        sx={{ flexGrow: 1, my: "-20px" }}
+        sx={{ flexGrow: 1, my: "-30px" }}
       >
         <img alt="profile-user" width="100px" height="100px" src={egLogo} />
         <Typography
@@ -55,7 +55,7 @@ function Topbar() {
             fontWeight: "900",
           }}
         >
-          E&G LOGISTICS
+          E&G <span style={{ letterSpacing: "0.1em" }}>LOGISTICS</span>
         </Typography>
       </Box>
       <Box width="27%" />
