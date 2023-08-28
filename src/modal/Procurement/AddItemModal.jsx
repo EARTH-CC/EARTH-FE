@@ -12,8 +12,6 @@ import {
 import { useFormik } from "formik";
 import PRItem, { initialPRItem } from "validation/procurement-item";
 import procurementService from "services/procurement-service";
-import TextFieldDatePicker from "components/PrivateComponents/eglogistics/Textfields/Datepicker";
-import dayjs from "dayjs";
 // import themes from "../../themes/theme";
 
 const style = {
@@ -24,7 +22,7 @@ const style = {
   left: "50%",
   transform: "translate(-50%, -50%)",
   height: "70vh",
-  width: "60vw",
+  width: "40vw",
   boxShadow: 24,
   p: 4,
 };
@@ -60,13 +58,6 @@ export default function AddItemModal({ open, handleClose, onSuccess }) {
     },
   });
 
-  const handleDate = (evt) => {
-    const date = dayjs(evt).format("YYYY/MM/DD");
-    formik?.setFieldValue("date", dayjs(date).format("YYYY-MM-DD"), true);
-  };
-
-  console.log(formik.values);
-
   return (
     <Modal
       open={open}
@@ -89,14 +80,14 @@ export default function AddItemModal({ open, handleClose, onSuccess }) {
           </Box>
           <Box mx={2}>
             <Grid container spacing={3}>
-              <Grid item xs={6}>
+              <Grid item xs={12}>
                 <TextField
                   label="Name"
                   name="item_name"
                   variant="outlined"
                   size="small"
                   fullWidth
-                  sx={{ pr: 5 }}
+                  sx={{ width: "60%" }}
                   disabled={loading}
                   value={formik.values?.item_name}
                   onChange={formik.handleChange}
@@ -110,14 +101,14 @@ export default function AddItemModal({ open, handleClose, onSuccess }) {
                   }
                 />
               </Grid>
-              <Grid item xs={6}>
+              <Grid item xs={12}>
                 <TextField
                   label="Type"
                   name="item_type"
                   variant="outlined"
                   size="small"
                   fullWidth
-                  sx={{ pr: 5 }}
+                  sx={{ width: "60%" }}
                   disabled={loading}
                   value={formik.values?.item_type}
                   onChange={formik.handleChange}
@@ -131,35 +122,14 @@ export default function AddItemModal({ open, handleClose, onSuccess }) {
                   }
                 />
               </Grid>
-              <Grid item xs={6}>
-                <TextField
-                  label="Item Code"
-                  name="item_code"
-                  variant="outlined"
-                  size="small"
-                  fullWidth
-                  sx={{ pr: 5 }}
-                  disabled={loading}
-                  value={formik.values?.item_code}
-                  onChange={formik.handleChange}
-                  onBlur={formik.handleBLur}
-                  error={
-                    formik.touched?.item_code &&
-                    Boolean(formik.errors?.item_code)
-                  }
-                  helperText={
-                    formik.touched?.item_code && formik.errors?.item_code
-                  }
-                />
-              </Grid>
-              <Grid item xs={6}>
+              <Grid item xs={12}>
                 <TextField
                   label="Description"
                   name="description"
                   variant="outlined"
                   size="small"
                   fullWidth
-                  sx={{ pr: 5 }}
+                  sx={{ width: "60%" }}
                   disabled={loading}
                   value={formik.values?.description}
                   onChange={formik.handleChange}
@@ -171,19 +141,6 @@ export default function AddItemModal({ open, handleClose, onSuccess }) {
                   helperText={
                     formik.touched?.description && formik.errors?.description
                   }
-                />
-              </Grid>
-              <Grid item xs={6}>
-                <TextFieldDatePicker
-                  label="Date"
-                  value={formik?.values?.date}
-                  onChange={handleDate}
-                  format="MM/DD/YYYY"
-                  maxDate={new Date()}
-                  error={formik.touched.date && Boolean(formik.errors.date)}
-                  helperText={formik.touched.date && formik.errors.date}
-                  sx={{ pr: 5 }}
-                  fullWidth
                 />
               </Grid>
             </Grid>

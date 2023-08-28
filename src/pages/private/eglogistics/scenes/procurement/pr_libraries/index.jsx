@@ -3,7 +3,7 @@ import { Box, Button, Divider, Typography, useTheme } from "@mui/material";
 import DownloadOutlinedIcon from "@mui/icons-material/DownloadOutlined";
 import AddIcon from "@mui/icons-material/Add";
 import AddItemModal from "modal/Procurement/AddItemModal";
-// import AddSupplierModal from "modal/Procurement/AddSupplierModal";
+import AddSupplierModal from "modal/Procurement/AddSupplierModal";
 import DataGrid from "../../../../../../components/PrivateComponents/eglogistics/DataGrid";
 import themes from "../../../../../../themes/theme";
 import mockData from "../../../../../../data/mockData";
@@ -17,22 +17,22 @@ function PurchaseLibraries() {
   const colors = tokens(theme.palette.mode);
 
   const [openItemModal, setOpenItemModal] = useState(false);
-  // const [openSupplierModal, setOpenSupplierModal] = useState(false);
+  const [openSupplierModal, setOpenSupplierModal] = useState(false);
 
   const handleAddItem = () => {
     setOpenItemModal(true);
   };
 
-  // const handleAddSupplier = () => {
-  //   setOpenSupplierModal(true);
-  // };
+  const handleAddSupplier = () => {
+    setOpenSupplierModal(true);
+  };
 
   const handleCloseItem = () => {
     setOpenItemModal(false);
   };
-  // const handleCloseSupplier = () => {
-  //   setOpenSupplierModal(false);
-  // };
+  const handleCloseSupplier = () => {
+    setOpenSupplierModal(false);
+  };
 
   const columns = [
     {
@@ -164,7 +164,7 @@ function PurchaseLibraries() {
         <DataGrid data={mockDataItems} columns={columns} />
       </Box>
 
-      {/* <Divider sx={{ mt: 8, mb: 2 }}>
+      <Divider sx={{ mt: 8, mb: 2 }}>
         <Typography
           sx={{
             textTransform: "uppercase",
@@ -214,7 +214,7 @@ function PurchaseLibraries() {
       />
       <Box>
         <DataGrid data={mockDataItems} columns={columns} />
-      </Box> */}
+      </Box>
     </Box>
   );
 }
