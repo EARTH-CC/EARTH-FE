@@ -91,8 +91,15 @@ export default function CanvassSheet() {
                   padding: "20px 30px 30px",
                 }}
               >
-                <Typography fontSize="medium" fontWeight="900">
-                  Shopping Cart
+                <Typography
+                  fontSize="medium"
+                  fontWeight="900"
+                  sx={{
+                    letterSpacing: "0.3em",
+                    fontFamily: "Poppins, sans-serif",
+                  }}
+                >
+                  SHOPPING CART
                 </Typography>
                 <Divider
                   variant="middle"
@@ -105,8 +112,15 @@ export default function CanvassSheet() {
                     alignSelf: "center",
                   }}
                 />
-                <Typography fontSize="medium" fontWeight="900">
-                  Filters
+                <Typography
+                  fontSize="medium"
+                  fontWeight="900"
+                  sx={{
+                    letterSpacing: "0.3em",
+                    fontFamily: "Poppins, sans-serif",
+                  }}
+                >
+                  FILTERS
                 </Typography>
                 <Divider
                   variant="middle"
