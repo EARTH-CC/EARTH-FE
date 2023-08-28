@@ -1,74 +1,21 @@
-import { useState } from "react";
-import { Box, Button, Divider, Typography, useTheme } from "@mui/material";
+import * as React from "react";
+import { Box, Tabs, Tab, Button, useTheme } from "@mui/material";
 import DownloadOutlinedIcon from "@mui/icons-material/DownloadOutlined";
-import AddIcon from "@mui/icons-material/Add";
-import AddItemModal from "modal/Procurement/AddItemModal";
-import AddSupplierModal from "modal/Procurement/AddSupplierModal";
-import DataGrid from "../../../../../../components/PrivateComponents/eglogistics/DataGrid";
+import ProductLibraries from "./product";
+import SupplierLibraries from "./supplier";
 import themes from "../../../../../../themes/theme";
-import mockData from "../../../../../../data/mockData";
 import Header from "../../../../../../components/PrivateComponents/eglogistics/Header";
 
 const { tokens } = themes;
-const { mockDataItems } = mockData;
 
-function PurchaseLibraries() {
+export default function ProcurementLibararies() {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
+  const [selectedTab, setSelectedTab] = React.useState(0);
 
-  const [openItemModal, setOpenItemModal] = useState(false);
-  const [openSupplierModal, setOpenSupplierModal] = useState(false);
-
-  const handleAddItem = () => {
-    setOpenItemModal(true);
+  const handleChange = (event, newValue) => {
+    setSelectedTab(newValue);
   };
-
-  const handleAddSupplier = () => {
-    setOpenSupplierModal(true);
-  };
-
-  const handleCloseItem = () => {
-    setOpenItemModal(false);
-  };
-  const handleCloseSupplier = () => {
-    setOpenSupplierModal(false);
-  };
-
-  const columns = [
-    {
-      field: "id",
-      headerName: "ID",
-      flex: 0.5,
-    },
-    {
-      field: "name",
-      headerName: "Name",
-      flex: 0.5,
-    },
-    {
-      field: "type",
-      headerName: "Type",
-      flex: 0.5,
-    },
-    {
-      field: "description",
-      headerName: "Description",
-      headerAlign: "left",
-      align: "left",
-      cellClassName: "name-column--cell",
-      flex: 1,
-    },
-    {
-      field: "qty",
-      headerName: "Quantity",
-      flex: 0.5,
-    },
-    {
-      field: "unit",
-      headerName: "Unit",
-      flex: 0.5,
-    },
-  ];
 
   return (
     <Box sx={{ m: "5px 20px 20px 20px" }}>
@@ -81,7 +28,7 @@ function PurchaseLibraries() {
       >
         <Header
           title="Purchase Libraries"
-          subtitle="List of Items and Suppliers"
+          subtitle="Library Management for Procurement Items"
         />
 
         <Box>
@@ -107,116 +54,56 @@ function PurchaseLibraries() {
           </Button>
         </Box>
       </Box>
+      <Box m="20px">
+        <Box
+          gridColumn="span 8"
+          gridRow="span 2"
+          borderRadius="5px"
+          boxShadow="0px 5px 10px rgba(0, 0, 0, 0.2)"
+          position="relative"
+          height="auto"
+        >
+          <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
+            <Tabs
+              value={selectedTab}
+              onChange={handleChange}
+              aria-label="simple tabs example"
+            >
+              <Tab
+                label="Product"
+                style={{
+                  fontWeight: "bold",
+                }}
+              />
+              <Tab
+                label="Brand"
+                style={{
+                  fontWeight: "bold",
+                }}
+              />
+              <Tab
+                label="Category"
+                style={{
+                  fontWeight: "bold",
+                }}
+              />
+              <Tab
+                label="Supplier"
+                style={{
+                  fontWeight: "bold",
+                }}
+              />
+            </Tabs>
+          </Box>
 
-      <Divider sx={{ mt: 4, mb: 2 }}>
-        <Typography
-          sx={{
-            textTransform: "uppercase",
-            fontSize: "25px",
-          }}
-        >
-          Item Supplies
-        </Typography>
-      </Divider>
-      <Box
-        sx={{
-          display: "flex",
-          justifyContent: "end",
-          position: "absolute",
-          right: "230px",
-          mr: "20px",
-          my: "-4px",
-          zIndex: 1,
-        }}
-      >
-        <Button
-          onClick={handleAddItem}
-          sx={{
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-            width: 150,
-            cursor: "pointer",
-            fontWeight: "bold",
-            backgroundColor: (themeMode) =>
-              themeMode.palette.mode === "dark" ? "#334b5f" : "lightgray",
-            color: colors.grey[100],
-            "&:hover": {
-              textShadow: "0 0 0.5rem rgba(255, 255, 255, 0.75)",
-              color: "#fff",
-              backgroundColor: "gray",
-            },
-          }}
-        >
-          <AddIcon sx={{ mr: 0.5 }} />
-          Add Item
-        </Button>
-      </Box>
-      <AddItemModal
-        open={openItemModal}
-        handleClose={handleCloseItem}
-        onSuccess={() => {
-          setOpenItemModal(false);
-          // handleSearch();
-        }}
-      />
-      <Box>
-        <DataGrid data={mockDataItems} columns={columns} />
-      </Box>
-
-      <Divider sx={{ mt: 8, mb: 2 }}>
-        <Typography
-          sx={{
-            textTransform: "uppercase",
-            fontSize: "25px",
-          }}
-        >
-          Suppliers/Vendors
-        </Typography>
-      </Divider>
-      <Box
-        sx={{
-          display: "flex",
-          justifyContent: "end",
-          position: "absolute",
-          right: "0",
-          mr: "250px",
-          my: "-4px",
-          zIndex: 1,
-        }}
-      >
-        <Button
-          onClick={handleAddSupplier}
-          sx={{
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-            width: 150,
-            cursor: "pointer",
-            fontWeight: "bold",
-            backgroundColor: (themeMode) =>
-              themeMode.palette.mode === "dark" ? "#334b5f" : "lightgray",
-            color: colors.grey[100],
-            "&:hover": {
-              textShadow: "0 0 0.5rem rgba(255, 255, 255, 0.75)",
-              color: "#fff",
-              backgroundColor: "gray",
-            },
-          }}
-        >
-          <AddIcon sx={{ mr: 0.5 }} />
-          Add Supplier
-        </Button>
-      </Box>
-      <AddSupplierModal
-        open={openSupplierModal}
-        handleClose={handleCloseSupplier}
-      />
-      <Box>
-        <DataGrid data={mockDataItems} columns={columns} />
+          <Box role="tabpanel">
+            {selectedTab === 0 && <ProductLibraries />}
+            {selectedTab === 1 && <Box>Brand</Box>}
+            {selectedTab === 2 && <Box>Category</Box>}
+            {selectedTab === 3 && <SupplierLibraries />}
+          </Box>
+        </Box>
       </Box>
     </Box>
   );
 }
-
-export default PurchaseLibraries;

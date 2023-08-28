@@ -269,7 +269,7 @@ export default function PurchaseRequest() {
           position: "absolute",
           left: "55%",
           transform: "translateX(-45%)",
-          my: "-4px",
+          my: "-9px",
           zIndex: "1",
         }}
       >

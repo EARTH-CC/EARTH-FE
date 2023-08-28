@@ -22,11 +22,11 @@ export default function DataGridTable({ data, columns }) {
           borderBottom: "none",
         },
         "& .name-column--cell": {
-          color: colors.greenAccent[300],
+          color: colors.blueAccent[300],
         },
         "& .MuiDataGrid-columnHeaders": {
           color: colors.grey[900],
-          backgroundColor: colors.greenAccent[300],
+          backgroundColor: colors.blueAccent[300],
           borderBottom: "none",
         },
         "& .MuiDataGrid-virtualScroller": {
@@ -37,7 +37,7 @@ export default function DataGridTable({ data, columns }) {
           backgroundColor: colors.grey[900],
         },
         "& .MuiCheckbox-root": {
-          color: `${colors.greenAccent[200]} !important`,
+          color: `${colors.blueAccent[200]} !important`,
         },
         "& .MuiDataGrid-toolbarContainer .MuiButton-text": {
           color: `${colors.grey[100]} !important`,

@@ -106,7 +106,6 @@ function ContentItem() {
         xs={12}
         sx={{
           display: "flex",
-          background: "rgba(245, 245, 245, 0.9)",
           width: "100%",
           flexDirection: "row",
           alignItems: "center",
@@ -121,7 +120,11 @@ function ContentItem() {
           src={Logo}
           height="100px"
           width="100px"
-          sx={{ cursor: "pointer" }}
+          sx={{
+            cursor: "pointer",
+            background: "rgba(245, 245, 245, 0.9)",
+            borderRadius: "25px",
+          }}
         />
 
         <Box
@@ -216,6 +219,7 @@ function ContentItem() {
               fontFamily: "poppins",
               color: "black",
               backgroundColor: "rgba(206, 200, 255, 0.9)",
+              boxShadow: "3px 3px 5px #56d5ff, 10px 10px 40px #56d5ff",
               "&:hover": {
                 textShadow: "0 0 0.5rem rgba(255, 255, 255, 0.75)",
                 color: "black",

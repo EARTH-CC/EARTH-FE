@@ -22,14 +22,14 @@ const links = [
         icon: <UilClipboardAlt style={{ fontSize: 29 }} />,
       },
       {
-        name: "Purchase Request",
-        path: "purchase-request",
-        icon: <UilClipboardAlt style={{ fontSize: 29 }} />,
-      },
-      {
         name: "Canvass Sheet",
         path: "canvasssheet",
         icon: <UilClipboardAlt />,
+      },
+      {
+        name: "Purchase Request",
+        path: "purchase-request",
+        icon: <UilClipboardAlt style={{ fontSize: 29 }} />,
       },
       {
         name: "Purchase Order",

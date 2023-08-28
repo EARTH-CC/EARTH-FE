@@ -50,17 +50,17 @@ a:visited {
 
 /* Track */
 ::-webkit-scrollbar-track {
-  background: #c800ff;
+  background: #ffffff;
 }
 
 /* Handle */
 ::-webkit-scrollbar-thumb {
-  background: #00a2ff;
+  background: #c1c1c1;
 }
 
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
-  background: #ffd900;
+  background: #787878;
 }
 
 /* color-picker style  */
