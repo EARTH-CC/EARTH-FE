@@ -1,5 +1,11 @@
 import DashboardIcon from "@mui/icons-material/Dashboard";
 import { UilClipboardAlt } from "@iconscout/react-unicons";
+import LibraryAddOutlinedIcon from "@mui/icons-material/LibraryAddOutlined";
+import LocalMallOutlinedIcon from "@mui/icons-material/LocalMallOutlined";
+import ProductionQuantityLimitsOutlinedIcon from "@mui/icons-material/ProductionQuantityLimitsOutlined";
+import AddShoppingCartOutlinedIcon from "@mui/icons-material/AddShoppingCartOutlined";
+import ShoppingCartCheckoutOutlinedIcon from "@mui/icons-material/ShoppingCartCheckoutOutlined";
+import ReceiptLongOutlinedIcon from "@mui/icons-material/ReceiptLongOutlined";
 
 const links = [
   {
@@ -18,33 +24,33 @@ const links = [
     links: [
       {
         name: "Purchase Libraries",
-        path: "purchaselibraries",
-        icon: <UilClipboardAlt style={{ fontSize: 29 }} />,
+        path: "purchase-libraries",
+        icon: <LibraryAddOutlinedIcon style={{ fontSize: 29 }} />,
       },
       {
         name: "Canvass Sheet",
-        path: "canvasssheet",
-        icon: <UilClipboardAlt />,
+        path: "purchase-canvass",
+        icon: <LocalMallOutlinedIcon style={{ fontSize: 29 }} />,
       },
       {
         name: "Purchase Request",
         path: "purchase-request",
-        icon: <UilClipboardAlt style={{ fontSize: 29 }} />,
+        icon: <AddShoppingCartOutlinedIcon style={{ fontSize: 29 }} />,
       },
       {
         name: "Purchase Order",
         path: "purchaseorder",
-        icon: <UilClipboardAlt style={{ fontSize: 24 }} />,
+        icon: <ProductionQuantityLimitsOutlinedIcon style={{ fontSize: 29 }} />,
       },
       {
         name: "Transmittal",
         path: "transmittal",
-        icon: <UilClipboardAlt style={{ fontSize: 27 }} />,
+        icon: <ShoppingCartCheckoutOutlinedIcon style={{ fontSize: 29 }} />,
       },
       {
         name: "Purchase History",
         path: "purchasehistory",
-        icon: <UilClipboardAlt style={{ fontSize: 27 }} />,
+        icon: <ReceiptLongOutlinedIcon style={{ fontSize: 29 }} />,
       },
     ],
   },
@@ -64,7 +70,7 @@ const links = [
       {
         name: "Item Delivery and Returns",
         path: "purchaseorder",
-        icon: <UilClipboardAlt style={{ fontSize: 24 }} />,
+        icon: <UilClipboardAlt style={{ fontSize: 29 }} />,
       },
     ],
   },

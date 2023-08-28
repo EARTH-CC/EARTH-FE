@@ -34,7 +34,7 @@ export default function DataGridTable({ data, columns, loadingState }) {
         },
         "& .MuiDataGrid-footerContainer": {
           borderTop: "none",
-          backgroundColor: colors.grey[900],
+          backgroundColor: colors.primary[400],
         },
         "& .MuiCheckbox-root": {
           color: `${colors.blueAccent[200]} !important`,

@@ -5,9 +5,10 @@ import { Box, IconButton, Typography, useTheme } from "@mui/material";
 import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 import MenuOutlinedIcon from "@mui/icons-material/MenuOutlined";
+import { useNavigate } from "react-router-dom";
 import { ProSidebar, MenuItem, Menu } from "react-pro-sidebar";
 import { useStateContext } from "contexts/ContextProvider";
-import userImg from "../../../../assets/images/eglogistics.png";
+import userImg from "../../../../assets/images/userlogo.png";
 import themes from "../../../../themes/theme";
 import links from "./sidebarlinks";
 import "react-pro-sidebar/dist/css/styles.css";
@@ -38,6 +39,11 @@ function Sidebar() {
   const [isCollapsed, setIsCollapsed] = useState(false);
   const [selected, setSelected] = useState("Dashboard");
   const { auth } = useStateContext();
+  const navigate = useNavigate();
+
+  const handleSettings = () => {
+    navigate("/settings");
+  };
 
   return (
     <Box
@@ -89,7 +95,12 @@ function Sidebar() {
 
           {!isCollapsed && (
             <Box mb="25">
-              <Box display="flex" justifyContent="center" alignItems="center">
+              <Box
+                display="flex"
+                justifyContent="center"
+                alignItems="center"
+                onClick={handleSettings}
+              >
                 <img
                   alt="profile-user"
                   width="100px"
@@ -98,18 +109,17 @@ function Sidebar() {
                   style={{ cursor: "pointer", borderRadius: "50%" }}
                 />
               </Box>
-              <Box
-                textAlign="center"
-                sx={{ display: "flex", mt: "-30px", justifyContent: "center" }}
-              >
+              <Box textAlign="center">
                 <Typography
-                  variant="h4"
+                  variant="h2"
                   color="#fff"
                   fontWeight="bold"
                   sx={{ m: "10px 0 0 0" }}
                 >
-                  <span style={{ color: "red" }}>E&G</span>
-                  <span style={{ color: "blue" }}> LOGISTICS</span>
+                  User Name
+                </Typography>
+                <Typography variant="h5" color="#C9BF81">
+                  User Role
                 </Typography>
               </Box>
             </Box>

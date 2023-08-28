@@ -22,7 +22,7 @@ export default function Dashboard() {
   const colors = tokens(theme.palette.mode);
 
   return (
-    <Box sx={{ m: "15px 20px 20px 20px" }}>
+    <Box sx={{ m: "-5px 20px 20px 20px" }}>
       {/* HEADER */}
       <Box
         display="flex"
@@ -35,11 +35,13 @@ export default function Dashboard() {
         <Box>
           <Button
             sx={{
-              backgroundColor: "#334b5f",
-              color: colors.grey[100],
+              backgroundColor: colors.blueAccent[300],
+              // backgroundColor: (themeMode) =>
+              //   themeMode.palette.mode === "dark" ? "#334b5f" : "lightgray",
+              color: colors.grey[900],
               "&:hover": {
                 color: "white",
-                backgroundColor: colors.redAccent[900],
+                backgroundColor: colors.blueAccent[700],
               },
               fontSize: "14px",
               fontWeight: "bold",

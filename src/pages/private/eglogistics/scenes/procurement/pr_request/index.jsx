@@ -240,13 +240,13 @@ export default function PurchaseRequest() {
         <Box>
           <Button
             sx={{
-              backgroundColor: colors.blueAccent[700],
+              backgroundColor: colors.blueAccent[300],
               // backgroundColor: (themeMode) =>
               //   themeMode.palette.mode === "dark" ? "#334b5f" : "lightgray",
-              color: colors.grey[100],
+              color: colors.grey[900],
               "&:hover": {
                 color: "white",
-                backgroundColor: colors.blueAccent[300],
+                backgroundColor: colors.blueAccent[700],
               },
               fontSize: "14px",
               fontWeight: "bold",

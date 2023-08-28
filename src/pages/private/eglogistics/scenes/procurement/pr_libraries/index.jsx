@@ -20,7 +20,7 @@ export default function ProcurementLibararies() {
   };
 
   return (
-    <Box sx={{ m: "15px 20px 20px 20px" }}>
+    <Box sx={{ m: "-5px 20px 20px 20px" }}>
       {/* HEADER */}
       <Box
         display="flex"
@@ -30,19 +30,19 @@ export default function ProcurementLibararies() {
       >
         <Header
           title="Purchase Libraries"
-          subtitle="Library Management for Procurement Items"
+          subtitle="Library Management for Purchase Items"
         />
 
         <Box>
           <Button
             sx={{
-              backgroundColor: colors.blueAccent[700],
+              backgroundColor: colors.blueAccent[300],
               // backgroundColor: (themeMode) =>
               //   themeMode.palette.mode === "dark" ? "#334b5f" : "lightgray",
-              color: colors.grey[100],
+              color: colors.grey[900],
               "&:hover": {
                 color: "white",
-                backgroundColor: colors.blueAccent[300],
+                backgroundColor: colors.blueAccent[700],
               },
               fontSize: "14px",
               fontWeight: "bold",
@@ -64,8 +64,14 @@ export default function ProcurementLibararies() {
           boxShadow="0px 5px 10px rgba(0, 0, 0, 0.2)"
           position="relative"
           height="auto"
+          sx={{ backgroundColor: colors.primary[400] }}
         >
-          <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
+          <Box
+            sx={{
+              borderBottom: 1,
+              borderColor: "divider",
+            }}
+          >
             <Tabs
               value={selectedTab}
               onChange={handleChange}
@@ -75,25 +81,45 @@ export default function ProcurementLibararies() {
               <Tab
                 label="Product"
                 style={{
-                  fontWeight: "bold",
+                  margin: "0 20px 0 20px",
+                  letterSpacing: "0.3em",
+                  fontFamily: "Poppins, sans-serif",
+                  fontSize: "small",
+                  fontWeight: "900",
+                  color: colors.grey[100],
                 }}
               />
               <Tab
                 label="Brand"
                 style={{
-                  fontWeight: "bold",
+                  margin: "0 20px 0 20px",
+                  letterSpacing: "0.3em",
+                  fontFamily: "Poppins, sans-serif",
+                  fontSize: "small",
+                  fontWeight: "900",
+                  color: colors.grey[100],
                 }}
               />
               <Tab
                 label="Category"
                 style={{
-                  fontWeight: "bold",
+                  margin: "0 20px 0 20px",
+                  letterSpacing: "0.3em",
+                  fontFamily: "Poppins, sans-serif",
+                  fontSize: "small",
+                  fontWeight: "900",
+                  color: colors.grey[100],
                 }}
               />
               <Tab
                 label="Supplier"
                 style={{
-                  fontWeight: "bold",
+                  margin: "0 20px 0 20px",
+                  letterSpacing: "0.3em",
+                  fontFamily: "Poppins, sans-serif",
+                  fontSize: "small",
+                  fontWeight: "900",
+                  color: colors.grey[100],
                 }}
               />
             </Tabs>
