@@ -13,11 +13,21 @@ function Header({ title, subtitle, ...rest }) {
         variant="h2"
         color={colors.grey[100]}
         fontWeight="bold"
-        sx={{ m: "0 0 5px 0" }}
+        sx={{
+          m: "0 0 5px 0",
+          fontFamily: "Poppins, sans-serif",
+        }}
       >
         {title}
       </Typography>
-      <Typography variant="h5" color={colors.redAccent[300]} fontWeight={600}>
+      <Typography
+        variant="h5"
+        color={colors.redAccent[300]}
+        fontWeight={600}
+        sx={{
+          fontFamily: "Poppins, sans-serif",
+        }}
+      >
         {subtitle}
       </Typography>
     </Box>

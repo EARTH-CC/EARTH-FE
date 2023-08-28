@@ -1,14 +1,13 @@
 /* eslint-disable import/no-duplicates */
-import { Box, IconButton, useTheme } from "@mui/material";
+import { Box, IconButton, Typography, useTheme } from "@mui/material";
 import { useContext } from "react";
-import InputBase from "@mui/material/InputBase";
 import LightModeOutlinedIcon from "@mui/icons-material/LightModeOutlined";
 import DarkModeOutlinedIcon from "@mui/icons-material/DarkModeOutlined";
 import NotificationsOutlinedIcon from "@mui/icons-material/NotificationsOutlined";
 import LogoutIcon from "@mui/icons-material/Logout";
-import SearchIcon from "@mui/icons-material/Search";
 import { useNavigate } from "react-router-dom";
 import SettingsIcon from "@mui/icons-material/Settings";
+import egLogo from "../../../../assets/images/eglogistics.png";
 import themes from "../../../../themes/theme";
 
 const { tokens, ColorModeContext } = themes;
@@ -34,23 +33,33 @@ function Topbar() {
       alignItems="center"
       p={2}
     >
-      {/* SEARCH BAR */}
-      <Box width="30%" />
+      {/* Middle Bar */}
+      <Box width="33%" />
       <Box
         display="flex"
+        alignItems="center"
         backgroundColor={colors.primary[400]}
-        borderRadius="10px"
         paddingLeft="16px"
         paddingRight="16px"
-        boxShadow="1px 1px 5px rgba(0, 0, 0, 0.5)"
-        sx={{ flexGrow: 1 }}
+        sx={{ flexGrow: 1, my: "-20px" }}
       >
-        <InputBase sx={{ flex: 1 }} placeholder="Explore" />
-        <IconButton type="button" sx={{ p: 1 }}>
-          <SearchIcon sx={{ mr: 1 }} />
-        </IconButton>
+        <img alt="profile-user" width="100px" height="100px" src={egLogo} />
+        <Typography
+          variant="h4"
+          fontWeight="bold"
+          sx={{
+            m: "10px 0 0 20px",
+            color: "#000000",
+            letterSpacing: "0.3em",
+            fontFamily: "Poppins, sans-serif",
+            fontSize: "30px",
+            fontWeight: "900",
+          }}
+        >
+          E&G LOGISTICS
+        </Typography>
       </Box>
-      <Box width="30%" />
+      <Box width="27%" />
 
       {/* ICONS */}
       <Box display="flex">

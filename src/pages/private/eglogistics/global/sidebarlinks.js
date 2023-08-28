@@ -18,12 +18,12 @@ const links = [
     links: [
       {
         name: "Purchase Libraries",
-        path: "purchaselibraries",
+        path: "purchase-libraries",
         icon: <UilClipboardAlt style={{ fontSize: 29 }} />,
       },
       {
         name: "Canvass Sheet",
-        path: "canvasssheet",
+        path: "purchase-canvass",
         icon: <UilClipboardAlt />,
       },
       {

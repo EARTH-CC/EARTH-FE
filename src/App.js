@@ -14,6 +14,7 @@ import {
   Dashboard,
   PurchaseLibraries,
   PurchaseRequest,
+  PurchaseCanvass,
   Bontrade,
   UGTrade,
   Erotas,
@@ -53,12 +54,16 @@ function App() {
                 <Route path="/" element={<Layout />}>
                   <Route path="/dashboard" element={<Dashboard />} />
                   <Route
-                    path="/purchaselibraries"
+                    path="/purchase-libraries"
                     element={<PurchaseLibraries />}
                   />
                   <Route
                     path="/purchase-request"
                     element={<PurchaseRequest />}
+                  />
+                  <Route
+                    path="/purchase-canvass"
+                    element={<PurchaseCanvass />}
                   />
                 </Route>
               </Route>
