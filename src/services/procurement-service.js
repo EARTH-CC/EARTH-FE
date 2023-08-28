@@ -2,38 +2,36 @@
 import axios from "axios";
 // import BASE_URL from "env";
 
-const DEFAULT_DELAY = 1000;
+// const DEFAULT_DELAY = 1000;
 
 const BASE_URL = "http://localhost:9000";
 
-function getItem(id) {
-  return axios.get(`${BASE_URL}/purchaseItems/get/${id}`);
+function getAPI(id, moduleName) {
+  return axios.get(`${BASE_URL}/${moduleName}/get/${id}`);
 }
 
-function searchItem(search = "") {
+function getAllAPI(moduleName) {
   return new Promise((resolve, reject) => {
-    setTimeout(() => {
-      axios
-        .get(`${BASE_URL}/purchaseItems/data`, { params: { search } })
-        .then((res) => resolve(res.data))
-        .catch((err) => {
-          reject(err);
-        });
-    }, DEFAULT_DELAY);
+    axios
+      .get(`${BASE_URL}/${moduleName}/get`)
+      .then((res) => resolve(res.data.data))
+      .catch((err) => {
+        reject(err);
+      });
   });
 }
 
-function addItem(item) {
-  return axios.post(`${BASE_URL}/purchaseItems`, item);
+function addAPI(data, moduleName) {
+  return axios.post(`${BASE_URL}/${moduleName}`, data);
 }
 
-function deleteItem(id) {
-  return axios.delete(`${BASE_URL}/purchaseItems/delete/${id}`);
+function deleteAPI(id, moduleName) {
+  return axios.delete(`${BASE_URL}/${moduleName}/delete/${id}`);
 }
 
 export default {
-  getItem,
-  searchItem,
-  addItem,
-  deleteItem,
+  getAPI,
+  getAllAPI,
+  addAPI,
+  deleteAPI,
 };

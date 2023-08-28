@@ -1,31 +1,47 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Box, Button, Divider, Typography, useTheme } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
-import AddItemModal from "modal/Procurement/AddItemModal";
+import AddBrandModal from "modal/Procurement/AddBrandModal";
+import procurementService from "services/procurement-service";
 import DataGrid from "../../../../../../components/PrivateComponents/eglogistics/DataGrid";
 import themes from "../../../../../../themes/theme";
-import mockData from "../../../../../../data/mockData";
 
 const { tokens } = themes;
-const { mockDataItems } = mockData;
 
 function BrandLibraries() {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
 
-  const [openItemModal, setOpenItemModal] = useState(false);
+  const [brands, setBrands] = useState([]);
 
-  const handleAddItem = () => {
-    setOpenItemModal(true);
+  const [loading, setLoading] = useState(false);
+  const [openBrandModal, setOpenBrandModal] = useState(false);
+
+  const moduleName = "brand";
+
+  const handleAddBrand = () => {
+    setOpenBrandModal(true);
   };
 
   const handleCloseItem = () => {
-    setOpenItemModal(false);
+    setOpenBrandModal(false);
+  };
+
+  const handleGetAll = () => {
+    setLoading(true);
+    procurementService
+      .getAllAPI(moduleName)
+      .then((e) => {
+        setBrands(e);
+      })
+      .finally(() => {
+        setLoading(false);
+      });
   };
 
   const columns = [
     {
-      field: "id",
+      field: "uuid",
       headerName: "ID",
       flex: 0.5,
     },
@@ -35,29 +51,17 @@ function BrandLibraries() {
       flex: 0.5,
     },
     {
-      field: "type",
-      headerName: "Type",
+      field: "status",
+      headerName: "Status",
       flex: 0.5,
-    },
-    {
-      field: "description",
-      headerName: "Description",
-      headerAlign: "left",
-      align: "left",
-      cellClassName: "name-column--cell",
-      flex: 1,
-    },
-    {
-      field: "qty",
-      headerName: "Quantity",
-      flex: 0.5,
-    },
-    {
-      field: "unit",
-      headerName: "Unit",
-      flex: 0.5,
+      valueGetter: (params) =>
+        ["Inactive", "Active"][params?.row?.status] || "Unknown",
     },
   ];
+
+  useEffect(() => {
+    handleGetAll();
+  }, []);
 
   return (
     <Box sx={{ m: "15px 20px 20px 20px" }}>
@@ -70,7 +74,7 @@ function BrandLibraries() {
         }}
       >
         <Button
-          onClick={handleAddItem}
+          onClick={handleAddBrand}
           sx={{
             display: "flex",
             justifyContent: "center",
@@ -102,16 +106,16 @@ function BrandLibraries() {
           Brands
         </Typography>
       </Divider>
-      <AddItemModal
-        open={openItemModal}
+      <AddBrandModal
+        open={openBrandModal}
         handleClose={handleCloseItem}
         onSuccess={() => {
-          setOpenItemModal(false);
-          // handleSearch();
+          setOpenBrandModal(false);
+          handleGetAll();
         }}
       />
       <Box>
-        <DataGrid data={mockDataItems} columns={columns} />
+        <DataGrid data={brands} columns={columns} loadingState={loading} />
       </Box>
     </Box>
   );

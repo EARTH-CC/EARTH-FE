@@ -2,11 +2,12 @@ import React, { useState } from "react";
 import PropTypes from "prop-types";
 import { Box, Button, Grid, Modal, TextField, Typography } from "@mui/material";
 import { useFormik } from "formik";
-import PRItem, { initialPRItem } from "validation/procurement-item";
+import PRSupplier, { initialPRSupplier } from "validation/procurement-supplier";
 import procurementService from "services/procurement-service";
 
 const style = {
-  backgroundColor: "#fff",
+  backgroundColor: (themeMode) =>
+    themeMode.palette.mode === "dark" ? "#1f2a40" : "#fff",
   position: "absolute",
   top: "50%",
   left: "50%",
@@ -14,25 +15,27 @@ const style = {
   height: "70vh",
   width: "60vw",
   boxShadow: 24,
-  p: 2,
+  p: 4,
 };
 
-export default function AddSupplierModal({ open, handleClose }) {
+export default function AddSupplierModal({ open, handleClose, onSuccess }) {
   const [loading, setLoading] = useState();
   const [error, setError] = useState("");
 
-  const formik = useFormik({
-    initialValues: initialPRItem,
+  const moduleName = "supplier";
 
-    validationSchema: PRItem,
+  const formik = useFormik({
+    initialValues: initialPRSupplier,
+
+    validationSchema: PRSupplier,
     onSubmit: () => {
       setError("");
       setLoading(true);
       procurementService
-        .addEmployee(formik.values)
+        .addAPI(formik.values, moduleName)
         .then(() => {
           formik?.resetForm();
-          //   onSuccess?.();
+          onSuccess?.();
         })
         .catch((err) => {
           setError(err?.message);
@@ -56,96 +59,89 @@ export default function AddSupplierModal({ open, handleClose }) {
         <form onSubmit={formik.handleSubmit} autoComplete="off">
           <Box mb={4}>
             <Typography variant="h3" fontWeight="bolder" my={2}>
-              Add Procurement Supplier/Vendor
+              Add Supplier
             </Typography>
           </Box>
           <Box mx={2}>
             <Grid container spacing={2}>
               <Grid item xs={6}>
                 <TextField
-                  label="Name"
-                  name="name"
+                  label="Company Name"
+                  name="company_name"
                   variant="outlined"
                   size="small"
                   fullWidth
                   sx={{ pr: 5 }}
                   disabled={loading}
-                  value={formik.values?.name}
-                  onChange={formik.handleChange}
-                  onBlur={formik.handleBLur}
-                  error={formik.touched?.name && Boolean(formik.errors?.name)}
-                  helperText={formik.touched?.name && formik.errors?.name}
-                />
-              </Grid>
-              <Grid item xs={6}>
-                <TextField
-                  label="Type"
-                  name="type"
-                  variant="outlined"
-                  size="small"
-                  fullWidth
-                  sx={{ pr: 5 }}
-                  disabled={loading}
-                  value={formik.values?.type}
-                  onChange={formik.handleChange}
-                  onBlur={formik.handleBLur}
-                  error={formik.touched?.type && Boolean(formik.errors?.type)}
-                  helperText={formik.touched?.type && formik.errors?.type}
-                />
-              </Grid>
-              <Grid item xs={6}>
-                <TextField
-                  label="Description"
-                  name="description"
-                  variant="outlined"
-                  size="small"
-                  fullWidth
-                  sx={{ pr: 5 }}
-                  disabled={loading}
-                  value={formik.values?.description}
+                  value={formik.values?.company_name}
                   onChange={formik.handleChange}
                   onBlur={formik.handleBLur}
                   error={
-                    formik.touched?.description &&
-                    Boolean(formik.errors?.description)
+                    formik.touched?.company_name &&
+                    Boolean(formik.errors?.company_name)
                   }
                   helperText={
-                    formik.touched?.description && formik.errors?.description
+                    formik.touched?.company_name && formik.errors?.company_name
                   }
                 />
               </Grid>
               <Grid item xs={6}>
                 <TextField
-                  label="Quantity"
-                  name="qty"
-                  type="number"
+                  label="Address"
+                  name="address"
                   variant="outlined"
                   size="small"
                   fullWidth
                   sx={{ pr: 5 }}
                   disabled={loading}
-                  value={formik.values?.qty}
+                  value={formik.values?.address}
                   onChange={formik.handleChange}
                   onBlur={formik.handleBLur}
-                  error={formik.touched?.qty && Boolean(formik.errors?.qty)}
-                  helperText={formik.touched?.qty && formik.errors?.qty}
+                  error={
+                    formik.touched?.address && Boolean(formik.errors?.address)
+                  }
+                  helperText={formik.touched?.address && formik.errors?.address}
                 />
               </Grid>
               <Grid item xs={6}>
                 <TextField
-                  label="Unit"
-                  name="unit"
-                  type="number"
+                  label="Phone No."
+                  name="phone_no"
                   variant="outlined"
                   size="small"
                   fullWidth
                   sx={{ pr: 5 }}
                   disabled={loading}
-                  value={formik.values?.unit}
+                  value={formik.values?.phone_no}
                   onChange={formik.handleChange}
                   onBlur={formik.handleBLur}
-                  error={formik.touched?.unit && Boolean(formik.errors?.unit)}
-                  helperText={formik.touched?.unit && formik.errors?.unit}
+                  error={
+                    formik.touched?.phone_no && Boolean(formik.errors?.phone_no)
+                  }
+                  helperText={
+                    formik.touched?.phone_no && formik.errors?.phone_no
+                  }
+                />
+              </Grid>
+              <Grid item xs={6}>
+                <TextField
+                  label="Mobile No."
+                  name="mobile_no"
+                  variant="outlined"
+                  size="small"
+                  fullWidth
+                  sx={{ pr: 5 }}
+                  disabled={loading}
+                  value={formik.values?.mobile_no}
+                  onChange={formik.handleChange}
+                  onBlur={formik.handleBLur}
+                  error={
+                    formik.touched?.mobile_no &&
+                    Boolean(formik.errors?.mobile_no)
+                  }
+                  helperText={
+                    formik.touched?.mobile_no && formik.errors?.mobile_no
+                  }
                 />
               </Grid>
             </Grid>
@@ -155,20 +151,23 @@ export default function AddSupplierModal({ open, handleClose }) {
           {open && (
             <Box sx={{ textAlign: "right", height: 100 }}>
               <Button
+                type="submit"
                 variant="contained"
-                color="secondary"
-                sx={{ mr: 2, mt: 5, width: 80 }}
+                sx={{ mr: 2, mt: 5, width: 80, backgroundColor: "#6b70c4" }}
+              >
+                Save
+              </Button>
+              <Button
+                variant="contained"
+                sx={{
+                  mr: 2,
+                  mt: 5,
+                  width: 80,
+                  backgroundColor: "#3e4287",
+                }}
                 onClick={handleClose}
               >
                 Cancel
-              </Button>
-              <Button
-                type="submit"
-                variant="contained"
-                color="success"
-                sx={{ mr: 2, mt: 5, width: 80 }}
-              >
-                Save
               </Button>
             </Box>
           )}
@@ -180,11 +179,11 @@ export default function AddSupplierModal({ open, handleClose }) {
 
 AddSupplierModal.defaultProps = {
   handleClose: () => {},
-  //   onSuccess: () => {},
+  onSuccess: () => {},
 };
 
 AddSupplierModal.propTypes = {
   open: PropTypes.bool.isRequired,
   handleClose: PropTypes.func,
-  //   onSuccess: PropTypes.func,
+  onSuccess: PropTypes.func,
 };

@@ -7,7 +7,7 @@ import themes from "../../../themes/theme";
 
 const { tokens } = themes;
 
-export default function DataGridTable({ data, columns }) {
+export default function DataGridTable({ data, columns, loadingState }) {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
 
@@ -46,6 +46,7 @@ export default function DataGridTable({ data, columns }) {
       }}
     >
       <DataGrid
+        getRowId={(row) => row.uuid || row.id}
         rows={data}
         columns={columns}
         slots={{ toolbar: GridToolbar }}
@@ -58,6 +59,7 @@ export default function DataGridTable({ data, columns }) {
         initialState={{
           pinnedColumns: { left: ["name"], right: ["actions"] },
         }}
+        loading={loadingState}
       />
     </Box>
   );
@@ -67,7 +69,7 @@ DataGridTable.defaultProps = {
   data: [],
   columns: [],
   // moduleName: "",
-  // loadingState: false,
+  loadingState: false,
   // dataReload: () => {},
 };
 
@@ -75,6 +77,6 @@ DataGridTable.propTypes = {
   data: PropTypes.arrayOf(PropTypes.object),
   columns: PropTypes.arrayOf(PropTypes.object),
   // moduleName: PropTypes.string,
-  // loadingState: PropTypes.bool,
+  loadingState: PropTypes.bool,
   // dataReload: PropTypes.func,
 };

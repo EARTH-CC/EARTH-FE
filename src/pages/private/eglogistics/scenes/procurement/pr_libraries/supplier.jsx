@@ -1,18 +1,23 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Box, Button, Divider, Typography, useTheme } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
 import AddSupplierModal from "modal/Procurement/AddSupplierModal";
+import procurementService from "services/procurement-service";
 import DataGrid from "../../../../../../components/PrivateComponents/eglogistics/DataGrid";
 import themes from "../../../../../../themes/theme";
-import mockData from "../../../../../../data/mockData";
 
 const { tokens } = themes;
-const { mockDataItems } = mockData;
 
 function SupplierLibraries() {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
+
+  const [suppliers, setSuppliers] = useState([]);
+
+  const [loading, setLoading] = useState(false);
   const [openSupplierModal, setOpenSupplierModal] = useState(false);
+
+  const moduleName = "supplier";
 
   const handleAddSupplier = () => {
     setOpenSupplierModal(true);
@@ -22,41 +27,52 @@ function SupplierLibraries() {
     setOpenSupplierModal(false);
   };
 
+  const handleGetAll = () => {
+    setLoading(true);
+    procurementService
+      .getAllAPI(moduleName)
+      .then((e) => {
+        setSuppliers(e);
+      })
+      .finally(() => {
+        setLoading(false);
+      });
+  };
+
   const columns = [
     {
-      field: "id",
+      field: "uuid",
       headerName: "ID",
       flex: 0.5,
     },
     {
-      field: "name",
-      headerName: "Name",
+      field: "company_name",
+      headerName: "Company Name",
       flex: 0.5,
     },
     {
-      field: "type",
-      headerName: "Type",
-      flex: 0.5,
-    },
-    {
-      field: "description",
-      headerName: "Description",
-      headerAlign: "left",
-      align: "left",
-      cellClassName: "name-column--cell",
+      field: "address",
+      headerName: "Address",
       flex: 1,
     },
     {
-      field: "qty",
-      headerName: "Quantity",
+      field: "phone_no",
+      headerName: "Phone",
+      headerAlign: "left",
+      align: "left",
+      cellClassName: "name-column--cell",
       flex: 0.5,
     },
     {
-      field: "unit",
-      headerName: "Unit",
+      field: "mobile_no",
+      headerName: "Mobile",
       flex: 0.5,
     },
   ];
+
+  useEffect(() => {
+    handleGetAll();
+  }, []);
 
   return (
     <Box sx={{ m: "15px 20px 20px 20px" }}>
@@ -105,9 +121,13 @@ function SupplierLibraries() {
       <AddSupplierModal
         open={openSupplierModal}
         handleClose={handleCloseSupplier}
+        onSuccess={() => {
+          setOpenSupplierModal(false);
+          handleGetAll();
+        }}
       />
       <Box>
-        <DataGrid data={mockDataItems} columns={columns} />
+        <DataGrid data={suppliers} columns={columns} loadingState={loading} />
       </Box>
     </Box>
   );

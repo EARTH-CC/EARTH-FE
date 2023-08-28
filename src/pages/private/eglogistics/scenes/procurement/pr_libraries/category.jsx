@@ -1,31 +1,47 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Box, Button, Divider, Typography, useTheme } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
-import AddItemModal from "modal/Procurement/AddItemModal";
+import AddCategoryModal from "modal/Procurement/AddCategoryModal";
+import procurementService from "services/procurement-service";
 import DataGrid from "../../../../../../components/PrivateComponents/eglogistics/DataGrid";
 import themes from "../../../../../../themes/theme";
-import mockData from "../../../../../../data/mockData";
 
 const { tokens } = themes;
-const { mockDataItems } = mockData;
 
 function CategoryLibraries() {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
 
-  const [openItemModal, setOpenItemModal] = useState(false);
+  const [categories, setCategories] = useState([]);
+
+  const [loading, setLoading] = useState(false);
+  const [openCategoryModal, setOpenCategoryModal] = useState(false);
+
+  const moduleName = "category";
 
   const handleAddItem = () => {
-    setOpenItemModal(true);
+    setOpenCategoryModal(true);
   };
 
   const handleCloseItem = () => {
-    setOpenItemModal(false);
+    setOpenCategoryModal(false);
+  };
+
+  const handleGetAll = () => {
+    setLoading(true);
+    procurementService
+      .getAllAPI(moduleName)
+      .then((e) => {
+        setCategories(e);
+      })
+      .finally(() => {
+        setLoading(false);
+      });
   };
 
   const columns = [
     {
-      field: "id",
+      field: "uuid",
       headerName: "ID",
       flex: 0.5,
     },
@@ -35,29 +51,17 @@ function CategoryLibraries() {
       flex: 0.5,
     },
     {
-      field: "type",
-      headerName: "Type",
+      field: "status",
+      headerName: "Status",
       flex: 0.5,
-    },
-    {
-      field: "description",
-      headerName: "Description",
-      headerAlign: "left",
-      align: "left",
-      cellClassName: "name-column--cell",
-      flex: 1,
-    },
-    {
-      field: "qty",
-      headerName: "Quantity",
-      flex: 0.5,
-    },
-    {
-      field: "unit",
-      headerName: "Unit",
-      flex: 0.5,
+      valueGetter: (params) =>
+        ["Inactive", "Active"][params?.row?.status] || "Unknown",
     },
   ];
+
+  useEffect(() => {
+    handleGetAll();
+  }, []);
 
   return (
     <Box sx={{ m: "15px 20px 20px 20px" }}>
@@ -102,16 +106,16 @@ function CategoryLibraries() {
           Category
         </Typography>
       </Divider>
-      <AddItemModal
-        open={openItemModal}
+      <AddCategoryModal
+        open={openCategoryModal}
         handleClose={handleCloseItem}
         onSuccess={() => {
-          setOpenItemModal(false);
-          // handleSearch();
+          setOpenCategoryModal(false);
+          handleGetAll();
         }}
       />
       <Box>
-        <DataGrid data={mockDataItems} columns={columns} />
+        <DataGrid data={categories} columns={columns} loadingState={loading} />
       </Box>
     </Box>
   );

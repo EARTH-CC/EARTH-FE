@@ -1,19 +1,26 @@
-import { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Box, Button, Divider, Typography, useTheme } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
 import AddItemModal from "modal/Procurement/AddItemModal";
+import procurementService from "services/procurement-service";
 import DataGrid from "../../../../../../components/PrivateComponents/eglogistics/DataGrid";
 import themes from "../../../../../../themes/theme";
-import mockData from "../../../../../../data/mockData";
 
 const { tokens } = themes;
-const { mockDataItems } = mockData;
 
-function ProductLibraries() {
+function Products() {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
 
+  const [items, setItems] = React.useState([]);
+  const [categories, setCategories] = React.useState([]);
+  const [brands, setBrands] = React.useState([]);
+  const [suppliers, setSuppliers] = React.useState([]);
+
+  const [loading, setLoading] = React.useState(false);
   const [openItemModal, setOpenItemModal] = useState(false);
+
+  const moduleName = "product";
 
   const handleAddItem = () => {
     setOpenItemModal(true);
@@ -23,9 +30,75 @@ function ProductLibraries() {
     setOpenItemModal(false);
   };
 
+  const handleGetAll = () => {
+    setLoading(true);
+    procurementService
+      .getAllAPI(moduleName)
+      .then((e) => {
+        setItems(e);
+      })
+      .finally(() => {
+        setLoading(false);
+      });
+  };
+
+  const handleGetSuppliers = () => {
+    setLoading(true);
+    procurementService
+      .getAllAPI("supplier")
+      .then((e) => {
+        setSuppliers(e);
+      })
+      .finally(() => {
+        setLoading(false);
+      });
+  };
+
+  const handleGetBrands = () => {
+    setLoading(true);
+    procurementService
+      .getAllAPI("brand")
+      .then((e) => {
+        setBrands(e);
+      })
+      .finally(() => {
+        setLoading(false);
+      });
+  };
+
+  const handleGetCategories = () => {
+    setLoading(true);
+    procurementService
+      .getAllAPI("category")
+      .then((e) => {
+        setCategories(e);
+      })
+      .finally(() => {
+        setLoading(false);
+      });
+  };
+
+  const brandMap = brands.reduce((map, brand) => {
+    // eslint-disable-next-line no-param-reassign
+    map[brand.uuid] = brand.name;
+    return map;
+  }, {});
+
+  const categoryMap = categories.reduce((map, category) => {
+    // eslint-disable-next-line no-param-reassign
+    map[category.uuid] = category.name;
+    return map;
+  }, {});
+
+  const supplierMap = suppliers.reduce((map, supplier) => {
+    // eslint-disable-next-line no-param-reassign
+    map[supplier.uuid] = supplier.company_name;
+    return map;
+  }, {});
+
   const columns = [
     {
-      field: "id",
+      field: "uuid",
       headerName: "ID",
       flex: 0.5,
     },
@@ -35,9 +108,24 @@ function ProductLibraries() {
       flex: 0.5,
     },
     {
-      field: "type",
-      headerName: "Type",
+      field: "brand_id",
+      headerName: "Brand",
       flex: 0.5,
+      valueGetter: (params) => brandMap[params?.row?.brand_id] || "Unknown",
+    },
+    {
+      field: "category_id",
+      headerName: "Category",
+      flex: 0.5,
+      valueGetter: (params) =>
+        categoryMap[params?.row?.category_id] || "Unknown",
+    },
+    {
+      field: "supplier_id",
+      headerName: "Supplier",
+      flex: 0.5,
+      valueGetter: (params) =>
+        supplierMap[params?.row?.supplier_id] || "Unknown",
     },
     {
       field: "description",
@@ -47,17 +135,14 @@ function ProductLibraries() {
       cellClassName: "name-column--cell",
       flex: 1,
     },
-    {
-      field: "qty",
-      headerName: "Quantity",
-      flex: 0.5,
-    },
-    {
-      field: "unit",
-      headerName: "Unit",
-      flex: 0.5,
-    },
   ];
+
+  useEffect(() => {
+    handleGetAll();
+    handleGetSuppliers();
+    handleGetBrands();
+    handleGetCategories();
+  }, []);
 
   return (
     <Box sx={{ m: "15px 20px 20px 20px" }}>
@@ -107,14 +192,14 @@ function ProductLibraries() {
         handleClose={handleCloseItem}
         onSuccess={() => {
           setOpenItemModal(false);
-          // handleSearch();
+          handleGetAll();
         }}
       />
       <Box>
-        <DataGrid data={mockDataItems} columns={columns} />
+        <DataGrid data={items} columns={columns} loadingState={loading} />
       </Box>
     </Box>
   );
 }
 
-export default ProductLibraries;
+export default Products;

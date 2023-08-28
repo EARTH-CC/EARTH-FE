@@ -12,6 +12,9 @@ import {
 import { useFormik } from "formik";
 import PRItem, { initialPRItem } from "validation/procurement-item";
 import procurementService from "services/procurement-service";
+import SelectBrand from "components/PrivateComponents/eglogistics/Textfields/SelectBrand";
+import SelectSupplier from "components/PrivateComponents/eglogistics/Textfields/SelectSupplier";
+import SelectCategory from "components/PrivateComponents/eglogistics/Textfields/SelectCategory";
 // import themes from "../../themes/theme";
 
 const style = {
@@ -33,8 +36,10 @@ export default function AddItemModal({ open, handleClose, onSuccess }) {
   // const theme = useTheme();
   // const colors = tokens(theme.palette.mode);
 
-  const [loading, setLoading] = useState();
+  const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
+
+  const moduleName = "product";
 
   const formik = useFormik({
     initialValues: initialPRItem,
@@ -44,7 +49,7 @@ export default function AddItemModal({ open, handleClose, onSuccess }) {
       setError("");
       setLoading(true);
       procurementService
-        .addItem({ added_by: 1, ...formik.values })
+        .addAPI({ added_by: 1, ...formik.values }, moduleName)
         .then(() => {
           formik?.resetForm();
           onSuccess?.();
@@ -57,6 +62,8 @@ export default function AddItemModal({ open, handleClose, onSuccess }) {
         });
     },
   });
+
+  console.log(formik.values);
 
   return (
     <Modal
@@ -75,50 +82,78 @@ export default function AddItemModal({ open, handleClose, onSuccess }) {
         >
           <Box mb={4}>
             <Typography variant="h3" fontWeight="bolder" my={2}>
-              Add Procurement Item
+              Add Item
             </Typography>
           </Box>
           <Box mx={2}>
             <Grid container spacing={3}>
               <Grid item xs={12}>
                 <TextField
-                  label="Name"
-                  name="item_name"
+                  label="Product Name"
+                  name="name"
                   variant="outlined"
                   size="small"
-                  fullWidth
                   sx={{ width: "60%" }}
                   disabled={loading}
-                  value={formik.values?.item_name}
+                  value={formik.values?.name}
                   onChange={formik.handleChange}
                   onBlur={formik.handleBLur}
+                  error={formik.touched?.name && Boolean(formik.errors?.name)}
+                  helperText={formik.touched?.name && formik.errors?.name}
+                />
+              </Grid>
+
+              <Grid item xs={12}>
+                <SelectBrand
+                  label="Select Brand"
+                  name="brand_id"
+                  disabled={loading}
+                  value={formik.values?.brand_id}
+                  onChange={formik.handleChange}
+                  onBlur={formik.handleBlur}
                   error={
-                    formik.touched?.item_name &&
-                    Boolean(formik.errors?.item_name)
+                    formik.touched?.brand_id && Boolean(formik.errors?.brand_id)
                   }
                   helperText={
-                    formik.touched?.item_name && formik.errors?.item_name
+                    (formik.touched?.brand_id && formik.errors?.brand_id) || ""
                   }
                 />
               </Grid>
               <Grid item xs={12}>
-                <TextField
-                  label="Type"
-                  name="item_type"
-                  variant="outlined"
-                  size="small"
-                  fullWidth
-                  sx={{ width: "60%" }}
+                <SelectCategory
+                  label="Select Category"
+                  name="category_id"
                   disabled={loading}
-                  value={formik.values?.item_type}
+                  value={formik.values?.category_id}
                   onChange={formik.handleChange}
-                  onBlur={formik.handleBLur}
+                  onBlur={formik.handleBlur}
                   error={
-                    formik.touched?.item_type &&
-                    Boolean(formik.errors?.item_type)
+                    formik.touched?.category_id &&
+                    Boolean(formik.errors?.category_id)
                   }
                   helperText={
-                    formik.touched?.item_type && formik.errors?.item_type
+                    (formik.touched?.category_id &&
+                      formik.errors?.category_id) ||
+                    ""
+                  }
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <SelectSupplier
+                  label="Select Supplier"
+                  name="supplier_id"
+                  disabled={loading}
+                  value={formik.values?.supplier_id}
+                  onChange={formik.handleChange}
+                  onBlur={formik.handleBlur}
+                  error={
+                    formik.touched?.supplier_id &&
+                    Boolean(formik.errors?.supplier_id)
+                  }
+                  helperText={
+                    (formik.touched?.supplier_id &&
+                      formik.errors?.supplier_id) ||
+                    ""
                   }
                 />
               </Grid>
@@ -128,7 +163,6 @@ export default function AddItemModal({ open, handleClose, onSuccess }) {
                   name="description"
                   variant="outlined"
                   size="small"
-                  fullWidth
                   sx={{ width: "60%" }}
                   disabled={loading}
                   value={formik.values?.description}
