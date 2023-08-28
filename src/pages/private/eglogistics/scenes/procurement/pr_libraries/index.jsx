@@ -64,8 +64,14 @@ export default function ProcurementLibararies() {
           boxShadow="0px 5px 10px rgba(0, 0, 0, 0.2)"
           position="relative"
           height="auto"
+          sx={{ backgroundColor: colors.primary[400] }}
         >
-          <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
+          <Box
+            sx={{
+              borderBottom: 1,
+              borderColor: "divider",
+            }}
+          >
             <Tabs
               value={selectedTab}
               onChange={handleChange}
@@ -80,6 +86,7 @@ export default function ProcurementLibararies() {
                   fontFamily: "Poppins, sans-serif",
                   fontSize: "small",
                   fontWeight: "900",
+                  color: colors.grey[100],
                 }}
               />
               <Tab
@@ -90,6 +97,7 @@ export default function ProcurementLibararies() {
                   fontFamily: "Poppins, sans-serif",
                   fontSize: "small",
                   fontWeight: "900",
+                  color: colors.grey[100],
                 }}
               />
               <Tab
@@ -100,6 +108,7 @@ export default function ProcurementLibararies() {
                   fontFamily: "Poppins, sans-serif",
                   fontSize: "small",
                   fontWeight: "900",
+                  color: colors.grey[100],
                 }}
               />
               <Tab
@@ -110,6 +119,7 @@ export default function ProcurementLibararies() {
                   fontFamily: "Poppins, sans-serif",
                   fontSize: "small",
                   fontWeight: "900",
+                  color: colors.grey[100],
                 }}
               />
             </Tabs>

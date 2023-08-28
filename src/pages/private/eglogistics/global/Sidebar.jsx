@@ -5,6 +5,7 @@ import { Box, IconButton, Typography, useTheme } from "@mui/material";
 import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 import MenuOutlinedIcon from "@mui/icons-material/MenuOutlined";
+import { useNavigate } from "react-router-dom";
 import { ProSidebar, MenuItem, Menu } from "react-pro-sidebar";
 import { useStateContext } from "contexts/ContextProvider";
 import userImg from "../../../../assets/images/userlogo.png";
@@ -38,6 +39,11 @@ function Sidebar() {
   const [isCollapsed, setIsCollapsed] = useState(false);
   const [selected, setSelected] = useState("Dashboard");
   const { auth } = useStateContext();
+  const navigate = useNavigate();
+
+  const handleSettings = () => {
+    navigate("/settings");
+  };
 
   return (
     <Box
@@ -89,7 +95,12 @@ function Sidebar() {
 
           {!isCollapsed && (
             <Box mb="25">
-              <Box display="flex" justifyContent="center" alignItems="center">
+              <Box
+                display="flex"
+                justifyContent="center"
+                alignItems="center"
+                onClick={handleSettings}
+              >
                 <img
                   alt="profile-user"
                   width="100px"

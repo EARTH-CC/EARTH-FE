@@ -6,7 +6,7 @@ import DarkModeOutlinedIcon from "@mui/icons-material/DarkModeOutlined";
 import NotificationsOutlinedIcon from "@mui/icons-material/NotificationsOutlined";
 import LogoutIcon from "@mui/icons-material/Logout";
 import { useNavigate } from "react-router-dom";
-import SettingsIcon from "@mui/icons-material/Settings";
+import GroupOutlinedIcon from "@mui/icons-material/GroupOutlined";
 import egLogo from "../../../../assets/images/eglogistics.png";
 import themes from "../../../../themes/theme";
 
@@ -22,8 +22,8 @@ function Topbar() {
     navigate("/");
   };
 
-  const handleSettings = () => {
-    navigate("/settings");
+  const handleUsers = () => {
+    navigate("/users");
   };
 
   return (
@@ -38,7 +38,6 @@ function Topbar() {
       <Box
         display="flex"
         alignItems="center"
-        backgroundColor={colors.primary[400]}
         paddingLeft="16px"
         paddingRight="16px"
         sx={{ flexGrow: 1, my: "-20px" }}
@@ -49,7 +48,7 @@ function Topbar() {
           fontWeight="bold"
           sx={{
             m: "10px 0 0 20px",
-            color: "#000000",
+            color: colors.grey[100],
             letterSpacing: "0.3em",
             fontFamily: "Poppins, sans-serif",
             fontSize: "30px",
@@ -63,9 +62,6 @@ function Topbar() {
 
       {/* ICONS */}
       <Box display="flex">
-        <IconButton onClick={handleSettings}>
-          <SettingsIcon />
-        </IconButton>
         <IconButton onClick={toggleColorMode}>
           {theme.palette.mode === "dark" ? (
             <DarkModeOutlinedIcon />
@@ -75,6 +71,9 @@ function Topbar() {
         </IconButton>
         <IconButton>
           <NotificationsOutlinedIcon />
+        </IconButton>
+        <IconButton onClick={handleUsers}>
+          <GroupOutlinedIcon />
         </IconButton>
         <IconButton onClick={handleLogout}>
           <LogoutIcon />
