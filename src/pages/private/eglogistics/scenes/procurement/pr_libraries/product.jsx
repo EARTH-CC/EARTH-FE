@@ -60,25 +60,12 @@ function ProductLibraries() {
   ];
 
   return (
-    <Box sx={{ m: "5px 20px 20px 20px" }}>
-      <Divider sx={{ mt: 4, mb: 2 }}>
-        <Typography
-          sx={{
-            textTransform: "uppercase",
-            fontSize: "25px",
-          }}
-        >
-          Item Supplies
-        </Typography>
-      </Divider>
+    <Box sx={{ m: "15px 20px 20px 20px" }}>
       <Box
         sx={{
           display: "flex",
           justifyContent: "end",
           position: "absolute",
-          right: "230px",
-          mr: "20px",
-          my: "-4px",
           zIndex: 1,
         }}
       >
@@ -102,9 +89,19 @@ function ProductLibraries() {
           }}
         >
           <AddIcon sx={{ mr: 0.5 }} />
-          Add Item
+          Add Product
         </Button>
       </Box>
+      <Divider>
+        <Typography
+          sx={{
+            textTransform: "uppercase",
+            fontSize: "25px",
+          }}
+        >
+          Products
+        </Typography>
+      </Divider>
       <AddItemModal
         open={openItemModal}
         handleClose={handleCloseItem}

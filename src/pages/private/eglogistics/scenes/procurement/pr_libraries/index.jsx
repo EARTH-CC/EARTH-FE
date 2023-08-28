@@ -2,6 +2,8 @@ import * as React from "react";
 import { Box, Tabs, Tab, Button, useTheme } from "@mui/material";
 import DownloadOutlinedIcon from "@mui/icons-material/DownloadOutlined";
 import ProductLibraries from "./product";
+import BrandLibraries from "./brand";
+import CategoryLibraries from "./category";
 import SupplierLibraries from "./supplier";
 import themes from "../../../../../../themes/theme";
 import Header from "../../../../../../components/PrivateComponents/eglogistics/Header";
@@ -18,13 +20,13 @@ export default function ProcurementLibararies() {
   };
 
   return (
-    <Box sx={{ m: "5px 20px 20px 20px" }}>
+    <Box sx={{ m: "15px 20px 20px 20px" }}>
       {/* HEADER */}
       <Box
         display="flex"
         justifyContent="space-between"
         alignItems="center"
-        sx={{ mb: "40px" }}
+        sx={{ mb: "20px" }}
       >
         <Header
           title="Purchase Libraries"
@@ -67,7 +69,8 @@ export default function ProcurementLibararies() {
             <Tabs
               value={selectedTab}
               onChange={handleChange}
-              aria-label="simple tabs example"
+              indicatorColor="secondary"
+              aria-label="procurement libraries tabs"
             >
               <Tab
                 label="Product"
@@ -98,8 +101,8 @@ export default function ProcurementLibararies() {
 
           <Box role="tabpanel">
             {selectedTab === 0 && <ProductLibraries />}
-            {selectedTab === 1 && <Box>Brand</Box>}
-            {selectedTab === 2 && <Box>Category</Box>}
+            {selectedTab === 1 && <BrandLibraries />}
+            {selectedTab === 2 && <CategoryLibraries />}
             {selectedTab === 3 && <SupplierLibraries />}
           </Box>
         </Box>

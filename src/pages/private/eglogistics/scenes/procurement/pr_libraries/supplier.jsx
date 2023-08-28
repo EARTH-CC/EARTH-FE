@@ -59,25 +59,12 @@ function SupplierLibraries() {
   ];
 
   return (
-    <Box sx={{ m: "5px 20px 20px 20px" }}>
-      <Divider sx={{ mt: 8, mb: 2 }}>
-        <Typography
-          sx={{
-            textTransform: "uppercase",
-            fontSize: "25px",
-          }}
-        >
-          Suppliers/Vendors
-        </Typography>
-      </Divider>
+    <Box sx={{ m: "15px 20px 20px 20px" }}>
       <Box
         sx={{
           display: "flex",
           justifyContent: "end",
           position: "absolute",
-          right: "0",
-          mr: "250px",
-          my: "-4px",
           zIndex: 1,
         }}
       >
@@ -104,6 +91,17 @@ function SupplierLibraries() {
           Add Supplier
         </Button>
       </Box>
+      <Divider>
+        <Typography
+          sx={{
+            textTransform: "uppercase",
+            fontSize: "25px",
+          }}
+        >
+          Suppliers/Vendors
+        </Typography>
+      </Divider>
+
       <AddSupplierModal
         open={openSupplierModal}
         handleClose={handleCloseSupplier}

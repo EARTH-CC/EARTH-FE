@@ -22,13 +22,13 @@ export default function Dashboard() {
   const colors = tokens(theme.palette.mode);
 
   return (
-    <Box m="20px">
+    <Box sx={{ m: "15px 20px 20px 20px" }}>
       {/* HEADER */}
       <Box
         display="flex"
         justifyContent="space-between"
         alignItems="center"
-        marginTop="-15px"
+        sx={{ mb: "20px" }}
       >
         <Header title="Dashboard" subtitle="Welcome E&G Logistics dashboard" />
 
