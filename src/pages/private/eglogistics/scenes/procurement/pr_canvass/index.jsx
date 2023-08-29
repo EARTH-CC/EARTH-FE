@@ -52,11 +52,12 @@ export default function CanvassSheet() {
       <Grid
         container
         spacing={0}
+        height="auto"
         borderRadius="10px"
         boxShadow="0px 5px 10px rgba(0, 0, 0, 0.2)"
         sx={{ backgroundColor: colors.primary[400] }}
       >
-        <Grid item xs={2}>
+        <Grid item xs={2} sx={{ minWidth: "150px" }}>
           <Filters />
         </Grid>
 

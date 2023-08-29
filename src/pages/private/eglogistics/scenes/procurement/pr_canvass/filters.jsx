@@ -74,10 +74,12 @@ function Filters() {
       </Typography>
       <Box display="flex" justifyContent="space-between">
         <Typography sx={{ color: colors.blueAccent[200] }}>₱ 0</Typography>
-        <Typography sx={{ color: colors.blueAccent[200] }}>₱ 999999</Typography>
+        <Typography sx={{ color: colors.blueAccent[200] }}>₱ 10000</Typography>
       </Box>
       <Slider
-        max={999999}
+        step={1000}
+        marks
+        max={10000}
         min={0}
         size="medium"
         valueLabelDisplay="auto"

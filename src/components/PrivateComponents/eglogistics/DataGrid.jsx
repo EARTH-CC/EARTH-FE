@@ -58,6 +58,11 @@ export default function DataGridTable({ data, columns, loadingState }) {
         }}
         initialState={{
           pinnedColumns: { left: ["name"], right: ["actions"] },
+          pagination: {
+            paginationModel: {
+              pageSize: 20,
+            },
+          },
         }}
         loading={loadingState}
       />
