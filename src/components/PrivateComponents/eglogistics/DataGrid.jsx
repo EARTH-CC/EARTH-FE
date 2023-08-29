@@ -46,6 +46,7 @@ export default function DataGridTable({ data, columns, loadingState }) {
       }}
     >
       <DataGrid
+        height="100%"
         getRowId={(row) => row.uuid || row.id}
         rows={data}
         columns={columns}

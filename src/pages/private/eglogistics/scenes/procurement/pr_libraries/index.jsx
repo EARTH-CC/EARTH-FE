@@ -60,7 +60,6 @@ export default function ProcurementLibararies() {
         borderRadius="10px"
         boxShadow="0px 5px 10px rgba(0, 0, 0, 0.2)"
         position="relative"
-        height="auto"
         sx={{ backgroundColor: colors.primary[400] }}
       >
         <Box

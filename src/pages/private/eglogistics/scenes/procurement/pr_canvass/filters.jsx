@@ -21,12 +21,30 @@ function Filters() {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
   const [value, setValue] = useState(priceData);
+  const [selectedRatings, setSelectedRatings] = useState(["all"]);
+
+  const handleCheckboxChange = (rating) => {
+    if (rating === "all") {
+      setSelectedRatings(["all"]);
+    } else {
+      const updatedRatings = selectedRatings.includes(rating)
+        ? selectedRatings.filter((r) => r !== rating)
+        : [...selectedRatings.filter((r) => r !== "all"), rating]; // Remove "all" if present
+      if (updatedRatings.length === 0) {
+        setSelectedRatings(["all"]);
+      } else {
+        setSelectedRatings(updatedRatings);
+      }
+    }
+  };
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
 
+  // Gawa ng useEffect dito tas ipasa sa API
   console.log(value);
+  console.log(selectedRatings);
 
   return (
     <Box
@@ -88,6 +106,7 @@ function Filters() {
         min={0}
         max={priceData[1]}
         size="medium"
+        disableSwap
         valueLabelDisplay="on"
         // eslint-disable-next-line react/no-unstable-nested-components
         valueLabelFormat={(price) => (
@@ -99,8 +118,8 @@ function Filters() {
           color: colors.blueAccent[300],
           mt: "15px",
           "& .MuiSlider-valueLabel": {
-            color: colors.blueAccent[400],
-            backgroundColor: "transparent",
+            color: colors.grey[900],
+            backgroundColor: colors.blueAccent[400],
             borderRadius: "10px",
             fontSize: "small",
           },
@@ -118,28 +137,35 @@ function Filters() {
       >
         <FormControlLabel
           control={
-            <Checkbox defaultChecked style={{ color: colors.grey[300] }} />
+            <Checkbox
+              checked={selectedRatings.includes("all")}
+              onChange={() => handleCheckboxChange("all")}
+              style={{ color: colors.grey[300] }}
+            />
           }
           label="All"
         />
+        {[5, 4, 3, 2].map((rating) => (
+          <FormControlLabel
+            key={rating}
+            control={
+              <Checkbox
+                checked={selectedRatings.includes(rating)}
+                onChange={() => handleCheckboxChange(rating)}
+                style={{ color: colors.grey[300] }}
+              />
+            }
+            label={<Rating name={`${rating} stars`} value={rating} readOnly />}
+          />
+        ))}
         <FormControlLabel
-          control={<Checkbox style={{ color: colors.grey[300] }} />}
-          label={<Rating name="5 stars" value={5} readOnly />}
-        />
-        <FormControlLabel
-          control={<Checkbox style={{ color: colors.grey[300] }} />}
-          label={<Rating name="4 stars" value={4} readOnly />}
-        />
-        <FormControlLabel
-          control={<Checkbox style={{ color: colors.grey[300] }} />}
-          label={<Rating name="3 stars" value={3} readOnly />}
-        />
-        <FormControlLabel
-          control={<Checkbox style={{ color: colors.grey[300] }} />}
-          label={<Rating name="2 stars" value={2} readOnly />}
-        />
-        <FormControlLabel
-          control={<Checkbox style={{ color: colors.grey[300] }} />}
+          control={
+            <Checkbox
+              checked={selectedRatings.includes("unrated")}
+              onChange={() => handleCheckboxChange("unrated")}
+              style={{ color: colors.grey[300] }}
+            />
+          }
           label="Unrated"
         />
       </FormGroup>
