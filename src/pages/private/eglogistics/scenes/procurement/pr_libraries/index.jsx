@@ -56,81 +56,77 @@ export default function ProcurementLibararies() {
           </Button>
         </Box>
       </Box>
-      <Box m="20px">
+      <Box
+        borderRadius="10px"
+        boxShadow="0px 5px 10px rgba(0, 0, 0, 0.2)"
+        position="relative"
+        height="auto"
+        sx={{ backgroundColor: colors.primary[400] }}
+      >
         <Box
-          gridColumn="span 8"
-          gridRow="span 2"
-          borderRadius="5px"
-          boxShadow="0px 5px 10px rgba(0, 0, 0, 0.2)"
-          position="relative"
-          height="auto"
-          sx={{ backgroundColor: colors.primary[400] }}
+          sx={{
+            borderBottom: 1,
+            borderColor: "divider",
+          }}
         >
-          <Box
-            sx={{
-              borderBottom: 1,
-              borderColor: "divider",
-            }}
+          <Tabs
+            value={selectedTab}
+            onChange={handleChange}
+            indicatorColor="secondary"
+            aria-label="procurement libraries tabs"
           >
-            <Tabs
-              value={selectedTab}
-              onChange={handleChange}
-              indicatorColor="secondary"
-              aria-label="procurement libraries tabs"
-            >
-              <Tab
-                label="Product"
-                style={{
-                  margin: "0 20px 0 20px",
-                  letterSpacing: "0.3em",
-                  fontFamily: "Poppins, sans-serif",
-                  fontSize: "small",
-                  fontWeight: "900",
-                  color: colors.grey[100],
-                }}
-              />
-              <Tab
-                label="Brand"
-                style={{
-                  margin: "0 20px 0 20px",
-                  letterSpacing: "0.3em",
-                  fontFamily: "Poppins, sans-serif",
-                  fontSize: "small",
-                  fontWeight: "900",
-                  color: colors.grey[100],
-                }}
-              />
-              <Tab
-                label="Category"
-                style={{
-                  margin: "0 20px 0 20px",
-                  letterSpacing: "0.3em",
-                  fontFamily: "Poppins, sans-serif",
-                  fontSize: "small",
-                  fontWeight: "900",
-                  color: colors.grey[100],
-                }}
-              />
-              <Tab
-                label="Supplier"
-                style={{
-                  margin: "0 20px 0 20px",
-                  letterSpacing: "0.3em",
-                  fontFamily: "Poppins, sans-serif",
-                  fontSize: "small",
-                  fontWeight: "900",
-                  color: colors.grey[100],
-                }}
-              />
-            </Tabs>
-          </Box>
+            <Tab
+              label="Product"
+              style={{
+                margin: "0 20px 0 20px",
+                letterSpacing: "0.3em",
+                fontFamily: "Poppins, sans-serif",
+                fontSize: "small",
+                fontWeight: "900",
+                color: colors.grey[100],
+              }}
+            />
+            <Tab
+              label="Brand"
+              style={{
+                margin: "0 20px 0 20px",
+                letterSpacing: "0.3em",
+                fontFamily: "Poppins, sans-serif",
+                fontSize: "small",
+                fontWeight: "900",
+                color: colors.grey[100],
+              }}
+            />
+            <Tab
+              label="Category"
+              style={{
+                margin: "0 20px 0 20px",
+                letterSpacing: "0.3em",
+                fontFamily: "Poppins, sans-serif",
+                fontSize: "small",
+                fontWeight: "900",
+                color: colors.grey[100],
+              }}
+            />
+            <Tab
+              label="Supplier"
+              style={{
+                margin: "0 20px 0 20px",
+                letterSpacing: "0.3em",
+                fontFamily: "Poppins, sans-serif",
+                fontSize: "small",
+                fontWeight: "900",
+                color: colors.grey[100],
+              }}
+            />
+          </Tabs>
+        </Box>
 
-          <Box role="tabpanel">
-            {selectedTab === 0 && <ProductLibraries />}
-            {selectedTab === 1 && <BrandLibraries />}
-            {selectedTab === 2 && <CategoryLibraries />}
-            {selectedTab === 3 && <SupplierLibraries />}
-          </Box>
+        <Box role="tabpanel">
+          {selectedTab === 0 && <ProductLibraries />}
+          {selectedTab === 1 && <BrandLibraries />}
+          {selectedTab === 2 && <CategoryLibraries />}
+          {selectedTab === 3 && <SupplierLibraries />}
         </Box>
       </Box>
     </Box>
