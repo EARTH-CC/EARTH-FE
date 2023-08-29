@@ -1,3 +1,4 @@
+import React, { useState } from "react";
 import {
   Box,
   Checkbox,
@@ -14,17 +15,26 @@ import LibraryTextfield from "components/PrivateComponents/eglogistics/Textfield
 import themes from "../../../../../../themes/theme";
 
 const { tokens } = themes;
+const priceData = [0, 999999]; // MOCK DATA
 
 function Filters() {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
+  const [value, setValue] = useState(priceData);
+
+  const handleChange = (event, newValue) => {
+    setValue(newValue);
+  };
+
+  console.log(value);
+
   return (
     <Box
       display="flex"
       sx={{
         flexDirection: "column",
         gap: "0.9em",
-        padding: "20px 30px 30px",
+        padding: "20px 40px 30px",
         textAlign: "center",
       }}
     >
@@ -72,19 +82,31 @@ function Filters() {
       <Typography fontSize="small" fontWeight="600">
         Price
       </Typography>
-      <Box display="flex" justifyContent="space-between">
-        <Typography sx={{ color: colors.blueAccent[200] }}>₱ 0</Typography>
-        <Typography sx={{ color: colors.blueAccent[200] }}>₱ 10000</Typography>
-      </Box>
       <Slider
-        step={1000}
-        marks
-        max={10000}
+        value={value}
+        onChange={handleChange}
         min={0}
+        max={priceData[1]}
         size="medium"
-        valueLabelDisplay="auto"
-        sx={{ color: colors.blueAccent[300], mt: "-15px" }}
+        valueLabelDisplay="on"
+        // eslint-disable-next-line react/no-unstable-nested-components
+        valueLabelFormat={(price) => (
+          <span>
+            <span style={{ fontSize: "15px" }}>₱</span> {price}
+          </span>
+        )}
+        sx={{
+          color: colors.blueAccent[300],
+          mt: "15px",
+          "& .MuiSlider-valueLabel": {
+            color: colors.blueAccent[400],
+            backgroundColor: "transparent",
+            borderRadius: "10px",
+            fontSize: "small",
+          },
+        }}
       />
+
       <Divider variant="middle" />
       <Typography fontSize="small" fontWeight="600">
         Rating
