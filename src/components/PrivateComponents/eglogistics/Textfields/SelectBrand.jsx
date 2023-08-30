@@ -1,12 +1,7 @@
 import React, { useEffect, useState } from "react";
-import Box from "@mui/material/Box";
-import MenuItem from "@mui/material/MenuItem";
-import FormControl from "@mui/material/FormControl";
-import Select from "@mui/material/Select";
-import InputLabel from "@mui/material/InputLabel";
 import procurementService from "services/procurement-service";
 import PropTypes from "prop-types";
-import { FormHelperText } from "@mui/material";
+import { Autocomplete, CircularProgress, TextField } from "@mui/material";
 
 export default function SelectBrand({
   label,
@@ -15,8 +10,10 @@ export default function SelectBrand({
   onChange,
   error,
   helperText,
+  width,
 }) {
   const [brands, setBrands] = useState([]);
+  const [filteredBrands, setFilteredBrands] = useState([]);
   const [loading, setLoading] = useState(false);
   const moduleName = "brand";
 
@@ -26,6 +23,7 @@ export default function SelectBrand({
       .getAllAPI(moduleName)
       .then((e) => {
         setBrands(e);
+        setFilteredBrands(e);
       })
       .finally(() => {
         setLoading(false);
@@ -36,39 +34,93 @@ export default function SelectBrand({
     handleGetAll();
   }, []);
 
+  const handleFilterChange = (event, evt) => {
+    if (evt === null) {
+      setFilteredBrands(brands);
+      return;
+    }
+
+    const filtered = brands.filter((brand) =>
+      brand.name.toLowerCase().includes(evt.toLowerCase())
+    );
+
+    setFilteredBrands(filtered);
+  };
   return (
-    <Box>
-      <FormControl
-        error={error}
-        disabled={loading}
-        size="small"
-        sx={{
-          backgroundColor: (themeMode) =>
-            themeMode.palette.mode === "dark" ? "#2e3442" : "#fff",
-          width: "60%",
-        }}
-      >
-        <InputLabel id="demo-simple-select-label">{label}</InputLabel>
-        <Select
-          labelId="demo-simple-select-label"
-          id="demo-simple-select"
+    <Autocomplete
+      id="brand-autocomplete"
+      options={filteredBrands}
+      getOptionLabel={(brand) => brand.name}
+      onInputChange={handleFilterChange}
+      value={brands.find((brand) => brand.uuid === value) || null}
+      onChange={(event, newValue) => {
+        onChange?.(name, newValue?.uuid || ""); // Pass the name and selected value to the parent component
+      }}
+      loading={loading}
+      renderInput={(params) => (
+        <TextField
+          {...params}
           label={label}
           name={name}
+          variant="outlined"
+          size="small"
           value={value}
           onChange={(newValue) => {
             onChange?.(newValue);
           }}
-        >
-          {brands.map((brand) => (
-            <MenuItem key={brand.uuid} value={brand.uuid}>
-              {brand.name}
-            </MenuItem>
-          ))}
-        </Select>
-        <FormHelperText>{helperText}</FormHelperText>
-      </FormControl>
-    </Box>
+          error={error}
+          helperText={helperText}
+          sx={{ width: { width } }}
+          InputProps={{
+            ...params.InputProps,
+            endAdornment: (
+              <>
+                {loading ? (
+                  <CircularProgress color="inherit" size={20} />
+                ) : null}
+                {params.InputProps.endAdornment}
+              </>
+            ),
+          }}
+        />
+      )}
+    />
   );
+  //     <TextField
+  //       label="Type to filter brands"
+  //       onChange={(e) => handleFilterBrands(e.target.value)}
+  //     />
+  //     <FormControl
+  //       error={error}
+  //       disabled={loading}
+  //       size="small"
+  //       sx={{
+  //         backgroundColor: (themeMode) =>
+  //           themeMode.palette.mode === "dark" ? "#2e3442" : "#fff",
+  //         width: "60%",
+  //       }}
+  //     >
+  //       <InputLabel id="demo-simple-select-label">{label}</InputLabel>
+  //       <Select
+  //         labelId="demo-simple-select-label"
+  //         id="demo-simple-select"
+  //         label={label}
+  //         name={name}
+  //         value={value}
+  //         onChange={(newValue) => {
+  //           onChange?.(newValue);
+  //         }}
+  //       >
+  //         {filteredBrands.map((brand) => (
+  //           <MenuItem key={brand.uuid} value={brand.uuid}>
+  //             {brand.name}
+  //           </MenuItem>
+  //         ))}
+  //       </Select>
+  //       <FormHelperText>{helperText}</FormHelperText>
+  //     </FormControl>
+  //   </Box>
+  // );
 }
 
 SelectBrand.defaultProps = {
@@ -78,6 +130,7 @@ SelectBrand.defaultProps = {
   onChange: () => {},
   error: false,
   helperText: "",
+  width: "100%",
 };
 // Typechecking props of the MDAlert
 SelectBrand.propTypes = {
@@ -87,4 +140,5 @@ SelectBrand.propTypes = {
   onChange: PropTypes.func,
   error: PropTypes.bool,
   helperText: PropTypes.string,
+  width: PropTypes.string,
 };

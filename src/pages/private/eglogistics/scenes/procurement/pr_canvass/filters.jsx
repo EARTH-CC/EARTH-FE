@@ -13,7 +13,9 @@ import {
 } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
-import LibraryTextfield from "components/PrivateComponents/eglogistics/Textfields/LibraryTextfield";
+import SelectBrand from "components/PrivateComponents/eglogistics/Textfields/SelectBrand";
+import SelectCategory from "components/PrivateComponents/eglogistics/Textfields/SelectCategory";
+import SelectSupplier from "components/PrivateComponents/eglogistics/Textfields/SelectSupplier";
 import themes from "../../../../../../themes/theme";
 
 const { tokens } = themes;
@@ -101,11 +103,23 @@ function Filters() {
         variant="middle"
         sx={{ borderTopWidth: "1px", borderTopColor: "black" }}
       />
-      <LibraryTextfield label="Category" />
+      <SelectCategory label="Category" name="category_id" width="100%" />
       <Divider variant="middle" />
-      <LibraryTextfield label="Brand" />
+      <SelectBrand
+        label="Brand"
+        name="brand_id"
+        width="100%"
+        // disabled={loading}
+        // value={formik.values.brand_id}
+        // onChange={(fieldName, selectedValue) => {
+        //   formik.setFieldValue(fieldName, selectedValue);
+        // }}
+        // onBlur={formik.handleBlur}
+        // error={formik.touched.brand_id && Boolean(formik.errors.brand_id)}
+        // helperText={(formik.touched.brand_id && formik.errors.brand_id) || ""}
+      />
       <Divider variant="middle" />
-      <LibraryTextfield label="Supplier" />
+      <SelectSupplier label="Supplier" name="supplier_id" width="100%" />
       <Divider variant="middle" />
       <Typography fontSize="small" fontWeight="600">
         Price

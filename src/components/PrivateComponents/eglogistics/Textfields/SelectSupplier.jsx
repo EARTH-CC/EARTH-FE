@@ -1,12 +1,7 @@
 import React, { useEffect, useState } from "react";
-import Box from "@mui/material/Box";
-import MenuItem from "@mui/material/MenuItem";
-import FormControl from "@mui/material/FormControl";
-import Select from "@mui/material/Select";
-import InputLabel from "@mui/material/InputLabel";
 import procurementService from "services/procurement-service";
 import PropTypes from "prop-types";
-import { FormHelperText } from "@mui/material";
+import { Autocomplete, CircularProgress, TextField } from "@mui/material";
 
 export default function SelectSupplier({
   label,
@@ -15,8 +10,10 @@ export default function SelectSupplier({
   onChange,
   error,
   helperText,
+  width,
 }) {
   const [suppliers, setSuppliers] = useState([]);
+  const [filteredSuppliers, setFilteredSuppliers] = useState([]);
   const [loading, setLoading] = useState(false);
   const moduleName = "supplier";
 
@@ -26,6 +23,7 @@ export default function SelectSupplier({
       .getAllAPI(moduleName)
       .then((e) => {
         setSuppliers(e);
+        setFilteredSuppliers(e);
       })
       .finally(() => {
         setLoading(false);
@@ -36,38 +34,58 @@ export default function SelectSupplier({
     handleGetAll();
   }, []);
 
+  const handleFilterChange = (event, evt) => {
+    if (evt === null) {
+      setFilteredSuppliers(suppliers);
+      return;
+    }
+
+    const filtered = suppliers.filter((supplier) =>
+      supplier.name.toLowerCase().includes(evt.toLowerCase())
+    );
+
+    setFilteredSuppliers(filtered);
+  };
+
   return (
-    <Box>
-      <FormControl
-        error={error}
-        disabled={loading}
-        size="small"
-        sx={{
-          backgroundColor: (themeMode) =>
-            themeMode.palette.mode === "dark" ? "#2e3442" : "#fff",
-          width: "60%",
-        }}
-      >
-        <InputLabel id="demo-simple-select-label">{label}</InputLabel>
-        <Select
-          labelId="demo-simple-select-label"
-          id="demo-simple-select"
+    <Autocomplete
+      id="supplier-autocomplete"
+      options={filteredSuppliers}
+      getOptionLabel={(supplier) => supplier.name}
+      onInputChange={handleFilterChange}
+      value={suppliers.find((supplier) => supplier.uuid === value) || null}
+      onChange={(event, newValue) => {
+        onChange?.(name, newValue?.uuid || ""); // Pass the name and selected value to the parent component
+      }}
+      loading={loading}
+      renderInput={(params) => (
+        <TextField
+          {...params}
           label={label}
           name={name}
+          variant="outlined"
+          size="small"
           value={value}
           onChange={(newValue) => {
             onChange?.(newValue);
           }}
-        >
-          {suppliers.map((supplier) => (
-            <MenuItem key={supplier.uuid} value={supplier.uuid}>
-              {supplier.name}
-            </MenuItem>
-          ))}
-        </Select>
-        <FormHelperText>{helperText}</FormHelperText>
-      </FormControl>
-    </Box>
+          error={error}
+          helperText={helperText}
+          sx={{ width: { width } }}
+          InputProps={{
+            ...params.InputProps,
+            endAdornment: (
+              <>
+                {loading ? (
+                  <CircularProgress color="inherit" size={20} />
+                ) : null}
+                {params.InputProps.endAdornment}
+              </>
+            ),
+          }}
+        />
+      )}
+    />
   );
 }
 
@@ -78,6 +96,7 @@ SelectSupplier.defaultProps = {
   onChange: () => {},
   error: false,
   helperText: "",
+  width: "100%",
 };
 // Typechecking props of the MDAlert
 SelectSupplier.propTypes = {
@@ -87,4 +106,5 @@ SelectSupplier.propTypes = {
   onChange: PropTypes.func,
   error: PropTypes.bool,
   helperText: PropTypes.string,
+  width: PropTypes.string,
 };

@@ -63,6 +63,8 @@ export default function AddItemModal({ open, handleClose, onSuccess }) {
     },
   });
 
+  console.log(formik.values);
+
   return (
     <Modal
       open={open}
@@ -106,15 +108,18 @@ export default function AddItemModal({ open, handleClose, onSuccess }) {
                   label="Select Brand"
                   name="brand_id"
                   disabled={loading}
-                  value={formik.values?.brand_id}
-                  onChange={formik.handleChange}
+                  value={formik.values.brand_id}
+                  onChange={(fieldName, selectedValue) => {
+                    formik.setFieldValue(fieldName, selectedValue);
+                  }}
                   onBlur={formik.handleBlur}
                   error={
-                    formik.touched?.brand_id && Boolean(formik.errors?.brand_id)
+                    formik.touched.brand_id && Boolean(formik.errors.brand_id)
                   }
                   helperText={
-                    (formik.touched?.brand_id && formik.errors?.brand_id) || ""
+                    (formik.touched.brand_id && formik.errors.brand_id) || ""
                   }
+                  width="60%"
                 />
               </Grid>
               <Grid item xs={12}>
@@ -123,7 +128,9 @@ export default function AddItemModal({ open, handleClose, onSuccess }) {
                   name="category_id"
                   disabled={loading}
                   value={formik.values?.category_id}
-                  onChange={formik.handleChange}
+                  onChange={(fieldName, selectedValue) => {
+                    formik.setFieldValue(fieldName, selectedValue);
+                  }}
                   onBlur={formik.handleBlur}
                   error={
                     formik.touched?.category_id &&
@@ -134,6 +141,7 @@ export default function AddItemModal({ open, handleClose, onSuccess }) {
                       formik.errors?.category_id) ||
                     ""
                   }
+                  width="60%"
                 />
               </Grid>
               <Grid item xs={12}>
@@ -142,7 +150,9 @@ export default function AddItemModal({ open, handleClose, onSuccess }) {
                   name="supplier_id"
                   disabled={loading}
                   value={formik.values?.supplier_id}
-                  onChange={formik.handleChange}
+                  onChange={(fieldName, selectedValue) => {
+                    formik.setFieldValue(fieldName, selectedValue);
+                  }}
                   onBlur={formik.handleBlur}
                   error={
                     formik.touched?.supplier_id &&
@@ -153,6 +163,7 @@ export default function AddItemModal({ open, handleClose, onSuccess }) {
                       formik.errors?.supplier_id) ||
                     ""
                   }
+                  width="60%"
                 />
               </Grid>
               <Grid item xs={12}>
