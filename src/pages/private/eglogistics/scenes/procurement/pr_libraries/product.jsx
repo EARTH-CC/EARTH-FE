@@ -13,9 +13,6 @@ function Products() {
   const colors = tokens(theme.palette.mode);
 
   const [items, setItems] = React.useState([]);
-  const [categories, setCategories] = React.useState([]);
-  const [brands, setBrands] = React.useState([]);
-  const [suppliers, setSuppliers] = React.useState([]);
 
   const [loading, setLoading] = React.useState(false);
   const [openItemModal, setOpenItemModal] = useState(false);
@@ -42,60 +39,6 @@ function Products() {
       });
   };
 
-  const handleGetSuppliers = () => {
-    setLoading(true);
-    procurementService
-      .getAllAPI("supplier")
-      .then((e) => {
-        setSuppliers(e);
-      })
-      .finally(() => {
-        setLoading(false);
-      });
-  };
-
-  const handleGetBrands = () => {
-    setLoading(true);
-    procurementService
-      .getAllAPI("brand")
-      .then((e) => {
-        setBrands(e);
-      })
-      .finally(() => {
-        setLoading(false);
-      });
-  };
-
-  const handleGetCategories = () => {
-    setLoading(true);
-    procurementService
-      .getAllAPI("category")
-      .then((e) => {
-        setCategories(e);
-      })
-      .finally(() => {
-        setLoading(false);
-      });
-  };
-
-  const brandMap = brands.reduce((map, brand) => {
-    // eslint-disable-next-line no-param-reassign
-    map[brand.uuid] = brand.name;
-    return map;
-  }, {});
-
-  const categoryMap = categories.reduce((map, category) => {
-    // eslint-disable-next-line no-param-reassign
-    map[category.uuid] = category.name;
-    return map;
-  }, {});
-
-  const supplierMap = suppliers.reduce((map, supplier) => {
-    // eslint-disable-next-line no-param-reassign
-    map[supplier.uuid] = supplier.company_name;
-    return map;
-  }, {});
-
   const columns = [
     {
       field: "uuid",
@@ -108,24 +51,19 @@ function Products() {
       flex: 0.5,
     },
     {
-      field: "brand_id",
+      field: "brand_name",
       headerName: "Brand",
       flex: 0.5,
-      valueGetter: (params) => brandMap[params?.row?.brand_id] || "Unknown",
     },
     {
-      field: "category_id",
+      field: "category_name",
       headerName: "Category",
       flex: 0.5,
-      valueGetter: (params) =>
-        categoryMap[params?.row?.category_id] || "Unknown",
     },
     {
-      field: "supplier_id",
+      field: "supplier_name",
       headerName: "Supplier",
       flex: 0.5,
-      valueGetter: (params) =>
-        supplierMap[params?.row?.supplier_id] || "Unknown",
     },
     {
       field: "description",
@@ -139,9 +77,6 @@ function Products() {
 
   useEffect(() => {
     handleGetAll();
-    handleGetSuppliers();
-    handleGetBrands();
-    handleGetCategories();
   }, []);
 
   return (

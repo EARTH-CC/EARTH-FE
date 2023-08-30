@@ -67,19 +67,16 @@ export default function AddSupplierModal({ open, handleClose, onSuccess }) {
               <Grid item xs={6}>
                 <TextField
                   label="Company Name"
-                  name="company_name"
+                  name="name"
                   variant="outlined"
                   size="small"
                   fullWidth
                   sx={{ pr: 5 }}
                   disabled={loading}
-                  value={formik.values?.company_name}
+                  value={formik.values?.name}
                   onChange={formik.handleChange}
                   onBlur={formik.handleBLur}
-                  error={
-                    formik.touched?.company_name &&
-                    Boolean(formik.errors?.company_name)
-                  }
+                  error={formik.touched?.name && Boolean(formik.errors?.name)}
                   helperText={
                     formik.touched?.company_name && formik.errors?.company_name
                   }
@@ -109,6 +106,7 @@ export default function AddSupplierModal({ open, handleClose, onSuccess }) {
                   name="phone_no"
                   variant="outlined"
                   size="small"
+                  type="number"
                   fullWidth
                   sx={{ pr: 5 }}
                   disabled={loading}
@@ -129,6 +127,7 @@ export default function AddSupplierModal({ open, handleClose, onSuccess }) {
                   name="mobile_no"
                   variant="outlined"
                   size="small"
+                  type="number"
                   fullWidth
                   sx={{ pr: 5 }}
                   disabled={loading}

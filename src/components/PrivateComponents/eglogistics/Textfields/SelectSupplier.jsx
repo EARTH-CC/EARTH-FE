@@ -61,7 +61,7 @@ export default function SelectSupplier({
         >
           {suppliers.map((supplier) => (
             <MenuItem key={supplier.uuid} value={supplier.uuid}>
-              {supplier.company_name}
+              {supplier.name}
             </MenuItem>
           ))}
         </Select>
