@@ -9,6 +9,7 @@ export { default as Waterfront } from "./landing/waterrfront";
 // EnG Logistics
 export { default as Dashboard } from "./private/eglogistics/scenes/dashboard";
 export { default as PurchaseCanvass } from "./private/eglogistics/scenes/procurement/pr_canvass";
+export { default as CanvassCart } from "./private/eglogistics/scenes/procurement/pr_canvass/cart";
 export { default as PurchaseLibraries } from "./private/eglogistics/scenes/procurement/pr_libraries";
 export { default as PurchaseRequest } from "./private/eglogistics/scenes/procurement/pr_request";
 

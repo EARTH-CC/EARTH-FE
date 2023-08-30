@@ -1,50 +1,66 @@
-import { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Box, Divider, Typography } from "@mui/material";
 import AddItemModal from "modal/Procurement/AddItemModal";
+import procurementService from "services/procurement-service";
 import DataGrid from "../../../../../../components/PrivateComponents/eglogistics/DataGrid";
-import mockData from "../../../../../../data/mockData";
-
-const { mockDataItems } = mockData;
 
 function CanvasTable() {
   const [openItemModal, setOpenItemModal] = useState(false);
+  const [items, setItems] = useState([]);
+  const [loading, setLoading] = React.useState(false);
 
   const handleCloseItem = () => {
     setOpenItemModal(false);
   };
 
+  const handleGetAll = () => {
+    setLoading(true);
+    procurementService
+      .getAllAPI("product")
+      .then((e) => {
+        setItems(e);
+      })
+      .finally(() => {
+        setLoading(false);
+      });
+  };
+
+  useEffect(() => {
+    handleGetAll();
+  }, []);
+
   const columns = [
-    {
-      field: "id",
-      headerName: "ID",
-      flex: 0.5,
-    },
     {
       field: "name",
       headerName: "Name",
       flex: 0.5,
-    },
-    {
-      field: "type",
-      headerName: "Type",
-      flex: 0.5,
-    },
-    {
-      field: "description",
-      headerName: "Description",
       headerAlign: "left",
       align: "left",
       cellClassName: "name-column--cell",
-      flex: 1,
     },
     {
-      field: "qty",
-      headerName: "Quantity",
+      field: "item_code",
+      headerName: "Item Code",
       flex: 0.5,
     },
     {
-      field: "unit",
-      headerName: "Unit",
+      field: "brand_id",
+      headerName: "Brand",
+      flex: 0.5,
+    },
+    {
+      field: "category_id",
+      headerName: "Category",
+      flex: 1,
+    },
+    {
+      field: "supplier_id",
+      headerName: "Supplier",
+      flex: 0.5,
+    },
+    {
+      field: "price",
+      headerName: "Price",
       flex: 0.5,
     },
   ];
@@ -70,7 +86,7 @@ function CanvasTable() {
         }}
       />
       <Box>
-        <DataGrid data={mockDataItems} columns={columns} />
+        <DataGrid data={items} columns={columns} loadingState={loading} />
       </Box>
     </Box>
   );

@@ -5,11 +5,13 @@ import {
   Divider,
   FormControlLabel,
   FormGroup,
+  IconButton,
   Rating,
   Slider,
   Typography,
   useTheme,
 } from "@mui/material";
+import { useNavigate } from "react-router-dom";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import LibraryTextfield from "components/PrivateComponents/eglogistics/Textfields/LibraryTextfield";
 import themes from "../../../../../../themes/theme";
@@ -20,8 +22,13 @@ const priceData = [0, 999999]; // MOCK DATA
 function Filters() {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
+  const navigate = useNavigate();
   const [value, setValue] = useState(priceData);
   const [selectedRatings, setSelectedRatings] = useState(["all"]);
+
+  const handleCart = () => {
+    navigate("/canvass-cart");
+  };
 
   const handleCheckboxChange = (rating) => {
     if (rating === "all") {
@@ -70,13 +77,16 @@ function Filters() {
         variant="middle"
         sx={{ borderTopWidth: "1px", borderTopColor: "black" }}
       />
-      <ShoppingCartIcon
-        style={{
-          color: colors.blueAccent[300],
-          fontSize: 45,
-          alignSelf: "center",
-        }}
-      />
+      <IconButton aria-label="cart" onClick={handleCart}>
+        <ShoppingCartIcon
+          style={{
+            color: colors.blueAccent[300],
+            fontSize: 45,
+            alignSelf: "center",
+          }}
+        />
+      </IconButton>
+
       <Typography
         fontSize="medium"
         fontWeight="900"
