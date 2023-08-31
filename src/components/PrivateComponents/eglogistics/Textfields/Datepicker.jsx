@@ -24,6 +24,7 @@ export default function TextFieldDatePicker({
         )}
         slotProps={{
           textField: {
+            variant: "standard",
             size: "small",
             error: false,
             ...rest,
