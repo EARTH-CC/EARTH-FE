@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import { Box, Button, Divider, Typography, useTheme } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
-import AddCategoryModal from "modal/Procurement/AddCategoryModal";
-import procurementService from "services/procurement-service";
+import AddCategoryModal from "../../../../../../modal/Procurement/ProcurementLibraries/AddCategoryModal";
+import procurementService from "../../../../../../services/procurement-service";
 import DataGrid from "../../../../../../components/PrivateComponents/eglogistics/DataGrid";
 import themes from "../../../../../../themes/theme";
 

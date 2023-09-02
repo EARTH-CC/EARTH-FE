@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import { Box, Button, Divider, Typography, useTheme } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
-import AddSupplierModal from "modal/Procurement/AddSupplierModal";
-import procurementService from "services/procurement-service";
+import AddSupplierModal from "../../../../../../modal/Procurement/ProcurementLibraries/AddSupplierModal";
+import procurementService from "../../../../../../services/procurement-service";
 import DataGrid from "../../../../../../components/PrivateComponents/eglogistics/DataGrid";
 import themes from "../../../../../../themes/theme";
 
@@ -46,7 +46,7 @@ function SupplierLibraries() {
       flex: 0.5,
     },
     {
-      field: "company_name",
+      field: "name",
       headerName: "Company Name",
       flex: 0.5,
     },

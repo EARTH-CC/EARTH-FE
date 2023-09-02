@@ -85,26 +85,39 @@ export default function Missing() {
       >
         <Typography
           sx={{
-            fontSize: "30px",
-            mb: "30px",
+            fontSize: "50px",
+            fontWeight: "bold",
+            color: "#454545",
             textAlign: "center",
+            mt: "10px",
           }}
         >
-          Oops! It looks like you have issues :/ .|..
+          Page Not Found
+        </Typography>
+        <Typography
+          sx={{
+            fontSize: "30px",
+            fontWeight: "bold",
+            mt: "-20px",
+            color: "#454545",
+            textAlign: "center",
+            mb: "40px",
+          }}
+        >
+          :/
         </Typography>
         <Button
           onClick={goBack}
           sx={{
-            backgroundColor: "gray",
-            borderRadius: "15px",
+            backgroundColor: "lightgray",
+            borderRadius: "10px",
             padding: "10px 20px",
-            fontSize: "12px",
-            color: "#fff",
-            boxShadow: "0 0 10px 5px rgba(255, 255, 255, 0.7)",
+            fontSize: "13px",
+            color: "black",
             "&:hover": {
               boxShadow: "0 0 10px 5px rgba(255, 255, 255, 0.7)",
-              backgroundColor: "lightgray",
-              color: "black",
+              backgroundColor: "gray",
+              color: "#fff",
               transition: "all 0.1s ease-in-out",
               mx: "5px",
             },

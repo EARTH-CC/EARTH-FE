@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { Box, Button, Divider, Typography, useTheme } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
-import AddItemModal from "modal/Procurement/AddItemModal";
-import procurementService from "services/procurement-service";
+import AddItemModal from "../../../../../../modal/Procurement/ProcurementLibraries/AddItemModal";
+import procurementService from "../../../../../../services/procurement-service";
 import DataGrid from "../../../../../../components/PrivateComponents/eglogistics/DataGrid";
 import themes from "../../../../../../themes/theme";
 
@@ -81,6 +81,14 @@ function Products() {
 
   return (
     <Box sx={{ m: "15px 20px 20px 20px" }}>
+      <AddItemModal
+        open={openItemModal}
+        handleClose={handleCloseItem}
+        onSuccess={() => {
+          setOpenItemModal(false);
+          handleGetAll();
+        }}
+      />
       <Box
         sx={{
           display: "flex",
@@ -122,14 +130,6 @@ function Products() {
           Products
         </Typography>
       </Divider>
-      <AddItemModal
-        open={openItemModal}
-        handleClose={handleCloseItem}
-        onSuccess={() => {
-          setOpenItemModal(false);
-          handleGetAll();
-        }}
-      />
       <Box>
         <DataGrid data={items} columns={columns} loadingState={loading} />
       </Box>

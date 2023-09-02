@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Box, Divider, Typography } from "@mui/material";
-import AddItemModal from "modal/Procurement/AddItemModal";
-import procurementService from "services/procurement-service";
+import AddItemModal from "../../../../../../modal/Procurement/ProcurementLibraries/AddItemModal";
+import procurementService from "../../../../../../services/procurement-service";
 import DataGrid from "../../../../../../components/PrivateComponents/eglogistics/DataGrid";
 
 function CanvasTable() {
@@ -44,17 +44,17 @@ function CanvasTable() {
       flex: 0.5,
     },
     {
-      field: "brand_id",
+      field: "brand_name",
       headerName: "Brand",
       flex: 0.5,
     },
     {
-      field: "category_id",
+      field: "category_name",
       headerName: "Category",
-      flex: 1,
+      flex: 0.5,
     },
     {
-      field: "supplier_id",
+      field: "supplier_name",
       headerName: "Supplier",
       flex: 0.5,
     },

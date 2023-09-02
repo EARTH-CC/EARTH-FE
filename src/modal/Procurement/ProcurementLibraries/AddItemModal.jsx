@@ -63,8 +63,6 @@ export default function AddItemModal({ open, handleClose, onSuccess }) {
     },
   });
 
-  console.log(formik.values);
-
   return (
     <Modal
       open={open}
