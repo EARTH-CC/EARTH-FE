@@ -26,7 +26,6 @@ export default function TextFieldDatePicker({
           textField: {
             variant: "standard",
             size: "small",
-            variant: "standard",
             error: false,
             ...rest,
           },

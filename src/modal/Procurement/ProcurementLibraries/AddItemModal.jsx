@@ -166,6 +166,22 @@ export default function AddItemModal({ open, handleClose, onSuccess }) {
               </Grid>
               <Grid item xs={12}>
                 <TextField
+                  label="Price"
+                  name="price"
+                  variant="outlined"
+                  size="small"
+                  type="number"
+                  sx={{ width: "60%" }}
+                  disabled={loading}
+                  value={formik.values?.price}
+                  onChange={formik.handleChange}
+                  onBlur={formik.handleBLur}
+                  error={formik.touched?.price && Boolean(formik.errors?.price)}
+                  helperText={formik.touched?.price && formik.errors?.price}
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <TextField
                   label="Description"
                   name="description"
                   variant="outlined"

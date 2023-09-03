@@ -66,6 +66,11 @@ function Products() {
       flex: 0.5,
     },
     {
+      field: "price",
+      headerName: "Price",
+      flex: 0.5,
+    },
+    {
       field: "description",
       headerName: "Description",
       headerAlign: "left",
