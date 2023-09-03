@@ -78,6 +78,11 @@ function Products() {
       cellClassName: "name-column--cell",
       flex: 1,
     },
+    {
+      field: "rating",
+      headerName: "Rating",
+      flex: 0.5,
+    },
   ];
 
   useEffect(() => {

@@ -63,6 +63,17 @@ function CanvasTable() {
       headerName: "Price",
       flex: 0.5,
     },
+    {
+      field: "description",
+      headerName: "Description",
+      headerAlign: "left",
+      flex: 0.5,
+    },
+    {
+      field: "rating",
+      headerName: "Rating",
+      flex: 0.5,
+    },
   ];
 
   return (
