@@ -14,7 +14,7 @@ function getAllAPI(moduleName) {
   return new Promise((resolve, reject) => {
     axios
       .get(`${BASE_URL}/${moduleName}/get`)
-      .then((res) => resolve(res.data.data))
+      .then((res) => resolve(res?.data?.data))
       .catch((err) => {
         reject(err);
       });

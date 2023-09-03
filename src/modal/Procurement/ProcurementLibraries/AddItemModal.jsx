@@ -100,7 +100,22 @@ export default function AddItemModal({ open, handleClose, onSuccess }) {
                   helperText={formik.touched?.name && formik.errors?.name}
                 />
               </Grid>
-
+              <Grid item xs={12}>
+                <TextField
+                  label="Price"
+                  name="price"
+                  variant="outlined"
+                  size="small"
+                  type="number"
+                  sx={{ width: "60%" }}
+                  disabled={loading}
+                  value={formik.values?.price}
+                  onChange={formik.handleChange}
+                  onBlur={formik.handleBLur}
+                  error={formik.touched?.price && Boolean(formik.errors?.price)}
+                  helperText={formik.touched?.price && formik.errors?.price}
+                />
+              </Grid>
               <Grid item xs={12}>
                 <SelectBrand
                   label="Select Brand"
@@ -162,22 +177,6 @@ export default function AddItemModal({ open, handleClose, onSuccess }) {
                     ""
                   }
                   width="60%"
-                />
-              </Grid>
-              <Grid item xs={12}>
-                <TextField
-                  label="Price"
-                  name="price"
-                  variant="outlined"
-                  size="small"
-                  type="number"
-                  sx={{ width: "60%" }}
-                  disabled={loading}
-                  value={formik.values?.price}
-                  onChange={formik.handleChange}
-                  onBlur={formik.handleBLur}
-                  error={formik.touched?.price && Boolean(formik.errors?.price)}
-                  helperText={formik.touched?.price && formik.errors?.price}
                 />
               </Grid>
               <Grid item xs={12}>

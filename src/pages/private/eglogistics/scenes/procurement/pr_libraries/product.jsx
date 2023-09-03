@@ -43,32 +43,32 @@ function Products() {
     {
       field: "uuid",
       headerName: "ID",
-      flex: 0.5,
+      width: 100,
     },
     {
       field: "name",
       headerName: "Name",
-      flex: 0.5,
-    },
-    {
-      field: "brand_name",
-      headerName: "Brand",
-      flex: 0.5,
-    },
-    {
-      field: "category_name",
-      headerName: "Category",
-      flex: 0.5,
-    },
-    {
-      field: "supplier_name",
-      headerName: "Supplier",
-      flex: 0.5,
+      width: 150,
     },
     {
       field: "price",
       headerName: "Price",
-      flex: 0.5,
+      width: 150,
+    },
+    {
+      field: "brand_name",
+      headerName: "Brand",
+      width: 150,
+    },
+    {
+      field: "category_name",
+      headerName: "Category",
+      width: 150,
+    },
+    {
+      field: "supplier_name",
+      headerName: "Supplier",
+      width: 150,
     },
     {
       field: "description",
@@ -76,12 +76,7 @@ function Products() {
       headerAlign: "left",
       align: "left",
       cellClassName: "name-column--cell",
-      flex: 1,
-    },
-    {
-      field: "rating",
-      headerName: "Rating",
-      flex: 0.5,
+      width: 200,
     },
   ];
 
