@@ -275,12 +275,14 @@ export default function PurchaseRequestTable() {
           // value={dayjs(startDate)}
           // onChange={handleStartDate}
           // format="MM/DD/YYYY"
+          variant="standard"
         />
         <DateField
           label="End Date"
           // value={dayjs(endDate)}
           // onChange={handleEndDate}
           // format="MM/DD/YYYY"
+          variant="standard"
         />
       </Box>
       <DataGrid data={mockPurchaseRequest} columns={columns} />

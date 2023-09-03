@@ -9,6 +9,8 @@ export default function TextFieldDatePicker({
   value,
   onChange,
   txprops,
+  width,
+  pr,
   ...rest
 }) {
   return (
@@ -22,11 +24,10 @@ export default function TextFieldDatePicker({
         renderInput={(params) => (
           <TextField {...params} {...txprops} error={false} fullWidth />
         )}
+        sx={{ width: { width }, pr }}
         slotProps={{
           textField: {
-            variant: "standard",
             size: "small",
-            error: false,
             ...rest,
           },
         }}
@@ -40,6 +41,8 @@ TextFieldDatePicker.defaultProps = {
   value: null,
   onChange: () => {},
   txprops: {},
+  width: "100%",
+  pr: 0,
 };
 // Typechecking props of the MDAlert
 TextFieldDatePicker.propTypes = {
@@ -48,4 +51,6 @@ TextFieldDatePicker.propTypes = {
   onChange: PropTypes.func,
   // eslint-disable-next-line react/forbid-prop-types
   txprops: PropTypes.object,
+  width: PropTypes.string,
+  pr: PropTypes.number,
 };

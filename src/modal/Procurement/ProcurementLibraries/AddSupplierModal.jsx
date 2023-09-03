@@ -2,7 +2,9 @@ import React, { useState } from "react";
 import PropTypes from "prop-types";
 import { Box, Button, Grid, Modal, TextField, Typography } from "@mui/material";
 import { useFormik } from "formik";
-import PRSupplier, { initialPRSupplier } from "validation/procurement-supplier";
+import PRSupplier, {
+  initialPRSupplier,
+} from "validation/pr-libraries/procurement-supplier";
 import procurementService from "services/procurement-service";
 
 const style = {
@@ -77,9 +79,7 @@ export default function AddSupplierModal({ open, handleClose, onSuccess }) {
                   onChange={formik.handleChange}
                   onBlur={formik.handleBLur}
                   error={formik.touched?.name && Boolean(formik.errors?.name)}
-                  helperText={
-                    formik.touched?.company_name && formik.errors?.company_name
-                  }
+                  helperText={formik.touched?.name && formik.errors?.name}
                 />
               </Grid>
               <Grid item xs={6}>

@@ -15,11 +15,11 @@ export default function PurchaseRequest() {
 
   const [openPRRequestModal, setOpenPRRequestModal] = useState(false);
 
-  const handleAddItem = () => {
+  const handlePRRequest = () => {
     setOpenPRRequestModal(true);
   };
 
-  const handleCloseItem = () => {
+  const handleClosePRRequest = () => {
     setOpenPRRequestModal(false);
   };
 
@@ -27,7 +27,7 @@ export default function PurchaseRequest() {
     <Box sx={{ m: "5px 20px 20px 20px" }}>
       <PurchaseRequestModal
         open={openPRRequestModal}
-        handleClose={handleCloseItem}
+        handleClose={handleClosePRRequest}
         onSuccess={() => {
           setOpenPRRequestModal(false);
           // handleGetAll();
@@ -75,7 +75,7 @@ export default function PurchaseRequest() {
         }}
       >
         <Button
-          onClick={handleAddItem}
+          onClick={handlePRRequest}
           sx={{
             display: "flex",
             justifyContent: "center",

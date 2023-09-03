@@ -10,7 +10,9 @@ import {
   // useTheme,
 } from "@mui/material";
 import { useFormik } from "formik";
-import PRItem, { initialPRItem } from "validation/procurement-item";
+import PRItem, {
+  initialPRItem,
+} from "validation/pr-libraries/procurement-item";
 import procurementService from "services/procurement-service";
 import SelectBrand from "components/PrivateComponents/eglogistics/Textfields/SelectBrand";
 import SelectSupplier from "components/PrivateComponents/eglogistics/Textfields/SelectSupplier";

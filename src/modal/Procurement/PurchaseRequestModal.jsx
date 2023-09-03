@@ -1,9 +1,12 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import { Box, Button, Grid, Modal, TextField, Typography } from "@mui/material";
 import { useFormik } from "formik";
-import PRSupplier, { initialPRSupplier } from "validation/procurement-supplier";
+import PRRequest, { initialPRRequest } from "validation/pr-request";
 import procurementService from "services/procurement-service";
+import SelectItem from "components/PrivateComponents/eglogistics/Textfields/SelectItem";
+import TextFieldDatePicker from "components/PrivateComponents/eglogistics/Textfields/Datepicker";
+import dayjs from "dayjs";
 
 const style = {
   backgroundColor: (themeMode) =>
@@ -19,15 +22,29 @@ const style = {
 };
 
 export default function PurchaseRequestModal({ open, handleClose, onSuccess }) {
+  const [items, setItems] = useState([]);
+
   const [loading, setLoading] = useState();
   const [error, setError] = useState("");
 
-  const moduleName = "supplier";
+  const moduleName = "purchaseRequest";
+
+  const handleGetProducts = () => {
+    setLoading(true);
+    procurementService
+      .getAllAPI("product")
+      .then((e) => {
+        setItems(e);
+      })
+      .finally(() => {
+        setLoading(false);
+      });
+  };
 
   const formik = useFormik({
-    initialValues: initialPRSupplier,
+    initialValues: initialPRRequest,
 
-    validationSchema: PRSupplier,
+    validationSchema: PRRequest,
     onSubmit: () => {
       setError("");
       setLoading(true);
@@ -45,6 +62,19 @@ export default function PurchaseRequestModal({ open, handleClose, onSuccess }) {
         });
     },
   });
+
+  useEffect(() => {
+    handleGetProducts();
+  }, []);
+
+  useEffect(() => {
+    const selectedItem = items.find(
+      (item) => item.item_code === formik.values.item_code
+    );
+
+    formik?.setFieldValue("company_name", selectedItem?.supplier_company);
+    formik?.setFieldValue("address", selectedItem?.supplier_address);
+  }, [formik.values.item_code]);
 
   return (
     <Modal
@@ -65,18 +95,40 @@ export default function PurchaseRequestModal({ open, handleClose, onSuccess }) {
           <Box mx={2}>
             <Grid container spacing={2}>
               <Grid item xs={6}>
+                <SelectItem
+                  label="Select Item"
+                  name="item_code"
+                  disabled={loading}
+                  value={formik.values.item_code}
+                  onChange={(fieldName, selectedValue) => {
+                    formik.setFieldValue(fieldName, selectedValue);
+                  }}
+                  onBlur={formik.handleBlur}
+                  error={
+                    formik.touched.item_code && Boolean(formik.errors.item_code)
+                  }
+                  helperText={
+                    (formik.touched.item_code && formik.errors.item_code) || ""
+                  }
+                  width="100%"
+                  pr={5}
+                />
+              </Grid>
+              <Grid item xs={6}>
                 <TextField
                   label="Company Name"
-                  name="name"
+                  name="company_name"
                   variant="outlined"
                   size="small"
                   fullWidth
                   sx={{ pr: 5 }}
                   disabled={loading}
-                  value={formik.values?.name}
-                  onChange={formik.handleChange}
+                  value={formik.values.company_name}
                   onBlur={formik.handleBLur}
-                  error={formik.touched?.name && Boolean(formik.errors?.name)}
+                  error={
+                    formik.touched?.company_name &&
+                    Boolean(formik.errors?.company_name)
+                  }
                   helperText={
                     formik.touched?.company_name && formik.errors?.company_name
                   }
@@ -92,7 +144,6 @@ export default function PurchaseRequestModal({ open, handleClose, onSuccess }) {
                   sx={{ pr: 5 }}
                   disabled={loading}
                   value={formik.values?.address}
-                  onChange={formik.handleChange}
                   onBlur={formik.handleBLur}
                   error={
                     formik.touched?.address && Boolean(formik.errors?.address)
@@ -102,45 +153,146 @@ export default function PurchaseRequestModal({ open, handleClose, onSuccess }) {
               </Grid>
               <Grid item xs={6}>
                 <TextField
-                  label="Phone No."
-                  name="phone_no"
+                  label="Attention"
+                  name="attention"
                   variant="outlined"
                   size="small"
                   type="number"
                   fullWidth
                   sx={{ pr: 5 }}
                   disabled={loading}
-                  value={formik.values?.phone_no}
+                  value={formik.values?.attention}
                   onChange={formik.handleChange}
                   onBlur={formik.handleBLur}
                   error={
-                    formik.touched?.phone_no && Boolean(formik.errors?.phone_no)
+                    formik.touched?.attention &&
+                    Boolean(formik.errors?.attention)
                   }
                   helperText={
-                    formik.touched?.phone_no && formik.errors?.phone_no
+                    formik.touched?.attention && formik.errors?.attention
                   }
                 />
               </Grid>
               <Grid item xs={6}>
                 <TextField
-                  label="Mobile No."
-                  name="mobile_no"
+                  label="Description"
+                  name="description"
+                  variant="outlined"
+                  size="small"
+                  fullWidth
+                  sx={{ pr: 5 }}
+                  disabled={loading}
+                  value={formik.values?.description}
+                  onChange={formik.handleChange}
+                  onBlur={formik.handleBLur}
+                  error={
+                    formik.touched?.description &&
+                    Boolean(formik.errors?.description)
+                  }
+                  helperText={
+                    formik.touched?.description && formik.errors?.description
+                  }
+                />
+              </Grid>
+              <Grid item xs={6}>
+                <TextField
+                  label="Quantity"
+                  name="quantity"
                   variant="outlined"
                   size="small"
                   type="number"
                   fullWidth
                   sx={{ pr: 5 }}
                   disabled={loading}
-                  value={formik.values?.mobile_no}
+                  value={formik.values?.quantity}
                   onChange={formik.handleChange}
                   onBlur={formik.handleBLur}
                   error={
-                    formik.touched?.mobile_no &&
-                    Boolean(formik.errors?.mobile_no)
+                    formik.touched?.quantity && Boolean(formik.errors?.quantity)
                   }
                   helperText={
-                    formik.touched?.mobile_no && formik.errors?.mobile_no
+                    formik.touched?.quantity && formik.errors?.quantity
                   }
+                />
+              </Grid>
+              <Grid item xs={6}>
+                <TextField
+                  label="Price"
+                  name="price"
+                  variant="outlined"
+                  size="small"
+                  type="number"
+                  fullWidth
+                  sx={{ pr: 5 }}
+                  disabled={loading}
+                  value={formik.values?.price}
+                  onChange={formik.handleChange}
+                  onBlur={formik.handleBLur}
+                  error={formik.touched?.price && Boolean(formik.errors?.price)}
+                  helperText={formik.touched?.price && formik.errors?.price}
+                />
+              </Grid>
+              <Grid item xs={6}>
+                <TextField
+                  label="Total Amount"
+                  name="total_amount"
+                  variant="outlined"
+                  size="small"
+                  type="number"
+                  fullWidth
+                  sx={{ pr: 5 }}
+                  disabled={loading}
+                  value={formik.values?.total_amount}
+                  onChange={formik.handleChange}
+                  onBlur={formik.handleBLur}
+                  error={
+                    formik.touched?.total_amount &&
+                    Boolean(formik.errors?.total_amount)
+                  }
+                  helperText={
+                    formik.touched?.total_amount && formik.errors?.total_amount
+                  }
+                />
+              </Grid>
+              <Grid item xs={6}>
+                <TextField
+                  label="Remarks"
+                  name="remarks"
+                  variant="outlined"
+                  size="small"
+                  type="number"
+                  fullWidth
+                  sx={{ pr: 5 }}
+                  disabled={loading}
+                  value={formik.values?.remarks}
+                  onChange={formik.handleChange}
+                  onBlur={formik.handleBLur}
+                  error={
+                    formik.touched?.remarks && Boolean(formik.errors?.remarks)
+                  }
+                  helperText={formik.touched?.remarks && formik.errors?.remarks}
+                />
+              </Grid>
+              <Grid item xs={6}>
+                <TextFieldDatePicker
+                  label="Date"
+                  disabled={loading}
+                  value={formik?.values?.date}
+                  onChange={(evt) =>
+                    formik?.setFieldValue(
+                      "date",
+                      dayjs(evt).format("YYYY-MM-DD"),
+                      true
+                    )
+                  }
+                  width="100%"
+                  pr={5}
+                  variant="outlined"
+                  maxDate={new Date()}
+                  error={
+                    Boolean(formik.touched.date) && Boolean(formik.errors.date)
+                  }
+                  helperText={formik.touched.date && formik.errors.date}
                 />
               </Grid>
             </Grid>

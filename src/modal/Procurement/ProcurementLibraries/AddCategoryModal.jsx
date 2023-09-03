@@ -10,7 +10,9 @@ import {
   // useTheme,
 } from "@mui/material";
 import { useFormik } from "formik";
-import PRCategory, { initialPRCategory } from "validation/procurement-category";
+import PRCategory, {
+  initialPRCategory,
+} from "validation/pr-libraries/procurement-category";
 import procurementService from "services/procurement-service";
 // import themes from "../../themes/theme";
 
