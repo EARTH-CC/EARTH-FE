@@ -41,13 +41,13 @@ function Products() {
 
   const columns = [
     {
-      field: "uuid",
-      headerName: "ID",
-      width: 100,
-    },
-    {
       field: "name",
       headerName: "Name",
+      width: 150,
+    },
+    {
+      field: "item_code",
+      headerName: "Item Code",
       width: 150,
     },
     {

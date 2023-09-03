@@ -126,7 +126,7 @@ export default function SelectBrand({
 SelectBrand.defaultProps = {
   label: "",
   name: "",
-  value: "",
+  value: null,
   onChange: () => {},
   error: false,
   helperText: "",
@@ -136,7 +136,7 @@ SelectBrand.defaultProps = {
 SelectBrand.propTypes = {
   label: PropTypes.string,
   name: PropTypes.string,
-  value: PropTypes.string,
+  value: PropTypes.number,
   onChange: PropTypes.func,
   error: PropTypes.bool,
   helperText: PropTypes.string,

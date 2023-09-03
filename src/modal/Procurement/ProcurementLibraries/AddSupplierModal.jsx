@@ -143,6 +143,25 @@ export default function AddSupplierModal({ open, handleClose, onSuccess }) {
                   }
                 />
               </Grid>
+              <Grid item xs={6}>
+                <TextField
+                  label="TIN No."
+                  name="tin_no"
+                  variant="outlined"
+                  size="small"
+                  type="number"
+                  fullWidth
+                  sx={{ pr: 5 }}
+                  disabled={loading}
+                  value={formik.values?.tin_no}
+                  onChange={formik.handleChange}
+                  onBlur={formik.handleBLur}
+                  error={
+                    formik.touched?.tin_no && Boolean(formik.errors?.tin_no)
+                  }
+                  helperText={formik.touched?.tin_no && formik.errors?.tin_no}
+                />
+              </Grid>
             </Grid>
           </Box>
 

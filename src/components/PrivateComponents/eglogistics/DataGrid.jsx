@@ -57,11 +57,12 @@ export default function DataGridTable({ data, columns, loadingState }) {
             quickFilterProps: { debounceMs: 500 },
           },
         }}
+        pageSizeOptions={[10, 20, 30, 40, 50]}
         initialState={{
           pinnedColumns: { left: ["name"], right: ["actions"] },
           pagination: {
             paginationModel: {
-              pageSize: 20,
+              pageSize: 10,
             },
           },
         }}

@@ -1,12 +1,9 @@
 import React, { useState } from "react";
 import {
   Box,
-  Checkbox,
+  Button,
   Divider,
-  FormControlLabel,
-  FormGroup,
   IconButton,
-  Rating,
   Slider,
   Typography,
   useTheme,
@@ -26,25 +23,12 @@ function Filters() {
   const colors = tokens(theme.palette.mode);
   const navigate = useNavigate();
   const [value, setValue] = useState(priceData);
-  const [selectedRatings, setSelectedRatings] = useState(["all"]);
+  const [category, setCategory] = useState();
+  const [brand, setBrand] = useState();
+  const [supplier, setSupplier] = useState();
 
   const handleCart = () => {
     navigate("/canvass-cart");
-  };
-
-  const handleCheckboxChange = (rating) => {
-    if (rating === "all") {
-      setSelectedRatings(["all"]);
-    } else {
-      const updatedRatings = selectedRatings.includes(rating)
-        ? selectedRatings.filter((r) => r !== rating)
-        : [...selectedRatings.filter((r) => r !== "all"), rating]; // Remove "all" if present
-      if (updatedRatings.length === 0) {
-        setSelectedRatings(["all"]);
-      } else {
-        setSelectedRatings(updatedRatings);
-      }
-    }
   };
 
   const handleChange = (event, newValue) => {
@@ -52,8 +36,7 @@ function Filters() {
   };
 
   // Gawa ng useEffect dito tas ipasa sa API
-  console.log(value);
-  console.log(selectedRatings);
+  console.log(brand);
 
   return (
     <Box
@@ -73,28 +56,45 @@ function Filters() {
           fontSize: "small",
         }}
       >
-        CANVASS CART
+        VIEW CART
       </Typography>
       <Divider
         variant="middle"
         sx={{ borderTopWidth: "1px", borderTopColor: "black" }}
       />
-      <IconButton aria-label="cart" onClick={handleCart}>
+      <IconButton
+        aria-label="cart"
+        onClick={handleCart}
+        sx={{
+          "&:hover": {
+            backgroundColor: "rgba(0, 0, 0, 0)",
+          },
+        }}
+      >
         <ShoppingCartIcon
-          style={{
+          sx={{
             color: colors.blueAccent[300],
             fontSize: 45,
             alignSelf: "center",
+            "&:hover": {
+              color: colors.blueAccent[700],
+            },
           }}
         />
       </IconButton>
 
+      <Divider variant="middle" />
+      <Typography fontSize="small" fontWeight="600">
+        Total (1 item): <span style={{ fontSize: "15px" }}>₱</span> 676
+      </Typography>
+      <Divider variant="middle" />
       <Typography
         fontSize="medium"
         fontWeight="900"
         sx={{
           letterSpacing: "0.3em",
           fontSize: "small",
+          mt: "15px",
         }}
       >
         FILTERS
@@ -103,23 +103,36 @@ function Filters() {
         variant="middle"
         sx={{ borderTopWidth: "1px", borderTopColor: "black" }}
       />
-      <SelectCategory label="Category" name="category_id" width="100%" />
+      <SelectCategory
+        label="Category"
+        name="category_id"
+        width="100%" // disabled={loading}
+        value={category}
+        onChange={(fieldName, selectedValue) => {
+          setCategory(selectedValue);
+        }}
+      />
       <Divider variant="middle" />
       <SelectBrand
         label="Brand"
         name="brand_id"
         width="100%"
         // disabled={loading}
-        // value={formik.values.brand_id}
-        // onChange={(fieldName, selectedValue) => {
-        //   formik.setFieldValue(fieldName, selectedValue);
-        // }}
-        // onBlur={formik.handleBlur}
-        // error={formik.touched.brand_id && Boolean(formik.errors.brand_id)}
-        // helperText={(formik.touched.brand_id && formik.errors.brand_id) || ""}
+        value={brand}
+        onChange={(fieldName, selectedValue) => {
+          setBrand(selectedValue);
+        }}
       />
       <Divider variant="middle" />
-      <SelectSupplier label="Supplier" name="supplier_id" width="100%" />
+      <SelectSupplier
+        label="Supplier"
+        name="supplier_id"
+        width="100%" // disabled={loading}
+        value={supplier}
+        onChange={(fieldName, selectedValue) => {
+          setSupplier(selectedValue);
+        }}
+      />
       <Divider variant="middle" />
       <Typography fontSize="small" fontWeight="600">
         Price
@@ -140,7 +153,7 @@ function Filters() {
         )}
         sx={{
           color: colors.blueAccent[300],
-          mt: "15px",
+          my: "15px",
           "& .MuiSlider-valueLabel": {
             color: colors.grey[900],
             backgroundColor: colors.blueAccent[400],
@@ -150,49 +163,41 @@ function Filters() {
         }}
       />
 
-      <Divider variant="middle" />
-      <Typography fontSize="small" fontWeight="600">
-        Rating
-      </Typography>
-      <FormGroup
+      <Typography
+        fontSize="medium"
+        fontWeight="900"
         sx={{
-          marginBottom: "-20px",
+          letterSpacing: "0.3em",
+          fontSize: "small",
         }}
       >
-        <FormControlLabel
-          control={
-            <Checkbox
-              checked={selectedRatings.includes("all")}
-              onChange={() => handleCheckboxChange("all")}
-              style={{ color: colors.grey[300] }}
-            />
-          }
-          label="All"
-        />
-        {[5, 4, 3, 2].map((rating) => (
-          <FormControlLabel
-            key={rating}
-            control={
-              <Checkbox
-                checked={selectedRatings.includes(rating)}
-                onChange={() => handleCheckboxChange(rating)}
-                style={{ color: colors.grey[300] }}
-              />
-            }
-            label={<Rating name={`${rating} stars`} value={rating} readOnly />}
-          />
-        ))}
-        <FormControlLabel
-          control={
-            <Checkbox
-              checked={selectedRatings.includes("unrated")}
-              onChange={() => handleCheckboxChange("unrated")}
-              style={{ color: colors.grey[300] }}
-            />
-          }
-          label="Unrated"
-        />
-      </FormGroup>
+        SELECTED
+      </Typography>
+      <Divider
+        variant="middle"
+        sx={{ borderTopWidth: "1px", borderTopColor: "black" }}
+      />
+      <Typography fontSize="small" fontWeight="600">
+        Slected (0 item): <span style={{ fontSize: "15px" }}>₱</span> 0
+      </Typography>
+      <Button
+        sx={{
+          backgroundColor: colors.blueAccent[300],
+          color: colors.grey[900],
+          "&:hover": {
+            color: "white",
+            backgroundColor: colors.blueAccent[700],
+          },
+          fontSize: "14px",
+          fontWeight: "bold",
+          padding: "10px 20px",
+          borderRadius: "5px",
+          my: "10px",
+        }}
+      >
+        <ShoppingCartIcon sx={{ mr: "10px" }} />
+        Add To Cart
+      </Button>
     </Box>
   );
 }

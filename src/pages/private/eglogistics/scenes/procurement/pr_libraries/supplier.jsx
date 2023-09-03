@@ -68,6 +68,11 @@ function SupplierLibraries() {
       headerName: "Mobile",
       flex: 0.5,
     },
+    {
+      field: "tin_no",
+      headerName: "TIN No.",
+      flex: 0.5,
+    },
   ];
 
   useEffect(() => {

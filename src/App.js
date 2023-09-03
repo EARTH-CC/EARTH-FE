@@ -15,7 +15,6 @@ import {
   PurchaseLibraries,
   PurchaseRequest,
   PurchaseCanvass,
-  CanvassCart,
   Bontrade,
   UGTrade,
   Erotas,
@@ -66,7 +65,6 @@ function App() {
                     path="/purchase-canvass"
                     element={<PurchaseCanvass />}
                   />
-                  <Route path="/canvass-cart" element={<CanvassCart />} />
                 </Route>
               </Route>
 

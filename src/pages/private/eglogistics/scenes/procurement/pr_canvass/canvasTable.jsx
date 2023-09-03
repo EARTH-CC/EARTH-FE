@@ -70,8 +70,9 @@ function CanvasTable() {
       flex: 0.5,
     },
     {
-      field: "rating",
-      headerName: "Rating",
+      field: "quantity",
+      headerName: "Quantity",
+      headerAlign: "left",
       flex: 0.5,
     },
   ];

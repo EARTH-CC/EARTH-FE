@@ -92,7 +92,7 @@ export default function SelectSupplier({
 SelectSupplier.defaultProps = {
   label: "",
   name: "",
-  value: "",
+  value: null,
   onChange: () => {},
   error: false,
   helperText: "",
@@ -102,7 +102,7 @@ SelectSupplier.defaultProps = {
 SelectSupplier.propTypes = {
   label: PropTypes.string,
   name: PropTypes.string,
-  value: PropTypes.string,
+  value: PropTypes.number,
   onChange: PropTypes.func,
   error: PropTypes.bool,
   helperText: PropTypes.string,
