@@ -115,7 +115,12 @@ function CategoryLibraries() {
         }}
       />
       <Box>
-        <DataGrid data={categories} columns={columns} loadingState={loading} />
+        <DataGrid
+          data={categories}
+          columns={columns}
+          loadingState={loading}
+          checkbox={false}
+        />
       </Box>
     </Box>
   );

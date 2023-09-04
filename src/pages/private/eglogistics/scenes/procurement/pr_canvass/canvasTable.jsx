@@ -8,6 +8,7 @@ function CanvasTable() {
   const [openItemModal, setOpenItemModal] = useState(false);
   const [items, setItems] = useState([]);
   const [loading, setLoading] = React.useState(false);
+  const selectedValues = [];
 
   const handleCloseItem = () => {
     setOpenItemModal(false);
@@ -25,6 +26,11 @@ function CanvasTable() {
       });
   };
 
+  const handleValue = (params) => {
+    selectedValues.push(params.row);
+    console.log(selectedValues);
+  };
+
   useEffect(() => {
     handleGetAll();
   }, []);
@@ -37,6 +43,9 @@ function CanvasTable() {
       headerAlign: "left",
       align: "left",
       cellClassName: "name-column--cell",
+      renderCell: (params) => {
+        handleValue(params);
+      },
     },
     {
       field: "item_code",
@@ -69,12 +78,6 @@ function CanvasTable() {
       headerAlign: "left",
       flex: 0.5,
     },
-    {
-      field: "quantity",
-      headerName: "Quantity",
-      headerAlign: "left",
-      flex: 0.5,
-    },
   ];
 
   return (
@@ -98,7 +101,12 @@ function CanvasTable() {
         }}
       />
       <Box>
-        <DataGrid data={items} columns={columns} loadingState={loading} />
+        <DataGrid
+          data={items}
+          columns={columns}
+          loadingState={loading}
+          checkbox
+        />
       </Box>
     </Box>
   );

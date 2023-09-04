@@ -136,7 +136,12 @@ function Products() {
         </Typography>
       </Divider>
       <Box>
-        <DataGrid data={items} columns={columns} loadingState={loading} />
+        <DataGrid
+          data={items}
+          columns={columns}
+          loadingState={loading}
+          checkbox={false}
+        />
       </Box>
     </Box>
   );

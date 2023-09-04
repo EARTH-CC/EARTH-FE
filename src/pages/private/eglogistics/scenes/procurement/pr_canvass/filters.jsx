@@ -8,11 +8,11 @@ import {
   Typography,
   useTheme,
 } from "@mui/material";
-import { useNavigate } from "react-router-dom";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import SelectBrand from "components/PrivateComponents/eglogistics/Textfields/SelectBrand";
 import SelectCategory from "components/PrivateComponents/eglogistics/Textfields/SelectCategory";
 import SelectSupplier from "components/PrivateComponents/eglogistics/Textfields/SelectSupplier";
+import CanvassCart from "modal/Procurement/CanvassCart";
 import themes from "../../../../../../themes/theme";
 
 const { tokens } = themes;
@@ -21,14 +21,18 @@ const priceData = [0, 999999]; // MOCK DATA
 function Filters() {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
-  const navigate = useNavigate();
   const [value, setValue] = useState(priceData);
   const [category, setCategory] = useState();
   const [brand, setBrand] = useState();
   const [supplier, setSupplier] = useState();
+  const [openCartModal, setOpenCartModal] = useState(false);
 
-  const handleCart = () => {
-    navigate("/canvass-cart");
+  const handleOpenCart = () => {
+    setOpenCartModal(true);
+  };
+
+  const handleCloseCart = () => {
+    setOpenCartModal(false);
   };
 
   const handleChange = (event, newValue) => {
@@ -48,6 +52,14 @@ function Filters() {
         textAlign: "center",
       }}
     >
+      <CanvassCart
+        open={openCartModal}
+        handleClose={handleCloseCart}
+        onSuccess={() => {
+          setOpenCartModal(false);
+          // handleGetAll();
+        }}
+      />
       <Typography
         fontSize="medium"
         fontWeight="900"
@@ -64,7 +76,7 @@ function Filters() {
       />
       <IconButton
         aria-label="cart"
-        onClick={handleCart}
+        onClick={handleOpenCart}
         sx={{
           "&:hover": {
             backgroundColor: "rgba(0, 0, 0, 0)",
