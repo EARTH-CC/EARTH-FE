@@ -11,6 +11,7 @@ export { default as Dashboard } from "./private/eglogistics/scenes/dashboard";
 export { default as PurchaseCanvass } from "./private/eglogistics/scenes/procurement/pr_canvass";
 export { default as PurchaseLibraries } from "./private/eglogistics/scenes/procurement/pr_libraries";
 export { default as PurchaseRequest } from "./private/eglogistics/scenes/procurement/pr_request";
+export { default as PurchaseOrder } from "./private/eglogistics/scenes/procurement/pr_order";
 
 // Bonatrade
 export { default as Bontrade } from "./private/bontrade";

@@ -7,7 +7,12 @@ import themes from "../../../themes/theme";
 
 const { tokens } = themes;
 
-export default function DataGridTable({ data, columns, loadingState }) {
+export default function DataGridTable({
+  data,
+  columns,
+  loadingState,
+  checkbox,
+}) {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
 
@@ -67,6 +72,7 @@ export default function DataGridTable({ data, columns, loadingState }) {
           },
         }}
         loading={loadingState}
+        checkboxSelection={checkbox}
       />
     </Box>
   );
@@ -78,6 +84,7 @@ DataGridTable.defaultProps = {
   // moduleName: "",
   loadingState: false,
   // dataReload: () => {},
+  checkbox: false,
 };
 
 DataGridTable.propTypes = {
@@ -86,4 +93,5 @@ DataGridTable.propTypes = {
   // moduleName: PropTypes.string,
   loadingState: PropTypes.bool,
   // dataReload: PropTypes.func,
+  checkbox: PropTypes.bool,
 };

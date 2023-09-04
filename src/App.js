@@ -3,7 +3,7 @@ import { Box, CssBaseline, ThemeProvider } from "@mui/material";
 import { Route, Routes } from "react-router-dom";
 import "./App.css";
 import RequireAuth from "contexts/RequireAuth";
-import PersistLogin from "contexts/PersistLogin";
+// import PersistLogin from "contexts/PersistLogin";
 import Layout from "contexts/Layouts/Layout";
 import {
   Unauthorized,
@@ -13,8 +13,9 @@ import {
   Landing,
   Dashboard,
   PurchaseLibraries,
-  PurchaseRequest,
   PurchaseCanvass,
+  PurchaseRequest,
+  PurchaseOrder,
   Bontrade,
   UGTrade,
   Erotas,
@@ -49,23 +50,16 @@ function App() {
               <Route path="/settings" element={<Settings />} />
             </Route>
 
-            <Route element={<PersistLogin />}>
-              <Route element={<RequireAuth allowedRoles="superadmin" />}>
-                <Route path="/" element={<Layout />}>
-                  <Route path="/dashboard" element={<Dashboard />} />
-                  <Route
-                    path="/purchase-libraries"
-                    element={<PurchaseLibraries />}
-                  />
-                  <Route
-                    path="/purchase-request"
-                    element={<PurchaseRequest />}
-                  />
-                  <Route
-                    path="/purchase-canvass"
-                    element={<PurchaseCanvass />}
-                  />
-                </Route>
+            <Route element={<RequireAuth allowedRoles="superadmin" />}>
+              <Route path="/" element={<Layout />}>
+                <Route path="/dashboard" element={<Dashboard />} />
+                <Route
+                  path="/purchase-libraries"
+                  element={<PurchaseLibraries />}
+                />
+                <Route path="/purchase-request" element={<PurchaseRequest />} />
+                <Route path="/purchase-canvass" element={<PurchaseCanvass />} />
+                <Route path="/purchase-order" element={<PurchaseOrder />} />
               </Route>
 
               <Route element={<RequireAuth allowedRoles="bontrade" />}>

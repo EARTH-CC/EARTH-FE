@@ -39,7 +39,7 @@ const links = [
       },
       {
         name: "Purchase Order",
-        path: "purchaseorder",
+        path: "purchase-order",
         icon: <ProductionQuantityLimitsOutlinedIcon style={{ fontSize: 29 }} />,
       },
       {

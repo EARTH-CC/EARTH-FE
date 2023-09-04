@@ -37,8 +37,13 @@ export default function PurchaseRequestTable() {
       flex: 1,
     },
     {
-      field: "company_name",
-      headerName: "COMPANY NAME",
+      field: "due_date",
+      headerName: "DUE DATE",
+      flex: 1,
+    },
+    {
+      field: "company_name_supplier",
+      headerName: "COMPANY NAME SUPPLIER",
       flex: 1,
     },
     {
@@ -47,8 +52,8 @@ export default function PurchaseRequestTable() {
       flex: 1,
     },
     {
-      field: "attention",
-      headerName: "ATTENTION",
+      field: "terms_of_agreement",
+      headerName: "TERMS OF AGREEMENT",
       flex: 1,
     },
     {

@@ -5,7 +5,7 @@ import DownloadOutlinedIcon from "@mui/icons-material/DownloadOutlined";
 import PurchaseRequestModal from "modal/Procurement/PurchaseRequestModal";
 import Header from "../../../../../../components/PrivateComponents/eglogistics/Header";
 import themes from "../../../../../../themes/theme";
-import PurchaseRequestTable from "./prrequestTable";
+import PurchaseOrderTable from "./prorderTable";
 
 const { tokens } = themes;
 
@@ -13,23 +13,23 @@ export default function PurchaseRequest() {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
 
-  const [openPRRequestModal, setOpenPRRequestModal] = useState(false);
+  const [openPROrderModal, setOpenPROrderModal] = useState(false);
 
-  const handlePRRequest = () => {
-    setOpenPRRequestModal(true);
+  const handlePROrder = () => {
+    setOpenPROrderModal(true);
   };
 
-  const handleClosePRRequest = () => {
-    setOpenPRRequestModal(false);
+  const handleClosePROrder = () => {
+    setOpenPROrderModal(false);
   };
 
   return (
     <Box sx={{ m: "5px 20px 20px 20px" }}>
       <PurchaseRequestModal
-        open={openPRRequestModal}
-        handleClose={handleClosePRRequest}
+        open={openPROrderModal}
+        handleClose={handleClosePROrder}
         onSuccess={() => {
-          setOpenPRRequestModal(false);
+          setOpenPROrderModal(false);
           // handleGetAll();
         }}
       />
@@ -40,7 +40,7 @@ export default function PurchaseRequest() {
         alignItems="center"
         sx={{ mb: "40px" }}
       >
-        <Header title="Purchase Request" subtitle="Request for the items" />
+        <Header title="Purchase Order" subtitle="Order the items" />
 
         <Box>
           <Button
@@ -75,7 +75,7 @@ export default function PurchaseRequest() {
         }}
       >
         <Button
-          onClick={handlePRRequest}
+          onClick={handlePROrder}
           sx={{
             display: "flex",
             justifyContent: "center",
@@ -94,7 +94,7 @@ export default function PurchaseRequest() {
           }}
         >
           <AddIcon sx={{ mr: 0.5 }} />
-          Purchase Request
+          Purchase Order
         </Button>
       </Box>
       <Divider>
@@ -104,14 +104,13 @@ export default function PurchaseRequest() {
             fontSize: "25px",
           }}
         >
-          Purchase Request
+          Purchase Order
         </Typography>
       </Divider>
 
       <Box>
-        <PurchaseRequestTable />
+        <PurchaseOrderTable />
       </Box>
-      {/* Contents */}
     </Box>
   );
 }

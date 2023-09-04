@@ -23,6 +23,8 @@ const style = {
 
 export default function PurchaseRequestModal({ open, handleClose, onSuccess }) {
   const [items, setItems] = useState([]);
+  const [compName, setCompName] = useState();
+  const [suppAdd, setSuppAdd] = useState();
 
   const [loading, setLoading] = useState();
   const [error, setError] = useState("");
@@ -72,9 +74,15 @@ export default function PurchaseRequestModal({ open, handleClose, onSuccess }) {
       (item) => item.item_code === formik.values.item_code
     );
 
-    formik?.setFieldValue("company_name", selectedItem?.supplier_company);
-    formik?.setFieldValue("address", selectedItem?.supplier_address);
-  }, [formik.values.item_code]);
+    formik.setFieldValue("company_name", selectedItem?.supplier_company);
+    formik.setFieldValue("address", selectedItem?.supplier_address);
+
+    console.log(formik.values.company_name);
+    console.log(formik.values.address);
+
+    setCompName(selectedItem?.supplier_company);
+    setSuppAdd(selectedItem?.supplier_address);
+  }, [compName]);
 
   return (
     <Modal
@@ -123,7 +131,7 @@ export default function PurchaseRequestModal({ open, handleClose, onSuccess }) {
                   fullWidth
                   sx={{ pr: 5 }}
                   disabled={loading}
-                  value={formik.values.company_name}
+                  value={compName}
                   onBlur={formik.handleBLur}
                   error={
                     formik.touched?.company_name &&
@@ -143,7 +151,7 @@ export default function PurchaseRequestModal({ open, handleClose, onSuccess }) {
                   fullWidth
                   sx={{ pr: 5 }}
                   disabled={loading}
-                  value={formik.values?.address}
+                  value={suppAdd}
                   onBlur={formik.handleBLur}
                   error={
                     formik.touched?.address && Boolean(formik.errors?.address)
