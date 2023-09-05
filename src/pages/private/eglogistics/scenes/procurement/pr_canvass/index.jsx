@@ -1,4 +1,4 @@
-import * as React from "react";
+import React, { useState } from "react";
 import { Box, Button, Grid, useTheme } from "@mui/material";
 import DownloadOutlinedIcon from "@mui/icons-material/DownloadOutlined";
 import Filters from "./filters";
@@ -11,6 +11,27 @@ const { tokens } = themes;
 export default function CanvassSheet() {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
+  const [selectedRow, setSelectedRow] = useState(null);
+
+  const handleRowSelection = (row) => {
+    setSelectedRow(row);
+  };
+
+  // const handleCartButton = () => {
+  //   setError("");
+  //   setLoading(true);
+  //   procurementService
+  //     .addAPI(data, moduleName)
+  //     .then(() => {
+  //       onSuccess?.();
+  //     })
+  //     .catch((err) => {
+  //       setError(err?.message);
+  //     })
+  //     .finally(() => {
+  //       setLoading(false);
+  //     });
+  // };
 
   return (
     <Box sx={{ m: "-5px 20px 20px 20px" }}>
@@ -57,7 +78,7 @@ export default function CanvassSheet() {
         sx={{ backgroundColor: colors.primary[400] }}
       >
         <Grid item xs={2} sx={{ minWidth: "150px" }}>
-          <Filters />
+          <Filters selectedRow={selectedRow} />
         </Grid>
 
         <Grid
@@ -65,7 +86,7 @@ export default function CanvassSheet() {
           xs={10}
           sx={{ borderLeft: "solid 1px #C0C0C0", paddingTop: "20px" }}
         >
-          <CanvasTable />
+          <CanvasTable onRowSelect={handleRowSelection} />
         </Grid>
       </Grid>
     </Box>

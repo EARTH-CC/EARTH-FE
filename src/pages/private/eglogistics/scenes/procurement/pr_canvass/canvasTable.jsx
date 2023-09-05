@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { Box, Divider, Typography } from "@mui/material";
+import PropTypes from "prop-types";
 import AddItemModal from "../../../../../../modal/Procurement/ProcurementLibraries/AddItemModal";
 import procurementService from "../../../../../../services/procurement-service";
 import DataGrid from "../../../../../../components/PrivateComponents/eglogistics/DataGrid";
 
-function CanvasTable() {
+function CanvasTable({ onRowSelect }) {
   const [openItemModal, setOpenItemModal] = useState(false);
   const [items, setItems] = useState([]);
   const [loading, setLoading] = React.useState(false);
-  const selectedValues = [];
 
   const handleCloseItem = () => {
     setOpenItemModal(false);
@@ -27,8 +27,7 @@ function CanvasTable() {
   };
 
   const handleValue = (params) => {
-    selectedValues.push(params.row);
-    console.log(selectedValues);
+    onRowSelect(params);
   };
 
   useEffect(() => {
@@ -43,7 +42,7 @@ function CanvasTable() {
       headerAlign: "left",
       align: "left",
       cellClassName: "name-column--cell",
-      renderCell: (params) => {
+      valueGetter: (params) => {
         handleValue(params);
       },
     },
@@ -113,3 +112,11 @@ function CanvasTable() {
 }
 
 export default CanvasTable;
+
+CanvasTable.defaultProps = {
+  onRowSelect: () => {},
+};
+
+CanvasTable.propTypes = {
+  onRowSelect: PropTypes.func,
+};

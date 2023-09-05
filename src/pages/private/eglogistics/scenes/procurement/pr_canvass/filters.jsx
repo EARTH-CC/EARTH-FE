@@ -8,17 +8,20 @@ import {
   Typography,
   useTheme,
 } from "@mui/material";
+import PropTypes from "prop-types";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import SelectBrand from "components/PrivateComponents/eglogistics/Textfields/SelectBrand";
 import SelectCategory from "components/PrivateComponents/eglogistics/Textfields/SelectCategory";
 import SelectSupplier from "components/PrivateComponents/eglogistics/Textfields/SelectSupplier";
 import CanvassCart from "modal/Procurement/CanvassCart";
+// import procurementService from "services/procurement-service";
 import themes from "../../../../../../themes/theme";
 
 const { tokens } = themes;
 const priceData = [0, 999999]; // MOCK DATA
+// const moduleName = "canvass";
 
-function Filters() {
+function Filters({ selectedRow }) {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
   const [value, setValue] = useState(priceData);
@@ -26,6 +29,8 @@ function Filters() {
   const [brand, setBrand] = useState();
   const [supplier, setSupplier] = useState();
   const [openCartModal, setOpenCartModal] = useState(false);
+
+  const [error, setError] = useState("");
 
   const handleOpenCart = () => {
     setOpenCartModal(true);
@@ -35,12 +40,18 @@ function Filters() {
     setOpenCartModal(false);
   };
 
-  const handleChange = (event, newValue) => {
+  const handleSliderChange = (event, newValue) => {
     setValue(newValue);
   };
 
-  // Gawa ng useEffect dito tas ipasa sa API
-  console.log(brand);
+  const handleAddToCart = () => {
+    if (selectedRow) {
+      setError("");
+      console.log(selectedRow);
+    } else {
+      console.warn(error);
+    }
+  };
 
   return (
     <Box
@@ -151,7 +162,7 @@ function Filters() {
       </Typography>
       <Slider
         value={value}
-        onChange={handleChange}
+        onChange={handleSliderChange}
         min={0}
         max={priceData[1]}
         size="medium"
@@ -193,6 +204,7 @@ function Filters() {
         Slected (0 item): <span style={{ fontSize: "15px" }}>₱</span> 0
       </Typography>
       <Button
+        onClick={handleAddToCart}
         sx={{
           backgroundColor: colors.blueAccent[300],
           color: colors.grey[900],
@@ -215,3 +227,12 @@ function Filters() {
 }
 
 export default Filters;
+
+Filters.defaultProps = {
+  selectedRow: {},
+};
+
+Filters.propTypes = {
+  // eslint-disable-next-line react/forbid-prop-types
+  selectedRow: PropTypes.object,
+};

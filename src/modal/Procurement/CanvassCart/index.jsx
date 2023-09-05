@@ -1,5 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
+import DataGridTable from "components/PrivateComponents/eglogistics/DataGrid";
 import {
   Box,
   Modal,
@@ -39,7 +40,10 @@ export default function CanvassCart({ open, handleClose }) {
         // setError("");
       }}
     >
-      <Box sx={style}>Canvass Cart</Box>
+      <Box sx={style}>
+        Canvass Cart
+        <DataGridTable />
+      </Box>
     </Modal>
   );
 }
