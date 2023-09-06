@@ -77,9 +77,6 @@ export default function PurchaseRequestModal({ open, handleClose, onSuccess }) {
     formik.setFieldValue("company_name", selectedItem?.supplier_company);
     formik.setFieldValue("address", selectedItem?.supplier_address);
 
-    console.log(formik.values.company_name);
-    console.log(formik.values.address);
-
     setCompName(selectedItem?.supplier_company);
     setSuppAdd(selectedItem?.supplier_address);
   }, [compName]);

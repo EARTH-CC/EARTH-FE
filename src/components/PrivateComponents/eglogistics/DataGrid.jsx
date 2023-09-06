@@ -16,6 +16,22 @@ export default function DataGridTable({
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
 
+  const handleRowSelect = (ids) => {
+    const selectedRows = [];
+
+    // eslint-disable-next-line no-restricted-syntax
+    for (const selectedId of ids) {
+      // Find the row with the matching ID and push it to the selectedRows array
+      const selectedRow = data.find((row) => row.uuid === selectedId);
+      if (selectedRow) {
+        selectedRows.push(selectedRow);
+      }
+    }
+
+    // Log the selected rows
+    console.log(selectedRows);
+  };
+
   return (
     <Box
       height="70vh"
@@ -73,6 +89,7 @@ export default function DataGridTable({
         }}
         loading={loadingState}
         checkboxSelection={checkbox}
+        onRowSelectionModelChange={handleRowSelect}
       />
     </Box>
   );
