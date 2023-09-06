@@ -12,6 +12,9 @@ export default function DataGridTable({
   columns,
   loadingState,
   checkbox,
+  getData,
+  height,
+  showSearch,
 }) {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
@@ -28,13 +31,12 @@ export default function DataGridTable({
       }
     }
 
-    // Log the selected rows
-    console.log(selectedRows);
+    getData(selectedRows);
   };
 
   return (
     <Box
-      height="70vh"
+      height={height}
       sx={{
         "& .MuiDataGrid-root": {
           border: "none",
@@ -74,7 +76,7 @@ export default function DataGridTable({
         slots={{ toolbar: GridToolbar }}
         slotProps={{
           toolbar: {
-            showQuickFilter: true,
+            showQuickFilter: showSearch,
             quickFilterProps: { debounceMs: 500 },
           },
         }}
@@ -102,6 +104,9 @@ DataGridTable.defaultProps = {
   loadingState: false,
   // dataReload: () => {},
   checkbox: false,
+  getData: () => {},
+  height: "70vh",
+  showSearch: true,
 };
 
 DataGridTable.propTypes = {
@@ -111,4 +116,7 @@ DataGridTable.propTypes = {
   loadingState: PropTypes.bool,
   checkbox: PropTypes.bool,
   // dataReload: PropTypes.func,
+  getData: PropTypes.func,
+  height: PropTypes.string,
+  showSearch: PropTypes.bool,
 };

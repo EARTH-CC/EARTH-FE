@@ -716,7 +716,7 @@ const mockPurchaseRequest = [
     address: "Present",
     attention: "Charlie Put",
     terms_of_agreement: "WFH",
-    item_code: "07:56:34",
+    item_code: "111AS20230001",
     description: "05:23:12",
     quantity: "--:--:--",
     price: "--:--:--",

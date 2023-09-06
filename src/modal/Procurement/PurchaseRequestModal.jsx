@@ -1,12 +1,16 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import PropTypes from "prop-types";
-import { Box, Button, Grid, Modal, TextField, Typography } from "@mui/material";
-import { useFormik } from "formik";
-import PRRequest, { initialPRRequest } from "validation/pr-request";
+import {
+  Box,
+  Grid,
+  IconButton,
+  Modal,
+  TextField,
+  Typography,
+} from "@mui/material";
+import AddCircleIcon from "@mui/icons-material/AddCircle";
+import DeleteIcon from "@mui/icons-material/Delete";
 import procurementService from "services/procurement-service";
-import SelectItem from "components/PrivateComponents/eglogistics/Textfields/SelectItem";
-import TextFieldDatePicker from "components/PrivateComponents/eglogistics/Textfields/Datepicker";
-import dayjs from "dayjs";
 
 const style = {
   backgroundColor: (themeMode) =>
@@ -15,331 +19,193 @@ const style = {
   top: "50%",
   left: "50%",
   transform: "translate(-50%, -50%)",
-  height: "70vh",
+  height: "80vh",
   width: "60vw",
   boxShadow: 24,
   p: 4,
 };
 
-export default function PurchaseRequestModal({ open, handleClose, onSuccess }) {
-  const [items, setItems] = useState([]);
-  const [compName, setCompName] = useState();
-  const [suppAdd, setSuppAdd] = useState();
+export default function PurchaseRequestModal({
+  data,
+  open,
+  handleClose,
+  onPRChange,
+}) {
+  const [items, setItems] = React.useState([]);
+  const [localPR, setLocalPR] = useState(data);
 
-  const [loading, setLoading] = useState();
-  const [error, setError] = useState("");
-
-  const moduleName = "purchaseRequest";
-
-  const handleGetProducts = () => {
-    setLoading(true);
-    procurementService
-      .getAllAPI("product")
-      .then((e) => {
-        setItems(e);
-      })
-      .finally(() => {
-        setLoading(false);
-      });
+  const handleGetAll = () => {
+    procurementService.getAllAPI("product").then((e) => {
+      setItems(e);
+    });
   };
 
-  const formik = useFormik({
-    initialValues: initialPRRequest,
+  const handleAddPR = () => {
+    const newPR = [
+      ...localPR,
+      {
+        item_code: "",
+        attention: "",
+        quantity: "",
+        price: "",
+        total_amount: "",
+        remarks: "",
+      },
+    ];
+    setLocalPR(newPR);
+    onPRChange(newPR);
+  };
+  const handleDeletePR = (index) => {
+    const newPR = [...localPR];
+    newPR.splice(index, 1);
+    setLocalPR(newPR);
+    onPRChange(newPR);
+  };
 
-    validationSchema: PRRequest,
-    onSubmit: () => {
-      setError("");
-      setLoading(true);
-      procurementService
-        .addAPI(formik.values, moduleName)
-        .then(() => {
-          formik?.resetForm();
-          onSuccess?.();
-        })
-        .catch((err) => {
-          setError(err?.message);
-        })
-        .finally(() => {
-          setLoading(false);
-        });
-    },
-  });
+  const handleChangePRType = (index, event) => {
+    const newPR = [...localPR];
+    newPR[index].description = event.target.value;
+    setLocalPR(newPR);
+    onPRChange(newPR);
+  };
 
-  useEffect(() => {
-    handleGetProducts();
-  }, []);
+  const handleChangePRAmount = (index, event) => {
+    const newPR = [...localPR];
+    newPR[index].value = event.target.value;
+    setLocalPR(newPR);
+    onPRChange(newPR);
+  };
 
-  useEffect(() => {
-    const selectedItem = items.find(
-      (item) => item.item_code === formik.values.item_code
-    );
+  React.useEffect(() => {
+    handleGetAll();
+    setLocalPR(data);
+  }, [data]);
 
-    formik.setFieldValue("company_name", selectedItem?.supplier_company);
-    formik.setFieldValue("address", selectedItem?.supplier_address);
-
-    setCompName(selectedItem?.supplier_company);
-    setSuppAdd(selectedItem?.supplier_address);
-  }, [compName]);
+  const handleDisplayItemName = (itemCode) => {
+    const foundItem = items.find((item) => item.item_code === itemCode);
+    return foundItem ? foundItem.name : "Unexisting";
+  };
 
   return (
     <Modal
       open={open}
       onClose={() => {
         handleClose();
-        formik.resetForm();
-        setError("");
       }}
     >
       <Box sx={style}>
-        <form onSubmit={formik.handleSubmit} autoComplete="off">
-          <Box mb={4}>
-            <Typography variant="h3" fontWeight="bolder" my={2}>
-              Add Supplier
-            </Typography>
-          </Box>
-          <Box mx={2}>
-            <Grid container spacing={2}>
-              <Grid item xs={6}>
-                <SelectItem
-                  label="Select Item"
-                  name="item_code"
-                  disabled={loading}
-                  value={formik.values.item_code}
-                  onChange={(fieldName, selectedValue) => {
-                    formik.setFieldValue(fieldName, selectedValue);
-                  }}
-                  onBlur={formik.handleBlur}
-                  error={
-                    formik.touched.item_code && Boolean(formik.errors.item_code)
-                  }
-                  helperText={
-                    (formik.touched.item_code && formik.errors.item_code) || ""
-                  }
-                  width="100%"
-                  pr={5}
-                />
+        <Box mb={4}>
+          <Typography variant="h3" fontWeight="bolder" my={2}>
+            Purchase Request
+          </Typography>
+          <IconButton variant="contained" color="info" onClick={handleAddPR}>
+            <AddCircleIcon fontSize="large" color="success" sx={{ pl: 0 }} />
+            Add Item
+          </IconButton>
+        </Box>
+        {data?.map((item, index) => (
+          <Box>
+            <Grid
+              sx={{
+                display: "flex",
+                mx: "2vw",
+                justifyContent: "space-between",
+                pb: 4,
+              }}
+            >
+              <Grid sx={{ textAlign: "center" }}>
+                <IconButton
+                  variant="contained"
+                  color="info"
+                  onClick={() => handleDeletePR(index)}
+                  sx={{ mr: 2 }}
+                >
+                  <DeleteIcon color="error" />
+                </IconButton>
               </Grid>
-              <Grid item xs={6}>
+              <Grid
+                sx={{
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center",
+                  width: "15vw",
+                }}
+              >
+                <Typography>{handleDisplayItemName(item.item_code)}</Typography>
+              </Grid>
+              <Grid sx={{ textAlign: "center", width: "15vw" }}>
                 <TextField
-                  label="Company Name"
-                  name="company_name"
-                  variant="outlined"
+                  type="text"
                   size="small"
-                  fullWidth
-                  sx={{ pr: 5 }}
-                  disabled={loading}
-                  value={compName}
-                  onBlur={formik.handleBLur}
-                  error={
-                    formik.touched?.company_name &&
-                    Boolean(formik.errors?.company_name)
-                  }
-                  helperText={
-                    formik.touched?.company_name && formik.errors?.company_name
-                  }
-                />
-              </Grid>
-              <Grid item xs={6}>
-                <TextField
-                  label="Address"
-                  name="address"
-                  variant="outlined"
-                  size="small"
-                  fullWidth
-                  sx={{ pr: 5 }}
-                  disabled={loading}
-                  value={suppAdd}
-                  onBlur={formik.handleBLur}
-                  error={
-                    formik.touched?.address && Boolean(formik.errors?.address)
-                  }
-                  helperText={formik.touched?.address && formik.errors?.address}
-                />
-              </Grid>
-              <Grid item xs={6}>
-                <TextField
                   label="Attention"
-                  name="attention"
-                  variant="outlined"
-                  size="small"
+                  value={item.attention}
+                  onChange={(event) => handleChangePRType(index, event)}
+                  fullWidth
+                />
+              </Grid>
+              <Grid sx={{ textAlign: "center", width: "15vw" }}>
+                <TextField
                   type="number"
-                  fullWidth
-                  sx={{ pr: 5 }}
-                  disabled={loading}
-                  value={formik.values?.attention}
-                  onChange={formik.handleChange}
-                  onBlur={formik.handleBLur}
-                  error={
-                    formik.touched?.attention &&
-                    Boolean(formik.errors?.attention)
-                  }
-                  helperText={
-                    formik.touched?.attention && formik.errors?.attention
-                  }
-                />
-              </Grid>
-              <Grid item xs={6}>
-                <TextField
-                  label="Description"
-                  name="description"
-                  variant="outlined"
                   size="small"
-                  fullWidth
-                  sx={{ pr: 5 }}
-                  disabled={loading}
-                  value={formik.values?.description}
-                  onChange={formik.handleChange}
-                  onBlur={formik.handleBLur}
-                  error={
-                    formik.touched?.description &&
-                    Boolean(formik.errors?.description)
-                  }
-                  helperText={
-                    formik.touched?.description && formik.errors?.description
-                  }
-                />
-              </Grid>
-              <Grid item xs={6}>
-                <TextField
                   label="Quantity"
-                  name="quantity"
-                  variant="outlined"
-                  size="small"
-                  type="number"
+                  value={item.quantity}
+                  onChange={(event) => handleChangePRType(index, event)}
                   fullWidth
-                  sx={{ pr: 5 }}
-                  disabled={loading}
-                  value={formik.values?.quantity}
-                  onChange={formik.handleChange}
-                  onBlur={formik.handleBLur}
-                  error={
-                    formik.touched?.quantity && Boolean(formik.errors?.quantity)
-                  }
-                  helperText={
-                    formik.touched?.quantity && formik.errors?.quantity
-                  }
                 />
               </Grid>
-              <Grid item xs={6}>
+              <Grid sx={{ textAlign: "center", width: "15vw" }}>
                 <TextField
+                  type="number"
+                  size="small"
                   label="Price"
-                  name="price"
-                  variant="outlined"
-                  size="small"
-                  type="number"
+                  value={item.price}
+                  onChange={(event) => handleChangePRType(index, event)}
                   fullWidth
-                  sx={{ pr: 5 }}
-                  disabled={loading}
-                  value={formik.values?.price}
-                  onChange={formik.handleChange}
-                  onBlur={formik.handleBLur}
-                  error={formik.touched?.price && Boolean(formik.errors?.price)}
-                  helperText={formik.touched?.price && formik.errors?.price}
                 />
               </Grid>
-              <Grid item xs={6}>
+              <Grid sx={{ textAlign: "center", width: "15vw" }}>
                 <TextField
+                  type="number"
+                  size="small"
                   label="Total Amount"
-                  name="total_amount"
-                  variant="outlined"
-                  size="small"
-                  type="number"
+                  value={item.total_amount}
+                  onChange={(event) => handleChangePRType(index, event)}
                   fullWidth
-                  sx={{ pr: 5 }}
-                  disabled={loading}
-                  value={formik.values?.total_amount}
-                  onChange={formik.handleChange}
-                  onBlur={formik.handleBLur}
-                  error={
-                    formik.touched?.total_amount &&
-                    Boolean(formik.errors?.total_amount)
-                  }
-                  helperText={
-                    formik.touched?.total_amount && formik.errors?.total_amount
-                  }
                 />
               </Grid>
-              <Grid item xs={6}>
+              <Grid sx={{ textAlign: "center", width: "15vw" }}>
                 <TextField
-                  label="Remarks"
-                  name="remarks"
-                  variant="outlined"
-                  size="small"
                   type="number"
+                  size="small"
+                  label="Remarks"
+                  value={item.remarks}
+                  onChange={(event) => handleChangePRAmount(index, event)}
                   fullWidth
-                  sx={{ pr: 5 }}
-                  disabled={loading}
-                  value={formik.values?.remarks}
-                  onChange={formik.handleChange}
-                  onBlur={formik.handleBLur}
-                  error={
-                    formik.touched?.remarks && Boolean(formik.errors?.remarks)
-                  }
-                  helperText={formik.touched?.remarks && formik.errors?.remarks}
-                />
-              </Grid>
-              <Grid item xs={6}>
-                <TextFieldDatePicker
-                  label="Date"
-                  disabled={loading}
-                  value={formik?.values?.date}
-                  onChange={(evt) =>
-                    formik?.setFieldValue(
-                      "date",
-                      dayjs(evt).format("YYYY-MM-DD"),
-                      true
-                    )
-                  }
-                  width="100%"
-                  pr={5}
-                  variant="outlined"
-                  maxDate={new Date()}
-                  error={
-                    Boolean(formik.touched.date) && Boolean(formik.errors.date)
-                  }
-                  helperText={formik.touched.date && formik.errors.date}
                 />
               </Grid>
             </Grid>
           </Box>
-
-          {error}
-          {open && (
-            <Box sx={{ textAlign: "right", height: 100 }}>
-              <Button
-                type="submit"
-                variant="contained"
-                sx={{ mr: 2, mt: 5, width: 80, backgroundColor: "#6b70c4" }}
-              >
-                Save
-              </Button>
-              <Button
-                variant="contained"
-                sx={{
-                  mr: 2,
-                  mt: 5,
-                  width: 80,
-                  backgroundColor: "#3e4287",
-                }}
-                onClick={handleClose}
-              >
-                Cancel
-              </Button>
-            </Box>
-          )}
-        </form>
+        ))}
+        <Typography sx={{ mt: 4, mx: "10vw", textAlign: "right" }}>
+          Total Items:&nbsp;{" "}
+          {/* eslint-disable-next-line react/destructuring-assignment */}
+          {data?.reduce((total, item) => total + Number(item.total_amount), 0)}
+        </Typography>
       </Box>
     </Modal>
   );
 }
 
 PurchaseRequestModal.defaultProps = {
+  data: [],
   handleClose: () => {},
-  onSuccess: () => {},
+  onPRChange: () => {},
 };
 
 PurchaseRequestModal.propTypes = {
+  // eslint-disable-next-line react/forbid-prop-types
+  data: PropTypes.array,
   open: PropTypes.bool.isRequired,
   handleClose: PropTypes.func,
-  onSuccess: PropTypes.func,
+  onPRChange: PropTypes.func,
 };

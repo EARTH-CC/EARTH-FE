@@ -13,6 +13,8 @@ export default function PurchaseRequest() {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
 
+  const [data, setData] = useState();
+
   const [openPRRequestModal, setOpenPRRequestModal] = useState(false);
 
   const handlePRRequest = () => {
@@ -23,11 +25,17 @@ export default function PurchaseRequest() {
     setOpenPRRequestModal(false);
   };
 
+  const handlePRChange = (newBenefits) => {
+    setData(newBenefits);
+  };
+
   return (
     <Box sx={{ m: "5px 20px 20px 20px" }}>
       <PurchaseRequestModal
+        data={data}
         open={openPRRequestModal}
         handleClose={handleClosePRRequest}
+        onPRChange={handlePRChange}
         onSuccess={() => {
           setOpenPRRequestModal(false);
           // handleGetAll();
@@ -76,6 +84,7 @@ export default function PurchaseRequest() {
       >
         <Button
           onClick={handlePRRequest}
+          disabled={!data}
           sx={{
             display: "flex",
             justifyContent: "center",
@@ -109,7 +118,7 @@ export default function PurchaseRequest() {
       </Divider>
 
       <Box>
-        <PurchaseRequestTable />
+        <PurchaseRequestTable getData={setData} />
       </Box>
       {/* Contents */}
     </Box>

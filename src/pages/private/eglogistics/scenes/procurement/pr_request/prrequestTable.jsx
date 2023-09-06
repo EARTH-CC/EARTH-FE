@@ -1,16 +1,20 @@
 /* eslint-disable no-nested-ternary */
 /* eslint-disable react/no-array-index-key */
 /* eslint-disable react/jsx-boolean-value */
-import React from "react";
+import React, { useState } from "react";
 import { Box } from "@mui/material";
+import PropTypes from "prop-types";
 import DataGrid from "../../../../../../components/PrivateComponents/eglogistics/DataGrid";
 import mockData from "../../../../../../data/mockData";
 // import procurementService from "services/procurement-service";
 
 const { mockPurchaseRequest } = mockData;
 
-export default function PurchaseRequestTable() {
-  //   const [items, setItems] = useState([]);
+export default function PurchaseRequestTable({ getData }) {
+  const [data, setData] = useState();
+
+  getData(data);
+
   //   const [loading, setLoading] = useState(false);
 
   //   const handleGetAll = () => {
@@ -85,7 +89,20 @@ export default function PurchaseRequestTable() {
 
   return (
     <Box>
-      <DataGrid data={mockPurchaseRequest} columns={columns} checkbox={true} />
+      <DataGrid
+        data={mockPurchaseRequest}
+        columns={columns}
+        checkbox={true}
+        getData={setData}
+      />
     </Box>
   );
 }
+
+PurchaseRequestTable.defaultProps = {
+  getData: () => {},
+};
+
+PurchaseRequestTable.propTypes = {
+  getData: PropTypes.func,
+};
