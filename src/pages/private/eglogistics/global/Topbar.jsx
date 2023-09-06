@@ -1,12 +1,13 @@
 /* eslint-disable import/no-duplicates */
 import { Box, IconButton, Typography, useTheme } from "@mui/material";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import LightModeOutlinedIcon from "@mui/icons-material/LightModeOutlined";
 import DarkModeOutlinedIcon from "@mui/icons-material/DarkModeOutlined";
 import NotificationsOutlinedIcon from "@mui/icons-material/NotificationsOutlined";
 import LogoutIcon from "@mui/icons-material/Logout";
 import { useNavigate } from "react-router-dom";
 import GroupOutlinedIcon from "@mui/icons-material/GroupOutlined";
+import RegisterModal from "../../../../modal/RegisterModal";
 import egLogo from "../../../../assets/images/eglogistics.png";
 import themes from "../../../../themes/theme";
 
@@ -17,13 +18,18 @@ function Topbar() {
   const colors = tokens(theme.palette.mode);
   const { toggleColorMode } = useContext(ColorModeContext);
   const navigate = useNavigate();
+  const [open, setOpen] = useState(false);
 
   const handleLogout = () => {
     navigate("/");
   };
 
-  const handleUsers = () => {
-    navigate("/users");
+  const handleOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
   };
 
   return (
@@ -59,7 +65,6 @@ function Topbar() {
         </Typography>
       </Box>
       <Box width="27%" />
-
       {/* ICONS */}
       <Box display="flex">
         <IconButton onClick={toggleColorMode}>
@@ -72,13 +77,14 @@ function Topbar() {
         <IconButton>
           <NotificationsOutlinedIcon />
         </IconButton>
-        <IconButton onClick={handleUsers}>
+        <IconButton onClick={handleOpen}>
           <GroupOutlinedIcon />
         </IconButton>
         <IconButton onClick={handleLogout}>
           <LogoutIcon />
         </IconButton>
       </Box>
+      <RegisterModal handleClose={handleClose} open={open} />
     </Box>
   );
 }

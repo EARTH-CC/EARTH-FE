@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { Box, Divider, Typography } from "@mui/material";
+import PropTypes from "prop-types";
 import AddItemModal from "../../../../../../modal/Procurement/ProcurementLibraries/AddItemModal";
 import procurementService from "../../../../../../services/procurement-service";
 import DataGrid from "../../../../../../components/PrivateComponents/eglogistics/DataGrid";
 
-function CanvasTable() {
+function CanvasTable({ onRowSelect }) {
   const [openItemModal, setOpenItemModal] = useState(false);
   const [items, setItems] = useState([]);
   const [loading, setLoading] = React.useState(false);
@@ -25,6 +26,10 @@ function CanvasTable() {
       });
   };
 
+  const handleValue = (params) => {
+    onRowSelect(params);
+  };
+
   useEffect(() => {
     handleGetAll();
   }, []);
@@ -37,6 +42,9 @@ function CanvasTable() {
       headerAlign: "left",
       align: "left",
       cellClassName: "name-column--cell",
+      valueGetter: (params) => {
+        handleValue(params);
+      },
     },
     {
       field: "item_code",
@@ -69,12 +77,6 @@ function CanvasTable() {
       headerAlign: "left",
       flex: 0.5,
     },
-    {
-      field: "quantity",
-      headerName: "Quantity",
-      headerAlign: "left",
-      flex: 0.5,
-    },
   ];
 
   return (
@@ -98,10 +100,23 @@ function CanvasTable() {
         }}
       />
       <Box>
-        <DataGrid data={items} columns={columns} loadingState={loading} />
+        <DataGrid
+          data={items}
+          columns={columns}
+          loadingState={loading}
+          checkbox
+        />
       </Box>
     </Box>
   );
 }
 
 export default CanvasTable;
+
+CanvasTable.defaultProps = {
+  onRowSelect: () => {},
+};
+
+CanvasTable.propTypes = {
+  onRowSelect: PropTypes.func,
+};

@@ -87,8 +87,8 @@ export default function DataGridTable({
             },
           },
         }}
-        loading={loadingState}
         checkboxSelection={checkbox}
+        loading={loadingState}
         onRowSelectionModelChange={handleRowSelect}
       />
     </Box>
@@ -109,6 +109,6 @@ DataGridTable.propTypes = {
   columns: PropTypes.arrayOf(PropTypes.object),
   // moduleName: PropTypes.string,
   loadingState: PropTypes.bool,
-  // dataReload: PropTypes.func,
   checkbox: PropTypes.bool,
+  // dataReload: PropTypes.func,
 };

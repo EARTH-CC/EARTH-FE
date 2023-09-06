@@ -16,6 +16,7 @@ import {
   PurchaseCanvass,
   PurchaseRequest,
   PurchaseOrder,
+  Transmittal,
   Bontrade,
   UGTrade,
   Erotas,
@@ -60,6 +61,7 @@ function App() {
                 <Route path="/purchase-request" element={<PurchaseRequest />} />
                 <Route path="/purchase-canvass" element={<PurchaseCanvass />} />
                 <Route path="/purchase-order" element={<PurchaseOrder />} />
+                <Route path="/transmittal" element={<Transmittal />} />
               </Route>
 
               <Route element={<RequireAuth allowedRoles="bontrade" />}>

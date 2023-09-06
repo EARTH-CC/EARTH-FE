@@ -132,7 +132,12 @@ function SupplierLibraries() {
         }}
       />
       <Box>
-        <DataGrid data={suppliers} columns={columns} loadingState={loading} />
+        <DataGrid
+          data={suppliers}
+          columns={columns}
+          loadingState={loading}
+          checkbox={false}
+        />
       </Box>
     </Box>
   );

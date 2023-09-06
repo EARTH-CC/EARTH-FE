@@ -287,9 +287,9 @@ export default function Settings() {
             bottom: "10px",
             right: "10px",
             padding: "10px",
-            backgroundColor: "#2979ff",
+            backgroundColor: "#3e4396",
             ":hover": {
-              backgroundColor: "#00bcd4",
+              backgroundColor: "#a4a9fc",
             },
           }}
         >

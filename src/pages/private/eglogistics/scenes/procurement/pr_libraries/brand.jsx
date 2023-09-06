@@ -115,7 +115,12 @@ function BrandLibraries() {
         }}
       />
       <Box>
-        <DataGrid data={brands} columns={columns} loadingState={loading} />
+        <DataGrid
+          data={brands}
+          columns={columns}
+          loadingState={loading}
+          checkbox={false}
+        />
       </Box>
     </Box>
   );
