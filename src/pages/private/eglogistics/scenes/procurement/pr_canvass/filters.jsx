@@ -21,7 +21,7 @@ const { tokens } = themes;
 const priceData = [0, 999999]; // MOCK DATA
 // const moduleName = "canvass";
 
-function Filters({ selectedRow }) {
+function Filters({ addToCart }) {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
   const [value, setValue] = useState(priceData);
@@ -29,8 +29,6 @@ function Filters({ selectedRow }) {
   const [brand, setBrand] = useState();
   const [supplier, setSupplier] = useState();
   const [openCartModal, setOpenCartModal] = useState(false);
-
-  const [error, setError] = useState("");
 
   const handleOpenCart = () => {
     setOpenCartModal(true);
@@ -42,15 +40,6 @@ function Filters({ selectedRow }) {
 
   const handleSliderChange = (event, newValue) => {
     setValue(newValue);
-  };
-
-  const handleAddToCart = () => {
-    if (selectedRow) {
-      setError("");
-      console.log(selectedRow);
-    } else {
-      console.warn(error);
-    }
   };
 
   return (
@@ -204,7 +193,7 @@ function Filters({ selectedRow }) {
         Slected (0 item): <span style={{ fontSize: "15px" }}>₱</span> 0
       </Typography>
       <Button
-        onClick={handleAddToCart}
+        onClick={addToCart}
         sx={{
           backgroundColor: colors.blueAccent[300],
           color: colors.grey[900],
@@ -229,10 +218,9 @@ function Filters({ selectedRow }) {
 export default Filters;
 
 Filters.defaultProps = {
-  selectedRow: {},
+  addToCart: [],
 };
 
 Filters.propTypes = {
-  // eslint-disable-next-line react/forbid-prop-types
-  selectedRow: PropTypes.object,
+  addToCart: PropTypes.func,
 };

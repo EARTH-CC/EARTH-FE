@@ -12,9 +12,13 @@ export default function DataGridTable({
   columns,
   loadingState,
   checkbox,
+<<<<<<< Updated upstream
   getData,
   height,
   showSearch,
+=======
+  selectedData,
+>>>>>>> Stashed changes
 }) {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
@@ -31,7 +35,12 @@ export default function DataGridTable({
       }
     }
 
+<<<<<<< Updated upstream
     getData(selectedRows);
+=======
+    // Log the selected rows
+    selectedData(selectedRows);
+>>>>>>> Stashed changes
   };
 
   return (
@@ -104,9 +113,13 @@ DataGridTable.defaultProps = {
   loadingState: false,
   // dataReload: () => {},
   checkbox: false,
+<<<<<<< Updated upstream
   getData: () => {},
   height: "70vh",
   showSearch: true,
+=======
+  selectedData: [],
+>>>>>>> Stashed changes
 };
 
 DataGridTable.propTypes = {
@@ -115,6 +128,8 @@ DataGridTable.propTypes = {
   // moduleName: PropTypes.string,
   loadingState: PropTypes.bool,
   checkbox: PropTypes.bool,
+  // eslint-disable-next-line react/require-default-props
+  selectedData: PropTypes.arrayOf(PropTypes.object),
   // dataReload: PropTypes.func,
   getData: PropTypes.func,
   height: PropTypes.string,

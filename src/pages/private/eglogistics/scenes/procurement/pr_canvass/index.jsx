@@ -1,37 +1,31 @@
 import React, { useState } from "react";
 import { Box, Button, Grid, useTheme } from "@mui/material";
 import DownloadOutlinedIcon from "@mui/icons-material/DownloadOutlined";
+import procurementService from "services/procurement-service";
 import Filters from "./filters";
 import CanvasTable from "./canvasTable";
 import themes from "../../../../../../themes/theme";
 import Header from "../../../../../../components/PrivateComponents/eglogistics/Header";
 
 const { tokens } = themes;
+const moduleName = "canvass";
 
 export default function CanvassSheet() {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
-  const [selectedRow, setSelectedRow] = useState(null);
+  const [error, setError] = useState("");
+  const [data, setData] = useState();
 
-  const handleRowSelection = (row) => {
-    setSelectedRow(row);
+  const handleAddToCart = () => {
+    try {
+      setError("");
+      procurementService.addAPI(data, moduleName).catch((err) => {
+        setError(err?.message);
+      });
+    } catch (err) {
+      console.warn(error);
+    }
   };
-
-  // const handleCartButton = () => {
-  //   setError("");
-  //   setLoading(true);
-  //   procurementService
-  //     .addAPI(data, moduleName)
-  //     .then(() => {
-  //       onSuccess?.();
-  //     })
-  //     .catch((err) => {
-  //       setError(err?.message);
-  //     })
-  //     .finally(() => {
-  //       setLoading(false);
-  //     });
-  // };
 
   return (
     <Box sx={{ m: "-5px 20px 20px 20px" }}>
@@ -78,7 +72,7 @@ export default function CanvassSheet() {
         sx={{ backgroundColor: colors.primary[400] }}
       >
         <Grid item xs={2} sx={{ minWidth: "150px" }}>
-          <Filters selectedRow={selectedRow} />
+          <Filters addToCart={handleAddToCart} />
         </Grid>
 
         <Grid
@@ -86,7 +80,7 @@ export default function CanvassSheet() {
           xs={10}
           sx={{ borderLeft: "solid 1px #C0C0C0", paddingTop: "20px" }}
         >
-          <CanvasTable onRowSelect={handleRowSelection} />
+          <CanvasTable selectedData={setData} />
         </Grid>
       </Grid>
     </Box>

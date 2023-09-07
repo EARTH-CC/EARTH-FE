@@ -1,14 +1,15 @@
 import React, { useEffect, useState } from "react";
-import { Box, Divider, Typography } from "@mui/material";
 import PropTypes from "prop-types";
+import { Box, Divider, Typography } from "@mui/material";
 import AddItemModal from "../../../../../../modal/Procurement/ProcurementLibraries/AddItemModal";
 import procurementService from "../../../../../../services/procurement-service";
 import DataGrid from "../../../../../../components/PrivateComponents/eglogistics/DataGrid";
 
-function CanvasTable({ onRowSelect }) {
+function CanvasTable({ selectedData }) {
   const [openItemModal, setOpenItemModal] = useState(false);
   const [items, setItems] = useState([]);
   const [loading, setLoading] = React.useState(false);
+  const [data, setData] = useState();
 
   const handleCloseItem = () => {
     setOpenItemModal(false);
@@ -26,9 +27,9 @@ function CanvasTable({ onRowSelect }) {
       });
   };
 
-  const handleValue = (params) => {
-    onRowSelect(params);
-  };
+  useEffect(() => {
+    selectedData(data);
+  }, [data]);
 
   useEffect(() => {
     handleGetAll();
@@ -42,9 +43,6 @@ function CanvasTable({ onRowSelect }) {
       headerAlign: "left",
       align: "left",
       cellClassName: "name-column--cell",
-      valueGetter: (params) => {
-        handleValue(params);
-      },
     },
     {
       field: "item_code",
@@ -105,6 +103,7 @@ function CanvasTable({ onRowSelect }) {
           columns={columns}
           loadingState={loading}
           checkbox
+          selectedData={setData}
         />
       </Box>
     </Box>
@@ -114,9 +113,10 @@ function CanvasTable({ onRowSelect }) {
 export default CanvasTable;
 
 CanvasTable.defaultProps = {
-  onRowSelect: () => {},
+  selectedData: [],
 };
 
 CanvasTable.propTypes = {
-  onRowSelect: PropTypes.func,
+  // eslint-disable-next-line react/forbid-prop-types
+  selectedData: PropTypes.arrayOf(PropTypes.object),
 };
