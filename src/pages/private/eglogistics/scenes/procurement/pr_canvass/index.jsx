@@ -8,7 +8,7 @@ import themes from "../../../../../../themes/theme";
 import Header from "../../../../../../components/PrivateComponents/eglogistics/Header";
 
 const { tokens } = themes;
-const moduleName = "canvass";
+const moduleName = "cart";
 
 export default function CanvassSheet() {
   const theme = useTheme();
@@ -19,7 +19,8 @@ export default function CanvassSheet() {
   const handleAddToCart = () => {
     try {
       setError("");
-      procurementService.addAPI(data, moduleName).catch((err) => {
+      console.log(data);
+      procurementService.addAPI(data[0], moduleName).catch((err) => {
         setError(err?.message);
       });
     } catch (err) {

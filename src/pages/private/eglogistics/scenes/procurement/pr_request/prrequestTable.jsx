@@ -93,7 +93,7 @@ export default function PurchaseRequestTable({ getData }) {
         data={mockPurchaseRequest}
         columns={columns}
         checkbox={true}
-        getData={setData}
+        selectedData={setData}
       />
     </Box>
   );

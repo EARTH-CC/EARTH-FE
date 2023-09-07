@@ -12,7 +12,6 @@ export default function DataGridTable({
   columns,
   loadingState,
   checkbox,
-  getData,
   height,
   showSearch,
   selectedData,
@@ -32,8 +31,6 @@ export default function DataGridTable({
       }
     }
 
-    getData(selectedRows);
-    // Log the selected rows
     selectedData(selectedRows);
   };
 
@@ -107,7 +104,6 @@ DataGridTable.defaultProps = {
   loadingState: false,
   // dataReload: () => {},
   checkbox: false,
-  getData: () => {},
   height: "70vh",
   showSearch: true,
   selectedData: [],
@@ -119,10 +115,9 @@ DataGridTable.propTypes = {
   // moduleName: PropTypes.string,
   loadingState: PropTypes.bool,
   checkbox: PropTypes.bool,
-  // eslint-disable-next-line react/require-default-props
-  selectedData: PropTypes.arrayOf(PropTypes.object),
   // dataReload: PropTypes.func,
-  getData: PropTypes.func,
   height: PropTypes.string,
   showSearch: PropTypes.bool,
+  // eslint-disable-next-line react/require-default-props
+  selectedData: PropTypes.arrayOf(PropTypes.object),
 };
