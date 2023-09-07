@@ -1,6 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
 import { Box, Button, Divider, Typography, useTheme } from "@mui/material";
+import AddIcon from "@mui/icons-material/Add";
 import DownloadOutlinedIcon from "@mui/icons-material/DownloadOutlined";
+import PurchaseOrderModal from "modal/Procurement/AddPoModal";
 import Header from "../../../../../../components/PrivateComponents/eglogistics/Header";
 import themes from "../../../../../../themes/theme";
 import PurchaseOrderTable from "./prorderTable";
@@ -11,14 +13,25 @@ export default function PurchaseOrder() {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
 
+  const [open, setOpen] = useState(false);
+
+  const handleOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+
   return (
     <Box sx={{ m: "5px 20px 20px 20px" }}>
+      <PurchaseOrderModal handleClose={handleClose} open={open} />
       {/* HEADER */}
       <Box
         display="flex"
         justifyContent="space-between"
         alignItems="center"
-        sx={{ mb: "20px" }}
+        sx={{ mb: "40px" }}
       >
         <Header title="Purchase Order" subtitle="Purchase order subtitle" />
 
@@ -44,6 +57,37 @@ export default function PurchaseOrder() {
             Download Reports
           </Button>
         </Box>
+      </Box>
+      <Box
+        sx={{
+          display: "flex",
+          justifyContent: "end",
+          position: "absolute",
+          zIndex: 1,
+        }}
+      >
+        <Button
+          onClick={handleOpen}
+          sx={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            width: 200,
+            cursor: "pointer",
+            fontWeight: "bold",
+            backgroundColor: (themeMode) =>
+              themeMode.palette.mode === "dark" ? "#334b5f" : "lightgray",
+            color: colors.grey[100],
+            "&:hover": {
+              textShadow: "0 0 0.5rem rgba(255, 255, 255, 0.75)",
+              color: "#fff",
+              backgroundColor: "gray",
+            },
+          }}
+        >
+          <AddIcon sx={{ mr: 0.5 }} />
+          Purchase Order
+        </Button>
       </Box>
       <Divider>
         <Typography

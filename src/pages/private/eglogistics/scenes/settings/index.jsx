@@ -27,9 +27,7 @@ export default function Settings() {
 
   const [selectedTab, setSelectedTab] = useState(0);
   const [givenName, setGivenName] = useState("Liam");
-  const [middleName, setMiddleName] = useState("Rosatase");
   const [lastName, setLastName] = useState("Florida");
-  const [mobileNumber, setMobileNumber] = useState("09121231234");
   const [email, setEmail] = useState("liamflorida3@gmail.com");
   const [oldPassword, setOldPassword] = useState("hotdog1234567");
   const [password, setPassword] = useState("");
@@ -104,7 +102,7 @@ export default function Settings() {
                   Personal Information
                 </Typography>
                 <Grid container spacing={4}>
-                  <Grid item xs={6}>
+                  <Grid item xs={12}>
                     <TextField
                       label="Given Name"
                       fullWidth
@@ -112,28 +110,12 @@ export default function Settings() {
                       onChange={(e) => setGivenName(e.target.value)}
                     />
                   </Grid>
-                  <Grid item xs={6}>
-                    <TextField
-                      label="Middle Name"
-                      fullWidth
-                      value={middleName}
-                      onChange={(e) => setMiddleName(e.target.value)}
-                    />
-                  </Grid>
-                  <Grid item xs={6}>
+                  <Grid item xs={12}>
                     <TextField
                       label="Last Name"
                       fullWidth
                       value={lastName}
                       onChange={(e) => setLastName(e.target.value)}
-                    />
-                  </Grid>
-                  <Grid item xs={6}>
-                    <TextField
-                      label="Mobile Number"
-                      fullWidth
-                      value={mobileNumber}
-                      onChange={(e) => setMobileNumber(e.target.value)}
                     />
                   </Grid>
                 </Grid>

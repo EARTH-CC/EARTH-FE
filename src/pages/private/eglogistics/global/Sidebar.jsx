@@ -117,10 +117,10 @@ function Sidebar() {
                   fontWeight="bold"
                   sx={{ m: "10px 0 0 0" }}
                 >
-                  User Name
+                  username
                 </Typography>
                 <Typography variant="h5" color="#C9BF81">
-                  User Role
+                  role
                 </Typography>
               </Box>
             </Box>

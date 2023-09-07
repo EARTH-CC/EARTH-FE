@@ -75,17 +75,15 @@ export default function RegisterModal({ open, handleClose }) {
       <Box>
         <Box
           sx={{
+            backgroundColor: (themeMode) =>
+              themeMode.palette.mode === "dark" ? "#1f2a40" : "#fff",
             position: "absolute",
             top: "50%",
             left: "50%",
-            right: "50%",
-            bottom: "50%",
             transform: "translate(-50%, -50%)",
             height: "77vh",
-            width: "500px",
-            backgroundColor: "white",
+            width: "37vw",
             borderRadius: "5px",
-            boxShadow: 24,
             py: "40px",
             px: "50px",
           }}
