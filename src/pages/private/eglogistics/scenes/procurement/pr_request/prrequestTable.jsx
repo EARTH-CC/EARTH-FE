@@ -10,7 +10,7 @@ import mockData from "../../../../../../data/mockData";
 
 const { mockPurchaseRequest } = mockData;
 
-export default function PurchaseRequestTable({ getData }) {
+export default function PurchaseRequestTable({ getData, loadingState }) {
   const [data, setData] = useState();
 
   getData(data);
@@ -94,6 +94,7 @@ export default function PurchaseRequestTable({ getData }) {
         columns={columns}
         checkbox={true}
         selectedData={setData}
+        loadingState={loadingState}
       />
     </Box>
   );
@@ -101,8 +102,10 @@ export default function PurchaseRequestTable({ getData }) {
 
 PurchaseRequestTable.defaultProps = {
   getData: () => {},
+  loadingState: false,
 };
 
 PurchaseRequestTable.propTypes = {
   getData: PropTypes.func,
+  loadingState: PropTypes.bool,
 };

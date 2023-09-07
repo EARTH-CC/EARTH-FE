@@ -47,13 +47,14 @@ export default function SelectItem({
 
     setFilteredItems(filtered);
   };
+
   return (
     <Autocomplete
       id="item-autocomplete"
       options={filteredItems}
       getOptionLabel={(item) => item.name}
       onInputChange={handleFilterChange}
-      value={items.find((item) => item.item_code === value) || null}
+      value={items.find((item) => item.name === value) || null}
       onChange={(event, newValue) => {
         onChange?.(name, newValue?.item_code || ""); // Pass the name and selected value to the parent component
       }}
@@ -66,7 +67,7 @@ export default function SelectItem({
           name={name}
           variant="outlined"
           size="small"
-          value={value}
+          value={value || ""}
           onChange={(newValue) => {
             onChange?.(newValue);
           }}

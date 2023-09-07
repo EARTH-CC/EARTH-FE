@@ -3,6 +3,7 @@ import { Box, Button, Divider, Typography, useTheme } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
 import DownloadOutlinedIcon from "@mui/icons-material/DownloadOutlined";
 import PurchaseRequestModal from "modal/Procurement/PurchaseRequestModal";
+import procurementService from "services/procurement-service";
 import Header from "../../../../../../components/PrivateComponents/eglogistics/Header";
 import themes from "../../../../../../themes/theme";
 import PurchaseRequestTable from "./prrequestTable";
@@ -17,17 +18,44 @@ export default function PurchaseRequest() {
 
   const [openPRRequestModal, setOpenPRRequestModal] = useState(false);
 
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
+
   const handlePRRequest = () => {
     setOpenPRRequestModal(true);
   };
 
   const handleClosePRRequest = () => {
     setOpenPRRequestModal(false);
+    setError("");
   };
 
-  const handlePRChange = (newBenefits) => {
-    setData(newBenefits);
+  const handlePRChange = (newPR) => {
+    setData(newPR);
   };
+
+  const handleSubmit = () => {
+    setError("");
+    setLoading(true);
+
+    const PRItems = { items: data };
+    console.log(PRItems);
+
+    procurementService
+      .addAPI(PRItems, "purchaseRequest")
+      .then(() => {
+        setOpenPRRequestModal(false);
+        // handleGetAll();
+      })
+      .catch((err) => {
+        setError(err?.message);
+      })
+      .finally(() => {
+        setLoading(false);
+      });
+  };
+
+  console.log(data);
 
   return (
     <Box sx={{ m: "5px 20px 20px 20px" }}>
@@ -36,10 +64,8 @@ export default function PurchaseRequest() {
         open={openPRRequestModal}
         handleClose={handleClosePRRequest}
         onPRChange={handlePRChange}
-        onSuccess={() => {
-          setOpenPRRequestModal(false);
-          // handleGetAll();
-        }}
+        onSubmit={handleSubmit}
+        error={error}
       />
       {/* HEADER */}
       <Box
@@ -84,7 +110,6 @@ export default function PurchaseRequest() {
       >
         <Button
           onClick={handlePRRequest}
-          disabled={!data}
           sx={{
             display: "flex",
             justifyContent: "center",
@@ -118,7 +143,7 @@ export default function PurchaseRequest() {
       </Divider>
 
       <Box>
-        <PurchaseRequestTable getData={setData} />
+        <PurchaseRequestTable loadingState={loading} />
       </Box>
       {/* Contents */}
     </Box>
