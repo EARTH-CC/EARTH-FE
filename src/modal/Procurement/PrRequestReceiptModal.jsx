@@ -17,7 +17,7 @@ import html2canvas from "html2canvas";
 import JsPDF from "jspdf";
 import bontrade from "../../assets/bontrade.png";
 import eg from "../../assets/eglogistics.png";
-import earth from "../../assets/images/logo.png";
+import earth from "../../assets/images/logo3.png";
 
 function PrRequestReceiptModal({
   prNum,
