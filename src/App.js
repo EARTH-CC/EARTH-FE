@@ -46,10 +46,6 @@ function App() {
             <Route path="/sign-in" element={<Login />} />
             <Route path="/waterfront" element={<Waterfront />} />
 
-            <Route path="/" element={<Layout />}>
-              {/* <Route path="/dashboard" element={<Dashboard />} /> */}
-            </Route>
-
             <Route element={<RequireAuth allowedRoles="superadmin" />}>
               <Route path="/" element={<Layout />}>
                 <Route path="/dashboard" element={<Dashboard />} />

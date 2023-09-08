@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Box, Button, Divider, Typography, useTheme } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
 import DownloadOutlinedIcon from "@mui/icons-material/DownloadOutlined";
@@ -7,6 +7,7 @@ import procurementService from "services/procurement-service";
 import Header from "../../../../../../components/PrivateComponents/eglogistics/Header";
 import themes from "../../../../../../themes/theme";
 import PurchaseRequestTable from "./prrequestTable";
+import SnackbarComponent from "../../../../../../components/PrivateComponents/SnackBarComponent";
 
 const { tokens } = themes;
 
@@ -14,9 +15,22 @@ export default function PurchaseRequest() {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
 
+  // ito ung kumukuha ng mga rows na naselect sa table para maidisplay ung total
+  const [PR, setPR] = useState();
+
+  // ito ung naghahahandle ng mga items sa modal
   const [data, setData] = useState();
 
+  // ito ung kumukuha ng data mula sa api para mailagay sa table
+  const [PRData, setPRData] = useState([]);
+
+  // ito ung naghahahandle ng nakastructure na na object para maipost sa purchaseRequest
+  const [PRValues, setPRValues] = useState();
+
   const [openPRRequestModal, setOpenPRRequestModal] = useState(false);
+
+  const [openSuccess, setOpenSuccess] = useState(false);
+  const [openError, setOpenError] = useState(false);
 
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
@@ -34,36 +48,70 @@ export default function PurchaseRequest() {
     setData(newPR);
   };
 
-  const handleSubmit = () => {
-    setError("");
+  const handleGetAll = () => {
     setLoading(true);
-
-    const PRItems = { items: data };
-    console.log(PRItems);
-
     procurementService
-      .addAPI(PRItems, "purchaseRequest")
-      .then(() => {
-        setOpenPRRequestModal(false);
-        // handleGetAll();
-      })
-      .catch((err) => {
-        setError(err?.message);
+      .getAllAPI("purchaseRequest")
+      .then((e) => {
+        setPRData(e);
       })
       .finally(() => {
         setLoading(false);
       });
   };
 
-  console.log(data);
+  const handleSubmit = () => {
+    setError("");
+    setLoading(true);
+
+    procurementService
+      .addAPI(PRValues, "purchaseRequest")
+      .then(() => {
+        setOpenPRRequestModal(false);
+        handleGetAll();
+        setOpenSuccess(true);
+      })
+      .catch((err) => {
+        setError(err?.message);
+        setOpenError(true);
+      })
+      .finally(() => {
+        setLoading(false);
+      });
+  };
+
+  const handleCloseSuccess = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+    setOpenSuccess(false);
+  };
+
+  const handleCloseError = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+    setOpenError(false);
+  };
+
+  useEffect(() => {
+    handleGetAll();
+  }, []);
+
+  const handleTotal = (evt) => {
+    // Use reduce to calculate the total sum of total_amount in the compute array
+    const total = evt?.reduce((acc, item) => acc + item.total_amount, 0);
+    return total || 0;
+  };
 
   return (
-    <Box sx={{ m: "5px 20px 20px 20px" }}>
+    <Box sx={{ m: "-5px 20px 20px 20px" }}>
       <PurchaseRequestModal
         data={data}
         open={openPRRequestModal}
         handleClose={handleClosePRRequest}
         onPRChange={handlePRChange}
+        setPRValues={setPRValues}
         onSubmit={handleSubmit}
         error={error}
       />
@@ -72,7 +120,7 @@ export default function PurchaseRequest() {
         display="flex"
         justifyContent="space-between"
         alignItems="center"
-        sx={{ mb: "40px" }}
+        sx={{ mb: "20px" }}
       >
         <Header title="Purchase Request" subtitle="Request for the items" />
 
@@ -131,6 +179,18 @@ export default function PurchaseRequest() {
           Purchase Request
         </Button>
       </Box>
+      <Box
+        sx={{
+          right: 0,
+          mr: 2,
+          position: "absolute",
+          zIndex: 1,
+        }}
+      >
+        <Typography sx={{ mt: -0.5, textAlign: "right", fontSize: "15px" }}>
+          Total Amount (of selected row/s): <br /> <b> {handleTotal(PR)}</b>
+        </Typography>
+      </Box>
       <Divider>
         <Typography
           sx={{
@@ -143,9 +203,24 @@ export default function PurchaseRequest() {
       </Divider>
 
       <Box>
-        <PurchaseRequestTable loadingState={loading} />
+        <PurchaseRequestTable
+          PRData={PRData}
+          getData={setPR}
+          loadingState={loading}
+        />
       </Box>
-      {/* Contents */}
+      <SnackbarComponent
+        open={openSuccess}
+        onClose={handleCloseSuccess}
+        severity="success"
+        message="Request Successful."
+      />
+      <SnackbarComponent
+        open={openError}
+        onClose={handleCloseError}
+        severity="error"
+        message="Request failed."
+      />
     </Box>
   );
 }

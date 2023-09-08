@@ -5,29 +5,15 @@ import React, { useState } from "react";
 import { Box } from "@mui/material";
 import PropTypes from "prop-types";
 import DataGrid from "../../../../../../components/PrivateComponents/eglogistics/DataGrid";
-import mockData from "../../../../../../data/mockData";
-// import procurementService from "services/procurement-service";
 
-const { mockPurchaseRequest } = mockData;
-
-export default function PurchaseRequestTable({ getData, loadingState }) {
+export default function PurchaseRequestTable({
+  PRData,
+  getData,
+  loadingState,
+}) {
   const [data, setData] = useState();
 
   getData(data);
-
-  //   const [loading, setLoading] = useState(false);
-
-  //   const handleGetAll = () => {
-  //     setLoading(true);
-  //     procurementService
-  //       .getAllAPI("product")
-  //       .then((e) => {
-  //         setItems(e);
-  //       })
-  //       .finally(() => {
-  //         setLoading(false);
-  //       });
-  //   };
 
   const columns = [
     {
@@ -36,18 +22,8 @@ export default function PurchaseRequestTable({ getData, loadingState }) {
       flex: 1,
     },
     {
-      field: "date",
-      headerName: "DATE",
-      flex: 1,
-    },
-    {
       field: "company_name",
       headerName: "COMPANY NAME",
-      flex: 1,
-    },
-    {
-      field: "address",
-      headerName: "ADDRESS",
       flex: 1,
     },
     {
@@ -77,12 +53,7 @@ export default function PurchaseRequestTable({ getData, loadingState }) {
     },
     {
       field: "total_amount",
-      headerName: "TOTAL AMOUNT",
-      flex: 1,
-    },
-    {
-      field: "remarks",
-      headerName: "REMARKS",
+      headerName: "SUBTOTAL",
       flex: 1,
     },
   ];
@@ -90,22 +61,26 @@ export default function PurchaseRequestTable({ getData, loadingState }) {
   return (
     <Box>
       <DataGrid
-        data={mockPurchaseRequest}
+        data={PRData}
         columns={columns}
         checkbox={true}
         selectedData={setData}
         loadingState={loadingState}
+        height="60vh"
       />
     </Box>
   );
 }
 
 PurchaseRequestTable.defaultProps = {
+  PRData: [],
   getData: () => {},
   loadingState: false,
 };
 
 PurchaseRequestTable.propTypes = {
+  // eslint-disable-next-line react/forbid-prop-types
+  PRData: PropTypes.array,
   getData: PropTypes.func,
   loadingState: PropTypes.bool,
 };

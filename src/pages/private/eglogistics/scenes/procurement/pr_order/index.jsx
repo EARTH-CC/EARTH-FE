@@ -24,14 +24,14 @@ export default function PurchaseOrder() {
   };
 
   return (
-    <Box sx={{ m: "5px 20px 20px 20px" }}>
+    <Box sx={{ m: "-5px 20px 20px 20px" }}>
       <PurchaseOrderModal handleClose={handleClose} open={open} />
       {/* HEADER */}
       <Box
         display="flex"
         justifyContent="space-between"
         alignItems="center"
-        sx={{ mb: "40px" }}
+        sx={{ mb: "20px" }}
       >
         <Header title="Purchase Order" subtitle="Purchase order subtitle" />
 
