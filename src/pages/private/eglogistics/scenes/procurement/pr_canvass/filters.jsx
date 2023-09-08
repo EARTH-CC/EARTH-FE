@@ -9,6 +9,7 @@ import {
   useTheme,
 } from "@mui/material";
 import PropTypes from "prop-types";
+import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import SelectBrand from "components/PrivateComponents/eglogistics/Textfields/SelectBrand";
 import SelectCategory from "components/PrivateComponents/eglogistics/Textfields/SelectCategory";
@@ -80,27 +81,47 @@ function Filters({ addToCart, selectedData, cartTotal }) {
         onClick={handleOpenCart}
         sx={{
           "&:hover": {
-            backgroundColor: "rgba(0, 0, 0, 0)",
+            color: colors.blueAccent[700],
           },
         }}
       >
-        <ShoppingCartIcon
+        <ShoppingCartOutlinedIcon
           sx={{
             color: colors.blueAccent[300],
-            fontSize: 45,
+            fontSize: 55,
             alignSelf: "center",
-            "&:hover": {
-              color: colors.blueAccent[700],
-            },
           }}
         />
+        {cartTotal.items > 0 ? (
+          <Box
+            mt="-2.5rem"
+            ml="-1.7rem"
+            sx={{
+              borderRadius: "50%",
+              backgroundColor: colors.redAccent[500],
+              px: "0.8rem",
+              py: "0.01rem",
+            }}
+          >
+            <Typography
+              fontWeight="900"
+              fontSize="15px"
+              color={colors.primary[400]}
+            >
+              {cartTotal.items}
+            </Typography>
+          </Box>
+        ) : null}
       </IconButton>
 
       <Divider variant="middle" />
-      <Typography fontSize="small" fontWeight="600">
-        Total ({cartTotal ? cartTotal.items : 0}):{" "}
-        <span style={{ fontSize: "15px" }}>₱</span>{" "}
-        {cartTotal ? cartTotal.total_price : 0}
+      <Typography
+        fontSize="small"
+        fontWeight="600"
+        color={cartTotal.items > 0 ? colors.greenAccent[300] : "black"}
+      >
+        Total: <span style={{ fontSize: "15px" }}>₱</span>{" "}
+        {cartTotal.total_price > 0 ? cartTotal.total_price : 0}
       </Typography>
       <Divider variant="middle" />
       <Typography
@@ -192,7 +213,13 @@ function Filters({ addToCart, selectedData, cartTotal }) {
         variant="middle"
         sx={{ borderTopWidth: "1px", borderTopColor: "black" }}
       />
-      <Typography fontSize="small" fontWeight="600">
+      <Typography
+        fontSize="small"
+        fontWeight="600"
+        color={
+          selectedData.length > 0 ? colors.greenAccent[300] : colors.grey[100]
+        }
+      >
         Selected ({selectedData ? selectedData.length : 0}{" "}
         {selectedData.length > 1 ? "items" : "item"}):{" "}
         <span style={{ fontSize: "15px" }}>₱</span>{" "}
