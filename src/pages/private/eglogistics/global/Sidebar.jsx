@@ -8,7 +8,10 @@ import MenuOutlinedIcon from "@mui/icons-material/MenuOutlined";
 import { useNavigate } from "react-router-dom";
 import { ProSidebar, MenuItem, Menu } from "react-pro-sidebar";
 import { useStateContext } from "contexts/ContextProvider";
-import userImg from "../../../../assets/images/userlogo.png";
+import body2 from "../../../../assets/images/Body2.png";
+import face1 from "../../../../assets/images/face1.png";
+import face2 from "../../../../assets/images/face2.png";
+import face3 from "../../../../assets/images/face3.png";
 import themes from "../../../../themes/theme";
 import links from "./sidebarlinks";
 import "react-pro-sidebar/dist/css/styles.css";
@@ -102,13 +105,14 @@ function Sidebar() {
                 alignItems="center"
                 onClick={handleSettings}
               >
-                <img
-                  alt="profile-user"
-                  width="100px"
-                  height="100px"
-                  src={userImg}
-                  style={{ cursor: "pointer", borderRadius: "50%" }}
-                />
+                <div className="image-container">
+                  <div className="image">
+                    <img alt="body" className="avatar" src={body2} />
+                    <img alt="face1" className="face face-1" src={face1} />
+                    <img alt="face2" className="face face-2" src={face2} />
+                    <img alt="face3" className="face face-3" src={face3} />
+                  </div>
+                </div>
               </Box>
               <Box textAlign="center">
                 <Typography
