@@ -132,9 +132,13 @@ export default function CanvassCart({ open, handleClose, cartTotal }) {
             p: "1em",
           }}
         >
-          <Typography fontSize="small" fontWeight="900" color="red">
-            Total Payment ({cartTotal ? cartTotal.items : 0}):{" "}
-            <span style={{ fontSize: "15px" }}>₱</span>{" "}
+          <Typography
+            fontSize="medium"
+            fontWeight="900"
+            sx={{ letterSpacing: "0.05em", fontFamily: "Poppins, sans-serif" }}
+          >
+            Subtotal Payment ({cartTotal ? cartTotal.items : 0}):{" "}
+            <span style={{ fontSize: "18px" }}>₱</span>{" "}
             {cartTotal ? cartTotal.total_price : 0}
           </Typography>
           <Button
