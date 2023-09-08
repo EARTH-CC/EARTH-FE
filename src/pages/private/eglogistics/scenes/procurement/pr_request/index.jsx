@@ -179,7 +179,7 @@ export default function PurchaseRequest() {
           Purchase Request
         </Button>
       </Box>
-      <Box
+      {/* <Box
         sx={{
           right: 0,
           mr: 2,
@@ -190,7 +190,7 @@ export default function PurchaseRequest() {
         <Typography sx={{ mt: -0.5, textAlign: "right", fontSize: "15px" }}>
           Total Amount (of selected row/s): <br /> <b> {handleTotal(PR)}</b>
         </Typography>
-      </Box>
+      </Box> */}
       <Divider>
         <Typography
           sx={{
@@ -208,6 +208,15 @@ export default function PurchaseRequest() {
           getData={setPR}
           loadingState={loading}
         />
+      </Box>
+      <Box
+        sx={{
+          p: 2,
+        }}
+      >
+        <Typography sx={{ textAlign: "right", fontSize: "15px" }}>
+          Total Amount (of selected row/s): <br /> <b> {handleTotal(PR)}</b>
+        </Typography>
       </Box>
       <SnackbarComponent
         open={openSuccess}

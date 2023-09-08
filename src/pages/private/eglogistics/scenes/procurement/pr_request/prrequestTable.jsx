@@ -32,28 +32,18 @@ export default function PurchaseRequestTable({
       flex: 1,
     },
     {
-      field: "item_code",
-      headerName: "ITEM CODE",
-      flex: 1,
-    },
-    {
-      field: "description",
-      headerName: "DESCRIPTION",
-      flex: 1,
-    },
-    {
-      field: "quantity",
-      headerName: "QUANTITY",
-      flex: 1,
-    },
-    {
-      field: "price",
-      headerName: "PRICE",
+      field: "item_count",
+      headerName: "ITEM COUNT",
       flex: 1,
     },
     {
       field: "total_amount",
-      headerName: "SUBTOTAL",
+      headerName: "TOTAL AMOUNT",
+      flex: 1,
+    },
+    {
+      field: "remarks",
+      headerName: "REMARKS",
       flex: 1,
     },
   ];

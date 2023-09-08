@@ -195,6 +195,15 @@ export default function PurchaseRequestModal({
     setLocalPR(data);
   }, [data]);
 
+  //   const handleValidation = () => {
+  // const isSpecified = data.map((pr) => {
+  //   return pr.
+  // })
+
+  //   };
+
+  console.log(data);
+
   return (
     <Modal
       open={open}
@@ -318,7 +327,7 @@ export default function PurchaseRequestModal({
                 <TextField
                   size="small"
                   label="Price"
-                  value={item.price || "Not yet specified"}
+                  value={item.price || "Item not specified"}
                   fullWidth
                 />
               </Grid>
@@ -338,7 +347,13 @@ export default function PurchaseRequestModal({
           <Box sx={{ textAlign: "right", height: 100 }}>
             <Button
               variant="contained"
-              disabled={data.length === 0}
+              disabled={
+                data.length === 0 ||
+                compName === "" ||
+                address === "" ||
+                remarks === "" ||
+                attention === ""
+              }
               onClick={onSubmit}
               sx={{ mr: 2, mt: 5, width: 80, backgroundColor: "#6b70c4" }}
             >
