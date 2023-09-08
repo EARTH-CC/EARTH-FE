@@ -5,7 +5,7 @@ import PropTypes from "prop-types";
 import MenuOutlinedIcon from "@mui/icons-material/MenuOutlined";
 import { ProSidebar, MenuItem, Menu } from "react-pro-sidebar";
 import { useStateContext } from "contexts/ContextProvider";
-import body2 from "../../../../assets/images/Body2.png";
+import body from "../../../../assets/images/Body.png";
 import face1 from "../../../../assets/images/face1.png";
 import face2 from "../../../../assets/images/face2.png";
 import face3 from "../../../../assets/images/face3.png";
@@ -104,7 +104,7 @@ function Sidebar() {
               >
                 <div className="image-container">
                   <div className="image">
-                    <img alt="body" className="avatar" src={body2} />
+                    <img alt="body" className="avatar" src={body} />
                     <img alt="face1" className="face face-1" src={face1} />
                     <img alt="face2" className="face face-2" src={face2} />
                     <img alt="face3" className="face face-3" src={face3} />
