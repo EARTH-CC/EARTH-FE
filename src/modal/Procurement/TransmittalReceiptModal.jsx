@@ -19,15 +19,17 @@ import bontrade from "../../assets/bontrade.png";
 import eg from "../../assets/eglogistics.png";
 import earth from "../../assets/images/logo3.png";
 
-function PrRequestReceiptModal({
-  prNum,
-  company,
-  location,
-  attention,
-  date,
+function TransmittalReceiptModal({
+  tfNum,
+  to,
+  toAddress,
+  toContact,
+  from,
+  fromAddress,
+  fromContact,
+  billingDate,
+  purpose,
   items,
-  subTotal,
-  total,
   open,
   handleClose,
 }) {
@@ -39,7 +41,7 @@ function PrRequestReceiptModal({
       const componentWidth = doc.internal.pageSize.getWidth();
       const componentHeight = doc.internal.pageSize.getHeight();
       doc.addImage(imgData, "PNG", 0, 0, componentWidth, componentHeight);
-      doc.save("purchase-request-receipt.pdf");
+      doc.save("transmittal-receipt.pdf");
     });
   };
   document.addEventListener("contextmenu", (e) => {
@@ -152,7 +154,7 @@ function PrRequestReceiptModal({
                   textAlign: "right",
                 }}
               >
-                Purchase Request Form
+                Transmittal Form
               </Typography>
               <Typography
                 sx={{
@@ -162,7 +164,7 @@ function PrRequestReceiptModal({
                   textAlign: "right",
                 }}
               >
-                <b>PRF NO.</b> {prNum}
+                <b>TF NO.</b> {tfNum}
               </Typography>
             </Grid>
           </Grid>
@@ -175,10 +177,10 @@ function PrRequestReceiptModal({
                     fontWeight: "bold",
                     textTransform: "uppercase",
                     color: "black",
-                    mr: "2em",
+                    mr: "7em",
                   }}
                 >
-                  Company
+                  To
                 </Typography>
                 <Typography
                   sx={{
@@ -186,7 +188,7 @@ function PrRequestReceiptModal({
                     color: "black",
                   }}
                 >
-                  {company}
+                  {to}
                 </Typography>
               </Grid>
               <Grid xs={12} display="flex" flexDirection="row">
@@ -197,10 +199,10 @@ function PrRequestReceiptModal({
                     textTransform: "uppercase",
                     color: "black",
                     mt: "3px",
-                    mr: "2em",
+                    mr: "51px",
                   }}
                 >
-                  Location
+                  Address
                 </Typography>
                 <Typography
                   sx={{
@@ -209,7 +211,7 @@ function PrRequestReceiptModal({
                     mt: "3px",
                   }}
                 >
-                  {location}
+                  {toAddress}
                 </Typography>
               </Grid>
               <Grid xs={12} display="flex" flexDirection="row">
@@ -223,7 +225,7 @@ function PrRequestReceiptModal({
                     mr: "21px",
                   }}
                 >
-                  Attention
+                  Contact No.
                 </Typography>
                 <Typography
                   sx={{
@@ -232,29 +234,70 @@ function PrRequestReceiptModal({
                     mt: "3px",
                   }}
                 >
-                  {attention}
+                  {toContact}
                 </Typography>
               </Grid>
-              <Grid xs={12}>
+              <Grid xs={12} display="flex" flexDirection="row" mt="1em">
                 <Typography
                   sx={{
-                    fontSize: "13px",
+                    fontSize: "15px",
+                    fontWeight: "bold",
+                    textTransform: "uppercase",
                     color: "black",
-                    mt: "15px",
+                    mr: "80px",
                   }}
                 >
-                  Dear Sir,
+                  From
+                </Typography>
+                <Typography
+                  sx={{
+                    fontSize: "15px",
+                    color: "black",
+                  }}
+                >
+                  {from}
                 </Typography>
               </Grid>
-              <Grid xs={12}>
+              <Grid xs={12} display="flex" flexDirection="row">
                 <Typography
                   sx={{
-                    fontSize: "13px",
+                    fontSize: "15px",
+                    fontWeight: "bold",
+                    textTransform: "uppercase",
                     color: "black",
-                    mt: "10px",
+                    mr: "51px",
                   }}
                 >
-                  Please deliver to us the following items:
+                  Address
+                </Typography>
+                <Typography
+                  sx={{
+                    fontSize: "15px",
+                    color: "black",
+                  }}
+                >
+                  {fromAddress}
+                </Typography>
+              </Grid>
+              <Grid xs={12} display="flex" flexDirection="row">
+                <Typography
+                  sx={{
+                    fontSize: "15px",
+                    fontWeight: "bold",
+                    textTransform: "uppercase",
+                    color: "black",
+                    mr: "21px",
+                  }}
+                >
+                  Contact No.
+                </Typography>
+                <Typography
+                  sx={{
+                    fontSize: "15px",
+                    color: "black",
+                  }}
+                >
+                  {fromContact}
                 </Typography>
               </Grid>
             </Grid>
@@ -268,7 +311,7 @@ function PrRequestReceiptModal({
                   mr: "2em",
                 }}
               >
-                Date
+                Billing Date
               </Typography>
               <Typography
                 sx={{
@@ -277,9 +320,36 @@ function PrRequestReceiptModal({
                   color: "black",
                 }}
               >
-                {date}
+                {billingDate}
               </Typography>
             </Grid>
+          </Grid>
+          <Grid xs={12} my="1em">
+            <Typography
+              sx={{
+                fontSize: "15px",
+                textTransform: "uppercase",
+                color: "black",
+                textAlign: "center",
+                fontWeight: "bold",
+              }}
+            >
+              Purpose
+            </Typography>
+          </Grid>
+          <Grid xs={12} mb="1em">
+            <Divider color="black" sx={{ height: "1px" }} />
+          </Grid>
+          <Grid xs={12}>
+            <Typography
+              sx={{
+                fontSize: "15px",
+                color: "black",
+                textAlign: "center",
+              }}
+            >
+              {purpose}
+            </Typography>
           </Grid>
           <Grid className="red" container xs={12} mt="1em">
             <Table>
@@ -294,7 +364,7 @@ function PrRequestReceiptModal({
                         color: "black",
                       }}
                     >
-                      Item
+                      Item Type
                     </Typography>
                   </TableCell>
                   <TableCell>
@@ -333,33 +403,9 @@ function PrRequestReceiptModal({
                       Unit
                     </Typography>
                   </TableCell>
-                  <TableCell>
-                    <Typography
-                      sx={{
-                        fontSize: "13px",
-                        fontWeight: "bold",
-                        textTransform: "uppercase",
-                        color: "black",
-                      }}
-                    >
-                      Unit Cost
-                    </Typography>
-                  </TableCell>
-                  <TableCell>
-                    <Typography
-                      sx={{
-                        fontSize: "13px",
-                        fontWeight: "bold",
-                        textTransform: "uppercase",
-                        color: "black",
-                      }}
-                    >
-                      Amount
-                    </Typography>
-                  </TableCell>
                 </TableRow>
               </TableHead>
-              <TableBody sx={{ border: "none" }}>
+              <TableBody sx={{ borderBottom: "2px solid black" }}>
                 {items.map((item) => (
                   <TableRow key={item.id}>
                     {Object.keys(item).map((key) => (
@@ -370,103 +416,9 @@ function PrRequestReceiptModal({
               </TableBody>
             </Table>
           </Grid>
-          <Grid container xs={12} mt="5em">
-            <Grid xs={12}>
-              <Divider color="black" sx={{ height: "1px", ml: "85%" }} />
-            </Grid>
-            <Grid xs={10} mt="1em">
-              <Typography
-                sx={{
-                  fontSize: "13px",
-                  fontWeight: "bold",
-                  textTransform: "uppercase",
-                  color: "black",
-                  textAlign: "right",
-                }}
-              >
-                sub-total amount
-              </Typography>
-            </Grid>
-            <Grid xs={2} mt="1em">
-              <Typography
-                sx={{
-                  fontSize: "13px",
-                  fontWeight: "bold",
-                  textTransform: "uppercase",
-                  color: "black",
-                  textAlign: "right",
-                }}
-              >
-                {subTotal}
-              </Typography>
-            </Grid>
-            <Grid xs={10} mt="1em">
-              <Typography
-                sx={{
-                  fontSize: "12px",
-                  textTransform: "uppercase",
-                  color: "black",
-                  textAlign: "right",
-                }}
-              >
-                <b>ADD</b> VAT (12%)
-              </Typography>
-            </Grid>
-            <Grid xs={10}>
-              <Typography
-                sx={{
-                  fontSize: "12px",
-                  textTransform: "uppercase",
-                  color: "black",
-                  textAlign: "right",
-                }}
-              >
-                <b>LESS</b> WITHOLDING TAX (2%)
-              </Typography>
-            </Grid>
-            <Grid xs={10} mt="1em">
-              <Typography
-                sx={{
-                  fontSize: "13px",
-                  fontWeight: "bold",
-                  textTransform: "uppercase",
-                  color: "black",
-                  textAlign: "right",
-                }}
-              >
-                TOTAL AMOUNT
-              </Typography>
-            </Grid>
-            <Grid xs={2} mt="1em">
-              <Typography
-                sx={{
-                  fontSize: "13px",
-                  fontWeight: "bold",
-                  textTransform: "uppercase",
-                  color: "black",
-                  textAlign: "right",
-                }}
-              >
-                {total}
-              </Typography>
-            </Grid>
-            <Grid xs={12} mt="1em">
-              <Divider color="black" sx={{ height: "1px" }} />
-            </Grid>
-            <Grid xs={12} mt="1em">
-              <Typography
-                sx={{
-                  fontSize: "13px",
-                  fontWeight: "bold",
-                  textTransform: "uppercase",
-                  color: "black",
-                }}
-              >
-                Remarks
-              </Typography>
-            </Grid>
+          <Grid container xs={12}>
             <Grid container xs={4}>
-              <Grid xs={12} mt="7em">
+              <Grid xs={12} mt="1em">
                 <Typography
                   sx={{
                     fontSize: "13px",
@@ -475,7 +427,7 @@ function PrRequestReceiptModal({
                     color: "black",
                   }}
                 >
-                  Requested by
+                  Prepared by
                 </Typography>
                 <Typography
                   sx={{
@@ -506,7 +458,7 @@ function PrRequestReceiptModal({
               </Grid>
             </Grid>
             <Grid container xs={4}>
-              <Grid xs={12} mt="7em">
+              <Grid xs={12} mt="1em">
                 <Typography
                   sx={{
                     fontSize: "13px",
@@ -515,7 +467,7 @@ function PrRequestReceiptModal({
                     color: "black",
                   }}
                 >
-                  Checked by
+                  Noted by
                 </Typography>
                 <Typography
                   sx={{
@@ -524,7 +476,7 @@ function PrRequestReceiptModal({
                     mt: "2em",
                   }}
                 >
-                  Justine M. Eduave
+                  Name
                 </Typography>
                 <Typography
                   sx={{
@@ -532,7 +484,7 @@ function PrRequestReceiptModal({
                     color: "black",
                   }}
                 >
-                  Executive Assistant
+                  Position
                 </Typography>
                 <Typography
                   sx={{
@@ -541,12 +493,12 @@ function PrRequestReceiptModal({
                     fontStyle: "italic",
                   }}
                 >
-                  E&G Logistics
+                  Company
                 </Typography>
               </Grid>
             </Grid>
             <Grid container xs={4}>
-              <Grid xs={12} mt="7em">
+              <Grid xs={12} mt="1em">
                 <Typography
                   sx={{
                     fontSize: "13px",
@@ -555,7 +507,35 @@ function PrRequestReceiptModal({
                     color: "black",
                   }}
                 >
-                  Approved by
+                  Date
+                </Typography>
+              </Grid>
+            </Grid>
+          </Grid>
+          <Grid xs={12} mt="1em">
+            <Typography
+              sx={{
+                fontSize: "13px",
+                fontWeight: "bold",
+                textTransform: "uppercase",
+                color: "black",
+              }}
+            >
+              Remarks
+            </Typography>
+          </Grid>
+          <Grid container xs={12} mt="2em">
+            <Grid container xs={6}>
+              <Grid xs={12} mt="1em">
+                <Typography
+                  sx={{
+                    fontSize: "13px",
+                    fontWeight: "bold",
+                    textTransform: "uppercase",
+                    color: "black",
+                  }}
+                >
+                  Received by
                 </Typography>
                 <Typography
                   sx={{
@@ -564,7 +544,7 @@ function PrRequestReceiptModal({
                     mt: "2em",
                   }}
                 >
-                  Oliver M. Eduave
+                  Name
                 </Typography>
                 <Typography
                   sx={{
@@ -572,7 +552,7 @@ function PrRequestReceiptModal({
                     color: "black",
                   }}
                 >
-                  Managing Director
+                  Position
                 </Typography>
                 <Typography
                   sx={{
@@ -581,33 +561,47 @@ function PrRequestReceiptModal({
                     fontStyle: "italic",
                   }}
                 >
-                  E&G Logistics
+                  Company
                 </Typography>
               </Grid>
             </Grid>
-            <Grid xs={12} mt="1em">
-              <Typography
-                sx={{
-                  fontSize: "10px",
-                  color: "gray",
-                  fontStyle: "italic",
-                }}
-              >
-                THIS IS A SYSTEM GENERATED DOCUMENT. Important: This document is
-                applicable for both electronic and physical submissions.
-              </Typography>
-              <Typography
-                sx={{
-                  fontSize: "10px",
-                  color: "gray",
-                  fontStyle: "italic",
-                }}
-              >
-                Electronic submission is accepted; however, whether submitted
-                electronically or physically, a valid signature remains
-                essential for authorization and validity.
-              </Typography>
+            <Grid container xs={6}>
+              <Grid xs={12} mt="1em">
+                <Typography
+                  sx={{
+                    fontSize: "13px",
+                    fontWeight: "bold",
+                    textTransform: "uppercase",
+                    color: "black",
+                  }}
+                >
+                  Date received
+                </Typography>
+              </Grid>
             </Grid>
+          </Grid>
+          <Grid xs={12} mt="1em">
+            <Typography
+              sx={{
+                fontSize: "10px",
+                color: "gray",
+                fontStyle: "italic",
+              }}
+            >
+              THIS IS A SYSTEM GENERATED DOCUMENT. Important: This document is
+              applicable for both electronic and physical submissions.
+            </Typography>
+            <Typography
+              sx={{
+                fontSize: "10px",
+                color: "gray",
+                fontStyle: "italic",
+              }}
+            >
+              Electronic submission is accepted; however, whether submitted
+              electronically or physically, a valid signature remains essential
+              for authorization and validity.
+            </Typography>
           </Grid>
         </Box>
         <Grid container xs={12}>
@@ -628,13 +622,13 @@ function PrRequestReceiptModal({
   );
 }
 
-PrRequestReceiptModal.defaultProps = {
+TransmittalReceiptModal.defaultProps = {
   handleClose: () => {},
 };
 
-PrRequestReceiptModal.propTypes = {
+TransmittalReceiptModal.propTypes = {
   open: PropTypes.bool.isRequired,
   handleClose: PropTypes.func,
 };
 
-export default PrRequestReceiptModal;
+export default TransmittalReceiptModal;
