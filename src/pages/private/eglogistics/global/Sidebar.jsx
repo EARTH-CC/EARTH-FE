@@ -1,26 +1,23 @@
-/* eslint-disable no-unused-vars */
-/* eslint-disable import/no-duplicates */
 import { useState } from "react";
-import { Box, IconButton, Typography, useTheme } from "@mui/material";
-import { Link } from "react-router-dom";
+import { Box, IconButton, Typography } from "@mui/material";
+import { Link, useNavigate } from "react-router-dom";
 import PropTypes from "prop-types";
 import MenuOutlinedIcon from "@mui/icons-material/MenuOutlined";
-import { useNavigate } from "react-router-dom";
 import { ProSidebar, MenuItem, Menu } from "react-pro-sidebar";
 import { useStateContext } from "contexts/ContextProvider";
 import body2 from "../../../../assets/images/Body2.png";
 import face1 from "../../../../assets/images/face1.png";
 import face2 from "../../../../assets/images/face2.png";
 import face3 from "../../../../assets/images/face3.png";
-import themes from "../../../../themes/theme";
+// import themes from "../../../../themes/theme";
 import links from "./sidebarlinks";
 import "react-pro-sidebar/dist/css/styles.css";
 
-const { tokens } = themes;
+// const { tokens } = themes;
 
 function Item({ title, to, icon, selected, setSelected }) {
-  const theme = useTheme();
-  const colors = tokens(theme.palette.mode);
+  // const theme = useTheme();
+  // const colors = tokens(theme.palette.mode);
   return (
     <MenuItem
       active={selected === title}
@@ -37,8 +34,8 @@ function Item({ title, to, icon, selected, setSelected }) {
 }
 
 function Sidebar() {
-  const theme = useTheme();
-  const colors = tokens(theme.palette.mode);
+  // const theme = useTheme();
+  // const colors = tokens(theme.palette.mode);
   const [isCollapsed, setIsCollapsed] = useState(false);
   const [selected, setSelected] = useState("Dashboard");
   const { auth } = useStateContext();

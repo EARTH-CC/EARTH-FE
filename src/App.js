@@ -47,13 +47,13 @@ function App() {
             <Route path="/waterfront" element={<Waterfront />} />
 
             <Route path="/" element={<Layout />}>
-              <Route path="/dashboard" element={<Dashboard />} />
-              <Route path="/settings" element={<Settings />} />
+              {/* <Route path="/dashboard" element={<Dashboard />} /> */}
             </Route>
 
             <Route element={<RequireAuth allowedRoles="superadmin" />}>
               <Route path="/" element={<Layout />}>
                 <Route path="/dashboard" element={<Dashboard />} />
+                <Route path="/settings" element={<Settings />} />
                 <Route
                   path="/purchase-libraries"
                   element={<PurchaseLibraries />}
