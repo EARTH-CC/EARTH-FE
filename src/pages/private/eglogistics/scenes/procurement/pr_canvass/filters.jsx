@@ -21,7 +21,7 @@ const { tokens } = themes;
 const priceData = [0, 999999]; // MOCK DATA
 // const moduleName = "canvass";
 
-function Filters({ addToCart }) {
+function Filters({ addToCart, selectedData, cartTotal }) {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
   const [value, setValue] = useState(priceData);
@@ -59,6 +59,7 @@ function Filters({ addToCart }) {
           setOpenCartModal(false);
           // handleGetAll();
         }}
+        cartTotal={cartTotal}
       />
       <Typography
         fontSize="medium"
@@ -97,7 +98,9 @@ function Filters({ addToCart }) {
 
       <Divider variant="middle" />
       <Typography fontSize="small" fontWeight="600">
-        Total (1 item): <span style={{ fontSize: "15px" }}>₱</span> 676
+        Total ({cartTotal ? cartTotal.items : 0}):{" "}
+        <span style={{ fontSize: "15px" }}>₱</span>{" "}
+        {cartTotal ? cartTotal.total_price : 0}
       </Typography>
       <Divider variant="middle" />
       <Typography
@@ -190,8 +193,17 @@ function Filters({ addToCart }) {
         sx={{ borderTopWidth: "1px", borderTopColor: "black" }}
       />
       <Typography fontSize="small" fontWeight="600">
-        Slected (0 item): <span style={{ fontSize: "15px" }}>₱</span> 0
+        Selected ({selectedData ? selectedData.length : 0}{" "}
+        {selectedData.length > 1 ? "items" : "item"}):{" "}
+        <span style={{ fontSize: "15px" }}>₱</span>{" "}
+        {selectedData
+          ? selectedData.reduce(
+              (total, currentItem) => total + (currentItem.price || 0),
+              0
+            )
+          : 0}
       </Typography>
+
       <Button
         onClick={addToCart}
         sx={{
@@ -218,9 +230,15 @@ function Filters({ addToCart }) {
 export default Filters;
 
 Filters.defaultProps = {
-  addToCart: [],
+  addToCart: () => {},
+  selectedData: [],
+  cartTotal: {},
 };
 
 Filters.propTypes = {
   addToCart: PropTypes.func,
+  // eslint-disable-next-line react/forbid-prop-types
+  selectedData: PropTypes.arrayOf(PropTypes.object),
+  // eslint-disable-next-line react/forbid-prop-types
+  cartTotal: PropTypes.object,
 };

@@ -21,6 +21,17 @@ function getAllAPI(moduleName) {
   });
 }
 
+function getPriceAPI(moduleName) {
+  return new Promise((resolve, reject) => {
+    axios
+      .get(`${BASE_URL}/${moduleName}/price`)
+      .then((res) => resolve(res?.data?.data))
+      .catch((err) => {
+        reject(err);
+      });
+  });
+}
+
 function addAPI(data, moduleName) {
   return axios.post(`${BASE_URL}/${moduleName}`, data);
 }
@@ -32,6 +43,7 @@ function deleteAPI(id, moduleName) {
 export default {
   getAPI,
   getAllAPI,
+  getPriceAPI,
   addAPI,
   deleteAPI,
 };

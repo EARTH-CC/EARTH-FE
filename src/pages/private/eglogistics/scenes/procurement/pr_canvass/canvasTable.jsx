@@ -1,19 +1,13 @@
 import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import { Box, Divider, Typography } from "@mui/material";
-import AddItemModal from "../../../../../../modal/Procurement/ProcurementLibraries/AddItemModal";
 import procurementService from "../../../../../../services/procurement-service";
 import DataGrid from "../../../../../../components/PrivateComponents/eglogistics/DataGrid";
 
 function CanvasTable({ selectedData }) {
-  const [openItemModal, setOpenItemModal] = useState(false);
   const [items, setItems] = useState([]);
   const [loading, setLoading] = React.useState(false);
   const [data, setData] = useState();
-
-  const handleCloseItem = () => {
-    setOpenItemModal(false);
-  };
 
   const handleGetAll = () => {
     setLoading(true);
@@ -89,14 +83,6 @@ function CanvasTable({ selectedData }) {
           Item Supplies
         </Typography>
       </Divider>
-      <AddItemModal
-        open={openItemModal}
-        handleClose={handleCloseItem}
-        onSuccess={() => {
-          setOpenItemModal(false);
-          // handleSearch();
-        }}
-      />
       <Box>
         <DataGrid
           data={items}

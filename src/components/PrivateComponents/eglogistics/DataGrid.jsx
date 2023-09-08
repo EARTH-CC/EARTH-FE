@@ -92,6 +92,8 @@ export default function DataGridTable({
         checkboxSelection={checkbox}
         loading={loadingState}
         onRowSelectionModelChange={handleRowSelect}
+        disableRowSelectionOnClick
+        hideFooterSelectedRowCount
       />
     </Box>
   );

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Box, Button, Grid, useTheme } from "@mui/material";
 import DownloadOutlinedIcon from "@mui/icons-material/DownloadOutlined";
 import procurementService from "services/procurement-service";
@@ -14,19 +14,36 @@ export default function CanvassSheet() {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
   const [error, setError] = useState("");
+  const [loading, setLoading] = React.useState(false);
   const [data, setData] = useState();
+  const [cartTotal, setCartTotal] = useState();
 
   const handleAddToCart = () => {
     try {
       setError("");
-      console.log(data);
-      procurementService.addAPI(data[0], moduleName).catch((err) => {
-        setError(err?.message);
-      });
+      setLoading(true);
+      procurementService
+        .addAPI(data, moduleName)
+        .catch((err) => {
+          setError(err?.message);
+        })
+        .finally(() => {
+          setLoading(false);
+        });
     } catch (err) {
       console.warn(error);
     }
   };
+
+  const handlGetCartPrice = () => {
+    procurementService.getPriceAPI("cart").then((e) => {
+      setCartTotal(e);
+    });
+  };
+
+  useEffect(() => {
+    handlGetCartPrice();
+  }, [loading]);
 
   return (
     <Box sx={{ m: "-5px 20px 20px 20px" }}>
@@ -73,7 +90,11 @@ export default function CanvassSheet() {
         sx={{ backgroundColor: colors.primary[400] }}
       >
         <Grid item xs={2} sx={{ minWidth: "150px" }}>
-          <Filters addToCart={handleAddToCart} />
+          <Filters
+            addToCart={handleAddToCart}
+            selectedData={data || 0}
+            cartTotal={cartTotal}
+          />
         </Grid>
 
         <Grid
