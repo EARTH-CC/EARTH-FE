@@ -1,4 +1,5 @@
 /* eslint-disable react/forbid-prop-types */
+import { useEffect, useState } from "react";
 import { Box, useTheme } from "@mui/material";
 import { DataGrid, GridToolbar } from "@mui/x-data-grid";
 // import { darken, lighten, styled } from "@mui/material/styles";
@@ -15,24 +16,35 @@ export default function DataGridTable({
   height,
   showSearch,
   selectedData,
+  reset,
 }) {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
 
-  const handleRowSelect = (ids) => {
-    const selectedRows = [];
+  const [selectedRows, setSelectedRows] = useState([]);
 
-    // eslint-disable-next-line no-restricted-syntax
-    for (const selectedId of ids) {
-      // Find the row with the matching ID and push it to the selectedRows array
-      const selectedRow = data.find((row) => row.uuid === selectedId);
-      if (selectedRow) {
-        selectedRows.push(selectedRow);
+  const handleRowSelect = (ids) => {
+    if (ids.length === 0) {
+      selectedData([]);
+    } else {
+      // eslint-disable-next-line no-restricted-syntax
+      for (const selectedId of ids) {
+        // Find the row with the matching ID and push it to the selectedRows array
+        const selectedRow = data.find((row) => row.uuid === selectedId);
+        if (selectedRow) {
+          setSelectedRows(ids);
+          selectedData([selectedRow]);
+        }
       }
     }
-
-    selectedData(selectedRows);
   };
+
+  useEffect(() => {
+    if (reset) {
+      setSelectedRows([]);
+      selectedData([]);
+    }
+  }, [reset]);
 
   return (
     <Box
@@ -91,6 +103,7 @@ export default function DataGridTable({
         }}
         checkboxSelection={checkbox}
         loading={loadingState}
+        rowSelectionModel={selectedRows}
         onRowSelectionModelChange={handleRowSelect}
         disableRowSelectionOnClick
         hideFooterSelectedRowCount
@@ -109,6 +122,7 @@ DataGridTable.defaultProps = {
   height: "70vh",
   showSearch: true,
   selectedData: [],
+  reset: false,
 };
 
 DataGridTable.propTypes = {
@@ -122,4 +136,5 @@ DataGridTable.propTypes = {
   showSearch: PropTypes.bool,
   // eslint-disable-next-line react/require-default-props
   selectedData: PropTypes.arrayOf(PropTypes.object),
+  reset: PropTypes.bool,
 };

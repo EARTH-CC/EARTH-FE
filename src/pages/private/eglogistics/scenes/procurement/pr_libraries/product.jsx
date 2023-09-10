@@ -43,32 +43,32 @@ function Products() {
     {
       field: "name",
       headerName: "Name",
-      width: 150,
+      width: 200,
     },
     {
       field: "item_code",
       headerName: "Item Code",
-      width: 150,
+      width: 200,
     },
     {
       field: "price",
       headerName: "Price",
-      width: 150,
+      width: 200,
     },
     {
       field: "brand_name",
       headerName: "Brand",
-      width: 150,
+      width: 200,
     },
     {
       field: "category_name",
       headerName: "Category",
-      width: 150,
+      width: 200,
     },
     {
       field: "supplier_name",
       headerName: "Supplier",
-      width: 150,
+      width: 200,
     },
     {
       field: "description",

@@ -10,10 +10,12 @@ export default function PurchaseOrderTable() {
   const [items, setItems] = useState([]);
   const [loading, setLoading] = useState(false);
 
+  const modulename = "purchase";
+
   const handleGetAll = () => {
     setLoading(true);
     procurementService
-      .getAllAPI("purchaseOrder")
+      .getAllAPI(modulename)
       .then((e) => {
         setItems(e);
       })

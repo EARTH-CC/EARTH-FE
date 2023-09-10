@@ -78,6 +78,7 @@ export default function PurchaseRequestModal({
       remarks,
       attention,
       items: newPRWithoutName,
+      process_type: "request",
     };
 
     setLocalPR(newPR);
@@ -102,6 +103,7 @@ export default function PurchaseRequestModal({
       remarks,
       attention,
       items: newPRWithoutName,
+      process_type: "request",
     };
 
     setLocalPR(newPR);
@@ -135,6 +137,7 @@ export default function PurchaseRequestModal({
       remarks,
       attention,
       items: newPRWithoutName,
+      process_type: "request",
     };
 
     setLocalPR(newPR);
@@ -159,6 +162,7 @@ export default function PurchaseRequestModal({
       remarks,
       attention,
       items: newPRWithoutName,
+      process_type: "request",
     };
 
     setLocalPR(newPR);
@@ -183,6 +187,7 @@ export default function PurchaseRequestModal({
       remarks,
       attention,
       items: newPRWithoutName,
+      process_type: "request",
     };
 
     setLocalPR(newPR);
@@ -216,7 +221,7 @@ export default function PurchaseRequestModal({
           <Typography variant="h3" fontWeight="bolder" my={2}>
             Purchase Request
           </Typography>
-          {error}
+          {error && "An error occurred. Make sure to fill up required fields"}
         </Box>
         <Box mb={4}>
           <Button variant="contained" color="info" onClick={handleAddPR}>
@@ -239,6 +244,16 @@ export default function PurchaseRequestModal({
             <TextField
               type="text"
               size="small"
+              label="Attention"
+              value={attention}
+              onChange={(event) => setAttention(event.target.value)}
+              fullWidth
+            />
+          </Grid>
+          <Grid item xs={6}>
+            <TextField
+              type="text"
+              size="small"
               label="Address"
               value={address}
               onChange={(event) => setAddress(event.target.value)}
@@ -252,16 +267,6 @@ export default function PurchaseRequestModal({
               label="Remarks"
               value={remarks}
               onChange={(event) => setRemarks(event.target.value)}
-              fullWidth
-            />
-          </Grid>
-          <Grid item xs={6}>
-            <TextField
-              type="text"
-              size="small"
-              label="Attention"
-              value={attention}
-              onChange={(event) => setAttention(event.target.value)}
               fullWidth
             />
           </Grid>
@@ -354,7 +359,13 @@ export default function PurchaseRequestModal({
                 remarks === "" ||
                 attention === ""
               }
-              onClick={onSubmit}
+              onClick={() => {
+                onSubmit();
+                setCompName("");
+                setAddress("");
+                setRemarks("");
+                setAttention("");
+              }}
               sx={{ mr: 2, mt: 5, width: 80, backgroundColor: "#6b70c4" }}
             >
               Save

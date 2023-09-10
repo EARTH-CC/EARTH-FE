@@ -17,6 +17,7 @@ export default function CanvassSheet() {
   const [loading, setLoading] = React.useState(false);
   const [data, setData] = useState();
   const [cartTotal, setCartTotal] = useState();
+  const [reset, setReset] = useState(false);
 
   const handleAddToCart = () => {
     try {
@@ -24,11 +25,15 @@ export default function CanvassSheet() {
       setLoading(true);
       procurementService
         .addAPI(data, moduleName)
+        .then(() => {
+          setReset(true);
+        })
         .catch((err) => {
           setError(err?.message);
         })
         .finally(() => {
           setLoading(false);
+          setReset(false);
         });
     } catch (err) {
       console.warn(error);
@@ -102,7 +107,7 @@ export default function CanvassSheet() {
           xs={10}
           sx={{ borderLeft: "solid 1px #C0C0C0", paddingTop: "20px" }}
         >
-          <CanvasTable selectedData={setData} />
+          <CanvasTable selectedData={setData} reset={reset} />
         </Grid>
       </Grid>
     </Box>

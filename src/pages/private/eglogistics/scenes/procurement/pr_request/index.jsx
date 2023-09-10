@@ -37,6 +37,8 @@ export default function PurchaseRequest() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
 
+  const modulename = "purchase";
+
   const handlePRRequest = () => {
     setOpenPRRequestModal(true);
   };
@@ -51,11 +53,16 @@ export default function PurchaseRequest() {
   };
 
   const handleGetAll = () => {
+    setError("");
     setLoading(true);
     procurementService
-      .getAllAPI(moduleName)
+      .getAllAPI(modulename)
       .then((e) => {
         setPRData(e);
+      })
+      .catch((err) => {
+        setOpenError(true);
+        setError(err?.message);
       })
       .finally(() => {
         setLoading(false);
@@ -67,11 +74,12 @@ export default function PurchaseRequest() {
     setLoading(true);
 
     procurementService
-      .addAPI(PRValues, moduleName)
+      .addAPI(PRValues, modulename)
       .then(() => {
         setOpenPRRequestModal(false);
         handleGetAll();
         setOpenSuccess(true);
+        setData([]);
       })
       .catch((err) => {
         setError(err?.message);
@@ -149,7 +157,6 @@ export default function PurchaseRequest() {
           </Button>
         </Box>
       </Box>
-
       <Box
         sx={{
           display: "flex",
@@ -230,7 +237,7 @@ export default function PurchaseRequest() {
         open={openError}
         onClose={handleCloseError}
         severity="error"
-        message="Request failed."
+        message={error}
       />
     </Box>
   );

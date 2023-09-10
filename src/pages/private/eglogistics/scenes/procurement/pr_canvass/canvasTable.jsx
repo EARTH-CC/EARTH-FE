@@ -4,7 +4,7 @@ import { Box, Divider, Typography } from "@mui/material";
 import procurementService from "../../../../../../services/procurement-service";
 import DataGrid from "../../../../../../components/PrivateComponents/eglogistics/DataGrid";
 
-function CanvasTable({ selectedData }) {
+function CanvasTable({ selectedData, reset }) {
   const [items, setItems] = useState([]);
   const [loading, setLoading] = React.useState(false);
   const [data, setData] = useState();
@@ -90,6 +90,7 @@ function CanvasTable({ selectedData }) {
           loadingState={loading}
           checkbox
           selectedData={setData}
+          reset={reset}
         />
       </Box>
     </Box>
@@ -100,9 +101,11 @@ export default CanvasTable;
 
 CanvasTable.defaultProps = {
   selectedData: [],
+  reset: false,
 };
 
 CanvasTable.propTypes = {
   // eslint-disable-next-line react/forbid-prop-types
   selectedData: PropTypes.arrayOf(PropTypes.object),
+  reset: PropTypes.bool,
 };
