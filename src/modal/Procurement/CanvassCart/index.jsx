@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
-import DataGrid from "components/PrivateComponents/eglogistics/DataGrid";
 import {
   Box,
   Button,
@@ -12,8 +11,7 @@ import {
 import ForwardIcon from "@mui/icons-material/Forward";
 import procurementService from "services/procurement-service";
 import themes from "../../../themes/theme";
-
-const moduleName = "canvass";
+import EditableCart from "./EditableCart";
 
 const style = {
   backgroundColor: (themeMode) =>
@@ -34,20 +32,18 @@ export default function CanvassCart({ open, handleClose, cartTotal }) {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
 
-  // const [loading, setLoading] = useState(false);
-  // const [error, setError] = useState("");
-
   const moduleName = "canvass";
 
-  const [items, setItems] = useState([]);
+  const [data, setData] = useState([]);
   const [loading, setLoading] = React.useState(false);
+  // const [error, setError] = useState("");
 
   const handleGetAll = () => {
     setLoading(true);
     procurementService
       .getAllAPI(moduleName)
       .then((e) => {
-        setItems(e);
+        setData(e);
       })
       .finally(() => {
         setLoading(false);
@@ -57,49 +53,6 @@ export default function CanvassCart({ open, handleClose, cartTotal }) {
   useEffect(() => {
     handleGetAll();
   }, [open]);
-
-  const columns = [
-    {
-      field: "name",
-      headerName: "Name",
-      flex: 0.5,
-      headerAlign: "left",
-      align: "left",
-      cellClassName: "name-column--cell",
-    },
-    {
-      field: "item_code",
-      headerName: "Item Code",
-      flex: 0.5,
-    },
-    {
-      field: "brand",
-      headerName: "Brand",
-      flex: 0.5,
-    },
-    {
-      field: "supplier",
-      headerName: "Supplier",
-      flex: 0.5,
-    },
-    {
-      field: "price",
-      headerName: "Price",
-      flex: 0.5,
-    },
-    {
-      field: "description",
-      headerName: "Description",
-      headerAlign: "left",
-      flex: 0.5,
-    },
-    {
-      field: "quantity",
-      headerName: "Quantity",
-      headerAlign: "left",
-      flex: 0.5,
-    },
-  ];
 
   return (
     <Modal
@@ -120,7 +73,7 @@ export default function CanvassCart({ open, handleClose, cartTotal }) {
             Canvass Cart
           </Typography>
         </Divider>
-        <DataGrid data={items} columns={columns} loadingState={loading} />
+        <EditableCart data={data} loadingState={loading} />
         <Divider
           variant="middle"
           sx={{ borderTopWidth: "1px", borderTopColor: "grey" }}

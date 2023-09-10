@@ -27,15 +27,18 @@ export default function DataGridTable({
     if (ids.length === 0) {
       selectedData([]);
     } else {
+      const cartArray = [];
       // eslint-disable-next-line no-restricted-syntax
       for (const selectedId of ids) {
         // Find the row with the matching ID and push it to the selectedRows array
         const selectedRow = data.find((row) => row.uuid === selectedId);
         if (selectedRow) {
           setSelectedRows(ids);
-          selectedData([selectedRow]);
+
+          cartArray.push(selectedRow);
         }
       }
+      selectedData(cartArray);
     }
   };
 

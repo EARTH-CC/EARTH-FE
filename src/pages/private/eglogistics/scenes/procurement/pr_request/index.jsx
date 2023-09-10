@@ -9,8 +9,6 @@ import themes from "../../../../../../themes/theme";
 import PurchaseRequestTable from "./prrequestTable";
 import SnackbarComponent from "../../../../../../components/PrivateComponents/SnackBarComponent";
 
-const moduleName = "purchase";
-
 const { tokens } = themes;
 
 export default function PurchaseRequest() {
@@ -37,7 +35,7 @@ export default function PurchaseRequest() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
 
-  const modulename = "purchase";
+  const moduleName = "purchase";
 
   const handlePRRequest = () => {
     setOpenPRRequestModal(true);
@@ -56,7 +54,7 @@ export default function PurchaseRequest() {
     setError("");
     setLoading(true);
     procurementService
-      .getAllAPI(modulename)
+      .getAllAPI(moduleName)
       .then((e) => {
         setPRData(e);
       })
@@ -74,7 +72,7 @@ export default function PurchaseRequest() {
     setLoading(true);
 
     procurementService
-      .addAPI(PRValues, modulename)
+      .addAPI(PRValues, moduleName)
       .then(() => {
         setOpenPRRequestModal(false);
         handleGetAll();

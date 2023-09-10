@@ -1,7 +1,5 @@
-import * as React from "react";
+import React, { useEffect, useState } from "react";
 import Box from "@mui/material/Box";
-import Button from "@mui/material/Button";
-import AddIcon from "@mui/icons-material/Add";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/DeleteOutlined";
 import SaveIcon from "@mui/icons-material/Save";
@@ -9,84 +7,42 @@ import CancelIcon from "@mui/icons-material/Close";
 import {
   GridRowModes,
   DataGrid,
-  GridToolbarContainer,
   GridActionsCellItem,
   GridRowEditStopReasons,
+  GridToolbar,
 } from "@mui/x-data-grid";
-import {
-  randomCreatedDate,
-  randomTraderName,
-  randomId,
-  randomArrayItem,
-  // eslint-disable-next-line import/no-unresolved
-} from "@mui/x-data-grid-generator";
+import procurementService from "services/procurement-service";
+import { useTheme } from "@mui/material";
+import themes from "../../../../../../themes/theme";
 
-const roles = ["Market", "Finance", "Development"];
-const randomRole = () => randomArrayItem(roles);
-
-const initialRows = [
-  {
-    id: randomId(),
-    name: randomTraderName(),
-    age: 25,
-    joinDate: randomCreatedDate(),
-    role: randomRole(),
-  },
-  {
-    id: randomId(),
-    name: randomTraderName(),
-    age: 36,
-    joinDate: randomCreatedDate(),
-    role: randomRole(),
-  },
-  {
-    id: randomId(),
-    name: randomTraderName(),
-    age: 19,
-    joinDate: randomCreatedDate(),
-    role: randomRole(),
-  },
-  {
-    id: randomId(),
-    name: randomTraderName(),
-    age: 28,
-    joinDate: randomCreatedDate(),
-    role: randomRole(),
-  },
-  {
-    id: randomId(),
-    name: randomTraderName(),
-    age: 23,
-    joinDate: randomCreatedDate(),
-    role: randomRole(),
-  },
-];
-
-function EditToolbar(props) {
-  // eslint-disable-next-line react/prop-types
-  const { setRows, setRowModesModel } = props;
-
-  const handleClick = () => {
-    const id = randomId();
-    setRows((oldRows) => [...oldRows, { id, name: "", age: "", isNew: true }]);
-    setRowModesModel((oldModel) => ({
-      ...oldModel,
-      [id]: { mode: GridRowModes.Edit, fieldToFocus: "name" },
-    }));
-  };
-
-  return (
-    <GridToolbarContainer>
-      <Button color="primary" startIcon={<AddIcon />} onClick={handleClick}>
-        Add record
-      </Button>
-    </GridToolbarContainer>
-  );
-}
+const { tokens } = themes;
 
 export default function FullFeaturedCrudGrid() {
-  const [rows, setRows] = React.useState(initialRows);
-  const [rowModesModel, setRowModesModel] = React.useState({});
+  const theme = useTheme();
+  const colors = tokens(theme.palette.mode);
+
+  const [data, setData] = useState([]);
+  const [rowModesModel, setRowModesModel] = useState({});
+
+  const moduleName = "purchase";
+
+  const handleGetAll = () => {
+    // setError("");
+    // setLoading(true);
+    procurementService.getAllAPI(moduleName).then((e) => {
+      setData(e);
+    });
+    // .catch((err) => {
+    //   setError(err?.message);
+    // })
+    // .finally(() => {
+    //   setLoading(false);
+    // });
+  };
+
+  useEffect(() => {
+    handleGetAll();
+  }, []);
 
   const handleRowEditStop = (params, event) => {
     if (params.reason === GridRowEditStopReasons.rowFocusOut) {
@@ -95,34 +51,33 @@ export default function FullFeaturedCrudGrid() {
     }
   };
 
-  const handleEditClick = (id) => () => {
-    setRowModesModel({ ...rowModesModel, [id]: { mode: GridRowModes.Edit } });
+  const handleEditClick = (uuid) => () => {
+    setRowModesModel({ ...rowModesModel, [uuid]: { mode: GridRowModes.Edit } });
   };
 
-  const handleSaveClick = (id) => () => {
-    setRowModesModel({ ...rowModesModel, [id]: { mode: GridRowModes.View } });
+  const handleSaveClick = (uuid) => () => {
+    setRowModesModel({ ...rowModesModel, [uuid]: { mode: GridRowModes.View } });
   };
 
-  const handleDeleteClick = (id) => () => {
-    setRows(rows.filter((row) => row.id !== id));
+  const handleDeleteClick = (uuid) => () => {
+    setData(data.filter((row) => row.uuid !== uuid));
   };
 
-  const handleCancelClick = (id) => () => {
+  const handleCancelClick = (uuid) => () => {
     setRowModesModel({
       ...rowModesModel,
-      [id]: { mode: GridRowModes.View, ignoreModifications: true },
+      [uuid]: { mode: GridRowModes.View, ignoreModifications: true },
     });
 
-    const editedRow = rows.find((row) => row.id === id);
+    const editedRow = data.find((row) => row.uuid === uuid);
     if (editedRow.isNew) {
-      setRows(rows.filter((row) => row.id !== id));
+      setData(data.filter((row) => row.uuid !== uuid));
     }
   };
 
   const processRowUpdate = (newRow) => {
     const updatedRow = { ...newRow, isNew: false };
-    setRows(rows.map((row) => (row.id === newRow.id ? updatedRow : row)));
-    console.log(updatedRow);
+    setData(data.map((row) => (row.uuid === newRow.uuid ? updatedRow : row)));
     return updatedRow;
   };
 
@@ -131,10 +86,10 @@ export default function FullFeaturedCrudGrid() {
   };
 
   const columns = [
-    { field: "name", headerName: "Name", width: 180, editable: true },
+    { field: "company_name", headerName: "NAME", width: 180, editable: true },
     {
-      field: "age",
-      headerName: "Age",
+      field: "address",
+      headerName: "ADDRESS",
       type: "number",
       width: 80,
       align: "left",
@@ -142,28 +97,13 @@ export default function FullFeaturedCrudGrid() {
       editable: true,
     },
     {
-      field: "joinDate",
-      headerName: "Join date",
-      type: "date",
-      width: 180,
-      editable: true,
-    },
-    {
-      field: "role",
-      headerName: "Department",
-      width: 220,
-      editable: true,
-      type: "singleSelect",
-      valueOptions: ["Market", "Finance", "Development"],
-    },
-    {
       field: "actions",
       type: "actions",
       headerName: "Actions",
       width: 100,
       cellClassName: "actions",
-      getActions: ({ id }) => {
-        const isInEditMode = rowModesModel[id]?.mode === GridRowModes.Edit;
+      getActions: ({ uuid }) => {
+        const isInEditMode = rowModesModel[uuid]?.mode === GridRowModes.Edit;
 
         if (isInEditMode) {
           return [
@@ -173,13 +113,13 @@ export default function FullFeaturedCrudGrid() {
               sx={{
                 color: "primary.main",
               }}
-              onClick={handleSaveClick(id)}
+              onClick={handleSaveClick(uuid)}
             />,
             <GridActionsCellItem
               icon={<CancelIcon />}
               label="Cancel"
               className="textPrimary"
-              onClick={handleCancelClick(id)}
+              onClick={handleCancelClick(uuid)}
               color="inherit"
             />,
           ];
@@ -190,13 +130,13 @@ export default function FullFeaturedCrudGrid() {
             icon={<EditIcon />}
             label="Edit"
             className="textPrimary"
-            onClick={handleEditClick(id)}
+            onClick={handleEditClick(uuid)}
             color="inherit"
           />,
           <GridActionsCellItem
             icon={<DeleteIcon />}
             label="Delete"
-            onClick={handleDeleteClick(id)}
+            onClick={handleDeleteClick(uuid)}
             color="inherit"
           />,
         ];
@@ -206,30 +146,50 @@ export default function FullFeaturedCrudGrid() {
 
   return (
     <Box
+      height="70vh"
       sx={{
-        height: 500,
-        width: "100%",
-        "& .actions": {
-          color: "text.secondary",
+        "& .MuiDataGrid-root": {
+          border: "none",
         },
-        "& .textPrimary": {
-          color: "text.primary",
+        "& .MuiDataGrid-cell": {
+          borderBottom: "none",
         },
+        "& .name-column--cell": {
+          color: colors.blueAccent[300],
+        },
+        "& .MuiDataGrid-columnHeaders": {
+          color: colors.grey[900],
+          backgroundColor: colors.blueAccent[300],
+          borderBottom: "none",
+        },
+        "& .MuiDataGrid-virtualScroller": {
+          backgroundColor: colors.primary[400],
+        },
+        "& .MuiDataGrid-footerContainer": {
+          borderTop: "none",
+          backgroundColor: colors.primary[400],
+        },
+        "& .MuiCheckbox-root": {
+          color: `${colors.blueAccent[200]} !important`,
+        },
+        "& .MuiDataGrid-toolbarContainer .MuiButton-text": {
+          color: `${colors.grey[100]} !important`,
+        },
+        marginTop: "5px",
       }}
     >
       <DataGrid
-        rows={rows}
+        getRowId={(row) => row.uuid || row.id}
+        rows={data}
         columns={columns}
         editMode="row"
         rowModesModel={rowModesModel}
         onRowModesModelChange={handleRowModesModelChange}
         onRowEditStop={handleRowEditStop}
         processRowUpdate={processRowUpdate}
-        slots={{
-          toolbar: EditToolbar,
-        }}
+        slots={{ toolbar: GridToolbar }}
         slotProps={{
-          toolbar: { setRows, setRowModesModel },
+          toolbar: { setData, setRowModesModel },
         }}
       />
     </Box>
