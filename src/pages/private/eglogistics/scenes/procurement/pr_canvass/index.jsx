@@ -8,7 +8,7 @@ import themes from "../../../../../../themes/theme";
 import Header from "../../../../../../components/PrivateComponents/eglogistics/Header";
 
 const { tokens } = themes;
-const moduleName = "cart";
+const moduleName = "canvass";
 
 export default function CanvassSheet() {
   const theme = useTheme();
@@ -36,7 +36,7 @@ export default function CanvassSheet() {
   };
 
   const handlGetCartPrice = () => {
-    procurementService.getPriceAPI("cart").then((e) => {
+    procurementService.getPriceAPI(moduleName).then((e) => {
       setCartTotal(e);
     });
   };

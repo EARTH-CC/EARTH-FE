@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Box, IconButton, Typography } from "@mui/material";
+import { Box, IconButton, Typography, useTheme } from "@mui/material";
 import { Link, useNavigate } from "react-router-dom";
 import PropTypes from "prop-types";
 import MenuOutlinedIcon from "@mui/icons-material/MenuOutlined";
@@ -9,11 +9,11 @@ import body from "../../../../assets/images/Body.png";
 import face1 from "../../../../assets/images/face1.png";
 import face2 from "../../../../assets/images/face2.png";
 import face3 from "../../../../assets/images/face3.png";
-// import themes from "../../../../themes/theme";
+import themes from "../../../../themes/theme";
 import links from "./sidebarlinks";
 import "react-pro-sidebar/dist/css/styles.css";
 
-// const { tokens } = themes;
+const { tokens } = themes;
 
 function Item({ title, to, icon, selected, setSelected }) {
   // const theme = useTheme();
@@ -34,8 +34,8 @@ function Item({ title, to, icon, selected, setSelected }) {
 }
 
 function Sidebar() {
-  // const theme = useTheme();
-  // const colors = tokens(theme.palette.mode);
+  const theme = useTheme();
+  const colors = tokens(theme.palette.mode);
   const [isCollapsed, setIsCollapsed] = useState(false);
   const [selected, setSelected] = useState("Dashboard");
   const { auth } = useStateContext();
@@ -102,7 +102,10 @@ function Sidebar() {
                 alignItems="center"
                 onClick={handleSettings}
               >
-                <div className="image-container">
+                <div
+                  className="image-container"
+                  style={{ background: colors.primary[400] }}
+                >
                   <div className="image">
                     <img alt="body" className="avatar" src={body} />
                     <img alt="face1" className="face face-1" src={face1} />

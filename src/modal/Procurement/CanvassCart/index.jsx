@@ -13,6 +13,8 @@ import ForwardIcon from "@mui/icons-material/Forward";
 import procurementService from "services/procurement-service";
 import themes from "../../../themes/theme";
 
+const moduleName = "canvass";
+
 const style = {
   backgroundColor: (themeMode) =>
     themeMode.palette.mode === "dark" ? "#1f2a40" : "#fff",
@@ -43,7 +45,7 @@ export default function CanvassCart({ open, handleClose, cartTotal }) {
   const handleGetAll = () => {
     setLoading(true);
     procurementService
-      .getAllAPI("cart")
+      .getAllAPI(moduleName)
       .then((e) => {
         setItems(e);
       })
