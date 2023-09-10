@@ -69,6 +69,24 @@ function CanvasTable({ selectedData, reset }) {
       headerAlign: "left",
       flex: 0.5,
     },
+    {
+      field: "phone_no",
+      headerName: "Phone",
+      headerAlign: "left",
+      flex: 0.5,
+    },
+    {
+      field: "mobile_no",
+      headerName: "Mobile",
+      headerAlign: "left",
+      flex: 0.5,
+    },
+    {
+      field: "tin_no",
+      headerName: "TIN",
+      headerAlign: "left",
+      flex: 0.5,
+    },
   ];
 
   return (

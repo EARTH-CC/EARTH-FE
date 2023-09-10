@@ -34,11 +34,6 @@ export default function PurchaseRequestTable({
       valueFormatter: (params) => formatDate(params.value), // Format the date
     },
     {
-      field: "ref_code",
-      headerName: "Reference Code",
-      flex: 1,
-    },
-    {
       field: "pr_code",
       headerName: "PR No.",
       flex: 1,
@@ -50,11 +45,6 @@ export default function PurchaseRequestTable({
       flex: 1,
     },
     {
-      field: "attention",
-      headerName: "ATTENTION",
-      flex: 1,
-    },
-    {
       field: "item_count",
       headerName: "ITEMS",
       flex: 1,
@@ -62,6 +52,11 @@ export default function PurchaseRequestTable({
     {
       field: "total_amount",
       headerName: "AMOUNT",
+      flex: 1,
+    },
+    {
+      field: "attention",
+      headerName: "ATTENTION",
       flex: 1,
     },
     {
