@@ -28,7 +28,12 @@ const style = {
 
 const { tokens } = themes;
 
-export default function CanvassCart({ open, handleClose, cartTotal }) {
+export default function CanvassCart({
+  open,
+  handleClose,
+  cartTotal,
+  updateTable,
+}) {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
 
@@ -52,7 +57,13 @@ export default function CanvassCart({ open, handleClose, cartTotal }) {
 
   useEffect(() => {
     handleGetAll();
-  }, [open]);
+  }, []);
+
+  useEffect(() => {
+    if (updateTable) {
+      handleGetAll();
+    }
+  }, [updateTable]);
 
   return (
     <Modal
@@ -126,6 +137,7 @@ CanvassCart.defaultProps = {
   handleClose: () => {},
   // onSuccess: () => {},
   cartTotal: {},
+  updateTable: false,
 };
 
 CanvassCart.propTypes = {
@@ -134,4 +146,5 @@ CanvassCart.propTypes = {
   // onSuccess: PropTypes.func,
   // eslint-disable-next-line react/forbid-prop-types
   cartTotal: PropTypes.object,
+  updateTable: PropTypes.bool,
 };

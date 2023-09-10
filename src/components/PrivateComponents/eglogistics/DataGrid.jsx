@@ -24,6 +24,7 @@ export default function DataGridTable({
 
   const handleRowSelect = (ids) => {
     if (ids.length === 0) {
+      setSelectedRows([]);
       selectedData([]);
     } else {
       const cartArray = [];

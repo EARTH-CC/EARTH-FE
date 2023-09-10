@@ -99,6 +99,7 @@ export default function CanvassSheet() {
             addToCart={handleAddToCart}
             selectedData={data || 0}
             cartTotal={cartTotal}
+            isUpdated={reset}
           />
         </Grid>
 

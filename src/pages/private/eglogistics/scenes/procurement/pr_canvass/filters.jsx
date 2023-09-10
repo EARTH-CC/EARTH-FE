@@ -22,7 +22,7 @@ const { tokens } = themes;
 const priceData = [0, 999999]; // MOCK DATA
 // const moduleName = "canvass";
 
-function Filters({ addToCart, selectedData, cartTotal }) {
+function Filters({ addToCart, selectedData, cartTotal, isUpdated }) {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
   const [value, setValue] = useState(priceData);
@@ -61,6 +61,7 @@ function Filters({ addToCart, selectedData, cartTotal }) {
           // handleGetAll();
         }}
         cartTotal={cartTotal}
+        updateTable={isUpdated}
       />
       <Typography
         fontSize="medium"
@@ -260,6 +261,7 @@ Filters.defaultProps = {
   addToCart: () => {},
   selectedData: [],
   cartTotal: {},
+  isUpdated: false,
 };
 
 Filters.propTypes = {
@@ -268,4 +270,5 @@ Filters.propTypes = {
   selectedData: PropTypes.arrayOf(PropTypes.object),
   // eslint-disable-next-line react/forbid-prop-types
   cartTotal: PropTypes.object,
+  isUpdated: PropTypes.bool,
 };
