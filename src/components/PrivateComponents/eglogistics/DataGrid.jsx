@@ -20,7 +20,6 @@ export default function DataGridTable({
 }) {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
-
   const [selectedRows, setSelectedRows] = useState([]);
 
   const handleRowSelect = (ids) => {
@@ -34,7 +33,6 @@ export default function DataGridTable({
         const selectedRow = data.find((row) => row.uuid === selectedId);
         if (selectedRow) {
           setSelectedRows(ids);
-
           cartArray.push(selectedRow);
         }
       }

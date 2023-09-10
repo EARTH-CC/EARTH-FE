@@ -10,10 +10,14 @@ function getAPI(id, moduleName) {
   return axios.get(`${BASE_URL}/${moduleName}/get/${id}`);
 }
 
-function getAllAPI(moduleName) {
+function getAllAPI(moduleName, processName = "") {
   return new Promise((resolve, reject) => {
     axios
-      .get(`${BASE_URL}/${moduleName}/get`)
+      .get(`${BASE_URL}/${moduleName}/get`, {
+        params: {
+          processName,
+        },
+      })
       .then((res) => resolve(res?.data?.data))
       .catch((err) => {
         reject(err);

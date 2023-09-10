@@ -6,6 +6,15 @@ import { Box } from "@mui/material";
 import PropTypes from "prop-types";
 import DataGrid from "../../../../../../components/PrivateComponents/eglogistics/DataGrid";
 
+// Function to format a date to "MM-DD-YY" format
+const formatDate = (dateString) => {
+  const date = new Date(dateString);
+  const year = date.getFullYear().toString(); // Get the last two digits of the year
+  const month = (date.getMonth() + 1).toString().padStart(2, "0"); // Month is 0-based
+  const day = date.getDate().toString().padStart(2, "0");
+  return `${month}-${day}-${year}`;
+};
+
 export default function PurchaseRequestTable({
   PRData,
   getData,
@@ -17,9 +26,23 @@ export default function PurchaseRequestTable({
 
   const columns = [
     {
-      field: "uuid",
-      headerName: "ID",
+      field: "request_date",
+      headerName: "Date",
       flex: 1,
+      // editable: true,
+      type: "date",
+      valueFormatter: (params) => formatDate(params.value), // Format the date
+    },
+    {
+      field: "ref_code",
+      headerName: "Reference Code",
+      flex: 1,
+    },
+    {
+      field: "pr_code",
+      headerName: "PR No.",
+      flex: 1,
+      cellClassName: "name-column--cell",
     },
     {
       field: "company_name",
@@ -33,12 +56,12 @@ export default function PurchaseRequestTable({
     },
     {
       field: "item_count",
-      headerName: "ITEM COUNT",
+      headerName: "ITEMS",
       flex: 1,
     },
     {
       field: "total_amount",
-      headerName: "TOTAL AMOUNT",
+      headerName: "AMOUNT",
       flex: 1,
     },
     {

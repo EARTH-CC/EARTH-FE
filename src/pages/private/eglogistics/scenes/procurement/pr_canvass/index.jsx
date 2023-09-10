@@ -40,8 +40,6 @@ export default function CanvassSheet() {
     }
   };
 
-  console.log(data);
-
   const handlGetCartPrice = () => {
     procurementService.getPriceAPI(moduleName).then((e) => {
       setCartTotal(e);
