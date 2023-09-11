@@ -24,8 +24,6 @@ export default function PurchaseRequest() {
   // ito ung naghahahandle ng mga items sa modal
   const [data, setData] = useState();
 
-  console.log(data);
-
   // ito ung kumukuha ng data mula sa api para mailagay sa table
   const [PRData, setPRData] = useState([]);
 
@@ -159,37 +157,43 @@ export default function PurchaseRequest() {
         </Box>
       </Box>
       <Box
-        sx={{
-          display: "flex",
-          justifyContent: "end",
-          position: "absolute",
-          zIndex: 1,
-        }}
+        borderRadius="10px"
+        boxShadow="0px 5px 10px rgba(0, 0, 0, 0.2)"
+        p="1rem"
+        sx={{ backgroundColor: colors.primary[400] }}
       >
-        <Button
-          onClick={handlePRRequest}
+        <Box
           sx={{
             display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-            width: 200,
-            cursor: "pointer",
-            fontWeight: "bold",
-            backgroundColor: (themeMode) =>
-              themeMode.palette.mode === "dark" ? "#334b5f" : "lightgray",
-            color: colors.grey[100],
-            "&:hover": {
-              textShadow: "0 0 0.5rem rgba(255, 255, 255, 0.75)",
-              color: "#fff",
-              backgroundColor: "gray",
-            },
+            justifyContent: "end",
+            position: "absolute",
+            zIndex: 1,
           }}
         >
-          <AddIcon sx={{ mr: 0.5 }} />
-          Purchase Request
-        </Button>
-      </Box>
-      {/* <Box
+          <Button
+            onClick={handlePRRequest}
+            sx={{
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              width: 200,
+              cursor: "pointer",
+              fontWeight: "bold",
+              backgroundColor: (themeMode) =>
+                themeMode.palette.mode === "dark" ? "#334b5f" : "lightgray",
+              color: colors.grey[100],
+              "&:hover": {
+                textShadow: "0 0 0.5rem rgba(255, 255, 255, 0.75)",
+                color: "#fff",
+                backgroundColor: "gray",
+              },
+            }}
+          >
+            <AddIcon sx={{ mr: 0.5 }} />
+            Purchase Request
+          </Button>
+        </Box>
+        {/* <Box
         sx={{
           right: 0,
           mr: 2,
@@ -201,45 +205,46 @@ export default function PurchaseRequest() {
           Total Amount (of selected row/s): <br /> <b> {handleTotal(PR)}</b>
         </Typography>
       </Box> */}
-      <Divider>
-        <Typography
+        <Divider>
+          <Typography
+            sx={{
+              textTransform: "uppercase",
+              fontSize: "25px",
+            }}
+          >
+            Purchase Request
+          </Typography>
+        </Divider>
+
+        <Box>
+          <PurchaseRequestTable
+            PRData={PRData}
+            getData={setPR}
+            loadingState={loading}
+          />
+        </Box>
+        <Box
           sx={{
-            textTransform: "uppercase",
-            fontSize: "25px",
+            p: 2,
           }}
         >
-          Purchase Request
-        </Typography>
-      </Divider>
-
-      <Box>
-        <PurchaseRequestTable
-          PRData={PRData}
-          getData={setPR}
-          loadingState={loading}
+          <Typography sx={{ textAlign: "right", fontSize: "15px" }}>
+            Total Amount (of selected row/s): <br /> <b> {handleTotal(PR)}</b>
+          </Typography>
+        </Box>
+        <SnackbarComponent
+          open={openSuccess}
+          onClose={handleCloseSuccess}
+          severity="success"
+          message="Request Successful."
+        />
+        <SnackbarComponent
+          open={openError}
+          onClose={handleCloseError}
+          severity="error"
+          message={error}
         />
       </Box>
-      <Box
-        sx={{
-          p: 2,
-        }}
-      >
-        <Typography sx={{ textAlign: "right", fontSize: "15px" }}>
-          Total Amount (of selected row/s): <br /> <b> {handleTotal(PR)}</b>
-        </Typography>
-      </Box>
-      <SnackbarComponent
-        open={openSuccess}
-        onClose={handleCloseSuccess}
-        severity="success"
-        message="Request Successful."
-      />
-      <SnackbarComponent
-        open={openError}
-        onClose={handleCloseError}
-        severity="error"
-        message={error}
-      />
     </Box>
   );
 }
