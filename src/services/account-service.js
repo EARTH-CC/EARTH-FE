@@ -77,8 +77,12 @@ function register(account) {
   return axios.post(`${BASE_URL}/register`, account);
 }
 
-function updateUser(id, account) {
-  return axios.put(`${BASE_URL}/user/${id}`, account);
+function updateUserPersonal(id, account) {
+  return axios.put(`${BASE_URL}/userPersonal/${id}`, account);
+}
+
+function updateUserAccount(id, account) {
+  return axios.put(`${BASE_URL}/userAccount/${id}`, account);
 }
 
 export default {
@@ -89,5 +93,6 @@ export default {
   getUser,
   searchUsers,
   register,
-  updateUser,
+  updateUserPersonal,
+  updateUserAccount,
 };
