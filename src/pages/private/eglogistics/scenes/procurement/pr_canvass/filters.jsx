@@ -119,7 +119,7 @@ function Filters({ addToCart, selectedData, cartTotal, isUpdated }) {
       <Typography
         fontSize="small"
         fontWeight="600"
-        color={cartTotal.items > 0 ? colors.greenAccent[300] : "black"}
+        color={cartTotal.items > 0 ? colors.greenAccent[300] : colors.grey[100]}
       >
         Total: <span style={{ fontSize: "15px" }}>₱</span>{" "}
         {cartTotal.total_price > 0 ? cartTotal.total_price : 0}

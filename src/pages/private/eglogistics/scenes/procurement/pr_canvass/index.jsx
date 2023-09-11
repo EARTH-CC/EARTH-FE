@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Box, Button, Grid, useTheme } from "@mui/material";
-import DownloadOutlinedIcon from "@mui/icons-material/DownloadOutlined";
+import { Box, Grid, useTheme } from "@mui/material";
 import procurementService from "services/procurement-service";
 import Filters from "./filters";
 import CanvasTable from "./canvasTable";
@@ -63,29 +62,6 @@ export default function CanvassSheet() {
           title="Canvass Sheet"
           subtitle="Compare suppliers and decide better with our Purchase Canvass Sheet"
         />
-
-        <Box>
-          <Button
-            sx={{
-              backgroundColor: colors.blueAccent[300],
-              // backgroundColor: (themeMode) =>
-              //   themeMode.palette.mode === "dark" ? "#334b5f" : "lightgray",
-              color: colors.grey[900],
-              "&:hover": {
-                color: "white",
-                backgroundColor: colors.blueAccent[700],
-              },
-              fontSize: "14px",
-              fontWeight: "bold",
-              padding: "10px 20px",
-              borderRadius: "5px",
-              boxShadow: "1px 1px 5px rgba(0, 0, 0, 0.5)",
-            }}
-          >
-            <DownloadOutlinedIcon sx={{ mr: "10px" }} />
-            Download Reports
-          </Button>
-        </Box>
       </Box>
       <Grid
         container

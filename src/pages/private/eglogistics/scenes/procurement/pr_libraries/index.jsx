@@ -1,6 +1,5 @@
 import * as React from "react";
-import { Box, Tabs, Tab, Button, useTheme } from "@mui/material";
-import DownloadOutlinedIcon from "@mui/icons-material/DownloadOutlined";
+import { Box, Tabs, Tab, useTheme } from "@mui/material";
 import ProductLibraries from "./product";
 import BrandLibraries from "./brand";
 import CategoryLibraries from "./category";
@@ -32,29 +31,6 @@ export default function ProcurementLibararies() {
           title="Purchase Libraries"
           subtitle="Library Management for Purchase Items"
         />
-
-        <Box>
-          <Button
-            sx={{
-              backgroundColor: colors.blueAccent[300],
-              // backgroundColor: (themeMode) =>
-              //   themeMode.palette.mode === "dark" ? "#334b5f" : "lightgray",
-              color: colors.grey[900],
-              "&:hover": {
-                color: "white",
-                backgroundColor: colors.blueAccent[700],
-              },
-              fontSize: "14px",
-              fontWeight: "bold",
-              padding: "10px 20px",
-              borderRadius: "10px",
-              boxShadow: "1px 1px 5px rgba(0, 0, 0, 0.5)",
-            }}
-          >
-            <DownloadOutlinedIcon sx={{ mr: "10px" }} />
-            Download Reports
-          </Button>
-        </Box>
       </Box>
       <Box
         borderRadius="10px"

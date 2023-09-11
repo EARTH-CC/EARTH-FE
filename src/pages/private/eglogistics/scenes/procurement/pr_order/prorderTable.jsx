@@ -98,7 +98,12 @@ export default function PurchaseOrderTable() {
 
   return (
     <Box>
-      <DataGrid date={items} columns={columns} loadingState={loading} />
+      <DataGrid
+        date={items}
+        columns={columns}
+        loadingState={loading}
+        height="72.4vh"
+      />
     </Box>
   );
 }

@@ -59,51 +59,59 @@ export default function PurchaseOrder() {
         </Box>
       </Box>
       <Box
-        sx={{
-          display: "flex",
-          justifyContent: "end",
-          position: "absolute",
-          zIndex: 1,
-        }}
+        borderRadius="10px"
+        boxShadow="0px 5px 10px rgba(0, 0, 0, 0.2)"
+        p="1rem"
+        sx={{ backgroundColor: colors.primary[400] }}
       >
-        <Button
-          onClick={handleOpen}
+        <Box
           sx={{
             display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-            width: 200,
-            cursor: "pointer",
-            fontWeight: "bold",
-            backgroundColor: (themeMode) =>
-              themeMode.palette.mode === "dark" ? "#334b5f" : "lightgray",
-            color: colors.grey[100],
-            "&:hover": {
-              textShadow: "0 0 0.5rem rgba(255, 255, 255, 0.75)",
-              color: "#fff",
-              backgroundColor: "gray",
-            },
+            justifyContent: "end",
+            position: "absolute",
+            zIndex: 1,
           }}
         >
-          <AddIcon sx={{ mr: 0.5 }} />
-          Purchase Order
-        </Button>
-      </Box>
-      <Divider>
-        <Typography
-          sx={{
-            textTransform: "uppercase",
-            fontSize: "25px",
-          }}
-        >
-          Purchase Order
-        </Typography>
-      </Divider>
+          <Button
+            onClick={handleOpen}
+            sx={{
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              width: 200,
+              cursor: "pointer",
+              fontWeight: "bold",
+              backgroundColor: (themeMode) =>
+                themeMode.palette.mode === "dark" ? "#334b5f" : "lightgray",
+              color: colors.grey[100],
+              "&:hover": {
+                textShadow: "0 0 0.5rem rgba(255, 255, 255, 0.75)",
+                color: "#fff",
+                backgroundColor: "gray",
+              },
+            }}
+          >
+            <AddIcon sx={{ mr: 0.5 }} />
+            Purchase Order
+          </Button>
+        </Box>
 
-      <Box>
-        <PurchaseOrderTable />
+        <Divider>
+          <Typography
+            sx={{
+              textTransform: "uppercase",
+              fontSize: "25px",
+            }}
+          >
+            Purchase Order
+          </Typography>
+        </Divider>
+
+        <Box>
+          <PurchaseOrderTable />
+        </Box>
+        {/* Contents */}
       </Box>
-      {/* Contents */}
     </Box>
   );
 }

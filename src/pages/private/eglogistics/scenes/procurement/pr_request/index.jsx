@@ -24,6 +24,8 @@ export default function PurchaseRequest() {
   // ito ung naghahahandle ng mga items sa modal
   const [data, setData] = useState();
 
+  console.log(data);
+
   // ito ung kumukuha ng data mula sa api para mailagay sa table
   const [PRData, setPRData] = useState([]);
 

@@ -74,7 +74,7 @@ export default function PurchaseRequestTable({
         checkbox={true}
         selectedData={setData}
         loadingState={loadingState}
-        height="60vh"
+        height="64.4vh"
       />
     </Box>
   );
