@@ -13,16 +13,27 @@ import {
   GridToolbar,
 } from "@mui/x-data-grid";
 import { useTheme } from "@mui/material";
-import themes from "../../../themes/theme";
+import themes from "../../../../themes/theme";
 
 const { tokens } = themes;
 
-export default function EditableCart({ data }) {
+export default function EditableTable({
+  data,
+  columns,
+  loadingState,
+  checkbox,
+  height,
+  showSearch,
+  //   selectedData,
+  //   reset,
+}) {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
 
   const [rows, setRows] = useState(data);
   const [rowModesModel, setRowModesModel] = useState({});
+
+  console.log(rowModesModel);
 
   const handleRowEditStop = (params, event) => {
     if (params.reason === GridRowEditStopReasons.rowFocusOut) {
@@ -31,33 +42,33 @@ export default function EditableCart({ data }) {
     }
   };
 
-  const handleEditClick = (id) => () => {
-    setRowModesModel({ ...rowModesModel, [id]: { mode: GridRowModes.Edit } });
+  const handleEditClick = (uuid) => () => {
+    setRowModesModel({ ...rowModesModel, [uuid]: { mode: GridRowModes.Edit } });
   };
 
-  const handleSaveClick = (id) => () => {
-    setRowModesModel({ ...rowModesModel, [id]: { mode: GridRowModes.View } });
+  const handleSaveClick = (uuid) => () => {
+    setRowModesModel({ ...rowModesModel, [uuid]: { mode: GridRowModes.View } });
   };
 
-  const handleDeleteClick = (id) => () => {
-    setRows(rows.filter((row) => row.id !== id));
+  const handleDeleteClick = (uuid) => () => {
+    setRows(rows.filter((row) => row.uuid !== uuid));
   };
 
-  const handleCancelClick = (id) => () => {
+  const handleCancelClick = (uuid) => () => {
     setRowModesModel({
       ...rowModesModel,
-      [id]: { mode: GridRowModes.View, ignoreModifications: true },
+      [uuid]: { mode: GridRowModes.View, ignoreModifications: true },
     });
 
-    const editedRow = rows.find((row) => row.id === id);
+    const editedRow = rows.find((row) => row.uuid === uuid);
     if (editedRow.isNew) {
-      setRows(rows.filter((row) => row.id !== id));
+      setRows(rows.filter((row) => row.uuid !== uuid));
     }
   };
 
   const processRowUpdate = (newRow) => {
     const updatedRow = { ...newRow, isNew: false };
-    setRows(rows.map((row) => (row.id === newRow.id ? updatedRow : row)));
+    setRows(rows.map((row) => (row.uuid === newRow.uuid ? updatedRow : row)));
     return updatedRow;
   };
 
@@ -65,47 +76,8 @@ export default function EditableCart({ data }) {
     setRowModesModel(newRowModesModel);
   };
 
-  const columns = [
-    {
-      field: "name",
-      headerName: "Name",
-      flex: 0.5,
-      headerAlign: "left",
-      align: "left",
-      cellClassName: "name-column--cell",
-    },
-    {
-      field: "item_code",
-      headerName: "Item Code",
-      flex: 0.5,
-    },
-    {
-      field: "brand",
-      headerName: "Brand",
-      flex: 0.5,
-    },
-    {
-      field: "supplier",
-      headerName: "Supplier",
-      flex: 0.5,
-    },
-    {
-      field: "price",
-      headerName: "Price",
-      flex: 0.5,
-    },
-    {
-      field: "description",
-      headerName: "Description",
-      headerAlign: "left",
-      flex: 0.5,
-    },
-    {
-      field: "quantity",
-      headerName: "Quantity",
-      headerAlign: "left",
-      flex: 0.5,
-    },
+  const columnsAction = [
+    ...columns,
     {
       field: "actions",
       type: "actions",
@@ -156,7 +128,7 @@ export default function EditableCart({ data }) {
 
   return (
     <Box
-      height="70vh"
+      height={height}
       sx={{
         "& .MuiDataGrid-root": {
           border: "none",
@@ -191,26 +163,50 @@ export default function EditableCart({ data }) {
       <DataGrid
         getRowId={(row) => row.uuid || row.id}
         rows={rows}
-        columns={columns}
+        columns={columnsAction}
         editMode="row"
+        checkboxSelection={checkbox}
+        loading={loadingState}
         rowModesModel={rowModesModel}
         onRowModesModelChange={handleRowModesModelChange}
         onRowEditStop={handleRowEditStop}
         processRowUpdate={processRowUpdate}
         slots={{ toolbar: GridToolbar }}
         slotProps={{
-          toolbar: { setRows, setRowModesModel },
+          toolbar: {
+            showQuickFilter: showSearch,
+            quickFilterProps: { debounceMs: 500 },
+            setRows,
+            setRowModesModel,
+          },
         }}
+        height="100%"
       />
     </Box>
   );
 }
 
-EditableCart.defaultProps = {
+EditableTable.defaultProps = {
   data: [],
+  columns: [],
+  loadingState: false,
+  checkbox: false,
+  height: "70vh",
+  showSearch: true,
+  //   selectedData: [],
+  //   reset: false,
 };
 
-EditableCart.propTypes = {
+EditableTable.propTypes = {
   // eslint-disable-next-line react/forbid-prop-types
-  data: PropTypes.array,
+  data: PropTypes.arrayOf(PropTypes.object),
+  // eslint-disable-next-line react/forbid-prop-types
+  columns: PropTypes.arrayOf(PropTypes.object),
+  loadingState: PropTypes.bool,
+  checkbox: PropTypes.bool,
+  height: PropTypes.string,
+  showSearch: PropTypes.bool,
+  // eslint-disable-next-line react/forbid-prop-types
+  //   selectedData: PropTypes.arrayOf(PropTypes.object),
+  //   reset: PropTypes.bool,
 };

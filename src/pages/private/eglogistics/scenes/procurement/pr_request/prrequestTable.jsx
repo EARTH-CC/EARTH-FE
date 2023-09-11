@@ -4,7 +4,7 @@
 import React, { useState } from "react";
 import { Box } from "@mui/material";
 import PropTypes from "prop-types";
-import DataGrid from "../../../../../../components/PrivateComponents/eglogistics/DataGrid";
+import DataGrid from "../../../../../../components/PrivateComponents/eglogistics/Tables/DataGrid";
 
 // Function to format a date to "MM-DD-YY" format
 const formatDate = (dateString) => {
@@ -17,12 +17,12 @@ const formatDate = (dateString) => {
 
 export default function PurchaseRequestTable({
   PRData,
-  getData,
+  selectedData,
   loadingState,
 }) {
   const [data, setData] = useState();
 
-  getData(data);
+  selectedData(data);
 
   const columns = [
     {
@@ -82,13 +82,13 @@ export default function PurchaseRequestTable({
 
 PurchaseRequestTable.defaultProps = {
   PRData: [],
-  getData: () => {},
+  selectedData: () => {},
   loadingState: false,
 };
 
 PurchaseRequestTable.propTypes = {
   // eslint-disable-next-line react/forbid-prop-types
   PRData: PropTypes.array,
-  getData: PropTypes.func,
+  selectedData: PropTypes.func,
   loadingState: PropTypes.bool,
 };

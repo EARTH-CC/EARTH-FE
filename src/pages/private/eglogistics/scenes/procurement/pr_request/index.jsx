@@ -193,18 +193,6 @@ export default function PurchaseRequest() {
             Purchase Request
           </Button>
         </Box>
-        {/* <Box
-        sx={{
-          right: 0,
-          mr: 2,
-          position: "absolute",
-          zIndex: 1,
-        }}
-      >
-        <Typography sx={{ mt: -0.5, textAlign: "right", fontSize: "15px" }}>
-          Total Amount (of selected row/s): <br /> <b> {handleTotal(PR)}</b>
-        </Typography>
-      </Box> */}
         <Divider>
           <Typography
             sx={{
@@ -219,18 +207,43 @@ export default function PurchaseRequest() {
         <Box>
           <PurchaseRequestTable
             PRData={PRData}
-            getData={setPR}
+            selectedData={setPR}
             loadingState={loading}
           />
         </Box>
         <Box
           sx={{
+            display: "flex",
+            justifyContent: "space-between",
+            alignItems: "center",
             p: 2,
           }}
         >
-          <Typography sx={{ textAlign: "right", fontSize: "15px" }}>
-            Total Amount (of selected row/s): <br /> <b> {handleTotal(PR)}</b>
-          </Typography>
+          <Box>
+            <Typography sx={{ fontSize: "15px" }}>
+              {/* Selected: <br /> <b> {handleTotal(PR)}</b> */}
+              Selected ({PR ? PR?.length : 0}{" "}
+              {PR?.length > 1 ? "items" : "item"}
+              ): <span style={{ fontSize: "15px" }}>₱</span>{" "}
+              {PR
+                ? PR?.reduce(
+                    (total, currentItem) =>
+                      total + (currentItem.total_amount || 0),
+                    0
+                  )
+                : 0}
+            </Typography>
+          </Box>
+          <Box>
+            <Typography sx={{ textAlign: "right", fontSize: "15px" }}>
+              Subtotal Amount: <br />{" "}
+              <b>
+                {" "}
+                <span style={{ fontSize: "17px" }}>₱</span>{" "}
+                {handleTotal(PRData)}
+              </b>
+            </Typography>
+          </Box>
         </Box>
         <SnackbarComponent
           open={openSuccess}

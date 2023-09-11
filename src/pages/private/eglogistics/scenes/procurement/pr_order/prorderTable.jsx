@@ -4,7 +4,7 @@
 import React, { useEffect, useState } from "react";
 import { Box } from "@mui/material";
 import procurementService from "services/procurement-service";
-import DataGrid from "../../../../../../components/PrivateComponents/eglogistics/DataGrid";
+import DataGrid from "../../../../../../components/PrivateComponents/eglogistics/Tables/DataGrid";
 
 export default function PurchaseOrderTable() {
   const [items, setItems] = useState([]);

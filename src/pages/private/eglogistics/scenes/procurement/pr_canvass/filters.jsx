@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Box,
   Button,
@@ -30,6 +30,7 @@ function Filters({ addToCart, selectedData, cartTotal, isUpdated }) {
   const [brand, setBrand] = useState();
   const [supplier, setSupplier] = useState();
   const [openCartModal, setOpenCartModal] = useState(false);
+  const [disable, setDisable] = useState(true);
 
   const handleOpenCart = () => {
     setOpenCartModal(true);
@@ -42,6 +43,14 @@ function Filters({ addToCart, selectedData, cartTotal, isUpdated }) {
   const handleSliderChange = (event, newValue) => {
     setValue(newValue);
   };
+
+  useEffect(() => {
+    if (selectedData.length > 0) {
+      setDisable(false);
+    } else {
+      setDisable(true);
+    }
+  }, [selectedData]);
 
   return (
     <Box
@@ -234,12 +243,16 @@ function Filters({ addToCart, selectedData, cartTotal, isUpdated }) {
 
       <Button
         onClick={addToCart}
+        disabled={disable}
         sx={{
-          backgroundColor: colors.blueAccent[300],
-          color: colors.grey[900],
+          backgroundColor: disable ? "gray" : colors.blueAccent[300],
+          color: "#fff",
           "&:hover": {
             color: "white",
-            backgroundColor: colors.blueAccent[700],
+            backgroundColor:
+              selectedData.length < 1
+                ? colors.blueAccent[700]
+                : colors.blueAccent[800],
           },
           fontSize: "14px",
           fontWeight: "bold",

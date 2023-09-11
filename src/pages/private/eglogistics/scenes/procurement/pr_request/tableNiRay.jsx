@@ -9,7 +9,7 @@ import ClearIcon from "@mui/icons-material/Clear";
 import RoofingRoundedIcon from "@mui/icons-material/RoofingRounded";
 import CorporateFareRoundedIcon from "@mui/icons-material/CorporateFareRounded";
 import { Box, Typography, useTheme } from "@mui/material";
-import DataGrid from "../../../../../../components/PrivateComponents/eglogistics/DataGrid";
+import DataGrid from "../../../../../../components/PrivateComponents/eglogistics/Tables/DataGrid";
 import DateField from "../../../../../../components/PrivateComponents/eglogistics/Textfields/Datepicker";
 import mockData from "../../../../../../data/mockData";
 import themes from "../../../../../../themes/theme";

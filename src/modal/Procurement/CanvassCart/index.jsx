@@ -10,8 +10,8 @@ import {
 } from "@mui/material";
 import ForwardIcon from "@mui/icons-material/Forward";
 import procurementService from "services/procurement-service";
+import EditableTable from "components/PrivateComponents/eglogistics/Tables/EditableTable";
 import themes from "../../../themes/theme";
-import EditableCart from "./EditableCart";
 
 const style = {
   backgroundColor: (themeMode) =>
@@ -65,6 +65,51 @@ export default function CanvassCart({
     }
   }, [updateTable]);
 
+  const columns = [
+    {
+      field: "name",
+      headerName: "Name",
+      flex: 0.5,
+      headerAlign: "left",
+      align: "left",
+      cellClassName: "name-column--cell",
+    },
+    {
+      field: "item_code",
+      headerName: "Item Code",
+      flex: 0.5,
+    },
+    {
+      field: "brand",
+      headerName: "Brand",
+      flex: 0.5,
+    },
+    {
+      field: "supplier",
+      headerName: "Supplier",
+      flex: 0.5,
+    },
+    {
+      field: "price",
+      headerName: "Price",
+      flex: 0.5,
+    },
+    {
+      field: "description",
+      headerName: "Description",
+      headerAlign: "left",
+      flex: 0.5,
+    },
+    {
+      field: "quantity",
+      headerName: "Quantity",
+      headerAlign: "left",
+      flex: 0.5,
+      type: "number",
+      editable: true,
+    },
+  ];
+
   return (
     <Modal
       open={open}
@@ -84,7 +129,16 @@ export default function CanvassCart({
             Canvass Cart
           </Typography>
         </Divider>
-        <EditableCart data={data} loadingState={loading} />
+        <EditableTable
+          data={data}
+          columns={columns}
+          loadingState={loading}
+          checkbox
+          height="70vh"
+          showSearch
+          // selectedData
+          // reset={false}
+        />
         <Divider
           variant="middle"
           sx={{ borderTopWidth: "1px", borderTopColor: "grey" }}

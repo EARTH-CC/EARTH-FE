@@ -207,8 +207,6 @@ export default function PurchaseRequestModal({
 
   //   };
 
-  console.log(data);
-
   return (
     <Modal
       open={open}
