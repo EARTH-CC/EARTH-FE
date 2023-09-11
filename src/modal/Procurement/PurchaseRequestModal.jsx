@@ -12,6 +12,7 @@ import {
 import AddIcon from "@mui/icons-material/Add";
 import DeleteIcon from "@mui/icons-material/Delete";
 import procurementService from "services/procurement-service";
+import Header from "components/PrivateComponents/eglogistics/Header";
 import SelectItem from "components/PrivateComponents/eglogistics/Textfields/SelectItem";
 
 const style = {
@@ -216,9 +217,7 @@ export default function PurchaseRequestModal({
     >
       <Box sx={style}>
         <Box mb={4}>
-          <Typography variant="h3" fontWeight="bolder" my={2}>
-            Purchase Request
-          </Typography>
+          <Header title="Add Purchase Order" mb={4} />
           {error && "An error occurred. Make sure to fill up required fields"}
         </Box>
         <Box mb={4}>

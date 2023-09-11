@@ -215,12 +215,12 @@ export default function PurchaseRequest() {
           sx={{
             display: "flex",
             justifyContent: "space-between",
-            alignItems: "center",
+            alignItems: "top",
             p: 2,
           }}
         >
           <Box>
-            <Typography sx={{ fontSize: "15px" }}>
+            <Typography sx={{ letterSpacing: "0.05em", fontSize: "15px" }}>
               {/* Selected: <br /> <b> {handleTotal(PR)}</b> */}
               Selected ({PR ? PR?.length : 0}{" "}
               {PR?.length > 1 ? "items" : "item"}
@@ -235,7 +235,16 @@ export default function PurchaseRequest() {
             </Typography>
           </Box>
           <Box>
-            <Typography sx={{ textAlign: "right", fontSize: "15px" }}>
+            <Typography
+              color={colors.blueAccent[300]}
+              fontWeight="bold"
+              sx={{
+                letterSpacing: "0.05em",
+                textAlign: "right",
+                fontSize: "15px",
+                fontFamily: "Poppins, sans-serif",
+              }}
+            >
               Subtotal Amount: <br />{" "}
               <b>
                 {" "}

@@ -104,6 +104,7 @@ export default function CanvassCart({
       field: "quantity",
       headerName: "Quantity",
       headerAlign: "left",
+      align: "left",
       flex: 0.5,
       type: "number",
       editable: true,
@@ -155,9 +156,10 @@ export default function CanvassCart({
           <Typography
             fontSize="medium"
             fontWeight="900"
+            color={colors.blueAccent[300]}
             sx={{ letterSpacing: "0.05em", fontFamily: "Poppins, sans-serif" }}
           >
-            Subtotal Payment ({cartTotal ? cartTotal.items : 0}):{" "}
+            Subtotal Price ({cartTotal ? cartTotal.items : 0}):{" "}
             <span style={{ fontSize: "18px" }}>₱</span>{" "}
             {cartTotal ? cartTotal.total_price : 0}
           </Typography>
