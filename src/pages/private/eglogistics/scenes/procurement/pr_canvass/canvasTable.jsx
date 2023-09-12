@@ -29,6 +29,11 @@ function CanvasTable({ selectedData, reset }) {
     handleGetAll();
   }, []);
 
+  const currencyFormatter = new Intl.NumberFormat("en-US", {
+    style: "currency",
+    currency: "PHP",
+  });
+
   const columns = [
     {
       field: "name",
@@ -62,6 +67,7 @@ function CanvasTable({ selectedData, reset }) {
       field: "price",
       headerName: "Price",
       flex: 0.5,
+      valueFormatter: ({ value }) => currencyFormatter.format(value),
     },
     {
       field: "description",

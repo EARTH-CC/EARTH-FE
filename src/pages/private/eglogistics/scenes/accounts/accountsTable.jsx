@@ -45,16 +45,23 @@ export default function AccountsTable() {
       field: "firstname",
       headerName: "Firstname",
       flex: 1,
+      editable: true,
+      type: "string",
     },
     {
       field: "lastname",
       headerName: "Lastname",
       flex: 1,
+      editable: true,
+      type: "string",
     },
     {
       field: "role",
       headerName: "Role",
       flex: 1,
+      editable: true,
+      type: "singleSelect",
+      valueOptions: ["superadmin", "canvasser", "user"],
       renderCell: ({ row: { role } }) => (
         <Box
           width="60%"
@@ -122,6 +129,9 @@ export default function AccountsTable() {
       field: "status",
       headerName: "Status",
       flex: 1,
+      editable: true,
+      type: "singleSelect",
+      valueOptions: ["Activate", "Deactivate"],
       renderCell: ({ row: { status } }) => (
         <Box
           width="60%"
@@ -165,10 +175,23 @@ export default function AccountsTable() {
             </Box>
           )}
           <span color={colors.grey[100]} style={{ ml: "5px" }}>
-            {status === 1 ? "Active" : status === 0 ? "Inactive" : "unknown"}
+            {status === 1
+              ? "Activate"
+              : status === 0
+              ? "Deactivated"
+              : "unknown"}
           </span>
         </Box>
       ),
+      valueGetter: (params) =>
+        params.row.status === 1 ? "Activate" : "Deactivate",
+      onEditCellChange: (params, event) => {
+        // Handle changes in the cell's value here
+        const newValue = event.target.value;
+        params.api.updateRows([
+          { ...params.row, status: newValue === "Activate" ? 1 : 0 },
+        ]);
+      },
     },
   ];
 

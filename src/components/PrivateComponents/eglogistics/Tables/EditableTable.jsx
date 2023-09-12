@@ -65,7 +65,15 @@ export default function EditableTable({
   };
 
   const processRowUpdate = (newRow) => {
-    const updatedRow = { ...newRow, isNew: false };
+    let status = 0;
+    if (newRow.status) {
+      if (newRow.status === "Activate") {
+        status = 1;
+      } else {
+        status = 0;
+      }
+    }
+    const updatedRow = { ...newRow, status, isNew: false };
     setRows(rows.map((row) => (row.uuid === newRow.uuid ? updatedRow : row)));
     return updatedRow;
   };

@@ -104,7 +104,10 @@ function Sidebar() {
               >
                 <div
                   className="image-container"
-                  style={{ background: colors.primary[400] }}
+                  style={{
+                    background: colors.primary[400],
+                    border: `5px solid ${colors.blueAccent[600]}`,
+                  }}
                 >
                   <div className="image">
                     <img alt="body" className="avatar" src={body} />

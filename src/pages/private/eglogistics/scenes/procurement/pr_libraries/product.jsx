@@ -3,7 +3,7 @@ import { Box, Button, Divider, Typography, useTheme } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
 import AddItemModal from "modal/Procurement/ProcurementLibraries/AddItemModal";
 import procurementService from "services/procurement-service";
-import DataGrid from "components/PrivateComponents/eglogistics/Tables/DataGrid";
+import DataGrid from "components/PrivateComponents/eglogistics/Tables/EditableTable";
 import themes from "themes/theme";
 
 const { tokens } = themes;
@@ -39,6 +39,11 @@ function Products() {
       });
   };
 
+  const currencyFormatter = new Intl.NumberFormat("en-US", {
+    style: "currency",
+    currency: "PHP",
+  });
+
   const columns = [
     {
       field: "name",
@@ -54,6 +59,7 @@ function Products() {
       field: "price",
       headerName: "Price",
       width: 200,
+      valueFormatter: ({ value }) => currencyFormatter.format(value),
     },
     {
       field: "brand_name",

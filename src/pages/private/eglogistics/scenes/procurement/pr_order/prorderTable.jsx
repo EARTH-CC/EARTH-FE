@@ -28,6 +28,11 @@ export default function PurchaseOrderTable() {
     handleGetAll();
   }, []);
 
+  const currencyFormatter = new Intl.NumberFormat("en-US", {
+    style: "currency",
+    currency: "PHP",
+  });
+
   const columns = [
     {
       field: "date",
@@ -88,6 +93,7 @@ export default function PurchaseOrderTable() {
       field: "amount",
       headerName: "Amount",
       flex: 1,
+      valueFormatter: ({ value }) => currencyFormatter.format(value),
     },
     {
       field: "remarks",

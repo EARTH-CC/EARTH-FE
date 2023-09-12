@@ -65,6 +65,11 @@ export default function CanvassCart({
     }
   }, [updateTable]);
 
+  const currencyFormatter = new Intl.NumberFormat("en-US", {
+    style: "currency",
+    currency: "PHP",
+  });
+
   const columns = [
     {
       field: "name",
@@ -93,6 +98,7 @@ export default function CanvassCart({
       field: "price",
       headerName: "Price",
       flex: 0.5,
+      valueFormatter: ({ value }) => currencyFormatter.format(value),
     },
     {
       field: "description",

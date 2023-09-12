@@ -24,6 +24,11 @@ export default function PurchaseRequestTable({
 
   selectedData(data);
 
+  const currencyFormatter = new Intl.NumberFormat("en-US", {
+    style: "currency",
+    currency: "PHP",
+  });
+
   const columns = [
     {
       field: "request_date",
@@ -53,6 +58,7 @@ export default function PurchaseRequestTable({
       field: "total_amount",
       headerName: "AMOUNT",
       flex: 1,
+      valueFormatter: ({ value }) => currencyFormatter.format(value),
     },
     {
       field: "attention",
