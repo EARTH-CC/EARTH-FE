@@ -55,7 +55,14 @@ function useRefreshToken() {
 }
 
 function getAllUsers() {
-  return axios.get(`${BASE_URL}/users`);
+  return new Promise((resolve, reject) => {
+    axios
+      .get(`${BASE_URL}/users`)
+      .then((res) => resolve(res?.data?.data))
+      .catch((err) => {
+        reject(err);
+      });
+  });
 }
 
 function getUser(id) {

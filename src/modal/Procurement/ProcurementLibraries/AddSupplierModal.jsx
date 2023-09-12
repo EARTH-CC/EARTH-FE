@@ -1,11 +1,12 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
-import { Box, Button, Grid, Modal, TextField, Typography } from "@mui/material";
+import { Box, Button, Grid, Modal, TextField } from "@mui/material";
 import { useFormik } from "formik";
 import PRSupplier, {
   initialPRSupplier,
 } from "validation/pr-libraries/procurement-supplier";
 import procurementService from "services/procurement-service";
+import Header from "components/PrivateComponents/eglogistics/Header";
 
 const style = {
   backgroundColor: (themeMode) =>
@@ -60,9 +61,7 @@ export default function AddSupplierModal({ open, handleClose, onSuccess }) {
       <Box sx={style}>
         <form onSubmit={formik.handleSubmit} autoComplete="off">
           <Box mb={4}>
-            <Typography variant="h3" fontWeight="bolder" my={2}>
-              Add Supplier
-            </Typography>
+            <Header title="Add Supplier" mb={4} />
           </Box>
           <Box mx={2}>
             <Grid container spacing={2}>

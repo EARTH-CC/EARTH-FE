@@ -4,7 +4,7 @@
 import React, { useEffect, useState } from "react";
 import { Box } from "@mui/material";
 import procurementService from "services/procurement-service";
-import DataGrid from "../../../../../../components/PrivateComponents/eglogistics/Tables/DataGrid";
+import DataGrid from "components/PrivateComponents/eglogistics/Tables/DataGrid";
 
 export default function PurchaseOrderTable() {
   const [items, setItems] = useState([]);
@@ -99,7 +99,7 @@ export default function PurchaseOrderTable() {
   return (
     <Box>
       <DataGrid
-        date={items}
+        data={items}
         columns={columns}
         loadingState={loading}
         height="72.4vh"

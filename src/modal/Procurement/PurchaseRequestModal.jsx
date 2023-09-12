@@ -217,7 +217,7 @@ export default function PurchaseRequestModal({
     >
       <Box sx={style}>
         <Box mb={4}>
-          <Header title="Add Purchase Order" mb={4} />
+          <Header title="Add Purchase Request" mb={4} />
           {error && "An error occurred. Make sure to fill up required fields"}
         </Box>
         <Box mb={4}>

@@ -16,7 +16,7 @@ import SelectCategory from "components/PrivateComponents/eglogistics/Textfields/
 import SelectSupplier from "components/PrivateComponents/eglogistics/Textfields/SelectSupplier";
 import CanvassCart from "modal/Procurement/CanvassCart";
 // import procurementService from "services/procurement-service";
-import themes from "../../../../../../themes/theme";
+import themes from "themes/theme";
 
 const { tokens } = themes;
 const priceData = [0, 999999]; // MOCK DATA

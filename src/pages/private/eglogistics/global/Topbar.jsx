@@ -1,13 +1,13 @@
 /* eslint-disable import/no-duplicates */
 import { Box, IconButton, Typography, useTheme } from "@mui/material";
-import { useContext, useState } from "react";
+import { useContext } from "react";
 import LightModeOutlinedIcon from "@mui/icons-material/LightModeOutlined";
 import DarkModeOutlinedIcon from "@mui/icons-material/DarkModeOutlined";
 import NotificationsOutlinedIcon from "@mui/icons-material/NotificationsOutlined";
 import LogoutIcon from "@mui/icons-material/Logout";
 import { useNavigate } from "react-router-dom";
 import GroupOutlinedIcon from "@mui/icons-material/GroupOutlined";
-import RegisterModal from "../../../../modal/RegisterModal";
+// import RegisterModal from "../../../../modal/RegisterModal";
 import egLogo from "../../../../assets/images/eglogistics.png";
 import themes from "../../../../themes/theme";
 
@@ -18,19 +18,23 @@ function Topbar() {
   const colors = tokens(theme.palette.mode);
   const { toggleColorMode } = useContext(ColorModeContext);
   const navigate = useNavigate();
-  const [open, setOpen] = useState(false);
+  // const [open, setOpen] = useState(false);
 
   const handleLogout = () => {
     navigate("/");
   };
 
-  const handleOpen = () => {
-    setOpen(true);
+  const handleAccounts = () => {
+    navigate("/accounts");
   };
 
-  const handleClose = () => {
-    setOpen(false);
-  };
+  // const handleOpen = () => {
+  //   setOpen(true);
+  // };
+
+  // const handleClose = () => {
+  //   setOpen(false);
+  // };
 
   return (
     <Box
@@ -77,14 +81,14 @@ function Topbar() {
         <IconButton>
           <NotificationsOutlinedIcon />
         </IconButton>
-        <IconButton onClick={handleOpen}>
+        <IconButton onClick={handleAccounts}>
           <GroupOutlinedIcon />
         </IconButton>
         <IconButton onClick={handleLogout}>
           <LogoutIcon />
         </IconButton>
       </Box>
-      <RegisterModal handleClose={handleClose} open={open} />
+      {/* <RegisterModal handleClose={handleClose} open={open} /> */}
     </Box>
   );
 }

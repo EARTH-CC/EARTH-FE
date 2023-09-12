@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import { Box, Divider, Typography } from "@mui/material";
-import procurementService from "../../../../../../services/procurement-service";
-import DataGrid from "../../../../../../components/PrivateComponents/eglogistics/Tables/DataGrid";
+import procurementService from "services/procurement-service";
+import DataGrid from "components/PrivateComponents/eglogistics/Tables/DataGrid";
 
 function CanvasTable({ selectedData, reset }) {
   const [items, setItems] = useState([]);

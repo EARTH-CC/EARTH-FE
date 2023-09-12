@@ -1,11 +1,11 @@
 import * as React from "react";
 import { Box, Tabs, Tab, useTheme } from "@mui/material";
+import themes from "themes/theme";
+import Header from "components/PrivateComponents/eglogistics/Header";
 import ProductLibraries from "./product";
 import BrandLibraries from "./brand";
 import CategoryLibraries from "./category";
 import SupplierLibraries from "./supplier";
-import themes from "../../../../../../themes/theme";
-import Header from "../../../../../../components/PrivateComponents/eglogistics/Header";
 
 const { tokens } = themes;
 

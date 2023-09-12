@@ -3,8 +3,8 @@ import { Box, Button, Divider, Typography, useTheme } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
 import DownloadOutlinedIcon from "@mui/icons-material/DownloadOutlined";
 import PurchaseOrderModal from "modal/Procurement/AddPoModal";
-import Header from "../../../../../../components/PrivateComponents/eglogistics/Header";
-import themes from "../../../../../../themes/theme";
+import Header from "components/PrivateComponents/eglogistics/Header";
+import themes from "themes/theme";
 import PurchaseOrderTable from "./prorderTable";
 
 const { tokens } = themes;

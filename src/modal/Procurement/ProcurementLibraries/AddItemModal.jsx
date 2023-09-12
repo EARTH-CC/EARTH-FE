@@ -6,7 +6,6 @@ import {
   Grid,
   Modal,
   TextField,
-  Typography,
   // useTheme,
 } from "@mui/material";
 import { useFormik } from "formik";
@@ -17,6 +16,7 @@ import procurementService from "services/procurement-service";
 import SelectBrand from "components/PrivateComponents/eglogistics/Textfields/SelectBrand";
 import SelectSupplier from "components/PrivateComponents/eglogistics/Textfields/SelectSupplier";
 import SelectCategory from "components/PrivateComponents/eglogistics/Textfields/SelectCategory";
+import Header from "components/PrivateComponents/eglogistics/Header";
 // import themes from "../../themes/theme";
 
 const style = {
@@ -81,9 +81,7 @@ export default function AddItemModal({ open, handleClose, onSuccess }) {
           style={{ zIndex: 1 }}
         >
           <Box mb={4}>
-            <Typography variant="h3" fontWeight="bolder" my={2}>
-              Add Item
-            </Typography>
+            <Header title="Add Item" mb={4} />
           </Box>
           <Box mx={2}>
             <Grid container spacing={3}>

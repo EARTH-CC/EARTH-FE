@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
 import { Box, Button, Divider, Typography, useTheme } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
-import AddBrandModal from "../../../../../../modal/Procurement/ProcurementLibraries/AddBrandModal";
-import procurementService from "../../../../../../services/procurement-service";
-import DataGrid from "../../../../../../components/PrivateComponents/eglogistics/Tables/DataGrid";
-import themes from "../../../../../../themes/theme";
+import AddBrandModal from "modal/Procurement/ProcurementLibraries/AddBrandModal";
+import procurementService from "services/procurement-service";
+import DataGrid from "components/PrivateComponents/eglogistics/Tables/DataGrid";
+import themes from "themes/theme";
 
 const { tokens } = themes;
 

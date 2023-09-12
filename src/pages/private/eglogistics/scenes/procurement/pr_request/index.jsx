@@ -4,10 +4,10 @@ import AddIcon from "@mui/icons-material/Add";
 import DownloadOutlinedIcon from "@mui/icons-material/DownloadOutlined";
 import PurchaseRequestModal from "modal/Procurement/PurchaseRequestModal";
 import procurementService from "services/procurement-service";
-import Header from "../../../../../../components/PrivateComponents/eglogistics/Header";
-import themes from "../../../../../../themes/theme";
+import Header from "components/PrivateComponents/eglogistics/Header";
+import themes from "themes/theme";
+import SnackbarComponent from "components/PrivateComponents/SnackBarComponent";
 import PurchaseRequestTable from "./prrequestTable";
-import SnackbarComponent from "../../../../../../components/PrivateComponents/SnackBarComponent";
 
 const moduleName = "purchase";
 const processType = "request";

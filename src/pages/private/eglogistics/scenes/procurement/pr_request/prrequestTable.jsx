@@ -4,7 +4,7 @@
 import React, { useState } from "react";
 import { Box } from "@mui/material";
 import PropTypes from "prop-types";
-import DataGrid from "../../../../../../components/PrivateComponents/eglogistics/Tables/DataGrid";
+import DataGrid from "components/PrivateComponents/eglogistics/Tables/DataGrid";
 
 // Function to format a date to "MM-DD-YY" format
 const formatDate = (dateString) => {

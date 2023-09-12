@@ -2,6 +2,8 @@ export { default as Landing } from "./landing/landing1";
 export { default as Login } from "./auth/sign-in";
 export { default as Unauthorized } from "./errorPages/unauthorized";
 export { default as Missing } from "./errorPages/missing";
+export { default as Settings } from "./private/eglogistics/scenes/settings";
+export { default as Accounts } from "./private/eglogistics/scenes/accounts";
 
 // First Project
 export { default as Waterfront } from "./landing/waterrfront";

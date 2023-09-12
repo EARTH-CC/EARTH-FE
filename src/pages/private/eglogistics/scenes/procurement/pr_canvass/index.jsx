@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { Box, Grid, useTheme } from "@mui/material";
 import procurementService from "services/procurement-service";
+import themes from "themes/theme";
+import Header from "components/PrivateComponents/eglogistics/Header";
 import Filters from "./filters";
 import CanvasTable from "./canvasTable";
-import themes from "../../../../../../themes/theme";
-import Header from "../../../../../../components/PrivateComponents/eglogistics/Header";
 
 const { tokens } = themes;
 const moduleName = "canvass";
