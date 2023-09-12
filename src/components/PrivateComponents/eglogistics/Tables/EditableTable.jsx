@@ -24,14 +24,35 @@ export default function EditableTable({
   checkbox,
   height,
   showSearch,
-  //   selectedData,
-  //   reset,
+  selectedData,
+  reset,
 }) {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
 
   const [rows, setRows] = useState(data);
   const [rowModesModel, setRowModesModel] = useState({});
+
+  const [selectedRows, setSelectedRows] = useState([]);
+
+  const handleRowSelect = (ids) => {
+    if (ids.length === 0) {
+      setSelectedRows([]);
+      selectedData([]);
+    } else {
+      const cartArray = [];
+      // eslint-disable-next-line no-restricted-syntax
+      for (const selectedId of ids) {
+        // Find the row with the matching ID and push it to the selectedRows array
+        const selectedRow = data.find((row) => row.uuid === selectedId);
+        if (selectedRow) {
+          setSelectedRows(ids);
+          cartArray.push(selectedRow);
+        }
+      }
+      selectedData(cartArray);
+    }
+  };
 
   const handleRowEditStop = (params, event) => {
     if (params.reason === GridRowEditStopReasons.rowFocusOut) {
@@ -136,6 +157,13 @@ export default function EditableTable({
     setRows(data);
   }, [data]);
 
+  useEffect(() => {
+    if (reset) {
+      setSelectedRows([]);
+      selectedData([]);
+    }
+  }, [reset]);
+
   return (
     <Box
       height={height}
@@ -179,6 +207,8 @@ export default function EditableTable({
         loading={loadingState}
         rowModesModel={rowModesModel}
         onRowModesModelChange={handleRowModesModelChange}
+        rowSelectionModel={selectedRows}
+        onRowSelectionModelChange={handleRowSelect}
         onRowEditStop={handleRowEditStop}
         processRowUpdate={processRowUpdate}
         slots={{ toolbar: GridToolbar }}
@@ -203,8 +233,8 @@ EditableTable.defaultProps = {
   checkbox: false,
   height: "70vh",
   showSearch: true,
-  //   selectedData: [],
-  //   reset: false,
+  selectedData: [],
+  reset: false,
 };
 
 EditableTable.propTypes = {
@@ -217,6 +247,6 @@ EditableTable.propTypes = {
   height: PropTypes.string,
   showSearch: PropTypes.bool,
   // eslint-disable-next-line react/forbid-prop-types
-  //   selectedData: PropTypes.arrayOf(PropTypes.object),
-  //   reset: PropTypes.bool,
+  selectedData: PropTypes.arrayOf(PropTypes.object),
+  reset: PropTypes.bool,
 };

@@ -131,7 +131,10 @@ export default function PurchaseRequest() {
         alignItems="center"
         sx={{ mb: "20px" }}
       >
-        <Header title="Purchase Request" subtitle="Request for the items" />
+        <Header
+          title="Purchase Request"
+          subtitle="Lists of Transactions Requested from Suppliers"
+        />
 
         <Box>
           <Button

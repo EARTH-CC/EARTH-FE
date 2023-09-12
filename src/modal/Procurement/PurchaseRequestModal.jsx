@@ -3,17 +3,22 @@ import PropTypes from "prop-types";
 import {
   Box,
   Button,
+  Divider,
   Grid,
   IconButton,
   Modal,
   TextField,
   Typography,
+  useTheme,
 } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
 import DeleteIcon from "@mui/icons-material/Delete";
 import procurementService from "services/procurement-service";
 import Header from "components/PrivateComponents/eglogistics/Header";
 import SelectItem from "components/PrivateComponents/eglogistics/Textfields/SelectItem";
+import themes from "../../themes/theme";
+
+const { tokens } = themes;
 
 const style = {
   backgroundColor: (themeMode) =>
@@ -37,6 +42,9 @@ export default function PurchaseRequestModal({
   onSubmit,
   error,
 }) {
+  const theme = useTheme();
+  const colors = tokens(theme.palette.mode);
+
   const [items, setItems] = React.useState([]);
   const [compName, setCompName] = React.useState("");
   const [address, setAddress] = React.useState("");
@@ -197,6 +205,23 @@ export default function PurchaseRequestModal({
   };
 
   React.useEffect(() => {
+    onPRChange([
+      ...localPR,
+      {
+        name: "",
+        item_code: "",
+        description: "",
+        quantity: "",
+        price: "",
+        product_id: "",
+        brand_id: "",
+        supplier_id: "",
+        category_id: "",
+      },
+    ]);
+  }, []);
+
+  React.useEffect(() => {
     handleGetAll();
     setLocalPR(data);
   }, [data]);
@@ -220,13 +245,8 @@ export default function PurchaseRequestModal({
           <Header title="Add Purchase Request" mb={4} />
           {error && "An error occurred. Make sure to fill up required fields"}
         </Box>
-        <Box mb={4}>
-          <Button variant="contained" color="info" onClick={handleAddPR}>
-            <AddIcon sx={{ mr: 1 }} />
-            Add Item
-          </Button>
-        </Box>
-        <Grid container spacing={2} px={2}>
+
+        <Grid container spacing={2} px={2} mb={4}>
           <Grid item xs={6}>
             <TextField
               type="text"
@@ -269,9 +289,37 @@ export default function PurchaseRequestModal({
           </Grid>
         </Grid>
         <Box
+          mb={2}
+          sx={{
+            display: "flex",
+            justifyContent: "end",
+            position: "absolute",
+            zIndex: 1,
+          }}
+        >
+          <Button variant="contained" color="info" onClick={handleAddPR}>
+            <AddIcon sx={{ mr: 1 }} />
+            Add Item
+          </Button>
+        </Box>
+        <Divider>
+          <Typography
+            variant="h2"
+            sx={{
+              textTransform: "uppercase",
+              fontSize: "25px",
+              color: colors.blueAccent[200],
+              fontWeight: "bold",
+              fontFamily: "Poppins, sans-serif",
+            }}
+          >
+            List of Items
+          </Typography>
+        </Divider>
+        <Box
           height="20vh"
           minWidth="50vw"
-          mt={4}
+          mt={2}
           p={2}
           sx={{ overflowY: "scroll" }}
         >

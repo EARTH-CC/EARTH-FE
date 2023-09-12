@@ -15,6 +15,7 @@ import {
   Landing,
   Dashboard,
   PurchaseLibraries,
+  Cart,
   PurchaseCanvass,
   PurchaseRequest,
   PurchaseOrder,
@@ -58,6 +59,7 @@ function App() {
                 />
                 <Route path="/purchase-request" element={<PurchaseRequest />} />
                 <Route path="/purchase-canvass" element={<PurchaseCanvass />} />
+                <Route path="/cart" element={<Cart />} />
                 <Route path="/purchase-order" element={<PurchaseOrder />} />
                 <Route path="/transmittal" element={<Transmittal />} />
               </Route>

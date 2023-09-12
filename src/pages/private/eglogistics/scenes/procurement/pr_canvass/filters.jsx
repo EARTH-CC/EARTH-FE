@@ -14,30 +14,27 @@ import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import SelectBrand from "components/PrivateComponents/eglogistics/Textfields/SelectBrand";
 import SelectCategory from "components/PrivateComponents/eglogistics/Textfields/SelectCategory";
 import SelectSupplier from "components/PrivateComponents/eglogistics/Textfields/SelectSupplier";
-import CanvassCart from "modal/Procurement/CanvassCart";
 // import procurementService from "services/procurement-service";
 import themes from "themes/theme";
+import { useNavigate } from "react-router-dom";
 
 const { tokens } = themes;
 const priceData = [0, 999999]; // MOCK DATA
 // const moduleName = "canvass";
 
-function Filters({ addToCart, selectedData, cartTotal, isUpdated }) {
+function Filters({ addToCart, selectedData, cartTotal }) {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
   const [value, setValue] = useState(priceData);
   const [category, setCategory] = useState();
   const [brand, setBrand] = useState();
   const [supplier, setSupplier] = useState();
-  const [openCartModal, setOpenCartModal] = useState(false);
   const [disable, setDisable] = useState(true);
 
-  const handleOpenCart = () => {
-    setOpenCartModal(true);
-  };
+  const navigate = useNavigate();
 
-  const handleCloseCart = () => {
-    setOpenCartModal(false);
+  const handleOpenCart = () => {
+    navigate("/cart");
   };
 
   const handleSliderChange = (event, newValue) => {
@@ -62,7 +59,7 @@ function Filters({ addToCart, selectedData, cartTotal, isUpdated }) {
         textAlign: "center",
       }}
     >
-      <CanvassCart
+      {/* <CanvassCart
         open={openCartModal}
         handleClose={handleCloseCart}
         onSuccess={() => {
@@ -71,7 +68,7 @@ function Filters({ addToCart, selectedData, cartTotal, isUpdated }) {
         }}
         cartTotal={cartTotal}
         updateTable={isUpdated}
-      />
+      /> */}
       <Typography
         fontSize="medium"
         fontWeight="900"
@@ -249,10 +246,9 @@ function Filters({ addToCart, selectedData, cartTotal, isUpdated }) {
           color: "#fff",
           "&:hover": {
             color: "white",
-            backgroundColor:
-              selectedData.length < 1
-                ? colors.blueAccent[700]
-                : colors.blueAccent[800],
+            backgroundColor: disable
+              ? colors.blueAccent[700]
+              : colors.blueAccent[800],
           },
           fontSize: "14px",
           fontWeight: "bold",
@@ -274,7 +270,6 @@ Filters.defaultProps = {
   addToCart: () => {},
   selectedData: [],
   cartTotal: {},
-  isUpdated: false,
 };
 
 Filters.propTypes = {
@@ -283,5 +278,4 @@ Filters.propTypes = {
   selectedData: PropTypes.arrayOf(PropTypes.object),
   // eslint-disable-next-line react/forbid-prop-types
   cartTotal: PropTypes.object,
-  isUpdated: PropTypes.bool,
 };
