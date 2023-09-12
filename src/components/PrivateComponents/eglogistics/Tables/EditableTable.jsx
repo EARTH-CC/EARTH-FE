@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import Box from "@mui/material/Box";
 import EditIcon from "@mui/icons-material/Edit";
@@ -32,8 +32,6 @@ export default function EditableTable({
 
   const [rows, setRows] = useState(data);
   const [rowModesModel, setRowModesModel] = useState({});
-
-  console.log(rowModesModel);
 
   const handleRowEditStop = (params, event) => {
     if (params.reason === GridRowEditStopReasons.rowFocusOut) {
@@ -125,6 +123,10 @@ export default function EditableTable({
       },
     },
   ];
+
+  useEffect(() => {
+    setRows(data);
+  }, [data]);
 
   return (
     <Box

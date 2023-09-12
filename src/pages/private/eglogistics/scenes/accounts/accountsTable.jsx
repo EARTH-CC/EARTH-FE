@@ -7,7 +7,7 @@ import VerifiedUserIcon from "@mui/icons-material/VerifiedUser";
 import LockOpenIcon from "@mui/icons-material/LockOpen";
 import CheckCircleOutlineOutlinedIcon from "@mui/icons-material/CheckCircleOutlineOutlined";
 import CancelOutlinedIcon from "@mui/icons-material/CancelOutlined";
-import EditableTable from "components/PrivateComponents/eglogistics/Tables/DataGrid";
+import EditableTable from "components/PrivateComponents/eglogistics/Tables/EditableTable";
 import themes from "themes/theme";
 
 const { tokens } = themes;
