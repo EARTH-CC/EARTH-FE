@@ -6,7 +6,7 @@ import DataGrid from "components/PrivateComponents/eglogistics/Tables/DataGrid";
 
 function CanvasTable({ selectedData, reset }) {
   const [items, setItems] = useState([]);
-  const [loading, setLoading] = React.useState(false);
+  const [loading, setLoading] = useState(false);
   const [data, setData] = useState();
 
   const handleGetAll = () => {

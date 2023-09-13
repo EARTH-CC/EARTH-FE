@@ -12,9 +12,9 @@ function Products() {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
 
-  const [items, setItems] = React.useState([]);
+  const [items, setItems] = useState([]);
 
-  const [loading, setLoading] = React.useState(false);
+  const [loading, setLoading] = useState(false);
   const [openItemModal, setOpenItemModal] = useState(false);
 
   const moduleName = "product";

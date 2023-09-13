@@ -13,7 +13,7 @@ export default function CanvassSheet() {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
   const [error, setError] = useState("");
-  const [loading, setLoading] = React.useState(false);
+  const [loading, setLoading] = useState(false);
   const [data, setData] = useState();
   const [cartTotal, setCartTotal] = useState();
   const [reset, setReset] = useState(false);

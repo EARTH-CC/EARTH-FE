@@ -1,4 +1,4 @@
-import * as React from "react";
+import React, { useState } from "react";
 import { Box, Tabs, Tab, useTheme } from "@mui/material";
 import themes from "themes/theme";
 import Header from "components/PrivateComponents/eglogistics/Header";
@@ -12,7 +12,7 @@ const { tokens } = themes;
 export default function ProcurementLibararies() {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
-  const [selectedTab, setSelectedTab] = React.useState(0);
+  const [selectedTab, setSelectedTab] = useState(0);
 
   const handleChange = (event, newValue) => {
     setSelectedTab(newValue);

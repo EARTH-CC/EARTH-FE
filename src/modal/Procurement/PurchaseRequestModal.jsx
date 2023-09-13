@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import PropTypes from "prop-types";
 import {
   Box,
@@ -45,12 +45,12 @@ export default function PurchaseRequestModal({
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
 
-  const [items, setItems] = React.useState([]);
-  const [compName, setCompName] = React.useState("");
-  const [address, setAddress] = React.useState("");
-  const [remarks, setRemarks] = React.useState("");
-  const [attention, setAttention] = React.useState("");
-  const [localPR, setLocalPR] = React.useState(data);
+  const [items, setItems] = useState([]);
+  const [compName, setCompName] = useState("");
+  const [address, setAddress] = useState("");
+  const [remarks, setRemarks] = useState("");
+  const [attention, setAttention] = useState("");
+  const [localPR, setLocalPR] = useState(data);
 
   const handleGetAll = () => {
     procurementService.getAllAPI("product").then((e) => {

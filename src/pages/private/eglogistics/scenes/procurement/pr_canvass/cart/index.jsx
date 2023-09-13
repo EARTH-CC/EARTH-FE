@@ -18,10 +18,11 @@ export default function CanvassCart() {
   const moduleName = "canvass";
 
   const [data, setData] = useState([]);
+  const [items, setItems] = useState([]);
   const [PRDetails, setPRDetails] = useState([]);
   const [selectedData, setSelectedData] = useState([]);
   const [toBeUpdated, setToBeUpdated] = useState([]);
-  const [loading, setLoading] = React.useState(false);
+  const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const [successMessage, setSuccessMessage] = useState("");
 
@@ -51,6 +52,18 @@ export default function CanvassCart() {
       });
   };
 
+  const handleGetAllItems = () => {
+    setLoading(true);
+    procurementService
+      .getAllAPI("product")
+      .then((e) => {
+        setItems(e);
+      })
+      .finally(() => {
+        setLoading(false);
+      });
+  };
+
   const handleItemUpdate = (row) => {
     setError("");
     setLoading(true);
@@ -69,6 +82,8 @@ export default function CanvassCart() {
       });
   };
 
+  console.log(items);
+
   const handleCloseSuccess = (event, reason) => {
     if (reason === "clickaway") {
       return;
@@ -85,6 +100,7 @@ export default function CanvassCart() {
 
   useEffect(() => {
     handleGetAll();
+    handleGetAllItems();
   }, []);
 
   useEffect(() => {
@@ -217,14 +233,18 @@ export default function CanvassCart() {
               Select items/s to proceed
             </Typography>
             <Button
-              disabled={PRDetails.attention === "" || PRDetails.remarks === ""}
+              disabled={
+                !selectedData.length ||
+                PRDetails.attention === "" ||
+                PRDetails.remarks === ""
+              }
               sx={{
                 backgroundColor:
-                  PRDetails.attention === "" || PRDetails.remarks === ""
+                  !selectedData.length ||
+                  PRDetails.attention === "" ||
+                  PRDetails.remarks === ""
                     ? colors.blueAccent[800]
                     : colors.blueAccent[300],
-                // backgroundColor: (themeMode) =>
-                //   themeMode.palette.mode === "dark" ? "#334b5f" : "lightgray",
                 color: colors.grey[900],
                 "&:hover": {
                   color: "white",

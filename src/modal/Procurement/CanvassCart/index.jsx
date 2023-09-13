@@ -40,7 +40,7 @@ export default function CanvassCart({
   const moduleName = "canvass";
 
   const [data, setData] = useState([]);
-  const [loading, setLoading] = React.useState(false);
+  const [loading, setLoading] = useState(false);
   // const [error, setError] = useState("");
 
   const handleGetAll = () => {
