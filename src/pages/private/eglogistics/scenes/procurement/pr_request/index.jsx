@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Box, Button, Divider, Typography, useTheme } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
+import ForwardIcon from "@mui/icons-material/Forward";
 import DownloadOutlinedIcon from "@mui/icons-material/DownloadOutlined";
 import PurchaseRequestModal from "modal/Procurement/PurchaseRequestModal";
 import procurementService from "services/procurement-service";
@@ -37,6 +38,7 @@ export default function PurchaseRequest() {
 
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
+  const [disabled, setDisabled] = useState(false);
 
   const handlePRRequest = () => {
     setOpenPRRequestModal(true);
@@ -106,6 +108,14 @@ export default function PurchaseRequest() {
   useEffect(() => {
     handleGetAll();
   }, []);
+
+  useEffect(() => {
+    if (!PR?.length) {
+      setDisabled(true);
+    } else {
+      setDisabled(false);
+    }
+  }, [PR]);
 
   const handleTotal = (evt) => {
     // Use reduce to calculate the total sum of total_amount in the compute array
@@ -218,7 +228,7 @@ export default function PurchaseRequest() {
           sx={{
             display: "flex",
             justifyContent: "space-between",
-            alignItems: "top",
+            alignItems: "center",
             p: 2,
           }}
         >
@@ -236,8 +246,6 @@ export default function PurchaseRequest() {
                   )
                 : 0}
             </Typography>
-          </Box>
-          <Box>
             <Typography
               color={colors.blueAccent[300]}
               fontWeight="bold"
@@ -248,13 +256,35 @@ export default function PurchaseRequest() {
                 fontFamily: "Poppins, sans-serif",
               }}
             >
-              Subtotal Amount: <br />{" "}
-              <b>
-                {" "}
-                <span style={{ fontSize: "17px" }}>₱</span>{" "}
-                {handleTotal(PRData)}
-              </b>
+              Subtotal Amount ({PRData ? `${PRData.length} items` : "0 item"}):{" "}
+              <span style={{ fontSize: "18px" }}>₱</span>{" "}
+              {PRData ? handleTotal(PRData) : 0}
             </Typography>
+          </Box>
+          <Box sx={{ textAlign: "center" }}>
+            <Typography color="gray">Select items/s to proceed</Typography>
+            <Button
+              disabled={disabled}
+              // onClick={handleSubmit}
+              sx={{
+                backgroundColor: disabled
+                  ? colors.blueAccent[800]
+                  : colors.blueAccent[300],
+                color: colors.grey[900],
+                "&:hover": {
+                  color: "white",
+                  backgroundColor: colors.blueAccent[700],
+                },
+                fontSize: "14px",
+                fontWeight: "bold",
+                padding: "10px 20px",
+                borderRadius: "5px",
+                boxShadow: "1px 1px 5px rgba(0, 0, 0, 0.5)",
+              }}
+            >
+              <ForwardIcon sx={{ mr: "10px" }} />
+              Place Order
+            </Button>
           </Box>
         </Box>
         <SnackbarComponent

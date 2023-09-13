@@ -15,21 +15,21 @@ import {
 import PropTypes from "prop-types";
 import html2canvas from "html2canvas";
 import JsPDF from "jspdf";
-import bontrade from "../../assets/bontrade.png";
-import eg from "../../assets/eglogistics.png";
-import earth from "../../assets/images/logo3.png";
+import bontrade from "../../../assets/bontrade.png";
+import eg from "../../../assets/eglogistics.png";
+import earth from "../../../assets/images/logo3.png";
 
-function TransmittalReceiptModal({
-  tfNum,
-  to,
-  toAddress,
-  toContact,
-  from,
-  fromAddress,
-  fromContact,
-  billingDate,
-  purpose,
+function PrOrderReceiptModal({
+  poNum,
+  supplier,
+  location,
+  attention,
+  date,
+  terms,
+  dueDate,
   items,
+  subTotal,
+  total,
   open,
   handleClose,
 }) {
@@ -41,7 +41,7 @@ function TransmittalReceiptModal({
       const componentWidth = doc.internal.pageSize.getWidth();
       const componentHeight = doc.internal.pageSize.getHeight();
       doc.addImage(imgData, "PNG", 0, 0, componentWidth, componentHeight);
-      doc.save("transmittal-receipt.pdf");
+      doc.save("purchase-order-receipt.pdf");
     });
   };
   document.addEventListener("contextmenu", (e) => {
@@ -154,7 +154,7 @@ function TransmittalReceiptModal({
                   textAlign: "right",
                 }}
               >
-                Transmittal Form
+                Purchase Order
               </Typography>
               <Typography
                 sx={{
@@ -164,7 +164,7 @@ function TransmittalReceiptModal({
                   textAlign: "right",
                 }}
               >
-                <b>TF NO.</b> {tfNum}
+                <b>PO NO.</b> {poNum}
               </Typography>
             </Grid>
           </Grid>
@@ -177,10 +177,10 @@ function TransmittalReceiptModal({
                     fontWeight: "bold",
                     textTransform: "uppercase",
                     color: "black",
-                    mr: "7em",
+                    mr: "2em",
                   }}
                 >
-                  To
+                  Supplier
                 </Typography>
                 <Typography
                   sx={{
@@ -188,7 +188,7 @@ function TransmittalReceiptModal({
                     color: "black",
                   }}
                 >
-                  {to}
+                  {supplier}
                 </Typography>
               </Grid>
               <Grid xs={12} display="flex" flexDirection="row">
@@ -199,10 +199,10 @@ function TransmittalReceiptModal({
                     textTransform: "uppercase",
                     color: "black",
                     mt: "3px",
-                    mr: "51px",
+                    mr: "2em",
                   }}
                 >
-                  Address
+                  Location
                 </Typography>
                 <Typography
                   sx={{
@@ -211,7 +211,7 @@ function TransmittalReceiptModal({
                     mt: "3px",
                   }}
                 >
-                  {toAddress}
+                  {location}
                 </Typography>
               </Grid>
               <Grid xs={12} display="flex" flexDirection="row">
@@ -225,7 +225,7 @@ function TransmittalReceiptModal({
                     mr: "21px",
                   }}
                 >
-                  Contact No.
+                  Attention
                 </Typography>
                 <Typography
                   sx={{
@@ -234,28 +234,53 @@ function TransmittalReceiptModal({
                     mt: "3px",
                   }}
                 >
-                  {toContact}
+                  {attention}
                 </Typography>
               </Grid>
-              <Grid xs={12} display="flex" flexDirection="row" mt="1em">
+              <Grid xs={12}>
+                <Typography
+                  sx={{
+                    fontSize: "13px",
+                    color: "black",
+                    mt: "15px",
+                  }}
+                >
+                  Dear Sir,
+                </Typography>
+              </Grid>
+              <Grid xs={12}>
+                <Typography
+                  sx={{
+                    fontSize: "13px",
+                    color: "black",
+                    mt: "10px",
+                  }}
+                >
+                  Please deliver to us the following items:
+                </Typography>
+              </Grid>
+            </Grid>
+            <Grid container xs={4}>
+              <Grid xs={12} display="flex" flexDirection="row">
                 <Typography
                   sx={{
                     fontSize: "15px",
                     fontWeight: "bold",
                     textTransform: "uppercase",
                     color: "black",
-                    mr: "80px",
+                    mr: "65px",
                   }}
                 >
-                  From
+                  Date
                 </Typography>
                 <Typography
                   sx={{
                     fontSize: "15px",
+                    textTransform: "uppercase",
                     color: "black",
                   }}
                 >
-                  {from}
+                  {date}
                 </Typography>
               </Grid>
               <Grid xs={12} display="flex" flexDirection="row">
@@ -265,10 +290,10 @@ function TransmittalReceiptModal({
                     fontWeight: "bold",
                     textTransform: "uppercase",
                     color: "black",
-                    mr: "51px",
+                    mr: "52px",
                   }}
                 >
-                  Address
+                  Terms
                 </Typography>
                 <Typography
                   sx={{
@@ -276,7 +301,7 @@ function TransmittalReceiptModal({
                     color: "black",
                   }}
                 >
-                  {fromAddress}
+                  {terms}
                 </Typography>
               </Grid>
               <Grid xs={12} display="flex" flexDirection="row">
@@ -286,10 +311,10 @@ function TransmittalReceiptModal({
                     fontWeight: "bold",
                     textTransform: "uppercase",
                     color: "black",
-                    mr: "21px",
+                    mr: "2em",
                   }}
                 >
-                  Contact No.
+                  Due Date
                 </Typography>
                 <Typography
                   sx={{
@@ -297,59 +322,11 @@ function TransmittalReceiptModal({
                     color: "black",
                   }}
                 >
-                  {fromContact}
+                  {dueDate}
                 </Typography>
               </Grid>
+              <Grid xs={12} mt="4em" />
             </Grid>
-            <Grid xs={4} display="flex" flexDirection="row">
-              <Typography
-                sx={{
-                  fontSize: "15px",
-                  fontWeight: "bold",
-                  textTransform: "uppercase",
-                  color: "black",
-                  mr: "2em",
-                }}
-              >
-                Billing Date
-              </Typography>
-              <Typography
-                sx={{
-                  fontSize: "15px",
-                  textTransform: "uppercase",
-                  color: "black",
-                }}
-              >
-                {billingDate}
-              </Typography>
-            </Grid>
-          </Grid>
-          <Grid xs={12} my="1em">
-            <Typography
-              sx={{
-                fontSize: "15px",
-                textTransform: "uppercase",
-                color: "black",
-                textAlign: "center",
-                fontWeight: "bold",
-              }}
-            >
-              Purpose
-            </Typography>
-          </Grid>
-          <Grid xs={12} mb="1em">
-            <Divider color="black" sx={{ height: "1px" }} />
-          </Grid>
-          <Grid xs={12}>
-            <Typography
-              sx={{
-                fontSize: "15px",
-                color: "black",
-                textAlign: "center",
-              }}
-            >
-              {purpose}
-            </Typography>
           </Grid>
           <Grid className="red" container xs={12} mt="1em">
             <Table>
@@ -364,7 +341,7 @@ function TransmittalReceiptModal({
                         color: "black",
                       }}
                     >
-                      Item Type
+                      Item Code
                     </Typography>
                   </TableCell>
                   <TableCell>
@@ -403,9 +380,33 @@ function TransmittalReceiptModal({
                       Unit
                     </Typography>
                   </TableCell>
+                  <TableCell>
+                    <Typography
+                      sx={{
+                        fontSize: "13px",
+                        fontWeight: "bold",
+                        textTransform: "uppercase",
+                        color: "black",
+                      }}
+                    >
+                      Unit Cost
+                    </Typography>
+                  </TableCell>
+                  <TableCell>
+                    <Typography
+                      sx={{
+                        fontSize: "13px",
+                        fontWeight: "bold",
+                        textTransform: "uppercase",
+                        color: "black",
+                      }}
+                    >
+                      Amount
+                    </Typography>
+                  </TableCell>
                 </TableRow>
               </TableHead>
-              <TableBody sx={{ borderBottom: "2px solid black" }}>
+              <TableBody sx={{ border: "none" }}>
                 {items.map((item) => (
                   <TableRow key={item.id}>
                     {Object.keys(item).map((key) => (
@@ -416,9 +417,103 @@ function TransmittalReceiptModal({
               </TableBody>
             </Table>
           </Grid>
-          <Grid container xs={12}>
+          <Grid container xs={12} mt="5em">
+            <Grid xs={12}>
+              <Divider color="black" sx={{ height: "1px", ml: "85%" }} />
+            </Grid>
+            <Grid xs={10} mt="1em">
+              <Typography
+                sx={{
+                  fontSize: "13px",
+                  fontWeight: "bold",
+                  textTransform: "uppercase",
+                  color: "black",
+                  textAlign: "right",
+                }}
+              >
+                sub-total amount
+              </Typography>
+            </Grid>
+            <Grid xs={2} mt="1em">
+              <Typography
+                sx={{
+                  fontSize: "13px",
+                  fontWeight: "bold",
+                  textTransform: "uppercase",
+                  color: "black",
+                  textAlign: "right",
+                }}
+              >
+                {subTotal}
+              </Typography>
+            </Grid>
+            <Grid xs={10} mt="1em">
+              <Typography
+                sx={{
+                  fontSize: "12px",
+                  textTransform: "uppercase",
+                  color: "black",
+                  textAlign: "right",
+                }}
+              >
+                <b>ADD</b> VAT (12%)
+              </Typography>
+            </Grid>
+            <Grid xs={10}>
+              <Typography
+                sx={{
+                  fontSize: "12px",
+                  textTransform: "uppercase",
+                  color: "black",
+                  textAlign: "right",
+                }}
+              >
+                <b>LESS</b> WITHOLDING TAX (2%)
+              </Typography>
+            </Grid>
+            <Grid xs={10} mt="1em">
+              <Typography
+                sx={{
+                  fontSize: "13px",
+                  fontWeight: "bold",
+                  textTransform: "uppercase",
+                  color: "black",
+                  textAlign: "right",
+                }}
+              >
+                TOTAL AMOUNT
+              </Typography>
+            </Grid>
+            <Grid xs={2} mt="1em">
+              <Typography
+                sx={{
+                  fontSize: "13px",
+                  fontWeight: "bold",
+                  textTransform: "uppercase",
+                  color: "black",
+                  textAlign: "right",
+                }}
+              >
+                {total}
+              </Typography>
+            </Grid>
+            <Grid xs={12} mt="1em">
+              <Divider color="black" sx={{ height: "1px" }} />
+            </Grid>
+            <Grid xs={12} mt="1em">
+              <Typography
+                sx={{
+                  fontSize: "13px",
+                  fontWeight: "bold",
+                  textTransform: "uppercase",
+                  color: "black",
+                }}
+              >
+                Remarks
+              </Typography>
+            </Grid>
             <Grid container xs={4}>
-              <Grid xs={12} mt="1em">
+              <Grid xs={12} mt="7em">
                 <Typography
                   sx={{
                     fontSize: "13px",
@@ -427,7 +522,7 @@ function TransmittalReceiptModal({
                     color: "black",
                   }}
                 >
-                  Prepared by
+                  Checked by
                 </Typography>
                 <Typography
                   sx={{
@@ -436,7 +531,7 @@ function TransmittalReceiptModal({
                     mt: "2em",
                   }}
                 >
-                  Name
+                  Justine M. Eduave
                 </Typography>
                 <Typography
                   sx={{
@@ -444,7 +539,7 @@ function TransmittalReceiptModal({
                     color: "black",
                   }}
                 >
-                  Position
+                  Executive Assistant
                 </Typography>
                 <Typography
                   sx={{
@@ -453,12 +548,12 @@ function TransmittalReceiptModal({
                     fontStyle: "italic",
                   }}
                 >
-                  Company
+                  E&G Logistics
                 </Typography>
               </Grid>
             </Grid>
             <Grid container xs={4}>
-              <Grid xs={12} mt="1em">
+              <Grid xs={12} mt="7em">
                 <Typography
                   sx={{
                     fontSize: "13px",
@@ -467,7 +562,7 @@ function TransmittalReceiptModal({
                     color: "black",
                   }}
                 >
-                  Noted by
+                  Approved by
                 </Typography>
                 <Typography
                   sx={{
@@ -476,7 +571,7 @@ function TransmittalReceiptModal({
                     mt: "2em",
                   }}
                 >
-                  Name
+                  Oliver M. Eduave
                 </Typography>
                 <Typography
                   sx={{
@@ -484,75 +579,7 @@ function TransmittalReceiptModal({
                     color: "black",
                   }}
                 >
-                  Position
-                </Typography>
-                <Typography
-                  sx={{
-                    fontSize: "12px",
-                    color: "black",
-                    fontStyle: "italic",
-                  }}
-                >
-                  Company
-                </Typography>
-              </Grid>
-            </Grid>
-            <Grid container xs={4}>
-              <Grid xs={12} mt="1em">
-                <Typography
-                  sx={{
-                    fontSize: "13px",
-                    fontWeight: "bold",
-                    textTransform: "uppercase",
-                    color: "black",
-                  }}
-                >
-                  Date
-                </Typography>
-              </Grid>
-            </Grid>
-          </Grid>
-          <Grid xs={12} mt="1em">
-            <Typography
-              sx={{
-                fontSize: "13px",
-                fontWeight: "bold",
-                textTransform: "uppercase",
-                color: "black",
-              }}
-            >
-              Remarks
-            </Typography>
-          </Grid>
-          <Grid container xs={12} mt="2em">
-            <Grid container xs={6}>
-              <Grid xs={12} mt="1em">
-                <Typography
-                  sx={{
-                    fontSize: "13px",
-                    fontWeight: "bold",
-                    textTransform: "uppercase",
-                    color: "black",
-                  }}
-                >
-                  Received by
-                </Typography>
-                <Typography
-                  sx={{
-                    fontSize: "12px",
-                    color: "black",
-                    mt: "2em",
-                  }}
-                >
-                  Name
-                </Typography>
-                <Typography
-                  sx={{
-                    fontSize: "12px",
-                    color: "black",
-                  }}
-                >
-                  Position
+                  Managing Director
                 </Typography>
                 <Typography
                   sx={{
@@ -561,47 +588,33 @@ function TransmittalReceiptModal({
                     fontStyle: "italic",
                   }}
                 >
-                  Company
+                  E&G Logistics
                 </Typography>
               </Grid>
             </Grid>
-            <Grid container xs={6}>
-              <Grid xs={12} mt="1em">
-                <Typography
-                  sx={{
-                    fontSize: "13px",
-                    fontWeight: "bold",
-                    textTransform: "uppercase",
-                    color: "black",
-                  }}
-                >
-                  Date received
-                </Typography>
-              </Grid>
+            <Grid xs={12} mt="1em">
+              <Typography
+                sx={{
+                  fontSize: "10px",
+                  color: "gray",
+                  fontStyle: "italic",
+                }}
+              >
+                THIS IS A SYSTEM GENERATED DOCUMENT. Important: This document is
+                applicable for both electronic and physical submissions.
+              </Typography>
+              <Typography
+                sx={{
+                  fontSize: "10px",
+                  color: "gray",
+                  fontStyle: "italic",
+                }}
+              >
+                Electronic submission is accepted; however, whether submitted
+                electronically or physically, a valid signature remains
+                essential for authorization and validity.
+              </Typography>
             </Grid>
-          </Grid>
-          <Grid xs={12} mt="1em">
-            <Typography
-              sx={{
-                fontSize: "10px",
-                color: "gray",
-                fontStyle: "italic",
-              }}
-            >
-              THIS IS A SYSTEM GENERATED DOCUMENT. Important: This document is
-              applicable for both electronic and physical submissions.
-            </Typography>
-            <Typography
-              sx={{
-                fontSize: "10px",
-                color: "gray",
-                fontStyle: "italic",
-              }}
-            >
-              Electronic submission is accepted; however, whether submitted
-              electronically or physically, a valid signature remains essential
-              for authorization and validity.
-            </Typography>
           </Grid>
         </Box>
         <Grid container xs={12}>
@@ -622,13 +635,34 @@ function TransmittalReceiptModal({
   );
 }
 
-TransmittalReceiptModal.defaultProps = {
+PrOrderReceiptModal.defaultProps = {
   handleClose: () => {},
+  poNum: "",
+  supplier: "",
+  location: "",
+  attention: "",
+  date: "",
+  terms: "",
+  dueDate: "",
+  items: [],
+  subTotal: "",
+  total: "",
 };
 
-TransmittalReceiptModal.propTypes = {
+PrOrderReceiptModal.propTypes = {
   open: PropTypes.bool.isRequired,
   handleClose: PropTypes.func,
+  poNum: PropTypes.string,
+  supplier: PropTypes.string,
+  location: PropTypes.string,
+  attention: PropTypes.string,
+  date: PropTypes.string,
+  terms: PropTypes.string,
+  dueDate: PropTypes.string,
+  // eslint-disable-next-line react/forbid-prop-types
+  items: PropTypes.arrayOf(PropTypes.object),
+  subTotal: PropTypes.string,
+  total: PropTypes.string,
 };
 
-export default TransmittalReceiptModal;
+export default PrOrderReceiptModal;

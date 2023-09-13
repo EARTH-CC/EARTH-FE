@@ -59,6 +59,7 @@ export default function AccountsTable() {
       field: "role",
       headerName: "Role",
       flex: 1,
+      headerAlign: "center",
       editable: true,
       type: "singleSelect",
       valueOptions: ["superadmin", "canvasser", "user"],
@@ -130,6 +131,7 @@ export default function AccountsTable() {
       headerName: "Status",
       flex: 1,
       editable: true,
+      headerAlign: "center",
       type: "singleSelect",
       valueOptions: ["Activate", "Deactivate"],
       renderCell: ({ row: { status } }) => (

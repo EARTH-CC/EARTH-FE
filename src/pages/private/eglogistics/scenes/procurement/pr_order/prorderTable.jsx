@@ -15,7 +15,7 @@ export default function PurchaseOrderTable() {
   const handleGetAll = () => {
     setLoading(true);
     procurementService
-      .getAllAPI(modulename)
+      .getAllAPI(modulename, "order")
       .then((e) => {
         setItems(e);
       })
@@ -70,11 +70,6 @@ export default function PurchaseOrderTable() {
       flex: 1,
     },
     {
-      field: "item_code",
-      headerName: "Item Code",
-      flex: 1,
-    },
-    {
       field: "description",
       headerName: "Description",
       flex: 1,
@@ -90,7 +85,7 @@ export default function PurchaseOrderTable() {
       flex: 1,
     },
     {
-      field: "amount",
+      field: "total_amount",
       headerName: "Amount",
       flex: 1,
       valueFormatter: ({ value }) => currencyFormatter.format(value),

@@ -15,18 +15,16 @@ import {
 import PropTypes from "prop-types";
 import html2canvas from "html2canvas";
 import JsPDF from "jspdf";
-import bontrade from "../../assets/bontrade.png";
-import eg from "../../assets/eglogistics.png";
-import earth from "../../assets/images/logo3.png";
+import bontrade from "../../../assets/bontrade.png";
+import eg from "../../../assets/eglogistics.png";
+import earth from "../../../assets/images/logo3.png";
 
-function PrOrderReceiptModal({
-  poNum,
-  supplier,
+function PrRequestReceiptModal({
+  prNum,
+  company,
   location,
   attention,
   date,
-  terms,
-  dueDate,
   items,
   subTotal,
   total,
@@ -41,7 +39,7 @@ function PrOrderReceiptModal({
       const componentWidth = doc.internal.pageSize.getWidth();
       const componentHeight = doc.internal.pageSize.getHeight();
       doc.addImage(imgData, "PNG", 0, 0, componentWidth, componentHeight);
-      doc.save("purchase-order-receipt.pdf");
+      doc.save("purchase-request-receipt.pdf");
     });
   };
   document.addEventListener("contextmenu", (e) => {
@@ -154,7 +152,7 @@ function PrOrderReceiptModal({
                   textAlign: "right",
                 }}
               >
-                Purchase Order
+                Purchase Request Form
               </Typography>
               <Typography
                 sx={{
@@ -164,7 +162,7 @@ function PrOrderReceiptModal({
                   textAlign: "right",
                 }}
               >
-                <b>PO NO.</b> {poNum}
+                <b>PRF NO.</b> {prNum}
               </Typography>
             </Grid>
           </Grid>
@@ -180,7 +178,7 @@ function PrOrderReceiptModal({
                     mr: "2em",
                   }}
                 >
-                  Supplier
+                  Company
                 </Typography>
                 <Typography
                   sx={{
@@ -188,7 +186,7 @@ function PrOrderReceiptModal({
                     color: "black",
                   }}
                 >
-                  {supplier}
+                  {company}
                 </Typography>
               </Grid>
               <Grid xs={12} display="flex" flexDirection="row">
@@ -260,72 +258,27 @@ function PrOrderReceiptModal({
                 </Typography>
               </Grid>
             </Grid>
-            <Grid container xs={4}>
-              <Grid xs={12} display="flex" flexDirection="row">
-                <Typography
-                  sx={{
-                    fontSize: "15px",
-                    fontWeight: "bold",
-                    textTransform: "uppercase",
-                    color: "black",
-                    mr: "65px",
-                  }}
-                >
-                  Date
-                </Typography>
-                <Typography
-                  sx={{
-                    fontSize: "15px",
-                    textTransform: "uppercase",
-                    color: "black",
-                  }}
-                >
-                  {date}
-                </Typography>
-              </Grid>
-              <Grid xs={12} display="flex" flexDirection="row">
-                <Typography
-                  sx={{
-                    fontSize: "15px",
-                    fontWeight: "bold",
-                    textTransform: "uppercase",
-                    color: "black",
-                    mr: "52px",
-                  }}
-                >
-                  Terms
-                </Typography>
-                <Typography
-                  sx={{
-                    fontSize: "15px",
-                    color: "black",
-                  }}
-                >
-                  {terms}
-                </Typography>
-              </Grid>
-              <Grid xs={12} display="flex" flexDirection="row">
-                <Typography
-                  sx={{
-                    fontSize: "15px",
-                    fontWeight: "bold",
-                    textTransform: "uppercase",
-                    color: "black",
-                    mr: "2em",
-                  }}
-                >
-                  Due Date
-                </Typography>
-                <Typography
-                  sx={{
-                    fontSize: "15px",
-                    color: "black",
-                  }}
-                >
-                  {dueDate}
-                </Typography>
-              </Grid>
-              <Grid xs={12} mt="4em" />
+            <Grid xs={4} display="flex" flexDirection="row">
+              <Typography
+                sx={{
+                  fontSize: "15px",
+                  fontWeight: "bold",
+                  textTransform: "uppercase",
+                  color: "black",
+                  mr: "2em",
+                }}
+              >
+                Date
+              </Typography>
+              <Typography
+                sx={{
+                  fontSize: "15px",
+                  textTransform: "uppercase",
+                  color: "black",
+                }}
+              >
+                {date}
+              </Typography>
             </Grid>
           </Grid>
           <Grid className="red" container xs={12} mt="1em">
@@ -341,7 +294,7 @@ function PrOrderReceiptModal({
                         color: "black",
                       }}
                     >
-                      Item Code
+                      Item
                     </Typography>
                   </TableCell>
                   <TableCell>
@@ -522,6 +475,46 @@ function PrOrderReceiptModal({
                     color: "black",
                   }}
                 >
+                  Requested by
+                </Typography>
+                <Typography
+                  sx={{
+                    fontSize: "12px",
+                    color: "black",
+                    mt: "2em",
+                  }}
+                >
+                  Name
+                </Typography>
+                <Typography
+                  sx={{
+                    fontSize: "12px",
+                    color: "black",
+                  }}
+                >
+                  Position
+                </Typography>
+                <Typography
+                  sx={{
+                    fontSize: "12px",
+                    color: "black",
+                    fontStyle: "italic",
+                  }}
+                >
+                  Company
+                </Typography>
+              </Grid>
+            </Grid>
+            <Grid container xs={4}>
+              <Grid xs={12} mt="7em">
+                <Typography
+                  sx={{
+                    fontSize: "13px",
+                    fontWeight: "bold",
+                    textTransform: "uppercase",
+                    color: "black",
+                  }}
+                >
                   Checked by
                 </Typography>
                 <Typography
@@ -635,13 +628,30 @@ function PrOrderReceiptModal({
   );
 }
 
-PrOrderReceiptModal.defaultProps = {
+PrRequestReceiptModal.defaultProps = {
   handleClose: () => {},
+  prNum: "",
+  company: "",
+  location: "",
+  attention: "",
+  date: "",
+  items: [],
+  subTotal: "",
+  total: "",
 };
 
-PrOrderReceiptModal.propTypes = {
+PrRequestReceiptModal.propTypes = {
   open: PropTypes.bool.isRequired,
   handleClose: PropTypes.func,
+  prNum: PropTypes.string,
+  company: PropTypes.string,
+  location: PropTypes.string,
+  attention: PropTypes.string,
+  date: PropTypes.string,
+  // eslint-disable-next-line react/forbid-prop-types
+  items: PropTypes.arrayOf(PropTypes.object),
+  subTotal: PropTypes.string,
+  total: PropTypes.string,
 };
 
-export default PrOrderReceiptModal;
+export default PrRequestReceiptModal;
