@@ -22,9 +22,11 @@ export default function CanvassCart() {
   const [PRDetails, setPRDetails] = useState();
   const [selectedData, setSelectedData] = useState([]);
   const [toBeUpdated, setToBeUpdated] = useState([]);
+  const [disabled, setDisabled] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const [successMessage, setSuccessMessage] = useState("");
+  const [restriction, setRestriction] = useState("");
 
   const [openPRDetailsModal, setOpenPRDetailsModal] = useState(false);
 
@@ -150,6 +152,39 @@ export default function CanvassCart() {
     }
   }, [toBeUpdated]);
 
+  useEffect(() => {
+    setRestriction("");
+    let hasDifferentSupplier = false;
+
+    selectedData?.forEach((row1) => {
+      selectedData?.forEach((row2) => {
+        const foundItem1 = items.find(
+          (item) => item.item_code === row1.item_code
+        );
+        const foundItem2 = items.find(
+          (item) => item.item_code === row2.item_code
+        );
+        if (foundItem1.supplier_id !== foundItem2.supplier_id) {
+          setRestriction(
+            "Selecting rows with different suppliers is restricted"
+          );
+          hasDifferentSupplier = true;
+        }
+      });
+    });
+
+    if (
+      !selectedData?.length ||
+      PRDetails.attention === "" ||
+      PRDetails.remarks === "" ||
+      hasDifferentSupplier
+    ) {
+      setDisabled(true);
+    } else {
+      setDisabled(false);
+    }
+  }, [selectedData, PRDetails?.attention, PRDetails?.remarks]);
+
   const handleTotal = (evt) => {
     const total = evt?.reduce((acc, item) => acc + item.price, 0);
     return total || 0;
@@ -268,25 +303,27 @@ export default function CanvassCart() {
             </Typography>
           </Box>
 
+          <Box>
+            <Typography
+              variant="h5"
+              sx={{ fontWeight: "bold", color: colors.redAccent[500] }}
+            >
+              {`${restriction}`}
+            </Typography>
+          </Box>
+
           <Box sx={{ textAlign: "center" }}>
             <Typography color="gray">
               Add PR Details First and <br />
               Select items/s to proceed
             </Typography>
             <Button
-              disabled={
-                !selectedData?.length ||
-                PRDetails.attention === "" ||
-                PRDetails.remarks === ""
-              }
+              disabled={disabled}
               onClick={handleSubmit}
               sx={{
-                backgroundColor:
-                  !selectedData?.length ||
-                  PRDetails.attention === "" ||
-                  PRDetails.remarks === ""
-                    ? colors.blueAccent[800]
-                    : colors.blueAccent[300],
+                backgroundColor: disabled
+                  ? colors.blueAccent[800]
+                  : colors.blueAccent[300],
                 color: colors.grey[900],
                 "&:hover": {
                   color: "white",
