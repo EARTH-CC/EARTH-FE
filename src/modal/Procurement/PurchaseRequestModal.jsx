@@ -87,7 +87,6 @@ export default function PurchaseRequestModal({
       remarks,
       attention,
       items: newPRWithoutName,
-      process_type: "request",
     };
 
     setLocalPR(newPR);
@@ -112,7 +111,6 @@ export default function PurchaseRequestModal({
       remarks,
       attention,
       items: newPRWithoutName,
-      process_type: "request",
     };
 
     setLocalPR(newPR);
@@ -146,7 +144,6 @@ export default function PurchaseRequestModal({
       remarks,
       attention,
       items: newPRWithoutName,
-      process_type: "request",
     };
 
     setLocalPR(newPR);
@@ -171,7 +168,6 @@ export default function PurchaseRequestModal({
       remarks,
       attention,
       items: newPRWithoutName,
-      process_type: "request",
     };
 
     setLocalPR(newPR);
@@ -196,7 +192,6 @@ export default function PurchaseRequestModal({
       remarks,
       attention,
       items: newPRWithoutName,
-      process_type: "request",
     };
 
     setLocalPR(newPR);

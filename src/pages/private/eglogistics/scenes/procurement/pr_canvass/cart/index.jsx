@@ -17,9 +17,9 @@ export default function CanvassCart() {
 
   const moduleName = "canvass";
 
-  const [data, setData] = useState([]);
   const [items, setItems] = useState([]);
-  const [PRDetails, setPRDetails] = useState([]);
+  const [data, setData] = useState([]);
+  const [PRDetails, setPRDetails] = useState();
   const [selectedData, setSelectedData] = useState([]);
   const [toBeUpdated, setToBeUpdated] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -70,6 +70,7 @@ export default function CanvassCart() {
     procurementService
       .updateAPI(row.uuid, { quantity: row.quantity }, moduleName)
       .then((e) => {
+        handleGetAll();
         setSuccessMessage(e.data.message);
         setOpenSuccess(true);
       })
@@ -82,7 +83,47 @@ export default function CanvassCart() {
       });
   };
 
-  console.log(items);
+  const handleSubmit = () => {
+    setError("");
+    setLoading(true);
+
+    const PRitems = selectedData.map((row) => {
+      const foundItem = items.find((item) => item.item_code === row.item_code);
+      return {
+        item_code: foundItem.item_code,
+        price: foundItem.price,
+        quantity: row.quantity,
+        product_id: foundItem.uuid,
+        brand_id: foundItem.brand_id,
+        supplier_id: foundItem.supplier_id,
+        category_id: foundItem.category_id,
+        description: foundItem.description,
+      };
+    });
+
+    const PRData = {
+      company_name: "asd",
+      address: "ssa",
+      attention: PRDetails.attention,
+      remarks: PRDetails.remarks,
+      items: PRitems,
+    };
+
+    procurementService
+      .addAPI(PRData, "purchase")
+      .then((e) => {
+        handleGetAll();
+        setSuccessMessage(e.data.message);
+        setOpenSuccess(true);
+      })
+      .catch((err) => {
+        setError(err?.message);
+        setOpenError(true);
+      })
+      .finally(() => {
+        setLoading(false);
+      });
+  };
 
   const handleCloseSuccess = (event, reason) => {
     if (reason === "clickaway") {
@@ -104,7 +145,7 @@ export default function CanvassCart() {
   }, []);
 
   useEffect(() => {
-    if (toBeUpdated.length !== 0) {
+    if (toBeUpdated?.length !== 0) {
       handleItemUpdate(toBeUpdated);
     }
   }, [toBeUpdated]);
@@ -208,7 +249,7 @@ export default function CanvassCart() {
               }}
             >
               Selected (
-              {selectedData ? `${selectedData.length} items` : "0 item"}):{" "}
+              {selectedData ? `${selectedData?.length} items` : "0 item"}):{" "}
               <span style={{ fontSize: "18px" }}>₱</span>{" "}
               {selectedData ? handleTotal(selectedData) : 0}
             </Typography>
@@ -234,13 +275,14 @@ export default function CanvassCart() {
             </Typography>
             <Button
               disabled={
-                !selectedData.length ||
+                !selectedData?.length ||
                 PRDetails.attention === "" ||
                 PRDetails.remarks === ""
               }
+              onClick={handleSubmit}
               sx={{
                 backgroundColor:
-                  !selectedData.length ||
+                  !selectedData?.length ||
                   PRDetails.attention === "" ||
                   PRDetails.remarks === ""
                     ? colors.blueAccent[800]
