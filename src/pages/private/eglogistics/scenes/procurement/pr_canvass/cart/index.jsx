@@ -5,6 +5,7 @@ import ForwardIcon from "@mui/icons-material/Forward";
 import procurementService from "services/procurement-service";
 import AddPRDetails from "modal/Procurement/CanvassCart/AddPRDetailsModal";
 import Header from "components/PrivateComponents/eglogistics/Header";
+import SnackbarComponent from "components/PrivateComponents/SnackBarComponent";
 import themes from "../../../../../../../themes/theme";
 import CartTable from "./cartTable";
 
@@ -19,10 +20,15 @@ export default function CanvassCart() {
   const [data, setData] = useState([]);
   const [PRDetails, setPRDetails] = useState([]);
   const [selectedData, setSelectedData] = useState([]);
+  const [toBeUpdated, setToBeUpdated] = useState([]);
   const [loading, setLoading] = React.useState(false);
-  // const [error, setError] = useState("");
+  const [error, setError] = useState("");
+  const [successMessage, setSuccessMessage] = useState("");
 
   const [openPRDetailsModal, setOpenPRDetailsModal] = useState(false);
+
+  const [openSuccess, setOpenSuccess] = useState(false);
+  const [openError, setOpenError] = useState(false);
 
   const handleAddPRDetails = () => {
     setOpenPRDetailsModal(true);
@@ -45,9 +51,47 @@ export default function CanvassCart() {
       });
   };
 
+  const handleItemUpdate = (row) => {
+    setError("");
+    setLoading(true);
+    procurementService
+      .updateAPI(row.uuid, { quantity: row.quantity }, moduleName)
+      .then((e) => {
+        setSuccessMessage(e.data.message);
+        setOpenSuccess(true);
+      })
+      .catch((err) => {
+        setError(err?.message);
+        setOpenError(true);
+      })
+      .finally(() => {
+        setLoading(false);
+      });
+  };
+
+  const handleCloseSuccess = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+    setOpenSuccess(false);
+  };
+
+  const handleCloseError = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+    setOpenError(false);
+  };
+
   useEffect(() => {
     handleGetAll();
   }, []);
+
+  useEffect(() => {
+    if (toBeUpdated.length !== 0) {
+      handleItemUpdate(toBeUpdated);
+    }
+  }, [toBeUpdated]);
 
   const handleTotal = (evt) => {
     const total = evt?.reduce((acc, item) => acc + item.price, 0);
@@ -122,6 +166,7 @@ export default function CanvassCart() {
           cartData={data}
           selectedData={setSelectedData}
           loadingState={loading}
+          rowToUpdate={setToBeUpdated}
         />
         <Divider
           variant="middle"
@@ -198,6 +243,18 @@ export default function CanvassCart() {
           </Box>
         </Box>
       </Box>
+      <SnackbarComponent
+        open={openSuccess}
+        onClose={handleCloseSuccess}
+        severity="success"
+        message={successMessage}
+      />
+      <SnackbarComponent
+        open={openError}
+        onClose={handleCloseError}
+        severity="error"
+        message={error}
+      />
     </Box>
   );
 }

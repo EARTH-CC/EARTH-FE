@@ -1,3 +1,4 @@
+/* eslint-disable react/forbid-prop-types */
 /* eslint-disable no-nested-ternary */
 /* eslint-disable react/no-array-index-key */
 /* eslint-disable react/jsx-boolean-value */
@@ -6,10 +7,17 @@ import { Box } from "@mui/material";
 import PropTypes from "prop-types";
 import EditableTable from "components/PrivateComponents/eglogistics/Tables/EditableTable";
 
-export default function CartTable({ cartData, selectedData, loadingState }) {
+export default function CartTable({
+  cartData,
+  selectedData,
+  loadingState,
+  rowToUpdate,
+}) {
   const [data, setData] = useState();
+  const [toBeUpdate, setToBeUpdated] = useState([]);
 
   selectedData(data);
+  rowToUpdate(toBeUpdate);
 
   const columns = [
     {
@@ -65,6 +73,7 @@ export default function CartTable({ cartData, selectedData, loadingState }) {
         checkbox={true}
         selectedData={setData}
         loadingState={loadingState}
+        rowToUpdate={setToBeUpdated}
         height="60vh"
       />
     </Box>
@@ -75,11 +84,12 @@ CartTable.defaultProps = {
   cartData: [],
   selectedData: () => {},
   loadingState: false,
+  rowToUpdate: [],
 };
 
 CartTable.propTypes = {
-  // eslint-disable-next-line react/forbid-prop-types
-  cartData: PropTypes.array,
+  cartData: PropTypes.arrayOf(PropTypes.object),
   selectedData: PropTypes.func,
   loadingState: PropTypes.bool,
+  rowToUpdate: PropTypes.arrayOf(PropTypes.object),
 };

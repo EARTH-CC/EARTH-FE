@@ -43,8 +43,6 @@ export default function AddPRDetails({ open, handleClose, PROtherDetails }) {
 
   PROtherDetails(formik?.values);
 
-  console.log(formik?.values);
-
   return (
     <Modal
       open={open}
@@ -113,7 +111,10 @@ export default function AddPRDetails({ open, handleClose, PROtherDetails }) {
                 width: 80,
                 backgroundColor: "#3e4287",
               }}
-              onClick={handleClose}
+              onClick={() => {
+                formik.resetForm();
+                handleClose();
+              }}
             >
               Cancel
             </Button>

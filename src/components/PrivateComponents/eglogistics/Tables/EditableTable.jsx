@@ -1,3 +1,4 @@
+/* eslint-disable react/forbid-prop-types */
 import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import Box from "@mui/material/Box";
@@ -25,6 +26,7 @@ export default function EditableTable({
   height,
   showSearch,
   selectedData,
+  rowToUpdate,
   reset,
 }) {
   const theme = useTheme();
@@ -86,16 +88,24 @@ export default function EditableTable({
   };
 
   const processRowUpdate = (newRow) => {
-    let status = 0;
+    let updatedRow = {};
+
     if (newRow.status) {
+      let status = 0;
       if (newRow.status === "Activate") {
         status = 1;
-      } else {
-        status = 0;
       }
+      updatedRow = { ...newRow, status, isNew: false };
+    } else {
+      updatedRow = { ...newRow, isNew: false };
     }
-    const updatedRow = { ...newRow, status, isNew: false };
+
+    if (newRow.quantity) {
+      rowToUpdate(updatedRow);
+    }
+
     setRows(rows.map((row) => (row.uuid === newRow.uuid ? updatedRow : row)));
+
     return updatedRow;
   };
 
@@ -234,19 +244,18 @@ EditableTable.defaultProps = {
   height: "70vh",
   showSearch: true,
   selectedData: [],
+  rowToUpdate: [],
   reset: false,
 };
 
 EditableTable.propTypes = {
-  // eslint-disable-next-line react/forbid-prop-types
   data: PropTypes.arrayOf(PropTypes.object),
-  // eslint-disable-next-line react/forbid-prop-types
   columns: PropTypes.arrayOf(PropTypes.object),
   loadingState: PropTypes.bool,
   checkbox: PropTypes.bool,
   height: PropTypes.string,
   showSearch: PropTypes.bool,
-  // eslint-disable-next-line react/forbid-prop-types
   selectedData: PropTypes.arrayOf(PropTypes.object),
+  rowToUpdate: PropTypes.arrayOf(PropTypes.object),
   reset: PropTypes.bool,
 };

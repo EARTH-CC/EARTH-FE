@@ -40,6 +40,10 @@ function addAPI(data, moduleName) {
   return axios.post(`${BASE_URL}/${moduleName}`, data);
 }
 
+function updateAPI(id, data, moduleName) {
+  return axios.put(`${BASE_URL}/${moduleName}/update/${id}`, data);
+}
+
 function deleteAPI(id, moduleName) {
   return axios.delete(`${BASE_URL}/${moduleName}/delete/${id}`);
 }
@@ -49,5 +53,6 @@ export default {
   getAllAPI,
   getPriceAPI,
   addAPI,
+  updateAPI,
   deleteAPI,
 };
