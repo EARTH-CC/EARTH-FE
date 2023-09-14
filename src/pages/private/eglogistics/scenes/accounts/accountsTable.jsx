@@ -1,7 +1,7 @@
 /* eslint-disable no-nested-ternary */
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { Box, useTheme } from "@mui/material";
-import acountService from "services/account-service";
+import PropTypes from "prop-types";
 import SecurityIcon from "@mui/icons-material/Security";
 import VerifiedUserIcon from "@mui/icons-material/VerifiedUser";
 import LockOpenIcon from "@mui/icons-material/LockOpen";
@@ -12,27 +12,16 @@ import themes from "themes/theme";
 
 const { tokens } = themes;
 
-export default function AccountsTable() {
+export default function AccountsTable({
+  accountData,
+  loadingState,
+  rowToUpdate,
+}) {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
-  const [data, setData] = useState([]);
-  const [loading, setLoading] = useState(false);
+  const [toBeUpdate, setToBeUpdated] = useState([]);
 
-  const handleGetAll = () => {
-    setLoading(true);
-    acountService
-      .getAllUsers()
-      .then((e) => {
-        setData(e);
-      })
-      .finally(() => {
-        setLoading(false);
-      });
-  };
-
-  useEffect(() => {
-    handleGetAll();
-  }, []);
+  rowToUpdate(toBeUpdate);
 
   const columns = [
     {
@@ -200,9 +189,10 @@ export default function AccountsTable() {
   return (
     <Box>
       <EditableTable
-        data={data}
+        data={accountData}
         columns={columns}
-        loadingState={loading}
+        loadingState={loadingState}
+        rowToUpdate={setToBeUpdated}
         height="79vh"
         showSearch
         // selectedData
@@ -211,3 +201,17 @@ export default function AccountsTable() {
     </Box>
   );
 }
+
+AccountsTable.defaultProps = {
+  accountData: [],
+  loadingState: false,
+  rowToUpdate: [],
+};
+
+AccountsTable.propTypes = {
+  // eslint-disable-next-line react/forbid-prop-types
+  accountData: PropTypes.arrayOf(PropTypes.object),
+  loadingState: PropTypes.bool,
+  // eslint-disable-next-line react/forbid-prop-types
+  rowToUpdate: PropTypes.arrayOf(PropTypes.object),
+};

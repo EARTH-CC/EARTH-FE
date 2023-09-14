@@ -116,6 +116,8 @@ export default function EditableTable({
       rowToUpdate(updatedRow);
     }
 
+    rowToUpdate(updatedRow); // kukunin yung row
+
     setRows(rows.map((row) => (row.uuid === newRow.uuid ? updatedRow : row)));
 
     return updatedRow;

@@ -11,6 +11,7 @@ import {
   Grid,
   InputAdornment,
   IconButton,
+  useTheme,
 } from "@mui/material";
 import OfflinePinIcon from "@mui/icons-material/OfflinePin";
 import Visibility from "@mui/icons-material/Visibility";
@@ -21,10 +22,10 @@ import FormSchema from "validation/userAccount";
 import accountService from "services/account-service";
 import { useStateContext } from "contexts/ContextProvider";
 import { useFormik } from "formik";
-//  import themes from "../../../../../themes/theme";
+import themes from "themes/theme";
 //  import mockTransaction from "../../../../../data/mockData";
 
-//  const { tokens } = themes;
+const { tokens } = themes;
 //  const { mockTransactions } = mockTransaction;
 
 export default function Settings() {
@@ -37,6 +38,8 @@ export default function Settings() {
   const [openSuccess, setOpenSuccess] = useState(false);
   const [openError, setOpenError] = useState(false);
   const [loading, setLoading] = useState(false);
+  const theme = useTheme();
+  const colors = tokens(theme.palette.mode);
 
   const handleChangeTab = (event, newValue) => {
     setSelectedTab(newValue);
@@ -121,24 +124,36 @@ export default function Settings() {
         borderRadius="5px"
         boxShadow="0px 5px 10px rgba(0, 0, 0, 0.2)"
         position="relative"
+        backgroundColor={colors.primary[400]}
         height="auto"
       >
         <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
           <Tabs
             value={selectedTab}
             onChange={handleChangeTab}
+            indicatorColor="secondary"
             aria-label="simple tabs example"
           >
             <Tab
               label="User Details"
               style={{
-                fontWeight: "bold",
+                margin: "0 20px 0 20px",
+                letterSpacing: "0.3em",
+                fontFamily: "Poppins, sans-serif",
+                fontSize: "small",
+                fontWeight: "900",
+                color: colors.grey[100],
               }}
             />
             <Tab
               label="Account Information"
               style={{
-                fontWeight: "bold",
+                margin: "0 20px 0 20px",
+                letterSpacing: "0.3em",
+                fontFamily: "Poppins, sans-serif",
+                fontSize: "small",
+                fontWeight: "900",
+                color: colors.grey[100],
               }}
             />
           </Tabs>
@@ -152,6 +167,7 @@ export default function Settings() {
                   mx={4}
                   p={2}
                   borderRadius="5px"
+                  backgroundColor={colors.primary[400]}
                   boxShadow="0px 5px 10px rgba(0, 0, 0, 0.2)"
                   minHeight="250px"
                 >
@@ -232,6 +248,7 @@ export default function Settings() {
                   py={2}
                   px={2}
                   borderRadius="5px"
+                  backgroundColor={colors.primary[400]}
                   boxShadow="0px 5px 10px rgba(0, 0, 0, 0.2)"
                   minHeight="450px"
                 >

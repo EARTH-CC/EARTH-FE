@@ -1,7 +1,9 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Box, Button, Divider, Typography, useTheme } from "@mui/material";
+import accountService from "services/account-service";
 import AddIcon from "@mui/icons-material/Add";
 import RegisterModal from "modal/RegisterModal";
+import SnackbarComponent from "components/PrivateComponents/SnackBarComponent";
 import themes from "themes/theme";
 import AccountsTable from "./accountsTable";
 
@@ -12,6 +14,11 @@ export default function Accounts() {
   const colors = tokens(theme.palette.mode);
 
   const [open, setOpen] = useState(false);
+  const [openSuccess, setOpenSuccess] = useState(false);
+  const [openError, setOpenError] = useState(false);
+  const [data, setData] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [toBeUpdated, setToBeUpdated] = useState([]);
 
   const handleOpen = () => {
     setOpen(true);
@@ -19,6 +26,63 @@ export default function Accounts() {
 
   const handleClose = () => {
     setOpen(false);
+  };
+
+  const handleGetAll = () => {
+    setLoading(true);
+    accountService
+      .getAllUsers()
+      .then((e) => {
+        setData(e);
+      })
+      .finally(() => {
+        setLoading(false);
+      });
+  };
+
+  const handleUpdate = (row) => {
+    setLoading(true);
+    accountService
+      .updateUser(row.uuid, {
+        firstname: row.firstname,
+        lastname: row.lastname,
+        role: row.role,
+        status: row.status,
+      })
+      .then(() => {
+        handleGetAll();
+        setOpenSuccess(true);
+      })
+      .catch(() => {
+        setOpenError(true);
+      })
+      .finally(() => {
+        setLoading(false);
+      });
+  };
+
+  useEffect(() => {
+    handleGetAll();
+  }, []);
+
+  useEffect(() => {
+    if (toBeUpdated?.length !== 0) {
+      handleUpdate(toBeUpdated);
+    }
+  }, [toBeUpdated]);
+
+  const handleCloseSuccess = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+    setOpenSuccess(false);
+  };
+
+  const handleCloseError = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+    setOpenError(false);
   };
 
   return (
@@ -74,10 +138,26 @@ export default function Accounts() {
         </Divider>
 
         <Box>
-          <AccountsTable />
+          <AccountsTable
+            accountData={data}
+            loadingState={loading}
+            rowToUpdate={setToBeUpdated}
+          />
         </Box>
         {/* Contents */}
       </Box>
+      <SnackbarComponent
+        open={openSuccess}
+        onClose={handleCloseSuccess}
+        severity="success"
+        message="Updated Successfully."
+      />
+      <SnackbarComponent
+        open={openError}
+        onClose={handleCloseError}
+        severity="error"
+        message="Updating Failed."
+      />
     </Box>
   );
 }
