@@ -70,18 +70,8 @@ export default function PurchaseOrderTable() {
       flex: 1,
     },
     {
-      field: "description",
-      headerName: "Description",
-      flex: 1,
-    },
-    {
-      field: "quantity",
-      headerName: "Quantity",
-      flex: 1,
-    },
-    {
-      field: "unit_price",
-      headerName: "Price",
+      field: "item_count",
+      headerName: "Item Count",
       flex: 1,
     },
     {

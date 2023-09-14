@@ -27,6 +27,7 @@ export default function EditableTable({
   showSearch,
   selectedData,
   rowToUpdate,
+  singleSelect,
   reset,
 }) {
   const theme = useTheme();
@@ -53,6 +54,17 @@ export default function EditableTable({
         }
       }
       selectedData(cartArray);
+    }
+  };
+
+  const handleSingleRowSelection = (newSelection) => {
+    if (newSelection.length === 0) {
+      setSelectedRows([]);
+      selectedData([]);
+    } else {
+      setSelectedRows([newSelection[0]]);
+      const selectedRow = data.find((row) => row.uuid === newSelection[0]);
+      selectedData([selectedRow]);
     }
   };
 
@@ -218,7 +230,9 @@ export default function EditableTable({
         rowModesModel={rowModesModel}
         onRowModesModelChange={handleRowModesModelChange}
         rowSelectionModel={selectedRows}
-        onRowSelectionModelChange={handleRowSelect}
+        onRowSelectionModelChange={
+          singleSelect ? handleSingleRowSelection : handleRowSelect
+        }
         onRowEditStop={handleRowEditStop}
         processRowUpdate={processRowUpdate}
         slots={{ toolbar: GridToolbar }}
@@ -245,6 +259,7 @@ EditableTable.defaultProps = {
   showSearch: true,
   selectedData: [],
   rowToUpdate: [],
+  singleSelect: false,
   reset: false,
 };
 
@@ -257,5 +272,6 @@ EditableTable.propTypes = {
   showSearch: PropTypes.bool,
   selectedData: PropTypes.arrayOf(PropTypes.object),
   rowToUpdate: PropTypes.arrayOf(PropTypes.object),
+  singleSelect: PropTypes.bool,
   reset: PropTypes.bool,
 };

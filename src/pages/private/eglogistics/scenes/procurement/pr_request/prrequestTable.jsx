@@ -4,7 +4,7 @@
 import React, { useState } from "react";
 import { Box } from "@mui/material";
 import PropTypes from "prop-types";
-import DataGrid from "components/PrivateComponents/eglogistics/Tables/DataGrid";
+import EditableTable from "components/PrivateComponents/eglogistics/Tables/EditableTable";
 
 // Function to format a date to "MM-DD-YY" format
 const formatDate = (dateString) => {
@@ -64,22 +64,25 @@ export default function PurchaseRequestTable({
       field: "attention",
       headerName: "ATTENTION",
       flex: 1,
+      editable: true,
     },
     {
       field: "remarks",
       headerName: "REMARKS",
       flex: 1,
+      editable: true,
     },
   ];
 
   return (
     <Box>
-      <DataGrid
+      <EditableTable
         data={PRData}
         columns={columns}
         checkbox={true}
         selectedData={setData}
         loadingState={loadingState}
+        singleSelect={true}
         height="60vh"
       />
     </Box>

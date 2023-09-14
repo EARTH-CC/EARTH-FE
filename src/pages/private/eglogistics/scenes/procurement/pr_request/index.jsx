@@ -117,6 +117,8 @@ export default function PurchaseRequest() {
     }
   }, [PR]);
 
+  console.log(PR);
+
   const handleTotal = (evt) => {
     // Use reduce to calculate the total sum of total_amount in the compute array
     const total = evt?.reduce((acc, item) => acc + item.total_amount, 0);
@@ -262,7 +264,7 @@ export default function PurchaseRequest() {
             </Typography>
           </Box>
           <Box sx={{ textAlign: "center" }}>
-            <Typography color="gray">Select items/s to proceed</Typography>
+            <Typography color="gray">Select a request to proceed</Typography>
             <Button
               disabled={disabled}
               // onClick={handleSubmit}

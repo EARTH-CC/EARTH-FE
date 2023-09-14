@@ -103,9 +103,13 @@ export default function CanvassCart() {
       };
     });
 
+    const itemFromSelectedData = items.find(
+      (item) => item.item_code === selectedData[0].item_code
+    );
+
     const PRData = {
-      company_name: "asd",
-      address: "ssa",
+      company_name: itemFromSelectedData.supplier_name, // maaring tanggalin
+      address: itemFromSelectedData.supplier_name, // maaring tanggalin
       attention: PRDetails.attention,
       remarks: PRDetails.remarks,
       items: PRitems,
