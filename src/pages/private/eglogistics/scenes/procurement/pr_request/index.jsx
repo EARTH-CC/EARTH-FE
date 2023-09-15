@@ -20,13 +20,13 @@ export default function PurchaseRequest() {
   const colors = tokens(theme.palette.mode);
 
   // ito ung kumukuha ng mga rows na naselect sa table para maidisplay ung total
-  const [PR, setPR] = useState();
+  const [selectedPR, setSelectedPR] = useState();
 
   // ito ung naghahahandle ng mga items sa modal
-  const [data, setData] = useState();
+  const [PRItems, setPRItems] = useState();
 
   // ito ung kumukuha ng data mula sa api para mailagay sa table
-  const [PRData, setPRData] = useState([]);
+  const [data, setData] = useState([]);
 
   // ito ung naghahahandle ng nakastructure na na object para maipost sa purchaseRequest
   const [PRValues, setPRValues] = useState();
@@ -50,7 +50,7 @@ export default function PurchaseRequest() {
   };
 
   const handlePRChange = (newPR) => {
-    setData(newPR);
+    setPRItems(newPR);
   };
 
   const handleGetAll = () => {
@@ -59,7 +59,7 @@ export default function PurchaseRequest() {
     procurementService
       .getAllAPI(moduleName, processType)
       .then((e) => {
-        setPRData(e);
+        setData(e);
       })
       .catch((err) => {
         setOpenError(true);
@@ -78,6 +78,26 @@ export default function PurchaseRequest() {
       .addAPI(PRValues, moduleName)
       .then(() => {
         setOpenPRRequestModal(false);
+        handleGetAll();
+        setOpenSuccess(true);
+        setData([]);
+      })
+      .catch((err) => {
+        setError(err?.message);
+        setOpenError(true);
+      })
+      .finally(() => {
+        setLoading(false);
+      });
+  };
+
+  const handleProceedToOrder = () => {
+    setError("");
+    setLoading(true);
+
+    procurementService
+      .updateAPI(selectedPR[0].uuid, { process_type: "order" }, moduleName)
+      .then(() => {
         handleGetAll();
         setOpenSuccess(true);
         setData([]);
@@ -110,14 +130,12 @@ export default function PurchaseRequest() {
   }, []);
 
   useEffect(() => {
-    if (!PR?.length) {
+    if (!selectedPR?.length) {
       setDisabled(true);
     } else {
       setDisabled(false);
     }
-  }, [PR]);
-
-  console.log(PR);
+  }, [selectedPR]);
 
   const handleTotal = (evt) => {
     // Use reduce to calculate the total sum of total_amount in the compute array
@@ -128,7 +146,7 @@ export default function PurchaseRequest() {
   return (
     <Box sx={{ m: "-5px 20px 20px 20px" }}>
       <PurchaseRequestModal
-        data={data}
+        data={PRItems}
         open={openPRRequestModal}
         handleClose={handleClosePRRequest}
         onPRChange={handlePRChange}
@@ -145,7 +163,7 @@ export default function PurchaseRequest() {
       >
         <Header
           title="Purchase Request"
-          subtitle="Lists of Transactions Requested from Suppliers"
+          subtitle="List of Transactions Requested from Suppliers"
         />
 
         <Box>
@@ -221,8 +239,8 @@ export default function PurchaseRequest() {
 
         <Box>
           <PurchaseRequestTable
-            PRData={PRData}
-            selectedData={setPR}
+            data={data}
+            selectedData={setSelectedPR}
             loadingState={loading}
           />
         </Box>
@@ -237,11 +255,11 @@ export default function PurchaseRequest() {
           <Box>
             <Typography sx={{ letterSpacing: "0.05em", fontSize: "15px" }}>
               {/* Selected: <br /> <b> {handleTotal(PR)}</b> */}
-              Selected ({PR ? PR?.length : 0}{" "}
-              {PR?.length > 1 ? "items" : "item"}
+              Selected ({selectedPR ? selectedPR?.length : 0}{" "}
+              {selectedPR?.length > 1 ? "items" : "item"}
               ): <span style={{ fontSize: "15px" }}>₱</span>{" "}
-              {PR
-                ? PR?.reduce(
+              {selectedPR
+                ? selectedPR?.reduce(
                     (total, currentItem) =>
                       total + (currentItem.total_amount || 0),
                     0
@@ -258,16 +276,16 @@ export default function PurchaseRequest() {
                 fontFamily: "Poppins, sans-serif",
               }}
             >
-              Subtotal Amount ({PRData ? `${PRData.length} items` : "0 item"}):{" "}
+              Subtotal Amount ({data ? `${data.length} items` : "0 item"}):{" "}
               <span style={{ fontSize: "18px" }}>₱</span>{" "}
-              {PRData ? handleTotal(PRData) : 0}
+              {data ? handleTotal(data) : 0}
             </Typography>
           </Box>
           <Box sx={{ textAlign: "center" }}>
             <Typography color="gray">Select a request to proceed</Typography>
             <Button
               disabled={disabled}
-              // onClick={handleSubmit}
+              onClick={handleProceedToOrder}
               sx={{
                 backgroundColor: disabled
                   ? colors.blueAccent[800]

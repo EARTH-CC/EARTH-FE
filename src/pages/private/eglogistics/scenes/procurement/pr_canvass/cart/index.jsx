@@ -19,7 +19,7 @@ export default function CanvassCart() {
 
   const [items, setItems] = useState([]);
   const [data, setData] = useState([]);
-  const [PRDetails, setPRDetails] = useState();
+  const [PRDetails, setPRDetails] = useState(); // attention at remarks ung dinadala
   const [selectedData, setSelectedData] = useState([]);
   const [toBeUpdated, setToBeUpdated] = useState([]);
   const [disabled, setDisabled] = useState(false);

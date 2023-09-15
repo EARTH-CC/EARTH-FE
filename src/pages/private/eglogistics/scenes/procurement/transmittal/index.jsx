@@ -1,197 +1,132 @@
 import React, { useEffect, useState } from "react";
-import Box from "@mui/material/Box";
-import EditIcon from "@mui/icons-material/Edit";
-import DeleteIcon from "@mui/icons-material/DeleteOutlined";
-import SaveIcon from "@mui/icons-material/Save";
-import CancelIcon from "@mui/icons-material/Close";
-import {
-  GridRowModes,
-  DataGrid,
-  GridActionsCellItem,
-  GridRowEditStopReasons,
-  GridToolbar,
-} from "@mui/x-data-grid";
+import { Box, Button, Divider, Typography, useTheme } from "@mui/material";
+import DownloadOutlinedIcon from "@mui/icons-material/DownloadOutlined";
 import procurementService from "services/procurement-service";
-import { useTheme } from "@mui/material";
+import Header from "components/PrivateComponents/eglogistics/Header";
+import SnackbarComponent from "components/PrivateComponents/SnackBarComponent";
 import themes from "../../../../../../themes/theme";
+import TransmittalTable from "./transmittalTable";
 
 const { tokens } = themes;
+const moduleName = "purchase";
 
-export default function FullFeaturedCrudGrid() {
+export default function Transmittal() {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
 
-  const [data, setData] = useState([]);
-  const [rowModesModel, setRowModesModel] = useState({});
+  const [data, setData] = useState();
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
 
-  const moduleName = "purchase";
+  const [openSuccess, setOpenSuccess] = useState(false);
+  const [openError, setOpenError] = useState(false);
 
   const handleGetAll = () => {
-    // setError("");
-    // setLoading(true);
-    procurementService.getAllAPI(moduleName).then((e) => {
-      setData(e);
-    });
-    // .catch((err) => {
-    //   setError(err?.message);
-    // })
-    // .finally(() => {
-    //   setLoading(false);
-    // });
+    setError("");
+    setLoading(true);
+    procurementService
+      .getAllAPI(moduleName)
+      .then((e) => {
+        setData(e);
+        setOpenSuccess(true);
+      })
+      .catch((err) => {
+        setOpenError(true);
+        setError(err?.message);
+      })
+      .finally(() => {
+        setLoading(false);
+      });
   };
 
   useEffect(() => {
     handleGetAll();
   }, []);
 
-  const handleRowEditStop = (params, event) => {
-    if (params.reason === GridRowEditStopReasons.rowFocusOut) {
-      // eslint-disable-next-line no-param-reassign
-      event.defaultMuiPrevented = true;
+  const handleCloseSuccess = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
     }
+    setOpenSuccess(false);
   };
 
-  const handleEditClick = (uuid) => () => {
-    setRowModesModel({ ...rowModesModel, [uuid]: { mode: GridRowModes.Edit } });
-  };
-
-  const handleSaveClick = (uuid) => () => {
-    setRowModesModel({ ...rowModesModel, [uuid]: { mode: GridRowModes.View } });
-  };
-
-  const handleDeleteClick = (uuid) => () => {
-    setData(data.filter((row) => row.uuid !== uuid));
-  };
-
-  const handleCancelClick = (uuid) => () => {
-    setRowModesModel({
-      ...rowModesModel,
-      [uuid]: { mode: GridRowModes.View, ignoreModifications: true },
-    });
-
-    const editedRow = data.find((row) => row.uuid === uuid);
-    if (editedRow.isNew) {
-      setData(data.filter((row) => row.uuid !== uuid));
+  const handleCloseError = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
     }
+    setOpenError(false);
   };
-
-  const processRowUpdate = (newRow) => {
-    const updatedRow = { ...newRow, isNew: false };
-    setData(data.map((row) => (row.uuid === newRow.uuid ? updatedRow : row)));
-    return updatedRow;
-  };
-
-  const handleRowModesModelChange = (newRowModesModel) => {
-    setRowModesModel(newRowModesModel);
-  };
-
-  const columns = [
-    { field: "company_name", headerName: "NAME", width: 180, editable: true },
-    {
-      field: "address",
-      headerName: "ADDRESS",
-      type: "number",
-      width: 80,
-      align: "left",
-      headerAlign: "left",
-      editable: true,
-    },
-    {
-      field: "actions",
-      type: "actions",
-      headerName: "Actions",
-      width: 100,
-      cellClassName: "actions",
-      getActions: ({ uuid }) => {
-        const isInEditMode = rowModesModel[uuid]?.mode === GridRowModes.Edit;
-
-        if (isInEditMode) {
-          return [
-            <GridActionsCellItem
-              icon={<SaveIcon />}
-              label="Save"
-              sx={{
-                color: "primary.main",
-              }}
-              onClick={handleSaveClick(uuid)}
-            />,
-            <GridActionsCellItem
-              icon={<CancelIcon />}
-              label="Cancel"
-              className="textPrimary"
-              onClick={handleCancelClick(uuid)}
-              color="inherit"
-            />,
-          ];
-        }
-
-        return [
-          <GridActionsCellItem
-            icon={<EditIcon />}
-            label="Edit"
-            className="textPrimary"
-            onClick={handleEditClick(uuid)}
-            color="inherit"
-          />,
-          <GridActionsCellItem
-            icon={<DeleteIcon />}
-            label="Delete"
-            onClick={handleDeleteClick(uuid)}
-            color="inherit"
-          />,
-        ];
-      },
-    },
-  ];
 
   return (
-    <Box
-      height="70vh"
-      sx={{
-        "& .MuiDataGrid-root": {
-          border: "none",
-        },
-        "& .MuiDataGrid-cell": {
-          borderBottom: "none",
-        },
-        "& .name-column--cell": {
-          color: colors.blueAccent[300],
-        },
-        "& .MuiDataGrid-columnHeaders": {
-          color: colors.grey[900],
-          backgroundColor: colors.blueAccent[300],
-          borderBottom: "none",
-        },
-        "& .MuiDataGrid-virtualScroller": {
-          backgroundColor: colors.primary[400],
-        },
-        "& .MuiDataGrid-footerContainer": {
-          borderTop: "none",
-          backgroundColor: colors.primary[400],
-        },
-        "& .MuiCheckbox-root": {
-          color: `${colors.blueAccent[200]} !important`,
-        },
-        "& .MuiDataGrid-toolbarContainer .MuiButton-text": {
-          color: `${colors.grey[100]} !important`,
-        },
-        marginTop: "5px",
-      }}
-    >
-      <DataGrid
-        getRowId={(row) => row.uuid || row.id}
-        rows={data}
-        columns={columns}
-        editMode="row"
-        rowModesModel={rowModesModel}
-        onRowModesModelChange={handleRowModesModelChange}
-        onRowEditStop={handleRowEditStop}
-        processRowUpdate={processRowUpdate}
-        slots={{ toolbar: GridToolbar }}
-        slotProps={{
-          toolbar: { setData, setRowModesModel },
-        }}
-      />
+    <Box sx={{ m: "-5px 20px 20px 20px" }}>
+      {/* HEADER */}
+      <Box
+        display="flex"
+        justifyContent="space-between"
+        alignItems="center"
+        sx={{ mb: "20px" }}
+      >
+        <Header
+          title="Transmittal"
+          subtitle="List of Transmitted Transactions"
+        />
+
+        <Box>
+          <Button
+            sx={{
+              backgroundColor: colors.blueAccent[300],
+              // backgroundColor: (themeMode) =>
+              //   themeMode.palette.mode === "dark" ? "#334b5f" : "lightgray",
+              color: colors.grey[900],
+              "&:hover": {
+                color: "white",
+                backgroundColor: colors.blueAccent[700],
+              },
+              fontSize: "14px",
+              fontWeight: "bold",
+              padding: "10px 20px",
+              borderRadius: "10px",
+              boxShadow: "1px 1px 5px rgba(0, 0, 0, 0.5)",
+            }}
+          >
+            <DownloadOutlinedIcon sx={{ mr: "10px" }} />
+            Download Reports
+          </Button>
+        </Box>
+      </Box>
+      <Box
+        borderRadius="10px"
+        boxShadow="0px 5px 10px rgba(0, 0, 0, 0.2)"
+        p="1rem"
+        sx={{ backgroundColor: colors.primary[400] }}
+      >
+        <Divider>
+          <Typography
+            sx={{
+              textTransform: "uppercase",
+              fontSize: "25px",
+            }}
+          >
+            Transmittal
+          </Typography>
+        </Divider>
+
+        <Box>
+          <TransmittalTable data={data} loadingState={loading} />
+        </Box>
+        <SnackbarComponent
+          open={openSuccess}
+          onClose={handleCloseSuccess}
+          severity="success"
+          message="Request Successful."
+        />
+        <SnackbarComponent
+          open={openError}
+          onClose={handleCloseError}
+          severity="error"
+          message={error}
+        />
+      </Box>
     </Box>
   );
 }

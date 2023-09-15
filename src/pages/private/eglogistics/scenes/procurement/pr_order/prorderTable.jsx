@@ -1,32 +1,20 @@
 /* eslint-disable no-nested-ternary */
 /* eslint-disable react/no-array-index-key */
 /* eslint-disable react/jsx-boolean-value */
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { Box } from "@mui/material";
-import procurementService from "services/procurement-service";
-import DataGrid from "components/PrivateComponents/eglogistics/Tables/DataGrid";
+import PropTypes from "prop-types";
 
-export default function PurchaseOrderTable() {
-  const [items, setItems] = useState([]);
-  const [loading, setLoading] = useState(false);
+import EditableTable from "components/PrivateComponents/eglogistics/Tables/EditableTable";
 
-  const modulename = "purchase";
+export default function PurchaseOrderTable({
+  data,
+  selectedData,
+  loadingState,
+}) {
+  const [selectedPO, setSelectedPO] = useState();
 
-  const handleGetAll = () => {
-    setLoading(true);
-    procurementService
-      .getAllAPI(modulename, "order")
-      .then((e) => {
-        setItems(e);
-      })
-      .finally(() => {
-        setLoading(false);
-      });
-  };
-
-  useEffect(() => {
-    handleGetAll();
-  }, []);
+  selectedData(selectedPO);
 
   const currencyFormatter = new Intl.NumberFormat("en-US", {
     style: "currency",
@@ -45,17 +33,17 @@ export default function PurchaseOrderTable() {
       flex: 1,
     },
     {
-      field: "uuid",
+      field: "pr_code",
       headerName: "PR No.",
       flex: 1,
     },
     {
-      field: "purchase_order_no",
+      field: "po_code",
       headerName: "PO No.",
       flex: 1,
     },
     {
-      field: "company_name_supplier",
+      field: "company_name",
       headerName: "Company Name",
       flex: 1,
     },
@@ -68,6 +56,7 @@ export default function PurchaseOrderTable() {
       field: "terms_of_agreement",
       headerName: "Terms of Agreement",
       flex: 1,
+      editable: true,
     },
     {
       field: "item_count",
@@ -89,12 +78,28 @@ export default function PurchaseOrderTable() {
 
   return (
     <Box>
-      <DataGrid
-        data={items}
+      <EditableTable
+        data={data}
         columns={columns}
-        loadingState={loading}
-        height="72.4vh"
+        checkbox={true}
+        loadingState={loadingState}
+        singleSelect={true}
+        selectedData={setSelectedPO}
+        height="60vh"
       />
     </Box>
   );
 }
+
+PurchaseOrderTable.defaultProps = {
+  data: [],
+  selectedData: () => {},
+  loadingState: false,
+};
+
+PurchaseOrderTable.propTypes = {
+  // eslint-disable-next-line react/forbid-prop-types
+  data: PropTypes.array,
+  selectedData: PropTypes.func,
+  loadingState: PropTypes.bool,
+};

@@ -1,10 +1,12 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Box, Button, Divider, Typography, useTheme } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
 import DownloadOutlinedIcon from "@mui/icons-material/DownloadOutlined";
 import PurchaseOrderModal from "modal/Procurement/AddPoModal";
 import Header from "components/PrivateComponents/eglogistics/Header";
 import themes from "themes/theme";
+import procurementService from "services/procurement-service";
+import SnackbarComponent from "components/PrivateComponents/SnackBarComponent";
 import PurchaseOrderTable from "./prorderTable";
 
 const { tokens } = themes;
@@ -12,6 +14,15 @@ const { tokens } = themes;
 export default function PurchaseOrder() {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
+
+  const [data, setData] = useState([]);
+  const [selectedPO, setSelectedPO] = useState();
+
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
+
+  const [openSuccess, setOpenSuccess] = useState(false);
+  const [openError, setOpenError] = useState(false);
 
   const [open, setOpen] = useState(false);
 
@@ -22,6 +33,44 @@ export default function PurchaseOrder() {
   const handleClose = () => {
     setOpen(false);
   };
+
+  const modulename = "purchase";
+
+  const handleGetAll = () => {
+    setLoading(true);
+    procurementService
+      .getAllAPI(modulename, "order")
+      .then((e) => {
+        setData(e);
+      })
+      .catch((err) => {
+        setError(err?.message);
+        setOpenError(true);
+      })
+      .finally(() => {
+        setLoading(false);
+      });
+  };
+
+  const handleCloseSuccess = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+    setOpenSuccess(false);
+  };
+
+  const handleCloseError = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+    setOpenError(false);
+  };
+
+  console.log(selectedPO);
+
+  useEffect(() => {
+    handleGetAll();
+  }, []);
 
   return (
     <Box sx={{ m: "-5px 20px 20px 20px" }}>
@@ -108,9 +157,24 @@ export default function PurchaseOrder() {
         </Divider>
 
         <Box>
-          <PurchaseOrderTable />
+          <PurchaseOrderTable
+            data={data}
+            selectedData={setSelectedPO}
+            loadingState={loading}
+          />
         </Box>
-        {/* Contents */}
+        <SnackbarComponent
+          open={openSuccess}
+          onClose={handleCloseSuccess}
+          severity="success"
+          message="Request Successful."
+        />
+        <SnackbarComponent
+          open={openError}
+          onClose={handleCloseError}
+          severity="error"
+          message={error}
+        />
       </Box>
     </Box>
   );

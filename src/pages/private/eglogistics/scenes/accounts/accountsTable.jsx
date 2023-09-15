@@ -195,7 +195,7 @@ export default function AccountsTable({
         rowToUpdate={setToBeUpdated}
         height="79vh"
         showSearch
-        // selectedData
+        selectedData
         // reset={false}
       />
     </Box>

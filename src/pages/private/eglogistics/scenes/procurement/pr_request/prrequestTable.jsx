@@ -16,13 +16,13 @@ const formatDate = (dateString) => {
 };
 
 export default function PurchaseRequestTable({
-  PRData,
+  data,
   selectedData,
   loadingState,
 }) {
-  const [data, setData] = useState();
+  const [PRData, setPRData] = useState();
 
-  selectedData(data);
+  selectedData(PRData);
 
   const currencyFormatter = new Intl.NumberFormat("en-US", {
     style: "currency",
@@ -77,10 +77,10 @@ export default function PurchaseRequestTable({
   return (
     <Box>
       <EditableTable
-        data={PRData}
+        data={data}
         columns={columns}
         checkbox={true}
-        selectedData={setData}
+        selectedData={setPRData}
         loadingState={loadingState}
         singleSelect={true}
         height="60vh"
@@ -90,14 +90,14 @@ export default function PurchaseRequestTable({
 }
 
 PurchaseRequestTable.defaultProps = {
-  PRData: [],
+  data: [],
   selectedData: () => {},
   loadingState: false,
 };
 
 PurchaseRequestTable.propTypes = {
   // eslint-disable-next-line react/forbid-prop-types
-  PRData: PropTypes.array,
+  data: PropTypes.array,
   selectedData: PropTypes.func,
   loadingState: PropTypes.bool,
 };
