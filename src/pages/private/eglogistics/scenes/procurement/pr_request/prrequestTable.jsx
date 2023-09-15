@@ -20,9 +20,9 @@ export default function PurchaseRequestTable({
   selectedData,
   loadingState,
 }) {
-  const [PRData, setPRData] = useState();
+  const [selectedPR, setSelectedPR] = useState();
 
-  selectedData(PRData);
+  selectedData(selectedPR);
 
   const currencyFormatter = new Intl.NumberFormat("en-US", {
     style: "currency",
@@ -46,29 +46,29 @@ export default function PurchaseRequestTable({
     },
     {
       field: "company_name",
-      headerName: "COMPANY NAME",
+      headerName: "Company Name",
       flex: 1,
     },
     {
       field: "item_count",
-      headerName: "ITEMS",
+      headerName: "Items",
       flex: 1,
     },
     {
       field: "total_amount",
-      headerName: "AMOUNT",
+      headerName: "Total Amount",
       flex: 1,
       valueFormatter: ({ value }) => currencyFormatter.format(value),
     },
     {
       field: "attention",
-      headerName: "ATTENTION",
+      headerName: "Attention",
       flex: 1,
       editable: true,
     },
     {
       field: "remarks",
-      headerName: "REMARKS",
+      headerName: "Remarks",
       flex: 1,
       editable: true,
     },
@@ -80,7 +80,7 @@ export default function PurchaseRequestTable({
         data={data}
         columns={columns}
         checkbox={true}
-        selectedData={setPRData}
+        selectedData={setSelectedPR}
         loadingState={loadingState}
         singleSelect={true}
         height="60vh"

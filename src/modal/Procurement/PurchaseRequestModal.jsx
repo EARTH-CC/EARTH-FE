@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import {
   Box,
@@ -46,11 +46,11 @@ export default function PurchaseRequestModal({
   const colors = tokens(theme.palette.mode);
 
   const [items, setItems] = useState([]);
-  const [compName, setCompName] = useState("");
-  const [address, setAddress] = useState("");
   const [remarks, setRemarks] = useState("");
   const [attention, setAttention] = useState("");
   const [localPR, setLocalPR] = useState(data);
+  const [restriction, setRestriction] = useState("");
+  const [disabled, setDisabled] = useState(false);
 
   const handleGetAll = () => {
     procurementService.getAllAPI("product").then((e) => {
@@ -82,8 +82,6 @@ export default function PurchaseRequestModal({
     });
 
     const PRValue = {
-      company_name: compName,
-      address,
       remarks,
       attention,
       items: newPRWithoutName,
@@ -92,6 +90,7 @@ export default function PurchaseRequestModal({
     setLocalPR(newPR);
     onPRChange(newPR);
     setPRValues(PRValue);
+    setRestriction("");
   };
 
   const handleDeletePR = (index) => {
@@ -106,8 +105,6 @@ export default function PurchaseRequestModal({
     });
 
     const PRValue = {
-      company_name: compName,
-      address,
       remarks,
       attention,
       items: newPRWithoutName,
@@ -139,8 +136,6 @@ export default function PurchaseRequestModal({
     });
 
     const PRValue = {
-      company_name: compName,
-      address,
       remarks,
       attention,
       items: newPRWithoutName,
@@ -163,8 +158,6 @@ export default function PurchaseRequestModal({
     });
 
     const PRValue = {
-      company_name: compName,
-      address,
       remarks,
       attention,
       items: newPRWithoutName,
@@ -187,8 +180,6 @@ export default function PurchaseRequestModal({
     });
 
     const PRValue = {
-      company_name: compName,
-      address,
       remarks,
       attention,
       items: newPRWithoutName,
@@ -216,17 +207,30 @@ export default function PurchaseRequestModal({
     ]);
   }, []);
 
-  React.useEffect(() => {
+  useEffect(() => {
     handleGetAll();
     setLocalPR(data);
   }, [data]);
 
-  //   const handleValidation = () => {
-  // const isSpecified = data.map((pr) => {
-  //   return pr.
-  // })
+  useEffect(() => {
+    setRestriction("");
+    let hasDifferentSupplier = false;
 
-  //   };
+    localPR?.forEach((row1) => {
+      localPR?.forEach((row2) => {
+        if (row1?.supplier_id !== row2?.supplier_id) {
+          setRestriction("Adding items with different suppliers is restricted");
+          hasDifferentSupplier = true;
+        }
+      });
+    });
+
+    if (hasDifferentSupplier || remarks === "" || attention === "") {
+      setDisabled(true);
+    } else {
+      setDisabled(false);
+    }
+  }, [localPR]);
 
   return (
     <Modal
@@ -246,29 +250,9 @@ export default function PurchaseRequestModal({
             <TextField
               type="text"
               size="small"
-              label="Company Name"
-              value={compName}
-              onChange={(event) => setCompName(event.target.value)}
-              fullWidth
-            />
-          </Grid>
-          <Grid item xs={6}>
-            <TextField
-              type="text"
-              size="small"
               label="Attention"
               value={attention}
               onChange={(event) => setAttention(event.target.value)}
-              fullWidth
-            />
-          </Grid>
-          <Grid item xs={6}>
-            <TextField
-              type="text"
-              size="small"
-              label="Address"
-              value={address}
-              onChange={(event) => setAddress(event.target.value)}
               fullWidth
             />
           </Grid>
@@ -380,29 +364,26 @@ export default function PurchaseRequestModal({
           ))}
         </Box>
 
-        <Box sx={{ textAlign: "right", p: 2 }}>
-          <Typography sx={{ fontSize: "15px" }}>
-            Total Amount: <br />{" "}
-            <b>
-              {data?.reduce((total, item) => total + Number(item.price), 0)}
-            </b>
-          </Typography>
-        </Box>
+        <Grid container spacing={2}>
+          <Grid item xs={6} sx={{ display: "flex", alignItems: "center" }}>
+            {restriction && `Note: ${restriction}`}
+          </Grid>
+          <Grid item xs={6} sx={{ textAlign: "right" }}>
+            <Typography sx={{ fontSize: "15px" }}>
+              Total Amount: <br />{" "}
+              <b>
+                {data?.reduce((total, item) => total + Number(item.price), 0)}
+              </b>
+            </Typography>
+          </Grid>
+        </Grid>
         {open && (
           <Box sx={{ textAlign: "right", height: 100 }}>
             <Button
               variant="contained"
-              disabled={
-                data.length === 0 ||
-                compName === "" ||
-                address === "" ||
-                remarks === "" ||
-                attention === ""
-              }
+              disabled={disabled}
               onClick={() => {
                 onSubmit();
-                setCompName("");
-                setAddress("");
                 setRemarks("");
                 setAttention("");
               }}

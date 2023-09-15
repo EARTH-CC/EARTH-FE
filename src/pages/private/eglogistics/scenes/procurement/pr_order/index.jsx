@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Box, Button, Divider, Typography, useTheme } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
+import ForwardIcon from "@mui/icons-material/Forward";
 import DownloadOutlinedIcon from "@mui/icons-material/DownloadOutlined";
 import PurchaseOrderModal from "modal/Procurement/AddPoModal";
 import Header from "components/PrivateComponents/eglogistics/Header";
@@ -11,6 +12,8 @@ import PurchaseOrderTable from "./prorderTable";
 
 const { tokens } = themes;
 
+const moduleName = "purchase";
+
 export default function PurchaseOrder() {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
@@ -20,6 +23,7 @@ export default function PurchaseOrder() {
 
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
+  const [disabled, setDisabled] = useState(false);
 
   const [openSuccess, setOpenSuccess] = useState(false);
   const [openError, setOpenError] = useState(false);
@@ -34,14 +38,36 @@ export default function PurchaseOrder() {
     setOpen(false);
   };
 
-  const modulename = "purchase";
-
   const handleGetAll = () => {
     setLoading(true);
     procurementService
-      .getAllAPI(modulename, "order")
+      .getAllAPI(moduleName, "order")
       .then((e) => {
         setData(e);
+      })
+      .catch((err) => {
+        setError(err?.message);
+        setOpenError(true);
+      })
+      .finally(() => {
+        setLoading(false);
+      });
+  };
+
+  const handleProceedToTransmittal = () => {
+    setError("");
+    setLoading(true);
+
+    procurementService
+      .updateAPI(
+        selectedPO[0].uuid,
+        { process_type: "transmittal" },
+        moduleName
+      )
+      .then(() => {
+        handleGetAll();
+        setOpenSuccess(true);
+        setData([]);
       })
       .catch((err) => {
         setError(err?.message);
@@ -66,11 +92,23 @@ export default function PurchaseOrder() {
     setOpenError(false);
   };
 
-  console.log(selectedPO);
-
   useEffect(() => {
     handleGetAll();
   }, []);
+
+  useEffect(() => {
+    if (!selectedPO?.length) {
+      setDisabled(true);
+    } else {
+      setDisabled(false);
+    }
+  }, [selectedPO]);
+
+  const handleTotal = (evt) => {
+    // Use reduce to calculate the total sum of total_amount in the compute array
+    const total = evt?.reduce((acc, item) => acc + item.total_amount, 0);
+    return total || 0;
+  };
 
   return (
     <Box sx={{ m: "-5px 20px 20px 20px" }}>
@@ -162,6 +200,69 @@ export default function PurchaseOrder() {
             selectedData={setSelectedPO}
             loadingState={loading}
           />
+        </Box>
+        <Box
+          sx={{
+            display: "flex",
+            justifyContent: "space-between",
+            alignItems: "center",
+            p: 2,
+          }}
+        >
+          <Box>
+            <Typography sx={{ letterSpacing: "0.05em", fontSize: "15px" }}>
+              {/* Selected: <br /> <b> {handleTotal(PR)}</b> */}
+              Selected ({selectedPO ? selectedPO?.length : 0}{" "}
+              {selectedPO?.length > 1 ? "items" : "item"}
+              ): <span style={{ fontSize: "15px" }}>₱</span>{" "}
+              {selectedPO
+                ? selectedPO?.reduce(
+                    (total, currentItem) =>
+                      total + (currentItem.total_amount || 0),
+                    0
+                  )
+                : 0}
+            </Typography>
+            <Typography
+              color={colors.blueAccent[300]}
+              fontWeight="bold"
+              sx={{
+                letterSpacing: "0.05em",
+                textAlign: "right",
+                fontSize: "15px",
+                fontFamily: "Poppins, sans-serif",
+              }}
+            >
+              Subtotal Amount ({data ? `${data.length} items` : "0 item"}):{" "}
+              <span style={{ fontSize: "18px" }}>₱</span>{" "}
+              {data ? handleTotal(data) : 0}
+            </Typography>
+          </Box>
+          <Box sx={{ textAlign: "center" }}>
+            <Typography color="gray">Select an order to proceed</Typography>
+            <Button
+              disabled={disabled}
+              onClick={handleProceedToTransmittal}
+              sx={{
+                backgroundColor: disabled
+                  ? colors.blueAccent[800]
+                  : colors.blueAccent[300],
+                color: colors.grey[900],
+                "&:hover": {
+                  color: "white",
+                  backgroundColor: colors.blueAccent[700],
+                },
+                fontSize: "14px",
+                fontWeight: "bold",
+                padding: "10px 20px",
+                borderRadius: "5px",
+                boxShadow: "1px 1px 5px rgba(0, 0, 0, 0.5)",
+              }}
+            >
+              <ForwardIcon sx={{ mr: "10px" }} />
+              Transmit
+            </Button>
+          </Box>
         </Box>
         <SnackbarComponent
           open={openSuccess}

@@ -38,11 +38,6 @@ export default function PurchaseOrderTable({
       flex: 1,
     },
     {
-      field: "po_code",
-      headerName: "PO No.",
-      flex: 1,
-    },
-    {
       field: "company_name",
       headerName: "Company Name",
       flex: 1,

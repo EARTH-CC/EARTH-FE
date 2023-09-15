@@ -9,6 +9,7 @@ import TransmittalTable from "./transmittalTable";
 
 const { tokens } = themes;
 const moduleName = "purchase";
+const processType = "transmittal";
 
 export default function Transmittal() {
   const theme = useTheme();
@@ -25,10 +26,9 @@ export default function Transmittal() {
     setError("");
     setLoading(true);
     procurementService
-      .getAllAPI(moduleName)
+      .getAllAPI(moduleName, processType)
       .then((e) => {
         setData(e);
-        setOpenSuccess(true);
       })
       .catch((err) => {
         setOpenError(true);

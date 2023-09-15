@@ -8,16 +8,36 @@ export default function TransmittalTable({
   loadingState,
 }) {
   const columns = [
-    { field: "company_name", headerName: "NAME", width: 180, editable: true },
+    { field: "date", headerName: "Date", flex: 1, editable: true },
+    {
+      field: "billing_date",
+      headerName: "Billing Date",
+      flex: 1,
+      editable: true,
+    },
+    { field: "tf_code", headerName: "TF No.", flex: 1, editable: true },
+    {
+      field: "company_name",
+      headerName: "Company Name",
+      flex: 1,
+      editable: true,
+    },
+    {
+      field: "item_count",
+      headerName: "Item Count",
+      flex: 1,
+      editable: true,
+    },
     {
       field: "address",
-      headerName: "ADDRESS",
-      type: "number",
-      width: 80,
+      headerName: "Address",
+      flex: 1,
       align: "left",
       headerAlign: "left",
       editable: true,
     },
+    { field: "purpose", headerName: "Purpose", flex: 1, editable: true },
+    { field: "remarks", headerName: "Remarks", flex: 1, editable: true },
   ];
 
   return (
