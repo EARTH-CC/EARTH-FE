@@ -15,24 +15,13 @@ import {
 import PropTypes from "prop-types";
 import html2canvas from "html2canvas";
 import JsPDF from "jspdf";
-import bontrade from "../../../assets/bontrade.png";
+import DownloadIcon from "@mui/icons-material/Download";
+import CancelIcon from "@mui/icons-material/Cancel";
+import bontrade from "../../../assets/bontrade1.png";
 import eg from "../../../assets/eglogistics.png";
 import earth from "../../../assets/images/logo3.png";
 
-function PrOrderReceiptModal({
-  poNum,
-  supplier,
-  location,
-  attention,
-  date,
-  terms,
-  dueDate,
-  items,
-  subTotal,
-  total,
-  open,
-  handleClose,
-}) {
+function PrOrderReceiptModal({ poReceiptData, open, handleClose, totalValue }) {
   const downloadPDF = () => {
     const capture = document.querySelector(".receipt");
     html2canvas(capture).then((canvas) => {
@@ -47,6 +36,15 @@ function PrOrderReceiptModal({
   document.addEventListener("contextmenu", (e) => {
     e.preventDefault();
   });
+
+  const today = new Date();
+  const year = today.getFullYear();
+  const month = String(today.getMonth() + 1).padStart(2, "0");
+  const day = String(today.getDate()).padStart(2, "0");
+  const formattedDate = `${year}-${month}-${day}`;
+
+  console.log(poReceiptData);
+
   return (
     <Modal
       open={open}
@@ -75,7 +73,7 @@ function PrOrderReceiptModal({
           }}
         >
           <Grid className="green" container xs={12}>
-            <Grid className="blue" display="flex" flexDirection="column" xs={1}>
+            <Grid className="blue" display="flex" flexDirection="column" xs={2}>
               <Box
                 component="img"
                 alt="bontrade"
@@ -96,8 +94,7 @@ function PrOrderReceiptModal({
               display="flex"
               flexDirection="column"
               xs={4}
-              ml="3em"
-              mr="1em"
+              mr="4em"
             >
               <Typography
                 sx={{
@@ -144,7 +141,7 @@ function PrOrderReceiptModal({
                 Reclamation Project
               </Typography>
             </Grid>
-            <Grid className="yellow" xs={6} pt="2em">
+            <Grid className="yellow" xs={5} pt="2em">
               <Typography
                 sx={{
                   fontSize: "20px",
@@ -164,7 +161,7 @@ function PrOrderReceiptModal({
                   textAlign: "right",
                 }}
               >
-                <b>PO NO.</b> {poNum}
+                <b>PO NO.</b> MCW-PO-2023-0001
               </Typography>
             </Grid>
           </Grid>
@@ -188,7 +185,7 @@ function PrOrderReceiptModal({
                     color: "black",
                   }}
                 >
-                  {supplier}
+                  E-Corp
                 </Typography>
               </Grid>
               <Grid xs={12} display="flex" flexDirection="row">
@@ -211,7 +208,7 @@ function PrOrderReceiptModal({
                     mt: "3px",
                   }}
                 >
-                  {location}
+                  Imus, Cavite
                 </Typography>
               </Grid>
               <Grid xs={12} display="flex" flexDirection="row">
@@ -234,7 +231,7 @@ function PrOrderReceiptModal({
                     mt: "3px",
                   }}
                 >
-                  {attention}
+                  Sample Attention
                 </Typography>
               </Grid>
               <Grid xs={12}>
@@ -280,7 +277,7 @@ function PrOrderReceiptModal({
                     color: "black",
                   }}
                 >
-                  {date}
+                  {formattedDate}
                 </Typography>
               </Grid>
               <Grid xs={12} display="flex" flexDirection="row">
@@ -301,7 +298,7 @@ function PrOrderReceiptModal({
                     color: "black",
                   }}
                 >
-                  {terms}
+                  Sample Terms
                 </Typography>
               </Grid>
               <Grid xs={12} display="flex" flexDirection="row">
@@ -322,7 +319,7 @@ function PrOrderReceiptModal({
                     color: "black",
                   }}
                 >
-                  {dueDate}
+                  {formattedDate}
                 </Typography>
               </Grid>
               <Grid xs={12} mt="4em" />
@@ -377,43 +374,29 @@ function PrOrderReceiptModal({
                         color: "black",
                       }}
                     >
-                      Unit
-                    </Typography>
-                  </TableCell>
-                  <TableCell>
-                    <Typography
-                      sx={{
-                        fontSize: "13px",
-                        fontWeight: "bold",
-                        textTransform: "uppercase",
-                        color: "black",
-                      }}
-                    >
-                      Unit Cost
-                    </Typography>
-                  </TableCell>
-                  <TableCell>
-                    <Typography
-                      sx={{
-                        fontSize: "13px",
-                        fontWeight: "bold",
-                        textTransform: "uppercase",
-                        color: "black",
-                      }}
-                    >
                       Amount
                     </Typography>
                   </TableCell>
                 </TableRow>
               </TableHead>
               <TableBody sx={{ border: "none" }}>
-                {items.map((item) => (
-                  <TableRow key={item.id}>
-                    {Object.keys(item).map((key) => (
-                      <TableCell sx={{ border: "none" }}>{item[key]}</TableCell>
-                    ))}
-                  </TableRow>
-                ))}
+                {poReceiptData &&
+                  poReceiptData?.map((item) => (
+                    <TableRow key={item.item_code}>
+                      <TableCell sx={{ border: "none" }}>
+                        {item.item_code}
+                      </TableCell>
+                      <TableCell sx={{ border: "none" }}>
+                        {item.description}
+                      </TableCell>
+                      <TableCell sx={{ border: "none" }}>
+                        {item.quantity}
+                      </TableCell>
+                      <TableCell sx={{ border: "none" }}>
+                        {item.price}
+                      </TableCell>
+                    </TableRow>
+                  ))}
               </TableBody>
             </Table>
           </Grid>
@@ -444,7 +427,7 @@ function PrOrderReceiptModal({
                   textAlign: "right",
                 }}
               >
-                {subTotal}
+                {totalValue.subTotal}
               </Typography>
             </Grid>
             <Grid xs={10} mt="1em">
@@ -494,11 +477,11 @@ function PrOrderReceiptModal({
                   textAlign: "right",
                 }}
               >
-                {total}
+                {totalValue.total}
               </Typography>
             </Grid>
             <Grid xs={12} mt="1em">
-              <Divider color="black" sx={{ height: "1px" }} />
+              <Divider color="black" sx={{ height: "2px" }} />
             </Grid>
             <Grid xs={12} mt="1em">
               <Typography
@@ -510,6 +493,16 @@ function PrOrderReceiptModal({
                 }}
               >
                 Remarks
+              </Typography>
+            </Grid>
+            <Grid xs={12} mt="1em">
+              <Typography
+                sx={{
+                  fontSize: "13px",
+                  color: "black",
+                }}
+              >
+                Sample Remarks
               </Typography>
             </Grid>
             <Grid container xs={4}>
@@ -618,15 +611,41 @@ function PrOrderReceiptModal({
           </Grid>
         </Box>
         <Grid container xs={12}>
-          <Grid xs={4} />
-          <Grid xs={2} my="1em">
-            <Button textAlign="right" variant="contained" onClick={downloadPDF}>
-              Download
+          <Grid xs={3} />
+          <Grid xs={3} my="1em">
+            <Button
+              textAlign="right"
+              variant="contained"
+              onClick={downloadPDF}
+              sx={{
+                backgroundColor: "#3e4396",
+                ":hover": {
+                  backgroundColor: "#a4a9fc",
+                },
+              }}
+            >
+              <DownloadIcon />
+              <Typography ml={1} fontWeight="bold">
+                Download
+              </Typography>
             </Button>
           </Grid>
-          <Grid xs={2} my="1em">
-            <Button textAlign="right" variant="contained" onClick={handleClose}>
-              Close
+          <Grid xs={3} my="1em">
+            <Button
+              textAlign="right"
+              variant="contained"
+              onClick={handleClose}
+              sx={{
+                backgroundColor: "#3e4396",
+                ":hover": {
+                  backgroundColor: "#a4a9fc",
+                },
+              }}
+            >
+              <CancelIcon />
+              <Typography ml={1} fontWeight="bold">
+                Close
+              </Typography>
             </Button>
           </Grid>
         </Grid>
@@ -636,33 +655,18 @@ function PrOrderReceiptModal({
 }
 
 PrOrderReceiptModal.defaultProps = {
+  poReceiptData: [],
   handleClose: () => {},
-  poNum: "",
-  supplier: "",
-  location: "",
-  attention: "",
-  date: "",
-  terms: "",
-  dueDate: "",
-  items: [],
-  subTotal: "",
-  total: "",
+  totalValue: {},
 };
 
 PrOrderReceiptModal.propTypes = {
+  // eslint-disable-next-line react/forbid-prop-types
+  poReceiptData: PropTypes.array,
   open: PropTypes.bool.isRequired,
   handleClose: PropTypes.func,
-  poNum: PropTypes.string,
-  supplier: PropTypes.string,
-  location: PropTypes.string,
-  attention: PropTypes.string,
-  date: PropTypes.string,
-  terms: PropTypes.string,
-  dueDate: PropTypes.string,
   // eslint-disable-next-line react/forbid-prop-types
-  items: PropTypes.arrayOf(PropTypes.object),
-  subTotal: PropTypes.string,
-  total: PropTypes.string,
+  totalValue: PropTypes.object,
 };
 
 export default PrOrderReceiptModal;

@@ -4,6 +4,7 @@ import AddIcon from "@mui/icons-material/Add";
 import ForwardIcon from "@mui/icons-material/Forward";
 import DownloadOutlinedIcon from "@mui/icons-material/DownloadOutlined";
 import PurchaseRequestModal from "modal/Procurement/PurchaseRequestModal";
+import PrOrderReceiptModal from "modal/Procurement/PRReceipts/PrOrderReceiptModal";
 import procurementService from "services/procurement-service";
 import Header from "components/PrivateComponents/eglogistics/Header";
 import themes from "themes/theme";
@@ -31,6 +32,8 @@ export default function PurchaseRequest() {
   // ito ung naghahahandle ng nakastructure na na object para maipost sa purchaseRequest
   const [PRValues, setPRValues] = useState();
 
+  const [allPrItems, setAllPrItems] = useState();
+
   const [openPRRequestModal, setOpenPRRequestModal] = useState(false);
 
   const [openSuccess, setOpenSuccess] = useState(false);
@@ -39,6 +42,17 @@ export default function PurchaseRequest() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const [disabled, setDisabled] = useState(false);
+  const [openPoReceipt, setOpenPoReceipt] = useState(false);
+
+  console.log(allPrItems);
+
+  const handleOpenPoReceipt = () => {
+    setOpenPoReceipt(true);
+  };
+
+  const handleClosePoReceipt = () => {
+    setOpenPoReceipt(false);
+  };
 
   const handlePRRequest = () => {
     setOpenPRRequestModal(true);
@@ -60,6 +74,23 @@ export default function PurchaseRequest() {
       .getAllAPI(moduleName, processType)
       .then((e) => {
         setData(e);
+      })
+      .catch((err) => {
+        setOpenError(true);
+        setError(err?.message);
+      })
+      .finally(() => {
+        setLoading(false);
+      });
+  };
+
+  const handleGetAllItems = () => {
+    setError("");
+    setLoading(true);
+    procurementService
+      .getAllItemsAPI(moduleName, selectedPR[0]?.pr_code)
+      .then((e) => {
+        setAllPrItems(e);
       })
       .catch((err) => {
         setOpenError(true);
@@ -99,6 +130,8 @@ export default function PurchaseRequest() {
       .updateAPI(selectedPR[0].uuid, { process_type: "order" }, moduleName)
       .then(() => {
         handleGetAll();
+        handleGetAllItems();
+        handleOpenPoReceipt();
         setOpenSuccess(true);
         setData([]);
       })
@@ -139,12 +172,31 @@ export default function PurchaseRequest() {
 
   const handleTotal = (evt) => {
     // Use reduce to calculate the total sum of total_amount in the compute array
-    const total = evt?.reduce((acc, item) => acc + item.total_amount, 0);
+    const total = evt?.reduce(
+      (acc, item) => acc + item.total_amount * item.quantity,
+      0
+    );
     return total || 0;
+  };
+
+  const handleTotalWithTax = () => {
+    const subTotal = handleTotal(allPrItems);
+    const taxAmount = subTotal * 0.14;
+    const totalAmount = subTotal + taxAmount;
+    return totalAmount;
   };
 
   return (
     <Box sx={{ m: "-5px 20px 20px 20px" }}>
+      <PrOrderReceiptModal
+        totalValue={{
+          total: handleTotal(allPrItems),
+          subTotal: handleTotalWithTax(),
+        }}
+        poReceiptData={allPrItems}
+        handleClose={handleClosePoReceipt}
+        open={openPoReceipt}
+      />
       <PurchaseRequestModal
         data={PRItems}
         open={openPRRequestModal}

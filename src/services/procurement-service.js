@@ -25,6 +25,23 @@ function getAllAPI(moduleName, processName = "") {
   });
 }
 
+// eslint-disable-next-line camelcase
+function getAllItemsAPI(moduleName, prRef_code = "") {
+  return new Promise((resolve, reject) => {
+    axios
+      .get(`${BASE_URL}/${moduleName}/getAllItems`, {
+        params: {
+          // eslint-disable-next-line camelcase
+          prRef_code,
+        },
+      })
+      .then((res) => resolve(res?.data?.data))
+      .catch((err) => {
+        reject(err);
+      });
+  });
+}
+
 function getPriceAPI(moduleName) {
   return new Promise((resolve, reject) => {
     axios
@@ -51,6 +68,7 @@ function deleteAPI(id, moduleName) {
 export default {
   getAPI,
   getAllAPI,
+  getAllItemsAPI,
   getPriceAPI,
   addAPI,
   updateAPI,

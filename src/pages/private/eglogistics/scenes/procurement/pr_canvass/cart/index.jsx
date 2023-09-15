@@ -4,6 +4,7 @@ import AddIcon from "@mui/icons-material/Add";
 import ForwardIcon from "@mui/icons-material/Forward";
 import procurementService from "services/procurement-service";
 import AddPRDetails from "modal/Procurement/CanvassCart/AddPRDetailsModal";
+import PrRequestReceiptModal from "modal/Procurement/PRReceipts/PrRequestReceiptModal";
 import Header from "components/PrivateComponents/eglogistics/Header";
 import SnackbarComponent from "components/PrivateComponents/SnackBarComponent";
 import themes from "../../../../../../../themes/theme";
@@ -27,11 +28,13 @@ export default function CanvassCart() {
   const [error, setError] = useState("");
   const [successMessage, setSuccessMessage] = useState("");
   const [restriction, setRestriction] = useState("");
+  const [prReceiptData, setPrReceiptData] = useState();
 
   const [openPRDetailsModal, setOpenPRDetailsModal] = useState(false);
 
   const [openSuccess, setOpenSuccess] = useState(false);
   const [openError, setOpenError] = useState(false);
+  const [openPrRequest, setOpenPrRequest] = useState(false);
 
   const handleAddPRDetails = () => {
     setOpenPRDetailsModal(true);
@@ -40,6 +43,14 @@ export default function CanvassCart() {
   const handleClosePRDetails = () => {
     setOpenPRDetailsModal(false);
     // setError("");
+  };
+
+  const handleOpenPrRequest = () => {
+    setOpenPrRequest(true);
+  };
+
+  const handleClosePrRequest = () => {
+    setOpenPrRequest(false);
   };
 
   const handleGetAll = () => {
@@ -113,6 +124,8 @@ export default function CanvassCart() {
       .addAPI(PRData, "purchase")
       .then((e) => {
         handleGetAll();
+        setPrReceiptData(e.data.data);
+        handleOpenPrRequest();
         setSuccessMessage(e.data.message);
         setOpenSuccess(true);
       })
@@ -124,6 +137,7 @@ export default function CanvassCart() {
         setLoading(false);
       });
   };
+  console.log(selectedData);
 
   const handleCloseSuccess = (event, reason) => {
     if (reason === "clickaway") {
@@ -184,12 +198,31 @@ export default function CanvassCart() {
   }, [selectedData, PRDetails?.attention, PRDetails?.remarks]);
 
   const handleTotal = (evt) => {
-    const total = evt?.reduce((acc, item) => acc + item.price, 0);
+    const total = evt?.reduce(
+      (acc, item) => acc + item.price * item.quantity,
+      0
+    );
     return total || 0;
+  };
+
+  const handleTotalWithTax = () => {
+    const subTotal = handleTotal(selectedData);
+    const taxAmount = subTotal * 0.14;
+    const totalAmount = subTotal + taxAmount;
+    return totalAmount;
   };
 
   return (
     <Box sx={{ m: "-5px 20px 20px 20px" }}>
+      <PrRequestReceiptModal
+        handleClose={handleClosePrRequest}
+        open={openPrRequest}
+        prReceiptData={{
+          subTotal: handleTotal(selectedData),
+          total: handleTotalWithTax(),
+          ...prReceiptData,
+        }}
+      />
       <AddPRDetails
         open={openPRDetailsModal}
         handleClose={handleClosePRDetails}

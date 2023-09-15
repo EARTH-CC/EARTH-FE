@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {
   Box,
   Button,
@@ -13,24 +13,18 @@ import {
   Typography,
 } from "@mui/material";
 import PropTypes from "prop-types";
+import DownloadIcon from "@mui/icons-material/Download";
+import CancelIcon from "@mui/icons-material/Cancel";
+import procurementService from "services/procurement-service";
 import html2canvas from "html2canvas";
 import JsPDF from "jspdf";
-import bontrade from "../../../assets/bontrade.png";
+import bontrade from "../../../assets/bontrade1.png";
 import eg from "../../../assets/eglogistics.png";
 import earth from "../../../assets/images/logo3.png";
 
-function PrRequestReceiptModal({
-  prNum,
-  company,
-  location,
-  attention,
-  date,
-  items,
-  subTotal,
-  total,
-  open,
-  handleClose,
-}) {
+function PrRequestReceiptModal({ prReceiptData, open, handleClose }) {
+  const [products, setProducts] = useState();
+
   const downloadPDF = () => {
     const capture = document.querySelector(".receipt");
     html2canvas(capture).then((canvas) => {
@@ -42,9 +36,32 @@ function PrRequestReceiptModal({
       doc.save("purchase-request-receipt.pdf");
     });
   };
+  // disable inpect elements
   document.addEventListener("contextmenu", (e) => {
     e.preventDefault();
   });
+
+  const today = new Date();
+  const year = today.getFullYear();
+  const month = String(today.getMonth() + 1).padStart(2, "0");
+  const day = String(today.getDate()).padStart(2, "0");
+  const formattedDate = `${year}-${month}-${day}`;
+
+  const handleGetAll = () => {
+    procurementService.getAllAPI("product").then((e) => {
+      setProducts(e);
+    });
+  };
+
+  const handleGetProduct = (evt) => {
+    const product = products?.find((item) => item.item_code === evt);
+    return product.name;
+  };
+
+  useEffect(() => {
+    handleGetAll();
+  }, []);
+
   return (
     <Modal
       open={open}
@@ -73,7 +90,7 @@ function PrRequestReceiptModal({
           }}
         >
           <Grid className="green" container xs={12}>
-            <Grid className="blue" display="flex" flexDirection="column" xs={1}>
+            <Grid className="blue" display="flex" flexDirection="column" xs={2}>
               <Box
                 component="img"
                 alt="bontrade"
@@ -94,8 +111,7 @@ function PrRequestReceiptModal({
               display="flex"
               flexDirection="column"
               xs={4}
-              ml="3em"
-              mr="1em"
+              mr="4em"
             >
               <Typography
                 sx={{
@@ -142,7 +158,7 @@ function PrRequestReceiptModal({
                 Reclamation Project
               </Typography>
             </Grid>
-            <Grid className="yellow" xs={6} pt="2em">
+            <Grid className="yellow" xs={5} pt="2em">
               <Typography
                 sx={{
                   fontSize: "20px",
@@ -162,7 +178,7 @@ function PrRequestReceiptModal({
                   textAlign: "right",
                 }}
               >
-                <b>PRF NO.</b> {prNum}
+                <b>PRF NO.</b> MWC-PRF-2023-0001
               </Typography>
             </Grid>
           </Grid>
@@ -186,7 +202,8 @@ function PrRequestReceiptModal({
                     color: "black",
                   }}
                 >
-                  {company}
+                  {/* eslint-disable-next-line react/destructuring-assignment */}
+                  {prReceiptData.company_name}
                 </Typography>
               </Grid>
               <Grid xs={12} display="flex" flexDirection="row">
@@ -209,7 +226,8 @@ function PrRequestReceiptModal({
                     mt: "3px",
                   }}
                 >
-                  {location}
+                  {/* eslint-disable-next-line react/destructuring-assignment */}
+                  {prReceiptData.address}
                 </Typography>
               </Grid>
               <Grid xs={12} display="flex" flexDirection="row">
@@ -232,7 +250,8 @@ function PrRequestReceiptModal({
                     mt: "3px",
                   }}
                 >
-                  {attention}
+                  {/* eslint-disable-next-line react/destructuring-assignment */}
+                  {prReceiptData.attention}
                 </Typography>
               </Grid>
               <Grid xs={12}>
@@ -277,7 +296,7 @@ function PrRequestReceiptModal({
                   color: "black",
                 }}
               >
-                {date}
+                {formattedDate}
               </Typography>
             </Grid>
           </Grid>
@@ -330,41 +349,24 @@ function PrRequestReceiptModal({
                         color: "black",
                       }}
                     >
-                      Unit
-                    </Typography>
-                  </TableCell>
-                  <TableCell>
-                    <Typography
-                      sx={{
-                        fontSize: "13px",
-                        fontWeight: "bold",
-                        textTransform: "uppercase",
-                        color: "black",
-                      }}
-                    >
-                      Unit Cost
-                    </Typography>
-                  </TableCell>
-                  <TableCell>
-                    <Typography
-                      sx={{
-                        fontSize: "13px",
-                        fontWeight: "bold",
-                        textTransform: "uppercase",
-                        color: "black",
-                      }}
-                    >
                       Amount
                     </Typography>
                   </TableCell>
                 </TableRow>
               </TableHead>
               <TableBody sx={{ border: "none" }}>
-                {items.map((item) => (
-                  <TableRow key={item.id}>
-                    {Object.keys(item).map((key) => (
-                      <TableCell sx={{ border: "none" }}>{item[key]}</TableCell>
-                    ))}
+                {prReceiptData.items?.map((item) => (
+                  <TableRow key={item.item_code}>
+                    <TableCell sx={{ border: "none" }}>
+                      {handleGetProduct(item.item_code)}
+                    </TableCell>
+                    <TableCell sx={{ border: "none" }}>
+                      {item.description}
+                    </TableCell>
+                    <TableCell sx={{ border: "none" }}>
+                      {item.quantity}
+                    </TableCell>
+                    <TableCell sx={{ border: "none" }}>{item.price}</TableCell>
                   </TableRow>
                 ))}
               </TableBody>
@@ -397,7 +399,19 @@ function PrRequestReceiptModal({
                   textAlign: "right",
                 }}
               >
-                {subTotal}
+                {/* eslint-disable-next-line react/destructuring-assignment */}
+                <span
+                  style={{
+                    fontSize: "13px",
+                    fontWeight: "bold",
+                    textTransform: "uppercase",
+                    color: "black",
+                    textAlign: "right",
+                  }}
+                >
+                  ₱{" "}
+                </span>
+                {prReceiptData.subTotal}
               </Typography>
             </Grid>
             <Grid xs={10} mt="1em">
@@ -447,11 +461,23 @@ function PrRequestReceiptModal({
                   textAlign: "right",
                 }}
               >
-                {total}
+                {/* eslint-disable-next-line react/destructuring-assignment */}
+                <span
+                  style={{
+                    fontSize: "13px",
+                    fontWeight: "bold",
+                    textTransform: "uppercase",
+                    color: "black",
+                    textAlign: "right",
+                  }}
+                >
+                  ₱{" "}
+                </span>
+                {prReceiptData.total}
               </Typography>
             </Grid>
             <Grid xs={12} mt="1em">
-              <Divider color="black" sx={{ height: "1px" }} />
+              <Divider color="black" sx={{ height: "2px" }} />
             </Grid>
             <Grid xs={12} mt="1em">
               <Typography
@@ -463,6 +489,17 @@ function PrRequestReceiptModal({
                 }}
               >
                 Remarks
+              </Typography>
+            </Grid>
+            <Grid xs={12} mt="1em">
+              <Typography
+                sx={{
+                  fontSize: "13px",
+                  color: "black",
+                }}
+              >
+                {/* eslint-disable-next-line react/destructuring-assignment */}
+                {prReceiptData.remarks}
               </Typography>
             </Grid>
             <Grid container xs={4}>
@@ -611,15 +648,41 @@ function PrRequestReceiptModal({
           </Grid>
         </Box>
         <Grid container xs={12}>
-          <Grid xs={4} />
-          <Grid xs={2} my="1em">
-            <Button textAlign="right" variant="contained" onClick={downloadPDF}>
-              Download
+          <Grid xs={3} />
+          <Grid xs={3} my="1em">
+            <Button
+              textAlign="right"
+              variant="contained"
+              onClick={downloadPDF}
+              sx={{
+                backgroundColor: "#3e4396",
+                ":hover": {
+                  backgroundColor: "#a4a9fc",
+                },
+              }}
+            >
+              <DownloadIcon />
+              <Typography ml={1} fontWeight="bold">
+                Download
+              </Typography>
             </Button>
           </Grid>
-          <Grid xs={2} my="1em">
-            <Button textAlign="right" variant="contained" onClick={handleClose}>
-              Close
+          <Grid xs={3} my="1em">
+            <Button
+              textAlign="right"
+              variant="contained"
+              onClick={handleClose}
+              sx={{
+                backgroundColor: "#3e4396",
+                ":hover": {
+                  backgroundColor: "#a4a9fc",
+                },
+              }}
+            >
+              <CancelIcon />
+              <Typography ml={1} fontWeight="bold">
+                Close
+              </Typography>
             </Button>
           </Grid>
         </Grid>
@@ -629,29 +692,15 @@ function PrRequestReceiptModal({
 }
 
 PrRequestReceiptModal.defaultProps = {
+  prReceiptData: {},
   handleClose: () => {},
-  prNum: "",
-  company: "",
-  location: "",
-  attention: "",
-  date: "",
-  items: [],
-  subTotal: "",
-  total: "",
 };
 
 PrRequestReceiptModal.propTypes = {
+  // eslint-disable-next-line react/forbid-prop-types
+  prReceiptData: PropTypes.object,
   open: PropTypes.bool.isRequired,
   handleClose: PropTypes.func,
-  prNum: PropTypes.string,
-  company: PropTypes.string,
-  location: PropTypes.string,
-  attention: PropTypes.string,
-  date: PropTypes.string,
-  // eslint-disable-next-line react/forbid-prop-types
-  items: PropTypes.arrayOf(PropTypes.object),
-  subTotal: PropTypes.string,
-  total: PropTypes.string,
 };
 
 export default PrRequestReceiptModal;
