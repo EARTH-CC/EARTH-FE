@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { Box, Button, Divider, Typography, useTheme } from "@mui/material";
-import AddIcon from "@mui/icons-material/Add";
 import ForwardIcon from "@mui/icons-material/Forward";
 import procurementService from "services/procurement-service";
 import AddPRDetails from "modal/Procurement/CanvassCart/AddPRDetailsModal";
@@ -126,6 +125,7 @@ export default function CanvassCart() {
         handleGetAll();
         setPrReceiptData(e.data.data);
         handleOpenPrRequest();
+        setOpenPRDetailsModal(false);
         setSuccessMessage(e.data.message);
         setOpenSuccess(true);
       })
@@ -137,7 +137,6 @@ export default function CanvassCart() {
         setLoading(false);
       });
   };
-  console.log(selectedData);
 
   const handleCloseSuccess = (event, reason) => {
     if (reason === "clickaway") {
@@ -185,17 +184,12 @@ export default function CanvassCart() {
       });
     });
 
-    if (
-      !selectedData?.length ||
-      PRDetails.attention === "" ||
-      PRDetails.remarks === "" ||
-      hasDifferentSupplier
-    ) {
+    if (!selectedData?.length || hasDifferentSupplier) {
       setDisabled(true);
     } else {
       setDisabled(false);
     }
-  }, [selectedData, PRDetails?.attention, PRDetails?.remarks]);
+  }, [selectedData]);
 
   const handleTotal = (evt) => {
     const total = evt?.reduce(
@@ -227,6 +221,7 @@ export default function CanvassCart() {
         open={openPRDetailsModal}
         handleClose={handleClosePRDetails}
         PROtherDetails={setPRDetails}
+        handleSubmit={handleSubmit}
       />
       {/* HEADER */}
       <Box
@@ -243,38 +238,6 @@ export default function CanvassCart() {
         p="1rem"
         sx={{ backgroundColor: colors.primary[400] }}
       >
-        <Box
-          mb={2}
-          sx={{
-            display: "flex",
-            justifyContent: "end",
-            position: "absolute",
-            zIndex: 1,
-          }}
-        >
-          <Button
-            onClick={handleAddPRDetails}
-            sx={{
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center",
-              width: 200,
-              cursor: "pointer",
-              fontWeight: "bold",
-              backgroundColor: (themeMode) =>
-                themeMode.palette.mode === "dark" ? "#334b5f" : "lightgray",
-              color: colors.grey[100],
-              "&:hover": {
-                textShadow: "0 0 0.5rem rgba(255, 255, 255, 0.75)",
-                color: "#fff",
-                backgroundColor: "gray",
-              },
-            }}
-          >
-            <AddIcon sx={{ mr: 0.5 }} />
-            Add PR Details
-          </Button>
-        </Box>
         <Divider>
           <Typography
             sx={{
@@ -350,7 +313,7 @@ export default function CanvassCart() {
             </Typography>
             <Button
               disabled={disabled}
-              onClick={handleSubmit}
+              onClick={handleAddPRDetails}
               sx={{
                 backgroundColor: disabled
                   ? colors.blueAccent[800]

@@ -72,6 +72,12 @@ export default function PurchaseRequestTable({
       flex: 1,
       editable: true,
     },
+    {
+      field: "pr_status",
+      headerName: "Status",
+      flex: 1,
+      editable: true,
+    },
   ];
 
   return (

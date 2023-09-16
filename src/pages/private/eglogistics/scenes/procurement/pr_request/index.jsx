@@ -3,7 +3,8 @@ import { Box, Button, Divider, Typography, useTheme } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
 import ForwardIcon from "@mui/icons-material/Forward";
 import DownloadOutlinedIcon from "@mui/icons-material/DownloadOutlined";
-import PurchaseRequestModal from "modal/Procurement/PurchaseRequestModal";
+import AddPRModal from "modal/Procurement/PurchaseRequest/AddPRModal";
+import AddPODetailsModal from "modal/Procurement/PurchaseRequest/AddPODetailsModal";
 import PrOrderReceiptModal from "modal/Procurement/PRReceipts/PrOrderReceiptModal";
 import procurementService from "services/procurement-service";
 import Header from "components/PrivateComponents/eglogistics/Header";
@@ -34,7 +35,7 @@ export default function PurchaseRequest() {
 
   const [allPrItems, setAllPrItems] = useState();
 
-  const [openPRRequestModal, setOpenPRRequestModal] = useState(false);
+  const [PODetails, setPODetails] = useState({});
 
   const [openSuccess, setOpenSuccess] = useState(false);
   const [openError, setOpenError] = useState(false);
@@ -42,9 +43,17 @@ export default function PurchaseRequest() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const [disabled, setDisabled] = useState(false);
+  const [openPODetailsModal, setOpenPODetailsModal] = useState(false);
+  const [openPRRequestModal, setOpenPRRequestModal] = useState(false);
   const [openPoReceipt, setOpenPoReceipt] = useState(false);
 
-  console.log(allPrItems);
+  const handleAddPODetails = () => {
+    setOpenPODetailsModal(true);
+  };
+
+  const handleClosePODetails = () => {
+    setOpenPODetailsModal(false);
+  };
 
   const handleOpenPoReceipt = () => {
     setOpenPoReceipt(true);
@@ -54,11 +63,11 @@ export default function PurchaseRequest() {
     setOpenPoReceipt(false);
   };
 
-  const handlePRRequest = () => {
+  const handleOpenAddPR = () => {
     setOpenPRRequestModal(true);
   };
 
-  const handleClosePRRequest = () => {
+  const handleCloseAddPR = () => {
     setOpenPRRequestModal(false);
     setError("");
   };
@@ -67,6 +76,7 @@ export default function PurchaseRequest() {
     setPRItems(newPR);
   };
 
+  // ito ung kumukuha ng data para madisplay sa table
   const handleGetAll = () => {
     setError("");
     setLoading(true);
@@ -84,6 +94,7 @@ export default function PurchaseRequest() {
       });
   };
 
+  // ito ung kumukuha ng items ng isang purchase
   const handleGetAllItems = () => {
     setError("");
     setLoading(true);
@@ -101,6 +112,7 @@ export default function PurchaseRequest() {
       });
   };
 
+  // ito ung nagaadd ng purchase request manually.. galing sa modal.. di galing sa table
   const handleSubmit = () => {
     setError("");
     setLoading(true);
@@ -122,16 +134,28 @@ export default function PurchaseRequest() {
       });
   };
 
+  console.log(PODetails.dueDate);
+
+  // ito ung naguupdate ng process type to order
   const handleProceedToOrder = () => {
     setError("");
     setLoading(true);
 
     procurementService
-      .updateAPI(selectedPR[0].uuid, { process_type: "order" }, moduleName)
+      .updateAPI(
+        selectedPR[0].uuid,
+        {
+          process_type: "order",
+          order_due_date: PODetails.dueDate,
+          terms_of_agreement: PODetails.TOA,
+        },
+        moduleName
+      )
       .then(() => {
         handleGetAll();
         handleGetAllItems();
         handleOpenPoReceipt();
+        setOpenPODetailsModal(false);
         setOpenSuccess(true);
         setData([]);
       })
@@ -179,6 +203,12 @@ export default function PurchaseRequest() {
     return total || 0;
   };
 
+  const handleDisplayTotal = (evt) => {
+    // Use reduce to calculate the total sum of total_amount in the compute array
+    const total = evt?.reduce((acc, item) => acc + item.total_amount, 0);
+    return total || 0;
+  };
+
   const handleTotalWithTax = () => {
     const subTotal = handleTotal(allPrItems);
     const taxAmount = subTotal * 0.14;
@@ -188,6 +218,12 @@ export default function PurchaseRequest() {
 
   return (
     <Box sx={{ m: "-5px 20px 20px 20px" }}>
+      <AddPODetailsModal
+        open={openPODetailsModal}
+        handleClose={handleClosePODetails}
+        POOtherDetails={setPODetails}
+        handleSubmit={handleProceedToOrder}
+      />
       <PrOrderReceiptModal
         totalValue={{
           total: handleTotal(allPrItems),
@@ -197,10 +233,10 @@ export default function PurchaseRequest() {
         handleClose={handleClosePoReceipt}
         open={openPoReceipt}
       />
-      <PurchaseRequestModal
+      <AddPRModal
         data={PRItems}
         open={openPRRequestModal}
-        handleClose={handleClosePRRequest}
+        handleClose={handleCloseAddPR}
         onPRChange={handlePRChange}
         setPRValues={setPRValues}
         onSubmit={handleSubmit}
@@ -256,7 +292,7 @@ export default function PurchaseRequest() {
           }}
         >
           <Button
-            onClick={handlePRRequest}
+            onClick={handleOpenAddPR}
             sx={{
               display: "flex",
               justifyContent: "center",
@@ -275,7 +311,7 @@ export default function PurchaseRequest() {
             }}
           >
             <AddIcon sx={{ mr: 0.5 }} />
-            Purchase Request
+            Add Request
           </Button>
         </Box>
         <Divider>
@@ -331,14 +367,14 @@ export default function PurchaseRequest() {
             >
               Subtotal Amount ({data ? `${data.length} items` : "0 item"}):{" "}
               <span style={{ fontSize: "18px" }}>₱</span>{" "}
-              {data ? handleTotal(data) : 0}
+              {data ? handleDisplayTotal(data) : 0}
             </Typography>
           </Box>
           <Box sx={{ textAlign: "center" }}>
             <Typography color="gray">Select a request to proceed</Typography>
             <Button
               disabled={disabled}
-              onClick={handleProceedToOrder}
+              onClick={handleAddPODetails}
               sx={{
                 backgroundColor: disabled
                   ? colors.blueAccent[800]

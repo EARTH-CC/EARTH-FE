@@ -43,8 +43,6 @@ function PrOrderReceiptModal({ poReceiptData, open, handleClose, totalValue }) {
   const day = String(today.getDate()).padStart(2, "0");
   const formattedDate = `${year}-${month}-${day}`;
 
-  console.log(poReceiptData);
-
   return (
     <Modal
       open={open}

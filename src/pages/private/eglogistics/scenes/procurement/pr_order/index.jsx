@@ -3,7 +3,7 @@ import { Box, Button, Divider, Typography, useTheme } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
 import ForwardIcon from "@mui/icons-material/Forward";
 import DownloadOutlinedIcon from "@mui/icons-material/DownloadOutlined";
-import PurchaseOrderModal from "modal/Procurement/AddPoModal";
+import PurchaseOrderModal from "modal/Procurement/PurchaseOrder/AddPoModal";
 import Header from "components/PrivateComponents/eglogistics/Header";
 import themes from "themes/theme";
 import procurementService from "services/procurement-service";
@@ -106,10 +106,7 @@ export default function PurchaseOrder() {
 
   const handleTotal = (evt) => {
     // Use reduce to calculate the total sum of total_amount in the compute array
-    const total = evt?.reduce(
-      (acc, item) => acc + item.total_amount * item.quantity,
-      0
-    );
+    const total = evt?.reduce((acc, item) => acc + item.total_amount, 0);
     return total || 0;
   };
 

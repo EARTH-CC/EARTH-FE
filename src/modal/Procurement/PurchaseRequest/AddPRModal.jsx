@@ -16,7 +16,7 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import procurementService from "services/procurement-service";
 import Header from "components/PrivateComponents/eglogistics/Header";
 import SelectItem from "components/PrivateComponents/eglogistics/Textfields/SelectItem";
-import themes from "../../themes/theme";
+import themes from "../../../themes/theme";
 
 const { tokens } = themes;
 

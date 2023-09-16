@@ -21,20 +21,43 @@ export default function PurchaseOrderTable({
     currency: "PHP",
   });
 
+  // Function to format a date to "MM-DD-YY" format
+  const formatDate = (dateString) => {
+    const date = new Date(dateString);
+    const year = date.getFullYear().toString(); // Get the last two digits of the year
+    const month = (date.getMonth() + 1).toString().padStart(2, "0"); // Month is 0-based
+    const day = date.getDate().toString().padStart(2, "0");
+    return `${month}-${day}-${year}`;
+  };
+
   const columns = [
     {
-      field: "date",
+      field: "order_date",
       headerName: "Date",
       flex: 1,
+      type: "date",
+      valueFormatter: (params) => formatDate(params.value), // Format the date
     },
     {
-      field: "due_date",
+      field: "order_due_date",
       headerName: "Due Date",
       flex: 1,
+      type: "date",
+      valueFormatter: (params) => formatDate(params.value), // Format the date
     },
     {
       field: "pr_code",
       headerName: "PR No.",
+      flex: 1,
+    },
+    {
+      field: "po_code",
+      headerName: "PO No.",
+      flex: 1,
+    },
+    {
+      field: "or_code",
+      headerName: "OR Code.",
       flex: 1,
     },
     {
@@ -68,6 +91,12 @@ export default function PurchaseOrderTable({
       field: "remarks",
       headerName: "Remarks",
       flex: 1,
+    },
+    {
+      field: "po_status",
+      headerName: "Status",
+      flex: 1,
+      editable: true,
     },
   ];
 

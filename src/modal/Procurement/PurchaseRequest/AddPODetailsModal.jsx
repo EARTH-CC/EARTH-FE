@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import { Box, Button, Grid, Modal, TextField, useTheme } from "@mui/material";
 import Header from "components/PrivateComponents/eglogistics/Header";
+import TextFieldDatePicker from "components/PrivateComponents/eglogistics/Textfields/Datepicker";
+import dayjs from "dayjs";
 import themes from "../../../themes/theme";
 
 const style = {
@@ -19,21 +21,21 @@ const style = {
 
 const { tokens } = themes;
 
-export default function AddPRDetails({
+export default function AddPODetails({
   open,
   handleClose,
-  PROtherDetails,
+  POOtherDetails,
   handleSubmit,
 }) {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
 
-  const [attention, setAttention] = useState("");
-  const [remarks, setRemarks] = useState("");
+  const [TOA, setTOA] = useState("");
+  const [dueDate, setDueDate] = useState("");
 
   useEffect(() => {
-    PROtherDetails({ attention, remarks });
-  }, [attention, remarks]);
+    POOtherDetails({ TOA, dueDate });
+  }, [TOA, dueDate]);
 
   return (
     <Modal
@@ -52,28 +54,23 @@ export default function AddPRDetails({
         <Grid container spacing={2}>
           <Grid item xs={12}>
             <TextField
-              name="attention"
+              name="TOA"
               type="text"
               size="small"
-              label="Attention"
-              value={attention}
+              label="Terms of Agreement"
+              value={TOA}
               onChange={(evt) => {
-                setAttention(evt.target.value);
+                setTOA(evt.target.value);
               }}
               fullWidth
             />
           </Grid>
           <Grid item xs={12}>
-            <TextField
-              name="remarks"
-              type="text"
-              size="small"
-              label="Remarks"
-              value={remarks}
-              onChange={(evt) => {
-                setRemarks(evt.target.value);
-              }}
-              fullWidth
+            <TextFieldDatePicker
+              label="Due Date"
+              value={dueDate}
+              onChange={(evt) => setDueDate(dayjs(evt).format("YYYY-MM-DD"))}
+              maxDate={new Date()}
             />
           </Grid>
         </Grid>
@@ -81,6 +78,7 @@ export default function AddPRDetails({
           <Box sx={{ textAlign: "right", height: 100 }}>
             <Button
               variant="contained"
+              disabled={(TOA === "", dueDate === "")}
               onClick={handleSubmit}
               sx={{
                 mr: 2,
@@ -100,8 +98,8 @@ export default function AddPRDetails({
                 backgroundColor: "#3e4287",
               }}
               onClick={() => {
-                setAttention("");
-                setRemarks("");
+                setTOA("");
+                setDueDate("");
                 handleClose();
               }}
             >
@@ -114,18 +112,18 @@ export default function AddPRDetails({
   );
 }
 
-AddPRDetails.defaultProps = {
+AddPODetails.defaultProps = {
   handleClose: () => {},
   // onSuccess: () => {},
-  PROtherDetails: [],
+  POOtherDetails: [],
   handleSubmit: () => {},
 };
 
-AddPRDetails.propTypes = {
+AddPODetails.propTypes = {
   open: PropTypes.bool.isRequired,
   handleClose: PropTypes.func,
   // onSuccess: PropTypes.func,
   // eslint-disable-next-line react/forbid-prop-types
-  PROtherDetails: PropTypes.object,
+  POOtherDetails: PropTypes.object,
   handleSubmit: PropTypes.func,
 };
