@@ -196,14 +196,15 @@ export default function PurchaseOrder() {
             Purchase Order
           </Typography>
         </Divider>
-
-        <Box>
-          <PurchaseOrderTable
-            data={data}
-            selectedData={setSelectedPO}
-            loadingState={loading}
-          />
-        </Box>
+        <PurchaseOrderTable
+          data={data}
+          selectedData={setSelectedPO}
+          loadingState={loading}
+        />
+        <Divider
+          variant="middle"
+          sx={{ borderTopWidth: "1px", borderTopColor: "grey" }}
+        />
         <Box
           sx={{
             display: "flex",

@@ -110,10 +110,11 @@ export default function Transmittal() {
             Transmittal
           </Typography>
         </Divider>
-
-        <Box>
-          <TransmittalTable data={data} loadingState={loading} />
-        </Box>
+        <TransmittalTable data={data} loadingState={loading} />
+        {/* <Divider
+          variant="middle"
+          sx={{ borderTopWidth: "1px", borderTopColor: "grey" }}
+        /> */}
         <SnackbarComponent
           open={openSuccess}
           onClose={handleCloseSuccess}

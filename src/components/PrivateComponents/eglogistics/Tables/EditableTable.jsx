@@ -195,9 +195,9 @@ export default function EditableTable({
         "& .MuiDataGrid-root": {
           border: "none",
         },
-        "& .MuiDataGrid-cell": {
-          borderBottom: "none",
-        },
+        // "& .MuiDataGrid-cell": {
+        //   borderBottom: "none",
+        // },
         "& .name-column--cell": {
           color: colors.blueAccent[300],
         },
@@ -207,6 +207,7 @@ export default function EditableTable({
           borderBottom: "none",
         },
         "& .MuiDataGrid-virtualScroller": {
+          // virtualScroller is the inside of dataGrid
           backgroundColor: colors.primary[400],
         },
         "& .MuiDataGrid-footerContainer": {
@@ -246,6 +247,17 @@ export default function EditableTable({
             setRowModesModel,
           },
         }}
+        pageSizeOptions={[10, 20, 30, 40, 50]}
+        initialState={{
+          pinnedColumns: { left: ["name"], right: ["actions"] },
+          pagination: {
+            paginationModel: {
+              pageSize: 10,
+            },
+          },
+        }}
+        disableRowSelectionOnClick // para di magloop si params
+        hideFooterSelectedRowCount
         height="100%"
       />
     </Box>

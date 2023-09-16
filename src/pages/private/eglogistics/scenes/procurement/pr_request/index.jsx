@@ -288,14 +288,15 @@ export default function PurchaseRequest() {
             Purchase Request
           </Typography>
         </Divider>
-
-        <Box>
-          <PurchaseRequestTable
-            data={data}
-            selectedData={setSelectedPR}
-            loadingState={loading}
-          />
-        </Box>
+        <PurchaseRequestTable
+          data={data}
+          selectedData={setSelectedPR}
+          loadingState={loading}
+        />
+        <Divider
+          variant="middle"
+          sx={{ borderTopWidth: "1px", borderTopColor: "grey" }}
+        />
         <Box
           sx={{
             display: "flex",
