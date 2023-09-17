@@ -10,7 +10,6 @@ import {
   Typography,
   Button,
 } from "@mui/material";
-import CloseIcon from "@mui/icons-material/Close";
 import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import { useFormik } from "formik";
@@ -76,8 +75,16 @@ export default function RegisterModal({ open, handleClose }) {
       <Box>
         <Box
           sx={{
-            display: "grid",
-            justifyContent: "center",
+            width: "37vw",
+            height: "600px",
+            position: "absolute",
+            left: 0,
+            right: 0,
+            top: 0,
+            bottom: 0,
+            margin: "auto",
+            maxWidth: "100%",
+            maxWeight: "100%",
           }}
         >
           <Box
@@ -86,22 +93,9 @@ export default function RegisterModal({ open, handleClose }) {
                 themeMode.palette.mode === "dark" ? "#1f2a40" : "#fff",
               width: "37vw",
               borderRadius: "5px",
-              mt: "1em",
               p: "50px",
             }}
           >
-            <CloseIcon
-              sx={{
-                position: "absolute",
-                top: "3%",
-                right: "32%",
-                ":hover": {
-                  backgroundColor: "#a4a9fc",
-                  cursor: "pointer",
-                },
-              }}
-              onClick={handleClose}
-            />
             <Header title="CREATE ACCOUNT" mb={2} />
             <form onSubmit={formik.handleSubmit} autoComplete="off">
               <Grid container spacing={2}>
