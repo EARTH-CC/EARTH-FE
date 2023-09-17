@@ -10,12 +10,25 @@ function getAPI(id, moduleName) {
   return axios.get(`${BASE_URL}/${moduleName}/get/${id}`);
 }
 
-function getAllAPI(moduleName, processName = "") {
+function getAllAPI(
+  moduleName,
+  processName = "",
+  category,
+  brand,
+  supplier,
+  minPrice,
+  maxPrice
+) {
   return new Promise((resolve, reject) => {
     axios
       .get(`${BASE_URL}/${moduleName}/get`, {
         params: {
           processName,
+          category,
+          brand,
+          supplier,
+          minPrice,
+          maxPrice,
         },
       })
       .then((res) => resolve(res?.data?.data))
@@ -26,13 +39,13 @@ function getAllAPI(moduleName, processName = "") {
 }
 
 // eslint-disable-next-line camelcase
-function getAllItemsAPI(moduleName, prRef_code = "") {
+function getAllItemsAPI(moduleName, ref_code = "") {
   return new Promise((resolve, reject) => {
     axios
       .get(`${BASE_URL}/${moduleName}/getAllItems`, {
         params: {
           // eslint-disable-next-line camelcase
-          prRef_code,
+          ref_code,
         },
       })
       .then((res) => resolve(res?.data?.data))

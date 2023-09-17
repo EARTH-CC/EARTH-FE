@@ -4,15 +4,32 @@ import { Box, Divider, Typography } from "@mui/material";
 import procurementService from "services/procurement-service";
 import DataGrid from "components/PrivateComponents/eglogistics/Tables/DataGrid";
 
-function CanvasTable({ selectedData, reset }) {
+function CanvasTable({
+  selectedData,
+  reset,
+  category,
+  brand,
+  supplier,
+  priceRage,
+}) {
   const [items, setItems] = useState([]);
   const [loading, setLoading] = useState(false);
   const [data, setData] = useState();
 
+  console.log(category, brand, supplier, priceRage[0], priceRage[1]);
+
   const handleGetAll = () => {
     setLoading(true);
     procurementService
-      .getAllAPI("product")
+      .getAllAPI(
+        "product",
+        null,
+        category,
+        brand,
+        supplier,
+        priceRage[0],
+        priceRage[1]
+      )
       .then((e) => {
         setItems(e);
       })
@@ -27,7 +44,7 @@ function CanvasTable({ selectedData, reset }) {
 
   useEffect(() => {
     handleGetAll();
-  }, []);
+  }, [category, brand, supplier, priceRage]);
 
   const currencyFormatter = new Intl.NumberFormat("en-US", {
     style: "currency",
@@ -126,10 +143,19 @@ export default CanvasTable;
 CanvasTable.defaultProps = {
   selectedData: [],
   reset: false,
+  category: null,
+  brand: null,
+  supplier: null,
+  priceRage: [],
 };
 
 CanvasTable.propTypes = {
   // eslint-disable-next-line react/forbid-prop-types
   selectedData: PropTypes.arrayOf(PropTypes.object),
   reset: PropTypes.bool,
+  category: PropTypes.number,
+  brand: PropTypes.number,
+  supplier: PropTypes.number,
+  // eslint-disable-next-line react/forbid-prop-types
+  priceRage: PropTypes.array,
 };

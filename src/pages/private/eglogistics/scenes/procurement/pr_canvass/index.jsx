@@ -17,6 +17,10 @@ export default function CanvassSheet() {
   const [data, setData] = useState();
   const [cartTotal, setCartTotal] = useState();
   const [reset, setReset] = useState(false);
+  const [category, setCategory] = useState();
+  const [brand, setBrand] = useState();
+  const [supplier, setSupplier] = useState();
+  const [priceRange, setPriceRange] = useState();
 
   const handleAddToCart = () => {
     try {
@@ -76,6 +80,10 @@ export default function CanvassSheet() {
             selectedData={data || 0}
             cartTotal={cartTotal}
             isUpdated={reset}
+            categoryId={setCategory}
+            brandId={setBrand}
+            supplierId={setSupplier}
+            range={setPriceRange}
           />
         </Grid>
 
@@ -84,7 +92,14 @@ export default function CanvassSheet() {
           xs={10}
           sx={{ borderLeft: "solid 1px #C0C0C0", paddingTop: "20px" }}
         >
-          <CanvasTable selectedData={setData} reset={reset} />
+          <CanvasTable
+            selectedData={setData}
+            reset={reset}
+            category={category}
+            brand={brand}
+            supplier={supplier}
+            priceRage={priceRange}
+          />
         </Grid>
       </Grid>
     </Box>

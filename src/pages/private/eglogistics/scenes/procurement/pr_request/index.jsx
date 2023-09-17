@@ -99,7 +99,7 @@ export default function PurchaseRequest() {
     setError("");
     setLoading(true);
     procurementService
-      .getAllItemsAPI(moduleName, selectedPR[0]?.pr_code)
+      .getAllItemsAPI(moduleName, selectedPR[0]?.ref_code)
       .then((e) => {
         setAllPrItems(e);
       })

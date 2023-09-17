@@ -22,13 +22,21 @@ const { tokens } = themes;
 const priceData = [0, 999999]; // MOCK DATA
 // const moduleName = "canvass";
 
-function Filters({ addToCart, selectedData, cartTotal }) {
+function Filters({
+  addToCart,
+  selectedData,
+  cartTotal,
+  categoryId,
+  brandId,
+  supplierId,
+  range,
+}) {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
-  const [value, setValue] = useState(priceData);
   const [category, setCategory] = useState();
   const [brand, setBrand] = useState();
   const [supplier, setSupplier] = useState();
+  const [priceRange, setPriceRange] = useState(priceData);
   const [disable, setDisable] = useState(true);
 
   const navigate = useNavigate();
@@ -38,8 +46,24 @@ function Filters({ addToCart, selectedData, cartTotal }) {
   };
 
   const handleSliderChange = (event, newValue) => {
-    setValue(newValue);
+    setPriceRange(newValue);
   };
+
+  useEffect(() => {
+    if (category) {
+      categoryId(category);
+    }
+    if (brand) {
+      brandId(brand);
+    }
+    if (supplier) {
+      supplierId(supplier);
+    }
+    if (priceRange) {
+      range(priceRange);
+    }
+    console.log();
+  }, [category, brand, supplier, priceRange]);
 
   useEffect(() => {
     if (selectedData.length > 0) {
@@ -181,7 +205,7 @@ function Filters({ addToCart, selectedData, cartTotal }) {
         Price
       </Typography>
       <Slider
-        value={value}
+        value={priceRange}
         onChange={handleSliderChange}
         min={0}
         max={priceData[1]}
@@ -270,6 +294,10 @@ Filters.defaultProps = {
   addToCart: () => {},
   selectedData: [],
   cartTotal: {},
+  categoryId: null,
+  brandId: null,
+  supplierId: null,
+  range: [],
 };
 
 Filters.propTypes = {
@@ -278,4 +306,9 @@ Filters.propTypes = {
   selectedData: PropTypes.arrayOf(PropTypes.object),
   // eslint-disable-next-line react/forbid-prop-types
   cartTotal: PropTypes.object,
+  categoryId: PropTypes.number,
+  brandId: PropTypes.number,
+  supplierId: PropTypes.number,
+  // eslint-disable-next-line react/forbid-prop-types
+  range: PropTypes.array,
 };
