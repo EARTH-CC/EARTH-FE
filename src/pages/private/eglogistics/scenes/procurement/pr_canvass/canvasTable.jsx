@@ -41,12 +41,12 @@ function CanvasTable({ selectedData, reset }) {
       flex: 0.5,
       headerAlign: "left",
       align: "left",
-      cellClassName: "name-column--cell",
     },
     {
       field: "item_code",
       headerName: "Item Code",
       flex: 0.5,
+      cellClassName: "name-column--cell",
     },
     {
       field: "brand_name",

@@ -166,11 +166,7 @@ export default function AccountsTable({
             </Box>
           )}
           <span color={colors.grey[100]} style={{ ml: "5px" }}>
-            {status === 1
-              ? "Activate"
-              : status === 0
-              ? "Deactivated"
-              : "unknown"}
+            {status === 1 ? "Active" : status === 0 ? "Deactivated" : "unknown"}
           </span>
         </Box>
       ),

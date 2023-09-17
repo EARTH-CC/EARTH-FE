@@ -3,7 +3,7 @@ import { Box, Button, Divider, Typography, useTheme } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
 import AddBrandModal from "modal/Procurement/ProcurementLibraries/AddBrandModal";
 import procurementService from "services/procurement-service";
-import DataGrid from "components/PrivateComponents/eglogistics/Tables/DataGrid";
+import EditableTable from "components/PrivateComponents/eglogistics/Tables/EditableTable";
 import themes from "themes/theme";
 
 const { tokens } = themes;
@@ -39,24 +39,30 @@ function BrandLibraries() {
       });
   };
 
+  // Function to format a date to "MM-DD-YY" format
+  // const formatDate = (dateString) => {
+  //   const date = new Date(dateString);
+  //   const year = date.getFullYear().toString(); // Get the last two digits of the year
+  //   const month = (date.getMonth() + 1).toString().padStart(2, "0"); // Month is 0-based
+  //   const day = date.getDate().toString().padStart(2, "0");
+  //   return `${month}-${day}-${year}`;
+  // };
+
   const columns = [
     {
-      field: "uuid",
-      headerName: "ID",
-      flex: 0.5,
-    },
-    {
       field: "name",
-      headerName: "Name",
+      headerName: "Brand name",
       flex: 0.5,
+      headerAlign: "center",
+      align: "center",
+      cellClassName: "name-column--cell",
     },
-    {
-      field: "status",
-      headerName: "Status",
-      flex: 0.5,
-      valueGetter: (params) =>
-        ["Inactive", "Active"][params?.row?.status] || "Unknown",
-    },
+    // {
+    //   field: "created_at",
+    //   headerName: "Created Date",
+    //   flex: 0.5,
+    //   valueFormatter: (params) => formatDate(params.value), // Format the date
+    // },
   ];
 
   useEffect(() => {
@@ -115,11 +121,12 @@ function BrandLibraries() {
         }}
       />
       <Box>
-        <DataGrid
+        <EditableTable
           data={brands}
           columns={columns}
           loadingState={loading}
           checkbox={false}
+          remove
         />
       </Box>
     </Box>

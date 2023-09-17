@@ -57,6 +57,8 @@ export default function TransmittalTable({
         loadingState={loadingState}
         singleSelect
         height="72.4vh"
+        remove
+        view
       />
     </Box>
   );

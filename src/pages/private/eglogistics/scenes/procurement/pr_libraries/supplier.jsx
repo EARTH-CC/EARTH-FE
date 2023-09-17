@@ -3,7 +3,7 @@ import { Box, Button, Divider, Typography, useTheme } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
 import AddSupplierModal from "modal/Procurement/ProcurementLibraries/AddSupplierModal";
 import procurementService from "services/procurement-service";
-import DataGrid from "components/PrivateComponents/eglogistics/Tables/DataGrid";
+import EditableTable from "components/PrivateComponents/eglogistics/Tables/EditableTable";
 import themes from "themes/theme";
 
 const { tokens } = themes;
@@ -40,11 +40,6 @@ function SupplierLibraries() {
   };
 
   const columns = [
-    {
-      field: "uuid",
-      headerName: "ID",
-      flex: 0.5,
-    },
     {
       field: "name",
       headerName: "Company Name",
@@ -132,11 +127,12 @@ function SupplierLibraries() {
         }}
       />
       <Box>
-        <DataGrid
+        <EditableTable
           data={suppliers}
           columns={columns}
           loadingState={loading}
           checkbox={false}
+          remove
         />
       </Box>
     </Box>

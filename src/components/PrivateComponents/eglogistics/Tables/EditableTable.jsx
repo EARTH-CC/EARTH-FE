@@ -4,6 +4,7 @@ import PropTypes from "prop-types";
 import Box from "@mui/material/Box";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/DeleteOutlined";
+import ListAltIcon from "@mui/icons-material/ListAlt";
 import SaveIcon from "@mui/icons-material/Save";
 import CancelIcon from "@mui/icons-material/Close";
 import {
@@ -13,7 +14,7 @@ import {
   GridRowEditStopReasons,
   GridToolbar,
 } from "@mui/x-data-grid";
-import { useTheme } from "@mui/material";
+import { Tooltip, useTheme } from "@mui/material";
 import themes from "../../../../themes/theme";
 
 const { tokens } = themes;
@@ -29,6 +30,8 @@ export default function EditableTable({
   rowToUpdate,
   singleSelect,
   reset,
+  remove,
+  view,
 }) {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
@@ -140,38 +143,62 @@ export default function EditableTable({
 
         if (isInEditMode) {
           return [
-            <GridActionsCellItem
-              icon={<SaveIcon />}
-              label="Save"
-              sx={{
-                color: "primary.main",
-              }}
-              onClick={handleSaveClick(id)}
-            />,
-            <GridActionsCellItem
-              icon={<CancelIcon />}
-              label="Cancel"
-              className="textPrimary"
-              onClick={handleCancelClick(id)}
-              color="inherit"
-            />,
+            <Tooltip title="Save" placement="top">
+              <GridActionsCellItem
+                icon={<SaveIcon />}
+                label="Save"
+                sx={{
+                  color: "primary.main",
+                }}
+                onClick={handleSaveClick(id)}
+              />
+            </Tooltip>,
+            <Tooltip title="Cancel" placement="top">
+              <GridActionsCellItem
+                icon={<CancelIcon />}
+                label="Cancel"
+                className="textPrimary"
+                onClick={handleCancelClick(id)}
+                color="inherit"
+              />
+            </Tooltip>,
           ];
         }
 
         return [
-          <GridActionsCellItem
-            icon={<EditIcon />}
-            label="Edit"
-            className="textPrimary"
-            onClick={handleEditClick(id)}
-            color="inherit"
-          />,
-          <GridActionsCellItem
-            icon={<DeleteIcon />}
-            label="Delete"
-            onClick={handleDeleteClick(id)}
-            color="inherit"
-          />,
+          view ? (
+            <Tooltip title="Items" placement="top">
+              <GridActionsCellItem
+                icon={<ListAltIcon />}
+                label="Delete"
+                onClick={handleDeleteClick(id)}
+                color="inherit"
+              />
+            </Tooltip>
+          ) : (
+            <div />
+          ),
+          <Tooltip title="Edit" placement="top">
+            <GridActionsCellItem
+              icon={<EditIcon />}
+              label="Edit"
+              className="textPrimary"
+              onClick={handleEditClick(id)}
+              color="inherit"
+            />
+          </Tooltip>,
+          remove ? (
+            <Tooltip title="Remove" placement="top">
+              <GridActionsCellItem
+                icon={<DeleteIcon />}
+                label="Delete"
+                onClick={handleDeleteClick(id)}
+                color="inherit"
+              />
+            </Tooltip>
+          ) : (
+            <div />
+          ),
         ];
       },
     },
@@ -275,6 +302,8 @@ EditableTable.defaultProps = {
   rowToUpdate: [],
   singleSelect: false,
   reset: false,
+  remove: false,
+  view: false,
 };
 
 EditableTable.propTypes = {
@@ -288,4 +317,6 @@ EditableTable.propTypes = {
   rowToUpdate: PropTypes.arrayOf(PropTypes.object),
   singleSelect: PropTypes.bool,
   reset: PropTypes.bool,
+  remove: PropTypes.bool,
+  view: PropTypes.bool,
 };

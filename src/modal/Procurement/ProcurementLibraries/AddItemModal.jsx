@@ -94,7 +94,10 @@ export default function AddItemModal({ open, handleClose, onSuccess }) {
                   sx={{ width: "60%" }}
                   disabled={loading}
                   value={formik.values?.name}
-                  onChange={formik.handleChange}
+                  onChange={(e) => {
+                    formik.handleChange(e);
+                    formik.setFieldValue("name", e.target.value.toUpperCase());
+                  }}
                   onBlur={formik.handleBLur}
                   error={formik.touched?.name && Boolean(formik.errors?.name)}
                   helperText={formik.touched?.name && formik.errors?.name}

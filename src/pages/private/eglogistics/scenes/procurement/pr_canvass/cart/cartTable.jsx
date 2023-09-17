@@ -75,6 +75,7 @@ export default function CartTable({
         loadingState={loadingState}
         rowToUpdate={setToBeUpdated}
         height="60vh"
+        remove
       />
     </Box>
   );

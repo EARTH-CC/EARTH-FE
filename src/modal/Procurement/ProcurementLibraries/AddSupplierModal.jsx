@@ -75,7 +75,10 @@ export default function AddSupplierModal({ open, handleClose, onSuccess }) {
                   sx={{ pr: 5 }}
                   disabled={loading}
                   value={formik.values?.name}
-                  onChange={formik.handleChange}
+                  onChange={(e) => {
+                    formik.handleChange(e);
+                    formik.setFieldValue("name", e.target.value.toUpperCase());
+                  }}
                   onBlur={formik.handleBLur}
                   error={formik.touched?.name && Boolean(formik.errors?.name)}
                   helperText={formik.touched?.name && formik.errors?.name}
@@ -91,7 +94,13 @@ export default function AddSupplierModal({ open, handleClose, onSuccess }) {
                   sx={{ pr: 5 }}
                   disabled={loading}
                   value={formik.values?.address}
-                  onChange={formik.handleChange}
+                  onChange={(e) => {
+                    formik.handleChange(e);
+                    formik.setFieldValue(
+                      "address",
+                      e.target.value.toUpperCase()
+                    );
+                  }}
                   onBlur={formik.handleBLur}
                   error={
                     formik.touched?.address && Boolean(formik.errors?.address)
@@ -153,7 +162,13 @@ export default function AddSupplierModal({ open, handleClose, onSuccess }) {
                   sx={{ pr: 5 }}
                   disabled={loading}
                   value={formik.values?.tin_no}
-                  onChange={formik.handleChange}
+                  onChange={(e) => {
+                    formik.handleChange(e);
+                    formik.setFieldValue(
+                      "tin_no",
+                      e.target.value.toUpperCase()
+                    );
+                  }}
                   onBlur={formik.handleBLur}
                   error={
                     formik.touched?.tin_no && Boolean(formik.errors?.tin_no)

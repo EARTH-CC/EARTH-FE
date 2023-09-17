@@ -90,6 +90,8 @@ export default function PurchaseRequestTable({
         loadingState={loadingState}
         singleSelect={true}
         height="60vh"
+        remove
+        view
       />
     </Box>
   );

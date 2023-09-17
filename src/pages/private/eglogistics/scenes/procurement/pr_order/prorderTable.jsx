@@ -110,6 +110,8 @@ export default function PurchaseOrderTable({
         singleSelect={true}
         selectedData={setSelectedPO}
         height="60vh"
+        remove
+        view
       />
     </Box>
   );

@@ -3,7 +3,7 @@ import { Box, Button, Divider, Typography, useTheme } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
 import AddItemModal from "modal/Procurement/ProcurementLibraries/AddItemModal";
 import procurementService from "services/procurement-service";
-import DataGrid from "components/PrivateComponents/eglogistics/Tables/EditableTable";
+import EditableTable from "components/PrivateComponents/eglogistics/Tables/EditableTable";
 import themes from "themes/theme";
 
 const { tokens } = themes;
@@ -54,6 +54,7 @@ function Products() {
       field: "item_code",
       headerName: "Item Code",
       width: 200,
+      cellClassName: "name-column--cell",
     },
     {
       field: "price",
@@ -81,7 +82,6 @@ function Products() {
       headerName: "Description",
       headerAlign: "left",
       align: "left",
-      cellClassName: "name-column--cell",
       width: 200,
     },
   ];
@@ -142,11 +142,12 @@ function Products() {
         </Typography>
       </Divider>
       <Box>
-        <DataGrid
+        <EditableTable
           data={items}
           columns={columns}
           loadingState={loading}
           checkbox={false}
+          remove
         />
       </Box>
     </Box>

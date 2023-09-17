@@ -3,7 +3,7 @@ import { Box, Button, Divider, Typography, useTheme } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
 import AddCategoryModal from "modal/Procurement/ProcurementLibraries/AddCategoryModal";
 import procurementService from "services/procurement-service";
-import DataGrid from "components/PrivateComponents/eglogistics/Tables/DataGrid";
+import EditableTable from "components/PrivateComponents/eglogistics/Tables/EditableTable";
 import themes from "themes/theme";
 
 const { tokens } = themes;
@@ -41,21 +41,12 @@ function CategoryLibraries() {
 
   const columns = [
     {
-      field: "uuid",
-      headerName: "ID",
-      flex: 0.5,
-    },
-    {
       field: "name",
-      headerName: "Name",
+      headerName: "Category Name",
       flex: 0.5,
-    },
-    {
-      field: "status",
-      headerName: "Status",
-      flex: 0.5,
-      valueGetter: (params) =>
-        ["Inactive", "Active"][params?.row?.status] || "Unknown",
+      headerAlign: "center",
+      align: "center",
+      cellClassName: "name-column--cell",
     },
   ];
 
@@ -115,11 +106,12 @@ function CategoryLibraries() {
         }}
       />
       <Box>
-        <DataGrid
+        <EditableTable
           data={categories}
           columns={columns}
           loadingState={loading}
           checkbox={false}
+          remove
         />
       </Box>
     </Box>
