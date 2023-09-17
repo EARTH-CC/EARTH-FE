@@ -1,17 +1,25 @@
+/* eslint-disable camelcase */
 /* eslint-disable no-nested-ternary */
 /* eslint-disable react/no-array-index-key */
 /* eslint-disable react/jsx-boolean-value */
 import React, { useState } from "react";
-import { Box } from "@mui/material";
+import { Box, useTheme } from "@mui/material";
 import PropTypes from "prop-types";
-
 import EditableTable from "components/PrivateComponents/eglogistics/Tables/EditableTable";
+import AutorenewOutlinedIcon from "@mui/icons-material/AutorenewOutlined";
+import RuleOutlinedIcon from "@mui/icons-material/RuleOutlined";
+import ChecklistOutlinedIcon from "@mui/icons-material/ChecklistOutlined";
+import themes from "themes/theme";
+
+const { tokens } = themes;
 
 export default function PurchaseOrderTable({
   data,
   selectedData,
   loadingState,
 }) {
+  const theme = useTheme();
+  const colors = tokens(theme.palette.mode);
   const [selectedPO, setSelectedPO] = useState();
 
   selectedData(selectedPO);
@@ -96,7 +104,73 @@ export default function PurchaseOrderTable({
       field: "po_status",
       headerName: "Status",
       flex: 1,
+      headerAlign: "center",
       editable: true,
+      type: "singleSelect",
+      valueOptions: ["pending", "incomplete", "complete"],
+      renderCell: ({ row: { po_status } }) => (
+        <Box
+          width="100%"
+          m="0 auto"
+          p="5px"
+          display="flex"
+          justifyContent="center"
+          alignItems="center"
+          borderRadius="15px"
+          backgroundColor={
+            po_status === "pending"
+              ? colors.blueAccent[700]
+              : po_status === "incomplete"
+              ? colors.greenAccent[700]
+              : po_status === "complete"
+              ? colors.grey[700]
+              : colors.grey[700]
+          }
+        >
+          {po_status === "pending" && (
+            <Box
+              sx={{
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                mr: "5px",
+                mt: "-3px",
+              }}
+            >
+              <AutorenewOutlinedIcon />
+            </Box>
+          )}
+          {po_status === "incomplete" && (
+            <Box
+              sx={{
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                mr: "5px",
+                mt: "-3px",
+              }}
+            >
+              <RuleOutlinedIcon />
+            </Box>
+          )}
+          {po_status === "complete" && (
+            <Box
+              sx={{
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                mr: "5px",
+                mt: "-3px",
+              }}
+            >
+              <ChecklistOutlinedIcon />
+            </Box>
+          )}
+          <span color={colors.grey[100]} style={{ ml: "5px" }}>
+            {po_status}
+          </span>
+        </Box>
+      ),
     },
   ];
 

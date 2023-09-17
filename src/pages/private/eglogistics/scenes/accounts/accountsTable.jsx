@@ -59,6 +59,8 @@ export default function AccountsTable({
           p="5px"
           display="flex"
           justifyContent="center"
+          alignItems="center"
+          borderRadius="15px"
           backgroundColor={
             role === "superadmin"
               ? colors.blueAccent[700]
@@ -68,7 +70,6 @@ export default function AccountsTable({
               ? colors.grey[700]
               : colors.grey[700]
           }
-          borderRadius="4px"
         >
           {role === "superadmin" && (
             <Box
@@ -130,6 +131,8 @@ export default function AccountsTable({
           p="5px"
           display="flex"
           justifyContent="center"
+          alignItems="center"
+          borderRadius="15px"
           backgroundColor={
             status === 1
               ? colors.greenAccent[700]
@@ -137,7 +140,6 @@ export default function AccountsTable({
               ? colors.redAccent[700]
               : colors.grey[700]
           }
-          borderRadius="4px"
         >
           {status === 1 && (
             <Box

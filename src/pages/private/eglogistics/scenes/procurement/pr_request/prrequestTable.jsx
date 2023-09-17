@@ -1,10 +1,17 @@
+/* eslint-disable camelcase */
 /* eslint-disable no-nested-ternary */
 /* eslint-disable react/no-array-index-key */
 /* eslint-disable react/jsx-boolean-value */
 import React, { useState } from "react";
-import { Box } from "@mui/material";
+import { Box, useTheme } from "@mui/material";
 import PropTypes from "prop-types";
 import EditableTable from "components/PrivateComponents/eglogistics/Tables/EditableTable";
+import AutorenewOutlinedIcon from "@mui/icons-material/AutorenewOutlined";
+import RuleOutlinedIcon from "@mui/icons-material/RuleOutlined";
+import ChecklistOutlinedIcon from "@mui/icons-material/ChecklistOutlined";
+import themes from "themes/theme";
+
+const { tokens } = themes;
 
 // Function to format a date to "MM-DD-YY" format
 const formatDate = (dateString) => {
@@ -20,6 +27,8 @@ export default function PurchaseRequestTable({
   selectedData,
   loadingState,
 }) {
+  const theme = useTheme();
+  const colors = tokens(theme.palette.mode);
   const [selectedPR, setSelectedPR] = useState();
 
   selectedData(selectedPR);
@@ -77,6 +86,72 @@ export default function PurchaseRequestTable({
       headerName: "Status",
       flex: 1,
       editable: true,
+      headerAlign: "center",
+      type: "singleSelect",
+      valueOptions: ["pending", "incomplete", "complete"],
+      renderCell: ({ row: { pr_status } }) => (
+        <Box
+          width="100%"
+          m="0 auto"
+          p="5px"
+          display="flex"
+          justifyContent="center"
+          alignItems="center"
+          borderRadius="15px"
+          backgroundColor={
+            pr_status === "pending"
+              ? colors.blueAccent[700]
+              : pr_status === "incomplete"
+              ? colors.greenAccent[700]
+              : pr_status === "complete"
+              ? colors.grey[700]
+              : colors.grey[700]
+          }
+        >
+          {pr_status === "pending" && (
+            <Box
+              sx={{
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                mr: "5px",
+                mt: "-3px",
+              }}
+            >
+              <AutorenewOutlinedIcon />
+            </Box>
+          )}
+          {pr_status === "incomplete" && (
+            <Box
+              sx={{
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                mr: "5px",
+                mt: "-3px",
+              }}
+            >
+              <RuleOutlinedIcon />
+            </Box>
+          )}
+          {pr_status === "complete" && (
+            <Box
+              sx={{
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                mr: "5px",
+                mt: "-3px",
+              }}
+            >
+              <ChecklistOutlinedIcon />
+            </Box>
+          )}
+          <span color={colors.grey[100]} style={{ ml: "5px" }}>
+            {pr_status}
+          </span>
+        </Box>
+      ),
     },
   ];
 
