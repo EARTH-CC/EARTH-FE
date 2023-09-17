@@ -5,7 +5,7 @@ import LocalMallOutlinedIcon from "@mui/icons-material/LocalMallOutlined";
 import ProductionQuantityLimitsOutlinedIcon from "@mui/icons-material/ProductionQuantityLimitsOutlined";
 import AddShoppingCartOutlinedIcon from "@mui/icons-material/AddShoppingCartOutlined";
 import ShoppingCartCheckoutOutlinedIcon from "@mui/icons-material/ShoppingCartCheckoutOutlined";
-import ReceiptLongOutlinedIcon from "@mui/icons-material/ReceiptLongOutlined";
+import HistoryEduIcon from "@mui/icons-material/HistoryEdu";
 
 const links = [
   {
@@ -50,7 +50,7 @@ const links = [
       {
         name: "Purchase History",
         path: "purchasehistory",
-        icon: <ReceiptLongOutlinedIcon style={{ fontSize: 29 }} />,
+        icon: <HistoryEduIcon style={{ fontSize: 29 }} />,
       },
     ],
   },

@@ -5,6 +5,7 @@ import Box from "@mui/material/Box";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/DeleteOutlined";
 import ListAltIcon from "@mui/icons-material/ListAlt";
+import ReceiptLongIcon from "@mui/icons-material/ReceiptLong";
 import SaveIcon from "@mui/icons-material/Save";
 import CancelIcon from "@mui/icons-material/Close";
 import {
@@ -32,6 +33,7 @@ export default function EditableTable({
   reset,
   remove,
   view,
+  form,
 }) {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
@@ -136,7 +138,7 @@ export default function EditableTable({
       field: "actions",
       type: "actions",
       headerName: "Actions",
-      width: 100,
+      width: 140,
       cellClassName: "actions",
       getActions: ({ id }) => {
         const isInEditMode = rowModesModel[id]?.mode === GridRowModes.Edit;
@@ -170,6 +172,18 @@ export default function EditableTable({
             <Tooltip title="Items" placement="top">
               <GridActionsCellItem
                 icon={<ListAltIcon />}
+                label="Delete"
+                onClick={handleDeleteClick(id)}
+                color="inherit"
+              />
+            </Tooltip>
+          ) : (
+            <div />
+          ),
+          form ? (
+            <Tooltip title="Form" placement="top">
+              <GridActionsCellItem
+                icon={<ReceiptLongIcon />}
                 label="Delete"
                 onClick={handleDeleteClick(id)}
                 color="inherit"
@@ -304,6 +318,7 @@ EditableTable.defaultProps = {
   reset: false,
   remove: false,
   view: false,
+  form: false,
 };
 
 EditableTable.propTypes = {
@@ -319,4 +334,5 @@ EditableTable.propTypes = {
   reset: PropTypes.bool,
   remove: PropTypes.bool,
   view: PropTypes.bool,
+  form: PropTypes.bool,
 };

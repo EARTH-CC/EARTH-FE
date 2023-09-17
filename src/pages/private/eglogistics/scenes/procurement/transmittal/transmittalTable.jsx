@@ -59,6 +59,7 @@ export default function TransmittalTable({
         height="72.4vh"
         remove
         view
+        form
       />
     </Box>
   );

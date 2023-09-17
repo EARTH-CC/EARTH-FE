@@ -112,6 +112,7 @@ export default function PurchaseOrderTable({
         height="60vh"
         remove
         view
+        form
       />
     </Box>
   );
