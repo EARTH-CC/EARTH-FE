@@ -10,6 +10,7 @@ import {
   Typography,
   Button,
 } from "@mui/material";
+import CloseIcon from "@mui/icons-material/Close";
 import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import { useFormik } from "formik";
@@ -75,139 +76,156 @@ export default function RegisterModal({ open, handleClose }) {
       <Box>
         <Box
           sx={{
-            backgroundColor: (themeMode) =>
-              themeMode.palette.mode === "dark" ? "#1f2a40" : "#fff",
-            position: "absolute",
-            top: "50%",
-            left: "50%",
-            transform: "translate(-50%, -50%)",
-            height: "77vh",
-            width: "37vw",
-            borderRadius: "5px",
-            py: "40px",
-            px: "50px",
+            display: "grid",
+            justifyContent: "center",
           }}
         >
-          <Header title="CREATE ACCOUNT" mb={2} />
-          <form onSubmit={formik.handleSubmit} autoComplete="off">
-            <Grid container spacing={2}>
-              <Grid item xs={12}>
-                <TextField
-                  label="First Name"
-                  name="firstname"
-                  variant="outlined"
-                  fullWidth
-                  disabled={loading}
-                  value={formik.values?.firstname}
-                  onChange={formik.handleChange}
-                  onBlur={formik.handleBLur}
-                  error={
-                    formik.touched?.firstname &&
-                    Boolean(formik.errors?.firstname)
-                  }
-                  helperText={
-                    formik.touched?.firstname && formik.errors?.firstname
-                  }
-                />
+          <Box
+            sx={{
+              backgroundColor: (themeMode) =>
+                themeMode.palette.mode === "dark" ? "#1f2a40" : "#fff",
+              width: "37vw",
+              borderRadius: "5px",
+              mt: "1em",
+              p: "50px",
+            }}
+          >
+            <CloseIcon
+              sx={{
+                position: "absolute",
+                top: "3%",
+                right: "32%",
+                ":hover": {
+                  backgroundColor: "#a4a9fc",
+                  cursor: "pointer",
+                },
+              }}
+              onClick={handleClose}
+            />
+            <Header title="CREATE ACCOUNT" mb={2} />
+            <form onSubmit={formik.handleSubmit} autoComplete="off">
+              <Grid container spacing={2}>
+                <Grid item xs={12}>
+                  <TextField
+                    label="First Name"
+                    name="firstname"
+                    variant="outlined"
+                    fullWidth
+                    disabled={loading}
+                    value={formik.values?.firstname}
+                    onChange={formik.handleChange}
+                    onBlur={formik.handleBLur}
+                    error={
+                      formik.touched?.firstname &&
+                      Boolean(formik.errors?.firstname)
+                    }
+                    helperText={
+                      formik.touched?.firstname && formik.errors?.firstname
+                    }
+                  />
+                </Grid>
+                <Grid item xs={12}>
+                  <TextField
+                    label="Last Name"
+                    name="lastname"
+                    variant="outlined"
+                    fullWidth
+                    disabled={loading}
+                    value={formik.values?.lastname}
+                    onChange={formik.handleChange}
+                    onBlur={formik.handleBLur}
+                    error={
+                      formik.touched?.lastname &&
+                      Boolean(formik.errors?.lastname)
+                    }
+                    helperText={
+                      formik.touched?.lastname && formik.errors?.lastname
+                    }
+                  />
+                </Grid>
+                <Grid item xs={12}>
+                  <TextField
+                    label="User Name"
+                    name="username"
+                    variant="outlined"
+                    fullWidth
+                    disabled={loading}
+                    value={formik.values?.username}
+                    onChange={formik.handleChange}
+                    onBlur={formik.handleBLur}
+                    error={
+                      formik.touched?.username &&
+                      Boolean(formik.errors?.username)
+                    }
+                    helperText={
+                      formik.touched?.username && formik.errors?.username
+                    }
+                  />
+                </Grid>
+                <Grid item xs={12}>
+                  <TextField
+                    label="Password"
+                    name="password"
+                    variant="outlined"
+                    fullWidth
+                    disabled={loading}
+                    type={showPassword ? "text" : "password"}
+                    value={formik.values?.password}
+                    onChange={formik.handleChange}
+                    onBlur={formik.handleBLur}
+                    error={
+                      formik.touched?.password &&
+                      Boolean(formik.errors?.password)
+                    }
+                    helperText={
+                      formik.touched?.password && formik.errors?.password
+                    }
+                    InputProps={{
+                      endAdornment: (
+                        <InputAdornment position="end">
+                          <IconButton
+                            aria-label="toggle password visibility"
+                            onClick={handleTogglePasswordVisibility}
+                          >
+                            {showPassword ? <Visibility /> : <VisibilityOff />}
+                          </IconButton>
+                        </InputAdornment>
+                      ),
+                    }}
+                  />
+                </Grid>
+                <Grid item xs={12}>
+                  <SelectRole
+                    label="Access Level"
+                    name="role"
+                    fullWidth
+                    disabled={loading}
+                    value={formik.values?.role}
+                    onChange={formik.handleChange}
+                    onBlur={formik.handleBLur}
+                    error={formik.touched?.role && Boolean(formik.errors?.role)}
+                    helperText={formik.touched?.role && formik.errors?.role}
+                  />
+                </Grid>
+                <Grid item xs={12}>
+                  <Button
+                    variant="contained"
+                    type="submit"
+                    fullWidth
+                    sx={{
+                      backgroundColor: "#3e4396",
+                      ":hover": {
+                        backgroundColor: "#a4a9fc",
+                      },
+                      padding: "17px",
+                    }}
+                  >
+                    <Typography fontWeight="bold">Register</Typography>
+                  </Button>
+                </Grid>
               </Grid>
-              <Grid item xs={12}>
-                <TextField
-                  label="Last Name"
-                  name="lastname"
-                  variant="outlined"
-                  fullWidth
-                  disabled={loading}
-                  value={formik.values?.lastname}
-                  onChange={formik.handleChange}
-                  onBlur={formik.handleBLur}
-                  error={
-                    formik.touched?.lastname && Boolean(formik.errors?.lastname)
-                  }
-                  helperText={
-                    formik.touched?.lastname && formik.errors?.lastname
-                  }
-                />
-              </Grid>
-              <Grid item xs={12}>
-                <TextField
-                  label="User Name"
-                  name="username"
-                  variant="outlined"
-                  fullWidth
-                  disabled={loading}
-                  value={formik.values?.username}
-                  onChange={formik.handleChange}
-                  onBlur={formik.handleBLur}
-                  error={
-                    formik.touched?.username && Boolean(formik.errors?.username)
-                  }
-                  helperText={
-                    formik.touched?.username && formik.errors?.username
-                  }
-                />
-              </Grid>
-              <Grid item xs={12}>
-                <TextField
-                  label="Password"
-                  name="password"
-                  variant="outlined"
-                  fullWidth
-                  disabled={loading}
-                  type={showPassword ? "text" : "password"}
-                  value={formik.values?.password}
-                  onChange={formik.handleChange}
-                  onBlur={formik.handleBLur}
-                  error={
-                    formik.touched?.password && Boolean(formik.errors?.password)
-                  }
-                  helperText={
-                    formik.touched?.password && formik.errors?.password
-                  }
-                  InputProps={{
-                    endAdornment: (
-                      <InputAdornment position="end">
-                        <IconButton
-                          aria-label="toggle password visibility"
-                          onClick={handleTogglePasswordVisibility}
-                        >
-                          {showPassword ? <Visibility /> : <VisibilityOff />}
-                        </IconButton>
-                      </InputAdornment>
-                    ),
-                  }}
-                />
-              </Grid>
-              <Grid item xs={12}>
-                <SelectRole
-                  label="Access Level"
-                  name="role"
-                  fullWidth
-                  disabled={loading}
-                  value={formik.values?.role}
-                  onChange={formik.handleChange}
-                  onBlur={formik.handleBLur}
-                  error={formik.touched?.role && Boolean(formik.errors?.role)}
-                  helperText={formik.touched?.role && formik.errors?.role}
-                />
-              </Grid>
-              <Grid item xs={12}>
-                <Button
-                  variant="contained"
-                  type="submit"
-                  fullWidth
-                  sx={{
-                    backgroundColor: "#3e4396",
-                    ":hover": {
-                      backgroundColor: "#a4a9fc",
-                    },
-                    padding: "17px",
-                  }}
-                >
-                  <Typography fontWeight="bold">Register</Typography>
-                </Button>
-              </Grid>
-            </Grid>
-          </form>
+            </form>
+          </Box>
         </Box>
         <SnackbarComponent
           open={openSuccess}
